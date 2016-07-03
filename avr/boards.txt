@@ -37,7 +37,7 @@ menu.variant=Variant
 328.menu.clock.16MHz_external=16MHz external
 328.menu.clock.16MHz_external.upload.speed=115200
 328.menu.clock.16MHz_external.bootloader.low_fuses=0xf7
-328.menu.clock.16MHz_external.bootloader.high_fuses=0xde
+328.menu.clock.16MHz_external.bootloader.high_fuses=0xd6
 328.menu.clock.16MHz_external.bootloader.file=optiboot_flash/atmega328/optiboot_flash_atmega328p_115200_16MHz.hex
 328.menu.clock.16MHz_external.build.f_cpu=16000000L
 
@@ -45,7 +45,7 @@ menu.variant=Variant
 328.menu.clock.20MHz_external=20MHz external
 328.menu.clock.20MHz_external.upload.speed=115200
 328.menu.clock.20MHz_external.bootloader.low_fuses=0xf7
-328.menu.clock.20MHz_external.bootloader.high_fuses=0xde
+328.menu.clock.20MHz_external.bootloader.high_fuses=0xd6
 328.menu.clock.20MHz_external.bootloader.file=optiboot_flash/atmega328/optiboot_flash_atmega328p_115200_20MHz.hex
 328.menu.clock.20MHz_external.build.f_cpu=20000000L
 
@@ -53,7 +53,7 @@ menu.variant=Variant
 328.menu.clock.8MHz_external=8MHz external
 328.menu.clock.8MHz_external.upload.speed=57600
 328.menu.clock.8MHz_external.bootloader.low_fuses=0xf7
-128.menu.clock.8MHz_external.bootloader.high_fuses=0xde
+128.menu.clock.8MHz_external.bootloader.high_fuses=0xd6
 128.menu.clock.8MHz_external.bootloader.file=optiboot_flash/atmega328/optiboot_flash_atmega328p_57600_8MHz.hex
 128.menu.clock.8MHz_external.build.f_cpu=8000000L
 
@@ -61,7 +61,7 @@ menu.variant=Variant
 328.menu.clock.8MHz_internal=8MHz internal
 328.menu.clock.8MHz_internal.upload.speed=38400
 328.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
-328.menu.clock.8MHz_internal.bootloader.high_fuses=0xde
+328.menu.clock.8MHz_internal.bootloader.high_fuses=0xd6
 328.menu.clock.8MHz_internal.bootloader.file=optiboot_flash/atmega328/optiboot_flash_atmega328p_38400_8MHz.hex
 328.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
@@ -69,6 +69,83 @@ menu.variant=Variant
 328.menu.clock.1MHz_internal=1MHz internal
 328.menu.clock.1MHz_internal.upload.speed=9600
 328.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
-328.menu.clock.1MHz_internal.bootloader.high_fuses=0xde
+328.menu.clock.1MHz_internal.bootloader.high_fuses=0xd6
 328.menu.clock.1MHz_internal.bootloader.file=optiboot_flash/atmega328/optiboot_flash_atmega328p_9600_1MHz.hex
 328.menu.clock.1MHz_internal.build.f_cpu=1000000L
+
+############################################################
+
+168.name=ATmega168
+168.upload.tool=arduino:avrdude
+168.upload.protocol=arduino
+168.upload.maximum_size=15872
+168.upload.maximum_data_size=1024
+
+168.bootloader.tool=arduino:avrdude
+168.bootloader.unlock_bits=0x3f
+168.bootloader.lock_bits=0x0f
+
+168.build.core=arduino:arduino
+168.build.board=AVR_ATmega168
+168.build.variant=standard
+
+
+168.menu.variant.modelP=168P / 168PA
+168.menu.variant.modelP.build.mcu=atmega168p
+168.menu.variant.modelNone=168 / 168A
+168.menu.variant.modelNone.build.mcu=atmega168
+
+
+#make atmega168p AVR_FREQ=16000000L BAUD_RATE=115200 UART=0 LED=B0 LED_START_FLASHES=2 -BIGBOOT
+168.menu.clock.16MHz_external=16MHz external (BOD 2.7v)
+168.menu.clock.16MHz_external.upload.speed=115200
+168.menu.clock.16MHz_external.bootloader.low_fuses=0xf7
+168.menu.clock.16MHz_external.bootloader.high_fuses=0xd5
+168.menu.clock.16MHz_external.bootloader.extended_fuses=0xfc
+168.menu.clock.16MHz_external.bootloader.file=optiboot_flash/atmega168/optiboot_flash_atmega168p_115200_16MHz.hex
+168.menu.clock.16MHz_external.build.f_cpu=16000000L
+
+#make atmega168p AVR_FREQ=20000000L BAUD_RATE=115200 UART=0 LED=B0 LED_START_FLASHES=2 -BIGBOOT
+168.menu.clock.20MHz_external=20MHz external
+168.menu.clock.20MHz_external.upload.speed=115200
+168.menu.clock.20MHz_external.bootloader.low_fuses=0xf7
+168.menu.clock.20MHz_external.bootloader.high_fuses=0xd4
+168.menu.clock.20MHz_external.bootloader.extended_fuses=0xfc
+168.menu.clock.20MHz_external.bootloader.file=optiboot_flash/atmega168/optiboot_flash_atmega168p_115200_20MHz.hex
+168.menu.clock.20MHz_external.build.f_cpu=20000000L
+
+#make atmega168p AVR_FREQ=12000000L BAUD_RATE=57600 UART=0 LED=B0 LED_START_FLASHES=2 -BIGBOOT
+168.menu.clock.12MHz_external=12MHz external (BOD 2.7v)
+168.menu.clock.12MHz_external.upload.speed=57600
+168.menu.clock.12MHz_external.bootloader.low_fuses=0xf7
+168.menu.clock.12MHz_external.bootloader.high_fuses=0xd5
+168.menu.clock.12MHz_external.bootloader.extended_fuses=0xfc
+168.menu.clock.12MHz_external.bootloader.file=optiboot_flash/atmega168/optiboot_flash_atmega168p_57600_12MHz.hex
+168.menu.clock.12MHz_external.build.f_cpu=12000000L
+
+#make atmega168p AVR_FREQ=8000000L BAUD_RATE=57600 UART=0 LED=B0 LED_START_FLASHES=2 -BIGBOOT
+168.menu.clock.8MHz_external=8MHz external
+168.menu.clock.8MHz_external.upload.speed=57600
+168.menu.clock.8MHz_external.bootloader.low_fuses=0xf7
+168.menu.clock.8MHz_external.bootloader.high_fuses=0xd5
+168.menu.clock.8MHz_external.bootloader.extended_fuses=0xfc
+168.menu.clock.8MHz_external.bootloader.file=optiboot_flash/atmega168/optiboot_flash_atmega168p_57600_8MHz.hex
+168.menu.clock.8MHz_external.build.f_cpu=8000000L
+
+#make atmega168p AVR_FREQ=8000000L BAUD_RATE=38400 UART=0 LED=B0 LED_START_FLASHES=2 -BIGBOOT
+168.menu.clock.8MHz_internal=8MHz internal
+168.menu.clock.8MHz_internal.upload.speed=38400
+168.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
+168.menu.clock.8MHz_internal.bootloader.high_fuses=0xd6
+168.menu.clock.8MHz_internal.bootloader.extended_fuses=0xfc
+168.menu.clock.8MHz_internal.bootloader.file=optiboot_flash/atmega168/optiboot_flash_atmega168p_38400_8MHz.hex
+168.menu.clock.8MHz_internal.build.f_cpu=8000000L
+
+#make atmega168p AVR_FREQ=1000000L BAUD_RATE=9600 UART=0 LED=B0 LED_START_FLASHES=2 -BIGBOOT
+168.menu.clock.1MHz_internal=1MHz internal
+168.menu.clock.1MHz_internal.upload.speed=9600
+168.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
+168.menu.clock.1MHz_internal.bootloader.high_fuses=0xd6
+168.menu.clock.1MHz_internal.bootloader.extended_fuses=0xfc
+168.menu.clock.1MHz_internal.bootloader.file=optiboot_flash/atmega168/optiboot_flash_atmega168p_9600_1MHz.hex
+168.menu.clock.1MHz_internal.build.f_cpu=1000000L
