@@ -329,6 +329,28 @@ isp-stk500: $(PROGRAM)_$(TARGET).hex
 
 clean:
 	rm -rf *.o *.elf *.lst *.map *.sym *.lss *.eep *.srec *.bin *.hex *.tmp.sh
+	rm -rf atmega328/*.hex atmega328/*.lst
+	rm -rf atmega328p/*.hex atmega328p/*.lst
+	rm -rf atmega168/*.hex atmega168/*.lst
+	rm -rf atmega168p/*.hex atmega168p/*.lst
+	rm -rf atmega88/*.hex atmega88/*.lst
+	rm -rf atmega88p/*.hex atmega88p/*.lst
+	rm -rf atmega48/*.hex atmega48/*.lst
+	rm -rf atmega48p/*.hex atmega48p/*.lst
+	rm -rf atmega8/*.hex atmega8/*.lst
+	rm -rf atmega8p/*.hex atmega8p/*.lst
+
+clean_asm:
+	rm -rf atmega328/*.lst
+	rm -rf atmega328p/*.lst
+	rm -rf atmega168/*.lst
+	rm -rf atmega168p/*.lst
+	rm -rf atmega88/*.lst
+	rm -rf atmega88p/*.lst
+	rm -rf atmega48/*.lst
+	rm -rf atmega48p/*.lst
+	rm -rf atmega8/*.lst
+	rm -rf atmega8p/*.lst
 
 %.lst: %.elf
 	$(OBJDUMP) -h -S $< > $@
