@@ -64,7 +64,7 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
  
 ##Write to own flash
 A while ago [@majekw](https://github.com/majekw) announced that he'd [successfully modified the Optiboot bootloader](http://forum.arduino.cc/index.php?topic=332191.0) to let the running program permanently store content in the flash memory.
-The flash memory is much faster than the EEPROM, and can handle about 10 000 write cycles before its worn out. <br/>
+The flash memory is much faster than the EEPROM, and can handle about 10 000 write cycles before it's worn out. <br/>
 To enable this feature your original bootloader needs to be replaced by the new one. Simply hit "Burn Bootloader", and it's done! <br/>
 Please check out the [Optiboot flasher example](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/Optiboot_flasher/examples/SerialReadWrite) for more info about how this feature works, and how you can try it on your MiniCore compatible microcontroller.
 
