@@ -88,9 +88,9 @@
 
 
 
-#define NUM_DIGITAL_PINS            20
+#define NUM_DIGITAL_PINS            23
 #define NUM_ANALOG_INPUTS           8  // 8 for TQFP, 6 for DIP 
-#define analogInputToDigitalPin(p)  ((p < 8) ? (p) + 14 : -1)
+#define analogInputToDigitalPin(p)  ((p < 5) ? (p) + 14 : ((p < 8) ? (p) + 17) : -1)
 
 #if defined(__AVR_ATmega8__)
 #define digitalPinHasPWM(p)         ((p) == 9 || (p) == 10 || (p) == 11)
@@ -113,8 +113,8 @@ static const uint8_t A2 = 16;
 static const uint8_t A3 = 17;
 static const uint8_t A4 = 18;
 static const uint8_t A5 = 19;
-static const uint8_t A6 = 20;
-static const uint8_t A7 = 21;
+static const uint8_t A6 = 23;
+static const uint8_t A7 = 24;
 
 #define digitalPinToPCICR(p)    (((p) >= 0 && (p) <= 21) ? (&PCICR) : ((uint8_t *)0))
 #define digitalPinToPCICRbit(p) (((p) <= 7) ? 2 : (((p) <= 13) ? 0 : 1))
@@ -131,22 +131,22 @@ static const uint8_t A7 = 21;
 
 // AVR ATmega48, ATmega8, ATmega88, ATmega168, ATmega328
 //
-//                  +-\/-+
-//            PC6  1|    |28  PC5 (AI 5)
-//      (D 0) PD0  2|    |27  PC4 (AI 4)
-//      (D 1) PD1  3|    |26  PC3 (AI 3)
-//      (D 2) PD2  4|    |25  PC2 (AI 2)
-// PWM+ (D 3) PD3  5|    |24  PC1 (AI 1)
-//      (D 4) PD4  6|    |23  PC0 (AI 0)
-//            VCC  7|    |22  GND
-//            GND  8|    |21  AREF
-//            PB6  9|    |20  AVCC
-//            PB7 10|    |19  PB5 (D 13)
-// PWM+ (D 5) PD5 11|    |18  PB4 (D 12)
-// PWM+ (D 6) PD6 12|    |17  PB3 (D 11) PWM
-//      (D 7) PD7 13|    |16  PB2 (D 10) PWM
-//      (D 8) PB0 14|    |15  PB1 (D 9) PWM
-//                  +----+
+//                    +-\/-+
+//   RST (D 22) PC6  1|    |28  PC5 (A 5)
+//        (D 0) PD0  2|    |27  PC4 (A 4)
+//        (D 1) PD1  3|    |26  PC3 (A 3)
+//        (D 2) PD2  4|    |25  PC2 (A 2)
+//   PWM+ (D 3) PD3  5|    |24  PC1 (A 1)
+//        (D 4) PD4  6|    |23  PC0 (A 0)
+//              VCC  7|    |22  GND
+//              GND  8|    |21  AREF
+// XTAL1 (D 20) PB6  9|    |20  AVCC
+// XTAL2 (D 21) PB7 10|    |19  PB5 (D 13)
+//   PWM+ (D 5) PD5 11|    |18  PB4 (D 12)
+//   PWM+ (D 6) PD6 12|    |17  PB3 (D 11) PWM
+//        (D 7) PD7 13|    |16  PB2 (D 10) PWM
+//        (D 8) PB0 14|    |15  PB1 (D 9)  PWM
+//                    +----+
 //
 // (PWM+ indicates the additional PWM pins on the ATmega48/88/168/328)
 
@@ -179,49 +179,55 @@ const uint16_t PROGMEM port_to_input_PGM[] = {
 };
 
 const uint8_t PROGMEM digital_pin_to_port_PGM[] = {
-	PD, /* 0 */
-	PD,
-	PD,
-	PD,
-	PD,
-	PD,
-	PD,
-	PD,
-	PB, /* 8 */
-	PB,
-	PB,
-	PB,
-	PB,
-	PB,
-	PC, /* 14 */
-	PC,
-	PC,
-	PC,
-	PC,
-	PC,
+	PD, // PD0 - D0
+	PD, // PD1 - D1
+	PD, // PD2 - D2
+	PD, // PD3 - D3
+	PD, // PD4 - D4
+	PD, // PD5 - D5
+	PD, // PD6 - D6
+	PD, // PD7 - D7
+	PB, // PB0 - D8
+	PB, // PB1 - D9
+	PB, // PB2 - D10
+	PB, // PB3 - D11
+	PB, // PB4 - D12
+	PB, // PB5 - D13
+	PC, // PC0 - D14 / A0
+	PC, // PC1 - D15 / A1
+	PC, // PC2 - D16 / A2
+	PC, // PC3 - D17 / A3
+	PC, // PC4 - D18 / A4
+	PC, // PC5 - D19 / A5
+	PB, // PB6 - D20 / XTAL1
+	PB, // PB7 - D21 / XTAL2
+	PC, // PC6 - D22 / RESET
 };
 
 const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = {
-	_BV(0), /* 0, port D */
-	_BV(1),
-	_BV(2),
-	_BV(3),
-	_BV(4),
-	_BV(5),
-	_BV(6),
-	_BV(7),
-	_BV(0), /* 8, port B */
-	_BV(1),
-	_BV(2),
-	_BV(3),
-	_BV(4),
-	_BV(5),
-	_BV(0), /* 14, port C */
-	_BV(1),
-	_BV(2),
-	_BV(3),
-	_BV(4),
-	_BV(5),
+	_BV(0), // PD0 - D0
+	_BV(1), // PD1 - D1
+	_BV(2), // PD2 - D2
+	_BV(3), // PD3 - D3
+	_BV(4), // PD4 - D4
+	_BV(5), // PD5 - D5
+	_BV(6), // PD6 - D6
+	_BV(7), // PD7 - D7
+	_BV(0), // PB0 - D8
+	_BV(1), // PB1 - D9
+	_BV(2), // PB2 - D10
+	_BV(3), // PB3 - D11
+	_BV(4), // PB4 - D12
+	_BV(5), // PB5 - D13
+	_BV(0), // PC0 - D14 / A0
+	_BV(1), // PC1 - D15 / A1
+	_BV(2), // PC2 - D16 / A2
+	_BV(3), // PC3 - D17 / A3
+	_BV(4), // PC4 - D18 / A4
+	_BV(5), // PC5 - D19 / A5
+	_BV(6), // PB6 - D20 / XTAL1
+	_BV(7), // PB7 - D21 / XTAL2
+	_BV(6), // PC6 - D22 / RESET
 };
 
 const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
@@ -260,6 +266,9 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 	NOT_ON_TIMER,
 	NOT_ON_TIMER,
 	NOT_ON_TIMER,
+	NOT_ON_TIMER, // PB6 - D20 / XTAL1
+	NOT_ON_TIMER, // PB7 - D21 / XTAL2
+	NOT_ON_TIMER, // PC6 - D22 / RESET
 };
 
 #endif
