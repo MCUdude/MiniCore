@@ -92,7 +92,10 @@ Open Arduino IDE, and a new category in the boards menu called "MiniCore" will s
 This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](http://www.atmel.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
 <b>Click to enlarge:</b> 
 </br> </br>
-<img src=" " width="800">
+<img src="http://i.imgur.com/OHir6hQ.jpg" width="800">
+<br/> <br/>
+<img src="http://i.imgur.com/cAVheJU.jpg" width="800">
+
 
 
 ##Minimal setup
