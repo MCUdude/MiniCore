@@ -27,10 +27,11 @@ If you're into "pure" AVR programming, I'm happy to tell you that all relevant k
 
 
 ## Why add Arduino support for these microcontrollers?
-* They're cheap (some can be bought for less than a dollar at AliExpress and Ebay)
-* They come in both DIP and TQFP packages (which are hand solderable)
+* They are all Arduino UNO compatible (drop-in replacement)
 * They're extremely popular and used in almost every Arduino project out there
-* You can choose the suited microcontroller based on how much RAM and flash you need
+* They're cheap (some can be bought for less than a dollar at AliExpress and Ebay)
+* They come in both DIP and TQFP packages
+* You can now choose the suited microcontroller for your project. No need to go for overkill!
 
 
 ##Supported clock frequencies
