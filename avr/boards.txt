@@ -9,12 +9,12 @@ menu.BOD=B.O.D
 ############################################################
 
 328.name=ATmega328
-328.upload.tool=arduino:avrdude
+328.upload.tool=avrdude
 328.upload.protocol=arduino
 328.upload.maximum_size=32256
 328.upload.maximum_data_size=2048
 
-328.bootloader.tool=arduino:avrdude
+328.bootloader.tool=avrdude
 328.bootloader.unlock_bits=0x3f
 328.bootloader.lock_bits=0x0f
 
@@ -99,12 +99,12 @@ menu.BOD=B.O.D
 ############################################################
 
 168.name=ATmega168
-168.upload.tool=arduino:avrdude
+168.upload.tool=avrdude
 168.upload.protocol=arduino
 168.upload.maximum_size=15872
 168.upload.maximum_data_size=1024
 
-168.bootloader.tool=arduino:avrdude
+168.bootloader.tool=avrdude
 168.bootloader.unlock_bits=0x3f
 168.bootloader.lock_bits=0x0f
 
@@ -186,12 +186,12 @@ menu.BOD=B.O.D
 ############################################################
 
 88.name=ATmega88
-88.upload.tool=arduino:avrdude
+88.upload.tool=avrdude
 88.upload.protocol=arduino
 88.upload.maximum_size=7680
 88.upload.maximum_data_size=1024
 
-88.bootloader.tool=arduino:avrdude
+88.bootloader.tool=avrdude
 88.bootloader.unlock_bits=0x3f
 88.bootloader.lock_bits=0x0f
 
@@ -273,14 +273,14 @@ menu.BOD=B.O.D
 ############################################################
 
 48.name=ATmega48 (no bootloader)
-48.upload.tool=arduino:avrdude
+48.upload.tool= avrdude
 48.upload.protocol=arduino
 48.upload.maximum_size=4096
 48.upload.maximum_data_size=512
 
-48.bootloader.tool=arduino:avrdude
+48.bootloader.tool=avrdude
 48.bootloader.unlock_bits=0x3f
-48.bootloader.lock_bits=0x0f
+48.bootloader.lock_bits=0x3f
 
 48.build.core=arduino:arduino
 48.build.board=AVR_ATmega48
@@ -298,7 +298,7 @@ menu.BOD=B.O.D
 48.menu.clock.16MHz_external.upload.speed=115200
 48.menu.clock.16MHz_external.bootloader.low_fuses=0xf7
 48.menu.clock.16MHz_external.bootloader.high_fuses=0xd5
-48.menu.clock.16MHz_external.bootloader.extended_fuses=0xfc
+48.menu.clock.16MHz_external.bootloader.extended_fuses=0xff
 48.menu.clock.16MHz_external.bootloader.file=empty/empty.hex
 48.menu.clock.16MHz_external.build.f_cpu=16000000L
 
@@ -308,7 +308,7 @@ menu.BOD=B.O.D
 48.menu.clock.20MHz_external.upload.speed=115200
 48.menu.clock.20MHz_external.bootloader.low_fuses=0xf7
 48.menu.clock.20MHz_external.bootloader.high_fuses=0xd4
-48.menu.clock.20MHz_external.bootloader.extended_fuses=0xfc
+48.menu.clock.20MHz_external.bootloader.extended_fuses=0xff
 48.menu.clock.20MHz_external.bootloader.file=empty/empty.hex
 48.menu.clock.20MHz_external.build.f_cpu=20000000L
 
@@ -318,7 +318,7 @@ menu.BOD=B.O.D
 48.menu.clock.12MHz_external.upload.speed=57600
 48.menu.clock.12MHz_external.bootloader.low_fuses=0xf7
 48.menu.clock.12MHz_external.bootloader.high_fuses=0xd5
-48.menu.clock.12MHz_external.bootloader.extended_fuses=0xfc
+48.menu.clock.12MHz_external.bootloader.extended_fuses=0xff
 48.menu.clock.12MHz_external.bootloader.file=empty/empty.hex
 48.menu.clock.12MHz_external.build.f_cpu=12000000L
 
@@ -330,7 +330,7 @@ menu.BOD=B.O.D
 48.menu.clock.8MHz_external.upload.speed=38400
 48.menu.clock.8MHz_external.bootloader.low_fuses=0xf7
 48.menu.clock.8MHz_external.bootloader.high_fuses=0xd5
-48.menu.clock.8MHz_external.bootloader.extended_fuses=0xfc
+48.menu.clock.8MHz_external.bootloader.extended_fuses=0xff
 48.menu.clock.8MHz_external.bootloader.file=empty/empty.hex
 48.menu.clock.8MHz_external.build.f_cpu=8000000L
 
@@ -342,7 +342,7 @@ menu.BOD=B.O.D
 48.menu.clock.8MHz_internal.upload.speed=38400
 48.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
 48.menu.clock.8MHz_internal.bootloader.high_fuses=0xd6
-48.menu.clock.8MHz_internal.bootloader.extended_fuses=0xfc
+48.menu.clock.8MHz_internal.bootloader.extended_fuses=0xff
 48.menu.clock.8MHz_internal.bootloader.file=empty/empty.hex
 48.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
@@ -352,7 +352,7 @@ menu.BOD=B.O.D
 48.menu.clock.1MHz_internal.upload.speed=9600
 48.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
 48.menu.clock.1MHz_internal.bootloader.high_fuses=0xd6
-48.menu.clock.1MHz_internal.bootloader.extended_fuses=0xfc
+48.menu.clock.1MHz_internal.bootloader.extended_fuses=0xff
 48.menu.clock.1MHz_internal.bootloader.file=empty/empty.hex
 48.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
@@ -360,7 +360,7 @@ menu.BOD=B.O.D
 
 
 8.name=ATmega8
-8.upload.tool=arduino:avrdude
+8.upload.tool=avrdude
 8.upload.protocol=arduino
 8.upload.maximum_size=7680
 8.upload.maximum_data_size=1024
