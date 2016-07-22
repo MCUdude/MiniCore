@@ -12,6 +12,7 @@ If you're into "pure" AVR programming, I'm happy to tell you that all relevant k
 * [How to install](#how-to-install)
 	- [Boards Manager Installation](#boards-manager-installation)
 	- [Manual Installation](#manual-installation)
+	- [Eclipse](#eclipse)
 * [Pinout](#pinout)
 * [Minimal setup](#minimal-setup)
 
@@ -87,6 +88,19 @@ This installation method requires Arduino IDE version 1.6.4 or greater.
 #### Manual Installation
 Click on the "Download ZIP" button in the upper right corner. Exctract the ZIP file, and move the extracted folder to the location "**~/Documents/Arduino/hardware**". Create the "hardware" folder if it doesn't exist.
 Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
+
+
+#### Eclipse
+MiniCore works perfectly with Eclipse using the [Arduino Eclipse plugin](http://eclipse.baeyens.it) (formally Sloeber). If you're tired of Arduino IDEs limits but still want to stick with open source software; this is the way to go!
+* Download and install the latest version of Arduino Eclipse (Download the nighty build if you want support for aditional programmers)
+* Open `Preferences` (Windows: Window -> Preferences, Mac: [App name] -> Preferences)
+* Click the <i>expand<i> arrow next to the `Arduino` option in the preferences menu
+* Click `Locations`, paste the board manager URL and hit the `Apply` button: `https://mcudude.github.io/MiniCore/package_MCUdude_MiniCore_index.json`
+* Click the `Platform and Boards` menu option to the left and expand the `MiniCore` option. Select the latest version.
+* Click the `OK` button. MiniCore is now installed! 
+<br/> <br/>
+Make sure to select the MiniCore boards.txt file when you create a new sketch.
+
 
 
 ##Pinout
