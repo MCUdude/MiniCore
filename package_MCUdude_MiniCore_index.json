@@ -22,10 +22,10 @@
           "checksum": "SHA-256:a3c5f9f496004bddb5969a473f155ef845178e92a79dc47392ea6356cfb6ba4b",
           "size": "86612",
           "boards": [
-            {"name": "ATmega328"},
-            {"name": "ATmega168"},
-            {"name": "ATmega88"},
-            {"name": "ATmega48"},
+            {"name": "ATmega328/P/PA/A"},
+            {"name": "ATmega168/P/PA/A"},
+            {"name": "ATmega88/P/PA/A"},
+            {"name": "ATmega48/P/PA/A"},
             {"name": "ATmega8"}
           ],
           "toolsDependencies": [
@@ -40,7 +40,39 @@
               "version": "6.0.1-arduino5"
             }
           ]
-        }
+        },
+        {
+          "name": "MiniCore",
+          "architecture": "avr",
+          "version": "1.0.1",
+          "category": "Contributed",
+          "help": {
+            "online": ""
+          },
+          "url": "https://MCUdude.github.io/MiniCore/MiniCore-1.0.1.tar.gz",
+          "archiveFileName": "MiniCore-1.0.1.tar.gz",
+          "checksum": "SHA-256:2191d09c4c7404f4a015658d177a30206ec241e38f264d3cabb1e0639bf0afd5",
+          "size": "87948",
+          "boards": [
+            {"name": "ATmega328/P/PA/A"},
+            {"name": "ATmega168/P/PA/A"},
+            {"name": "ATmega88/P/PA/A"},
+            {"name": "ATmega48/P/PA/A"},
+            {"name": "ATmega8"}
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "arduino",
+              "name": "avr-gcc",
+              "version": "4.8.1-arduino5"
+            },
+            {
+              "packager": "arduino",
+              "name": "avrdude",
+              "version": "6.0.1-arduino5"
+            }
+          ]
+        }        
       ],
       "tools": []
     }
