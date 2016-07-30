@@ -1,6 +1,7 @@
 # MiniCore
 An Arduino core for the ATmega8, ATmega48, ATmega88, ATmega168 and ATmega328, all running a [modified version of Optiboot](#write-to-own-flash). This core requires at least Arduino IDE v1.6, where v1.6.5+ is recommended. <br/>
-If you're into "pure" AVR programming, I'm happy to tell you that all relevant keywords are being highlighted by the IDE through a separate keywords file. Make sure to test the [example files](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/AVR_examples/examples) (File > Examples > AVR C code examples).
+<b>This core gives you two extra IO pins if you're using the internal oscillator!</b> PB6 and PB7 is mapped to [Arduino pin 20 and 21](#pinout).<br/>
+If you're into "pure" AVR programming, I'm happy to tell you that all relevant keywords are being highlighted by the IDE through a separate keywords file. Make sure to test the [example files](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/AVR_examples/examples) (File > Examples > AVR C code examples). Try writing a register name, <i>DDRB</i> for instance, and see for yourself!
 
 # Table of contents
 * [Supported microcontrollers](#supported-microcontrollers)
@@ -90,7 +91,7 @@ Click on the "Download ZIP" button in the upper right corner. Exctract the ZIP f
 Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
 
 
-#### Eclipse
+#### ~~Eclipse~~ Eclipse support is currently broken
 MiniCore works perfectly with Eclipse using the [Arduino Eclipse plugin](http://eclipse.baeyens.it) (formally Sloeber). If you're tired of Arduino IDEs limits but still want to stick with open source software; this is the way to go!
 * Download and install the latest version of Arduino Eclipse (Download the nighty build if you want support for aditional programmers)
 * Open **Preferences** (<i>Windows</i>: Window -> Preferences, <i>Mac</i>: [App name] -> Preferences)
