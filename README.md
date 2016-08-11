@@ -1,5 +1,5 @@
 # MiniCore
-An Arduino core for the ATmega8, ATmega48, ATmega88, ATmega168 and ATmega328, all running a [modified version of Optiboot](#write-to-own-flash). This core requires at least Arduino IDE v1.6, where v1.6.5+ is recommended. <br/>
+An Arduino core for the ATmega8, ATmega48, ATmega88, ATmega168 and ATmega328, all running a [modified version of Optiboot](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.6.5+ is recommended. <br/>
 <b>This core gives you two extra IO pins if you're using the internal oscillator!</b> PB6 and PB7 is mapped to [Arduino pin 20 and 21](#pinout).<br/>
 If you're into "pure" AVR programming, I'm happy to tell you that all relevant keywords are being highlighted by the IDE through a separate keywords file. Make sure to test the [example files](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/AVR_examples/examples) (File > Examples > AVR C code examples). Try writing a register name, <i>DDRB</i> for instance, and see for yourself!
 
@@ -108,9 +108,13 @@ Make sure to select the MiniCore boards.txt file when you create a new sketch.
 This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](http://www.atmel.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
 <b>Click to enlarge:</b> 
 </br> </br>
-<img src="http://i.imgur.com/OHir6hQ.jpg" width="800">
-<br/> <br/>
-<img src="http://i.imgur.com/cAVheJU.jpg" width="800">
+<img src="http://i.imgur.com/fW0xF06.jpg" width="800">
+</br> </br> </br> </br>
+<img src="http://i.imgur.com/d6l5kYP.jpg" width="800"> 
+<br/> <br/> </br> </br>
+<img src="http://i.imgur.com/9jjc19I.jpg" width="800">
+<br/> <br/> </br> </br>
+<img src="http://i.imgur.com/UsKFMEO.jpg" width="800">
 
 
 
