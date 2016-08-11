@@ -109,11 +109,11 @@ This core uses the standard Arduino UNO pinout and will not break compatibility 
 <b>Click to enlarge:</b> 
 </br> </br>
 <img src="http://i.imgur.com/fW0xF06.jpg" width="800">
-</br> </br> </br> </br>
-<img src="http://i.imgur.com/d6l5kYP.jpg" width="800"> 
-<br/> <br/> </br> </br>
+</br> </br> </br>
+<img src="http://i.imgur.com/Zj7PPNV.jpg" width="800"> 
+<br/> <br/> </br>
 <img src="http://i.imgur.com/9jjc19I.jpg" width="800">
-<br/> <br/> </br> </br>
+<br/> <br/> </br>
 <img src="http://i.imgur.com/UsKFMEO.jpg" width="800">
 
 
