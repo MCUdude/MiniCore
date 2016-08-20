@@ -1,38 +1,29 @@
-# Makefile for ATmegaBOOT
-# E.Lins, 18.7.2005
-# $Id$
+# Makefile for Majek's Optiboot fork
+# https://github.com/majekw/optiboot
 #
-# Instructions
-#
-# To make bootloader .hex file:
-# make diecimila
-# make lilypad
-# make ng
-# etc...
-#
-# To burn bootloader .hex file:
-# make diecimila_isp
-# make lilypad_isp
-# make ng_isp
-# etc...
-#
+
 # Edit History
-# 201406xx: WestfW: More Makefile restructuring.
-#                   Split off Makefile.1284, Makefile.extras, Makefile.custom
-#                   So that in theory, the main Makefile contains only the
-#                   official platforms, and does not need to be modified to
-#                   add "less supported" chips and boards.
-# 201303xx: WestfW: Major Makefile restructuring.
-#                   Allows options on Make command line "make xx LED=B3"
-#                   (see also pin_defs.h)
-#                   Divide into "chip" targets and "board" targets.
-#                   Most boards are (recursive) board targets with options.
-#                   Move isp target to separate makefile (fixes m8 EFUSE)
-#                   Some (many) targets will now be rebuilt when not
-#                     strictly necessary, so that options will be included.
-#                     (any "make" with options will always compile.)
-#                   Set many variables with ?= so they can be overridden
-#                   Use arduinoISP settings as default for ISP targets
+# 201607xx: MCUdude: Rewrote the make routines and deleted all the extra makefiles.
+#										 One can now simply run the makeall script to make all variants
+#										 of this bootloader.	 
+#											
+# 201406xx: WestfW:  More Makefile restructuring.
+#                    Split off Makefile.1284, Makefile.extras, Makefile.custom
+#                    So that in theory, the main Makefile contains only the
+#                    official platforms, and does not need to be modified to
+#                    add "less supported" chips and boards.
+#
+# 201303xx: WestfW:  Major Makefile restructuring.
+#                    Allows options on Make command line "make xx LED=B3"
+#                    (see also pin_defs.h)
+#                    Divide into "chip" targets and "board" targets.
+#                    Most boards are (recursive) board targets with options.
+#                    Move isp target to separate makefile (fixes m8 EFUSE)
+#                    Some (many) targets will now be rebuilt when not
+#                    strictly necessary, so that options will be included.
+#                    (any "make" with options will always compile.)
+#                    Set many variables with ?= so they can be overridden
+#                    Use arduinoISP settings as default for ISP targets
 #
 #
 # * Copyright 2013-2015 by Bill Westfield.  Part of Optiboot.
@@ -122,7 +113,7 @@ STK500-2 = $(STK500) -d$(MCU_TARGET) -ms -q -lCF -LCF -cUSB -I200kHz -s -wt
 
 
 OBJ        = $(PROGRAM).o
-OPTIMIZE = -Os -fno-split-wide-types -mrelax
+OPTIMIZE = -Os -fno-split-wide-types -mrelax -fno-caller-saves
 
 DEFS       = 
 
@@ -339,6 +330,7 @@ clean:
 	rm -rf atmega48p/*.hex atmega48p/*.lst
 	rm -rf atmega8/*.hex atmega8/*.lst
 	rm -rf atmega8p/*.hex atmega8p/*.lst
+	rm -rf baudcheck.tmp.sh
 
 clean_asm:
 	rm -rf atmega328/*.lst
@@ -351,6 +343,7 @@ clean_asm:
 	rm -rf atmega48p/*.lst
 	rm -rf atmega8/*.lst
 	rm -rf atmega8p/*.lst
+	rm -rf baudcheck.tmp.sh
 
 %.lst: %.elf
 	$(OBJDUMP) -h -S $< > $@
