@@ -10,12 +10,12 @@ If you're into "pure" AVR programming, I'm happy to tell you that all relevant k
 * [Programmers](#programmers)
 * [Why add Arduino support for these microcontrollers?](#why-add-arduino-support-for-these-microcontrollers)
 * [Write to own flash](#write-to-own-flash)
-* [How to install](#how-to-install)
+* **[How to install](#how-to-install)**
 	- [Boards Manager Installation](#boards-manager-installation)
 	- [Manual Installation](#manual-installation)
-	- [Eclipse](#eclipse)
-* [Pinout](#pinout)
-* [Minimal setup](#minimal-setup)
+* **[Getting started with MiniCore](#getting-started-with-minicore)**
+* **[Pinout](#pinout)**
+* **[Minimal setup](#minimal-setup)**
 
 
 ## Supported microcontrollers:
@@ -91,17 +91,21 @@ Click on the "Download ZIP" button in the upper right corner. Exctract the ZIP f
 Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
 
 
-#### ~~Eclipse~~ Eclipse support is currently broken
-MiniCore works perfectly with Eclipse using the [Arduino Eclipse plugin](http://eclipse.baeyens.it) (formally Sloeber). If you're tired of Arduino IDEs limits but still want to stick with open source software; this is the way to go!
-* Download and install the latest version of Arduino Eclipse (Download the nighty build if you want support for aditional programmers)
-* Open **Preferences** (<i>Windows</i>: Window -> Preferences, <i>Mac</i>: [App name] -> Preferences)
-* Click the <i>expand</i> arrow next to the **Arduino** option in the preferences menu
-* Click **Locations**, paste the board manager URL and hit the **Apply** button: `https://mcudude.github.io/MiniCore/package_MCUdude_MiniCore_index.json`
-* Click the **Platform and Boards** menu option to the left and expand the **MiniCore** option. Select the latest version.
-* Click the **OK** button. MiniCore is now installed! 
-<br/> <br/>
-Make sure to select the MiniCore boards.txt file when you create a new sketch.
+##Getting started with MiniCore
+Ok, so you're downloaded and installed MiniCore, but do I get the wheels spinning? Here's a quick start guide:
+* Hook up your microcontroller as shown in the [pinout diagram](#pinout), or simply just plut it into an Arduino UNO board.
+	- (If you're not planning to use the bootloader (uploading code using a USB to serial adapter), the FTDI header and the 100 nF capacitor on the reset pin can be omitted.) 
+* Open the **Tools > Board** menu item, and select a MiniCore compatible microcontroller.
+* If the *BOD option* is presented, you can select at what voltage the microcontroller will shut down at. Read more about BOD [here](#bod-option).
+* Select your prefered clock frequency. **16 MHz** is standard on most Arduino boards, including the Arduino UNO.
+* Select what kind of programmer you're using under the **Programmers** menu.
+* If the *Variants* option is presented, you'll have to specify what version of the microcontroller you're using. E.g the ATmega328 and the ATmega328P got different device signatures, so selecting the wrong one will result in an error.
+* Hit **Burn Bootloader**. If an LED is connected to pin PB5 (Arduino pin 13), it should flash twice every second.
+* Now that the correct fuse settings is sat and the bootloader burnt, you can upload your code in two ways:
+	- Disconnect your programmer tool, and connect a USB to serial adapter to the microcontroller, like shown in the [minimal setup circuit](#minimal-setup). Then select the correct serial port under the **Tools** menu, and click the **Upload** button. If you're getting some kind of timeout error, it means your RX and TX pins are swapped, or your auto reset circuity isn't working properly (the 100 nF capacitor on the reset line).
+	- Keep your programmer connected, and hold down the `shift` button while clicking **Upload**. This will erase the bootloader and upload your code using the programmer tool.
 
+Your code should now be running on your microcontroller! If you experience any issues related to bootloader burning or serial uploading, please use *[this forum post](https://forum.arduino.cc/index.php?topic=412070.0)* or create an issue on Github.
 
 
 ##Pinout
