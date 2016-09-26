@@ -6,7 +6,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
 
 name=MiniCore
-version=1.6.11
+version=1.0.2
 
 # AVR compile variables
 # ---------------------
@@ -120,29 +120,3 @@ tools.avrdude_remote.upload.pattern=/usr/bin/run-avrdude /tmp/sketch.hex {upload
 # - from numeric vendor ID, set to Unknown otherwise
 build.usb_manufacturer="Unknown"
 build.usb_flags=-DUSB_VID={build.vid} -DUSB_PID={build.pid} '-DUSB_MANUFACTURER={build.usb_manufacturer}' '-DUSB_PRODUCT={build.usb_product}'
-
-
-
-# AVR custom Uploader/Programmers tools, without extended fuses (ATmega8)
-# -------------------------------------------------------------
-
-tools.avrdudeCustom.path={runtime.tools.avrdude.path}
-tools.avrdudeCustom.cmd.path={path}/bin/avrdude
-tools.avrdudeCustom.config.path={runtime.platform.path}/avrdude.conf
-
-tools.avrdudeCustom.upload.params.verbose=-v
-tools.avrdudeCustom.upload.params.quiet=-q -q
-tools.avrdudeCustom.upload.params.noverify=-V
-tools.avrdudeCustom.upload.pattern="{cmd.path}" "-C{config.path}" {upload.verbose} -p{build.mcu} -c{upload.protocol} -P{serial.port} -b{upload.speed} -D "-Uflash:w:{build.path}/{build.project_name}.hex:i"
-
-tools.avrdudeCustom.program.params.verbose=-v
-tools.avrdudeCustom.program.params.quiet=-q -q
-tools.avrdudeCustom.program.pattern="{cmd.path}" "-C{config.path}" {program.verbose} -p{build.mcu} -c{protocol} {program.extra_params} "-Uflash:w:{build.path}/{build.project_name}.hex:i"
-
-tools.avrdudeCustom.erase.params.verbose=-v
-tools.avrdudeCustom.erase.params.quiet=-q -q
-tools.avrdudeCustom.erase.pattern="{cmd.path}" "-C{config.path}" -v -p{build.mcu} -c{protocol} {program.extra_params} -e -Ulock:w:{bootloader.unlock_bits}:m -Uhfuse:w:{bootloader.high_fuses}:m -Ulfuse:w:{bootloader.low_fuses}:m
-
-tools.avrdudeCustom.bootloader.params.verbose=-v
-tools.avrdudeCustom.bootloader.params.quiet=-q -q
-tools.avrdudeCustom.bootloader.pattern="{cmd.path}" "-C{config.path}" -v -p{build.mcu} -c{protocol} {program.extra_params} "-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i" -Ulock:w:{bootloader.lock_bits}:m

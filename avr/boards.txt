@@ -366,7 +366,7 @@ menu.BOD=B.O.D
 8.upload.maximum_size=7680
 8.upload.maximum_data_size=1024
 
-8.bootloader.tool=avrdudeCustom
+8.bootloader.tool=avrdude
 8.bootloader.unlock_bits=0x3f
 8.bootloader.lock_bits=0x0f
 
