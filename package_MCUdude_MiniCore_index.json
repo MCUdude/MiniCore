@@ -6,7 +6,7 @@
       "websiteURL": "https://github.com/MCUdude/MiniCore",
       "email": "",
       "help": {
-        "online": ""
+        "online": "https://forum.arduino.cc/index.php?topic=412070"
       },
       "platforms": [
         {
@@ -14,9 +14,6 @@
           "architecture": "avr",
           "version": "1.0.0",
           "category": "Contributed",
-          "help": {
-            "online": ""
-          },
           "url": "https://MCUdude.github.io/MiniCore/MiniCore-1.0.0.tar.gz",
           "archiveFileName": "MiniCore-1.0.0.tar.gz",
           "checksum": "SHA-256:a3c5f9f496004bddb5969a473f155ef845178e92a79dc47392ea6356cfb6ba4b",
@@ -35,9 +32,6 @@
           "architecture": "avr",
           "version": "1.0.1",
           "category": "Contributed",
-          "help": {
-            "online": ""
-          },
           "url": "https://MCUdude.github.io/MiniCore/MiniCore-1.0.1.tar.gz",
           "archiveFileName": "MiniCore-1.0.1.tar.gz",
           "checksum": "SHA-256:2191d09c4c7404f4a015658d177a30206ec241e38f264d3cabb1e0639bf0afd5",
