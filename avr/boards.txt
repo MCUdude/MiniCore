@@ -1,13 +1,24 @@
-# MiniCore - An Arduino core for the ATmega48/P, ATmega8, ATmega88/P, ATmega168/P, ATmega328/P
-# https://github.com/MCUdude/MiniCore
-# Run ./makeall to build all bootloaders
+##########################################
+## This file is created by MCUdude 
+## for use with MiniCore
+## https://github.com/MCUdude/MiniCore	
+##
+## This is the file where fuse settings,
+## clock frequencies and compiler flags
+## are located.
+##
+## Run ./makeall to build all bootloaders
+##########################################
 
+# Menu options
 menu.variant=Variant
 menu.clock=Clock
-menu.BOD=B.O.D
+menu.BOD=BOD 
+menu.LTO=Compiler LTO
 
-
-############################################################
+##########################
+#### ATmega328/A/P/PA ####
+##########################
 
 328.name=ATmega328
 328.upload.tool=avrdude
@@ -23,11 +34,13 @@ menu.BOD=B.O.D
 328.build.board=AVR_ATmega328
 328.build.variant=standard
 
+# Variants
 328.menu.variant.modelP=328P / 328PA
 328.menu.variant.modelP.build.mcu=atmega328p
 328.menu.variant.modelNonP=328 / 328A
 328.menu.variant.modelNonP.build.mcu=atmega328
 
+# Brown out detection
 328.menu.BOD.2v7=2.7v
 328.menu.BOD.2v7.bootloader.extended_fuses=0xfd
 328.menu.BOD.4v3=4.3v
@@ -37,7 +50,20 @@ menu.BOD=B.O.D
 328.menu.BOD.disabled=Disabled
 328.menu.BOD.disabled.bootloader.extended_fuses=0xff
 
+# Compiler link time optimization
+328.menu.LTO.Os=Disabled (default)
+328.menu.LTO.Os.compiler.c.extra_flags=
+328.menu.LTO.Os.compiler.c.elf.extra_flags=
+328.menu.LTO.Os.compiler.cpp.extra_flags=
+328.menu.LTO.Os.ltoarcmd=avr-ar
 
+328.menu.LTO.Os_flto=Enabled
+328.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto
+328.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto
+328.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto
+328.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
+
+# Clock frequencies
 #make atmega328p AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 #make atmega328 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 328.menu.clock.16MHz_external=16 MHz external
@@ -97,7 +123,9 @@ menu.BOD=B.O.D
 328.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
 
-############################################################
+##########################
+#### ATmega168/A/P/PA ####
+##########################
 
 168.name=ATmega168
 168.upload.tool=avrdude
@@ -113,12 +141,26 @@ menu.BOD=B.O.D
 168.build.board=AVR_ATmega168
 168.build.variant=standard
 
+# Variants
 168.menu.variant.modelP=168P / 168PA
 168.menu.variant.modelP.build.mcu=atmega168p
 168.menu.variant.modelNonP=168 / 168A
 168.menu.variant.modelNonP.build.mcu=atmega168
 
+# Compiler link time optimization
+168.menu.LTO.Os=Disabled (default)
+168.menu.LTO.Os.compiler.c.extra_flags=
+168.menu.LTO.Os.compiler.c.elf.extra_flags=
+168.menu.LTO.Os.compiler.cpp.extra_flags=
+168.menu.LTO.Os.ltoarcmd=avr-ar
 
+168.menu.LTO.Os_flto=Enabled
+168.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto
+168.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto
+168.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto
+168.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
+
+# Clock frequencies
 #make atmega168p AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 #make atmega168 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 168.menu.clock.16MHz_external=16 MHz external (BOD 2.7v)
@@ -184,7 +226,9 @@ menu.BOD=B.O.D
 168.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
 
-############################################################
+#########################
+#### ATmega88/A/P/PA ####
+#########################
 
 88.name=ATmega88
 88.upload.tool=avrdude
@@ -200,12 +244,26 @@ menu.BOD=B.O.D
 88.build.board=AVR_ATmega88
 88.build.variant=standard
 
+# Variants
 88.menu.variant.modelP=88P / 88PA
 88.menu.variant.modelP.build.mcu=atmega88p
 88.menu.variant.modelNonP=88 / 88A
 88.menu.variant.modelNonP.build.mcu=atmega88
 
+# Compiler link time optimization
+88.menu.LTO.Os=Disabled (default)
+88.menu.LTO.Os.compiler.c.extra_flags=
+88.menu.LTO.Os.compiler.c.elf.extra_flags=
+88.menu.LTO.Os.compiler.cpp.extra_flags=
+88.menu.LTO.Os.ltoarcmd=avr-ar
 
+88.menu.LTO.Os_flto=Enabled
+88.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto
+88.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto
+88.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto
+88.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
+
+# Clock frequencies
 #make atmega88p AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 #make atmega88 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 88.menu.clock.16MHz_external=16 MHz external (BOD 2.7v)
@@ -271,7 +329,9 @@ menu.BOD=B.O.D
 88.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
 
-############################################################
+##########################
+#### ATmega48/A/P/PA ####
+##########################
 
 48.name=ATmega48 (no bootloader)
 48.upload.tool= avrdude
@@ -287,12 +347,26 @@ menu.BOD=B.O.D
 48.build.board=AVR_ATmega48
 48.build.variant=standard
 
+# Variants
 48.menu.variant.modelP=48P / 48PA
 48.menu.variant.modelP.build.mcu=atmega48p
 48.menu.variant.modelNonP=48 / 48A
 48.menu.variant.modelNonP.build.mcu=atmega48
 
+# Compiler link time optimization
+48.menu.LTO.Os=Disabled (default)
+48.menu.LTO.Os.compiler.c.extra_flags=
+48.menu.LTO.Os.compiler.c.elf.extra_flags=
+48.menu.LTO.Os.compiler.cpp.extra_flags=
+48.menu.LTO.Os.ltoarcmd=avr-ar
 
+48.menu.LTO.Os_flto=Enabled
+48.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto
+48.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto
+48.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto
+48.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
+
+# Clock frequencies
 #make atmega48p AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 #make atmega48 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 48.menu.clock.16MHz_external=16 MHz external (BOD 2.7v)
@@ -357,8 +431,10 @@ menu.BOD=B.O.D
 48.menu.clock.1MHz_internal.bootloader.file=empty/empty.hex
 48.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
-############################################################
 
+###################
+#### ATmega8/A ####
+###################
 
 8.name=ATmega8
 8.upload.tool=avrdude
@@ -375,8 +451,20 @@ menu.BOD=B.O.D
 8.build.variant=standard
 8.build.mcu=atmega8
 
+# Compiler link time optimization
+8.menu.LTO.Os=Disabled (default)
+8.menu.LTO.Os.compiler.c.extra_flags=
+8.menu.LTO.Os.compiler.c.elf.extra_flags=
+8.menu.LTO.Os.compiler.cpp.extra_flags=
+8.menu.LTO.Os.ltoarcmd=avr-ar
 
+8.menu.LTO.Os_flto=Enabled
+8.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto
+8.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto
+8.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto
+8.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
 
+# Clock frequencies
 #make atmega8 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 8.menu.clock.16MHz_external=16 MHz external (BOD 2.7v)
 8.menu.clock.16MHz_external.upload.speed=115200

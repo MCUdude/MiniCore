@@ -7,6 +7,7 @@ If you're into "pure" AVR programming, I'm happy to tell you that all relevant k
 * [Supported microcontrollers](#supported-microcontrollers)
 * [Supported clock frequencies](#supported-clock-frequencies)
 * [BOD option](#bod-option)
+* [Link time optimization / LTO](#link-time-optimization--lto)
 * [Programmers](#programmers)
 * [Why add Arduino support for these microcontrollers?](#why-add-arduino-support-for-these-microcontrollers)
 * [Write to own flash](#write-to-own-flash)
@@ -55,6 +56,11 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
 
 ##BOD option
 Brown out detection, or BOD for short lets the microcontroller sense the input voltage and shut down if the voltage goes below the brown out setting. The ATmega8, ATmega48, ATmega88 and ATmega168 haven't dedicated the BOD selection to extended fuse, so there's no way to only change the BOD option in the Arduino IDE. If you need to change this setting you'll have to edit the boards.txt file.
+
+
+##Link time optimization / LTO
+After Arduino IDE 1.6.11 where released, There have been support for link time optimization or LTO for short. The LTO optimizes the code at link time, making the code (often) significantly smaller without making it "slower". In Arduino IDE 1.6.11 and newer LTO is enabled by default. I've chosen to disable this by default to make sure the core keep its backwards compatibility. Enabling LTO in IDE 1.6.10 and older will return an error. 
+I encourage you to try the new LTO option and see how much smaller your code gets! Note that you don't need to hit "Burn Bootloader" in order to enable LTO. Simply enable it in the "Tools" menu, and your code is ready for compilation. If you want to read more about LTO and GCC flags in general, head over to the [GNU GCC website](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)!
 
 
 ##Programmers
