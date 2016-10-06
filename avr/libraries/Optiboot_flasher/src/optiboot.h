@@ -109,7 +109,7 @@ void optiboot_page_write(optiboot_addr_t address) {
  */
 
 // Function to read a flash page and store it in an array (storage_array[])
-void optiboot_readPage(const char allocated_flash_space[], uint8_t storage_array[], uint16_t page, char blank_character)
+void optiboot_readPage(const uint8_t allocated_flash_space[], uint8_t storage_array[], uint16_t page, char blank_character)
 {
   uint8_t read_character;
   for(uint16_t j = 0; j < SPM_PAGESIZE; j++) 
@@ -124,7 +124,7 @@ void optiboot_readPage(const char allocated_flash_space[], uint8_t storage_array
 
 
 // Function to read a flash page and store it in an array (storage_array[]), but without blank_character
-void optiboot_readPage(const char allocated_flash_space[], uint8_t storage_array[], uint16_t page)
+void optiboot_readPage(const uint8_t allocated_flash_space[], uint8_t storage_array[], uint16_t page)
 {
   uint8_t read_character;
   for(uint16_t j = 0; j < SPM_PAGESIZE; j++) 
@@ -137,7 +137,7 @@ void optiboot_readPage(const char allocated_flash_space[], uint8_t storage_array
 
 
 // Function to write data to a flash page
-void optiboot_writePage(const char allocated_flash_space[], uint8_t data_to_store[], uint16_t page)
+void optiboot_writePage(const uint8_t allocated_flash_space[], uint8_t data_to_store[], uint16_t page)
 {
   uint16_t word_buffer = 0; 
        
