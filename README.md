@@ -55,7 +55,15 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
 
 
 ##BOD option
-Brown out detection, or BOD for short lets the microcontroller sense the input voltage and shut down if the voltage goes below the brown out setting. The ATmega8, ATmega48, ATmega88 and ATmega168 haven't dedicated the BOD selection to extended fuse, so there's no way to only change the BOD option in the Arduino IDE. If you need to change this setting you'll have to edit the boards.txt file.
+Brown out detection, or BOD for short lets the microcontroller sense the input voltage and shut down if the voltage goes below the brown out setting. To change the BOD settings you'll have to connect an ISP programmer and hit "Burn bootloader". Below is a table that shows the available BOD options:
+<br/>
+
+| ATmega328 | Atmega168 | ATmega88 | ATmega48 | ATmega8  |
+|-----------|-----------|----------|----------|----------|
+| 4.3v      | 4.3v      | 4.3v     | 4.3v     | 4.0v     |
+| 2.7v      | 2.7v      | 2.7v     | 2.7v     | 2.7v     |
+| 1.8v      | 1.8v      | 1.8v     | 1.8v     | -        |
+| Disabled  | Disabled  | Disabled | Disabled | Disabled |
 
 
 ##Link time optimization / LTO
