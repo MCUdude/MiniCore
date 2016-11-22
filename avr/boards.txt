@@ -66,52 +66,42 @@ menu.LTO=Compiler LTO
 328.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
 
 # Clock frequencies
-#make atmega328p AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega328 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 328.menu.clock.16MHz_external=16 MHz external
 328.menu.clock.16MHz_external.upload.speed=115200
 328.menu.clock.16MHz_external.bootloader.low_fuses=0xf7
 328.menu.clock.16MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 328.menu.clock.16MHz_external.build.f_cpu=16000000L
 
-#make atmega328p AVR_FREQ=20000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega328 AVR_FREQ=20000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 328.menu.clock.20MHz_external=20 MHz external
 328.menu.clock.20MHz_external.upload.speed=115200
 328.menu.clock.20MHz_external.bootloader.low_fuses=0xf7
 328.menu.clock.20MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 328.menu.clock.20MHz_external.build.f_cpu=20000000L
 
-#make atmega328p AVR_FREQ=12000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
-#make atmega328 AVR_FREQ=12000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2 
+328.menu.clock.18_432MHz_external=18.432 MHz external
+328.menu.clock.18_432MHz_external.upload.speed=115200
+328.menu.clock.18_432MHz_external.bootloader.low_fuses=0xf7
+328.menu.clock.18_432MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
+328.menu.clock.18_432MHz_external.build.f_cpu=18432000L
+
 328.menu.clock.12MHz_external=12 MHz external
 328.menu.clock.12MHz_external.upload.speed=57600
 328.menu.clock.12MHz_external.bootloader.low_fuses=0xf7
 328.menu.clock.12MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 328.menu.clock.12MHz_external.build.f_cpu=12000000L
 
-#make atmega328p AVR_FREQ=8000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2 
-#make atmega328 AVR_FREQ=8000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2 
-#make atmega328p AVR_FREQ=8000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2 
-#make atmega328 AVR_FREQ=8000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2 
 328.menu.clock.8MHz_external=8 MHz external
 328.menu.clock.8MHz_external.upload.speed=38400
 328.menu.clock.8MHz_external.bootloader.low_fuses=0xf7
 328.menu.clock.8MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 328.menu.clock.8MHz_external.build.f_cpu=8000000L
 
-#make atmega328p AVR_FREQ=8000000L BAUD_RATE=38400 LED=B5 LED_START_FLASHES=2 
-#make atmega328 AVR_FREQ=8000000L BAUD_RATE=38400 LED=B5 LED_START_FLASHES=2 
-#make atmega328p AVR_FREQ=8000000L BAUD_RATE=19200 LED=B5 LED_START_FLASHES=2 
-#make atmega328 AVR_FREQ=8000000L BAUD_RATE=19200 LED=B5 LED_START_FLASHES=2 
 328.menu.clock.8MHz_internal=8 MHz internal
 328.menu.clock.8MHz_internal.upload.speed=38400
 328.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
 328.menu.clock.8MHz_internal.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 328.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
-#make atmega328p AVR_FREQ=1000000L BAUD_RATE=9600 LED=B5 LED_START_FLASHES=2
-#make atmega328 AVR_FREQ=1000000L BAUD_RATE=9600 LED=B5 LED_START_FLASHES=2
 328.menu.clock.1MHz_internal=1 MHz internal
 328.menu.clock.1MHz_internal.upload.speed=9600
 328.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
@@ -168,52 +158,42 @@ menu.LTO=Compiler LTO
 168.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
 
 # Clock frequencies
-#make atmega168p AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega168 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 168.menu.clock.16MHz_external=16 MHz external
 168.menu.clock.16MHz_external.upload.speed=115200
 168.menu.clock.16MHz_external.bootloader.low_fuses=0xf7
 168.menu.clock.16MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 168.menu.clock.16MHz_external.build.f_cpu=16000000L
 
-#make atmega168p AVR_FREQ=20000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega168 AVR_FREQ=20000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 168.menu.clock.20MHz_external=20 MHz external
 168.menu.clock.20MHz_external.upload.speed=115200
 168.menu.clock.20MHz_external.bootloader.low_fuses=0xf7
 168.menu.clock.20MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 168.menu.clock.20MHz_external.build.f_cpu=20000000L
 
-#make atmega168p AVR_FREQ=12000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
-#make atmega168 AVR_FREQ=12000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
+168.menu.clock.18_432MHz_external=18.432 MHz external
+168.menu.clock.18_432MHz_external.upload.speed=115200
+168.menu.clock.18_432MHz_external.bootloader.low_fuses=0xf7
+168.menu.clock.18_432MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
+168.menu.clock.18_432MHz_external.build.f_cpu=18432000L
+
 168.menu.clock.12MHz_external=12 MHz external
 168.menu.clock.12MHz_external.upload.speed=57600
 168.menu.clock.12MHz_external.bootloader.low_fuses=0xf7
 168.menu.clock.12MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 168.menu.clock.12MHz_external.build.f_cpu=12000000L
 
-#make atmega168p AVR_FREQ=8000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega168 AVR_FREQ=8000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega168p AVR_FREQ=8000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
-#make atmega168 AVR_FREQ=8000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
 168.menu.clock.8MHz_external=8 MHz external
 168.menu.clock.8MHz_external.upload.speed=38400
 168.menu.clock.8MHz_external.bootloader.low_fuses=0xf7
 168.menu.clock.8MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 168.menu.clock.8MHz_external.build.f_cpu=8000000L
 
-#make atmega168p AVR_FREQ=8000000L BAUD_RATE=38400 LED=B5 LED_START_FLASHES=2
-#make atmega168 AVR_FREQ=8000000L BAUD_RATE=38400 LED=B5 LED_START_FLASHES=2
-#make atmega168p AVR_FREQ=8000000L BAUD_RATE=19200 LED=B5 LED_START_FLASHES=2
-#make atmega168 AVR_FREQ=8000000L BAUD_RATE=19200 LED=B5 LED_START_FLASHES=2
 168.menu.clock.8MHz_internal=8 MHz internal
 168.menu.clock.8MHz_internal.upload.speed=38400
 168.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
 168.menu.clock.8MHz_internal.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 168.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
-#make atmega168p AVR_FREQ=1000000L BAUD_RATE=9600 LED=B5 LED_START_FLASHES=2
-#make atmega168 AVR_FREQ=1000000L BAUD_RATE=9600 LED=B5 LED_START_FLASHES=2
 168.menu.clock.1MHz_internal=1 MHz internal
 168.menu.clock.1MHz_internal.upload.speed=9600
 168.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
@@ -270,52 +250,42 @@ menu.LTO=Compiler LTO
 88.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
 
 # Clock frequencies
-#make atmega88p AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega88 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 88.menu.clock.16MHz_external=16 MHz external
 88.menu.clock.16MHz_external.upload.speed=115200
 88.menu.clock.16MHz_external.bootloader.low_fuses=0xf7
 88.menu.clock.16MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 88.menu.clock.16MHz_external.build.f_cpu=16000000L
 
-#make atmega88p AVR_FREQ=20000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega88 AVR_FREQ=20000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 88.menu.clock.20MHz_external=20 MHz external
 88.menu.clock.20MHz_external.upload.speed=115200
 88.menu.clock.20MHz_external.bootloader.low_fuses=0xf7
 88.menu.clock.20MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 88.menu.clock.20MHz_external.build.f_cpu=20000000L
 
-#make atmega88p AVR_FREQ=12000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
-#make atmega88 AVR_FREQ=12000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
+88.menu.clock.18_432MHz_external=18.432 MHz external
+88.menu.clock.18_432MHz_external.upload.speed=115200
+88.menu.clock.18_432MHz_external.bootloader.low_fuses=0xf7
+88.menu.clock.18_432MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
+88.menu.clock.18_432MHz_external.build.f_cpu=18432000L
+
 88.menu.clock.12MHz_external=12 MHz external
 88.menu.clock.12MHz_external.upload.speed=57600
 88.menu.clock.12MHz_external.bootloader.low_fuses=0xf7
 88.menu.clock.12MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 88.menu.clock.12MHz_external.build.f_cpu=12000000L
 
-#make atmega88p AVR_FREQ=8000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega88 AVR_FREQ=8000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega88p AVR_FREQ=8000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
-#make atmega88 AVR_FREQ=8000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
 88.menu.clock.8MHz_external=8 MHz external
 88.menu.clock.8MHz_external.upload.speed=38400
 88.menu.clock.8MHz_external.bootloader.low_fuses=0xf7
 88.menu.clock.8MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 88.menu.clock.8MHz_external.build.f_cpu=8000000L
 
-#make atmega88p AVR_FREQ=8000000L BAUD_RATE=38400 LED=B5 LED_START_FLASHES=2
-#make atmega88 AVR_FREQ=8000000L BAUD_RATE=38400 LED=B5 LED_START_FLASHES=2
-#make atmega88p AVR_FREQ=8000000L BAUD_RATE=19200 LED=B5 LED_START_FLASHES=2
-#make atmega88 AVR_FREQ=8000000L BAUD_RATE=19200 LED=B5 LED_START_FLASHES=2
 88.menu.clock.8MHz_internal=8 MHz internal
 88.menu.clock.8MHz_internal.upload.speed=38400
 88.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
 88.menu.clock.8MHz_internal.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 88.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
-#make atmega88p AVR_FREQ=1000000L BAUD_RATE=9600 LED=B5 LED_START_FLASHES=2
-#make atmega88 AVR_FREQ=1000000L BAUD_RATE=9600 LED=B5 LED_START_FLASHES=2
 88.menu.clock.1MHz_internal=1 MHz internal
 88.menu.clock.1MHz_internal.upload.speed=9600
 88.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
@@ -372,52 +342,42 @@ menu.LTO=Compiler LTO
 48.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
 
 # Clock frequencies
-#make atmega48p AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega48 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 48.menu.clock.16MHz_external=16 MHz external
 48.menu.clock.16MHz_external.upload.speed=115200
 48.menu.clock.16MHz_external.bootloader.low_fuses=0xf7
 48.menu.clock.16MHz_external.bootloader.file=empty/empty.hex
 48.menu.clock.16MHz_external.build.f_cpu=16000000L
 
-#make atmega48p AVR_FREQ=20000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega48 AVR_FREQ=20000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 48.menu.clock.20MHz_external=20 MHz external
 48.menu.clock.20MHz_external.upload.speed=115200
 48.menu.clock.20MHz_external.bootloader.low_fuses=0xf7
 48.menu.clock.20MHz_external.bootloader.file=empty/empty.hex
 48.menu.clock.20MHz_external.build.f_cpu=20000000L
 
-#make atmega48p AVR_FREQ=12000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
-#make atmega48 AVR_FREQ=12000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
+48.menu.clock.18_432MHz_external=18.432 MHz external
+48.menu.clock.18_432MHz_external.upload.speed=115200
+48.menu.clock.18_432MHz_external.bootloader.low_fuses=0xf7
+48.menu.clock.18_432MHz_external.bootloader.file=empty/empty.hex
+48.menu.clock.18_432MHz_external.build.f_cpu=18432000L
+
 48.menu.clock.12MHz_external=12 MHz external
 48.menu.clock.12MHz_external.upload.speed=57600
 48.menu.clock.12MHz_external.bootloader.low_fuses=0xf7
 48.menu.clock.12MHz_external.bootloader.file=empty/empty.hex
 48.menu.clock.12MHz_external.build.f_cpu=12000000L
 
-#make atmega48p AVR_FREQ=8000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega48 AVR_FREQ=8000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega48p AVR_FREQ=8000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
-#make atmega48 AVR_FREQ=8000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
 48.menu.clock.8MHz_external=8 MHz external
 48.menu.clock.8MHz_external.upload.speed=38400
 48.menu.clock.8MHz_external.bootloader.low_fuses=0xf7
 48.menu.clock.8MHz_external.bootloader.file=empty/empty.hex
 48.menu.clock.8MHz_external.build.f_cpu=8000000L
 
-#make atmega48p AVR_FREQ=8000000L BAUD_RATE=38400 LED=B5 LED_START_FLASHES=2
-#make atmega48 AVR_FREQ=8000000L BAUD_RATE=38400 LED=B5 LED_START_FLASHES=2
-#make atmega48p AVR_FREQ=8000000L BAUD_RATE=19200 LED=B5 LED_START_FLASHES=2
-#make atmega48 AVR_FREQ=8000000L BAUD_RATE=19200 LED=B5 LED_START_FLASHES=2
 48.menu.clock.8MHz_internal=8 MHz internal
 48.menu.clock.8MHz_internal.upload.speed=38400
 48.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
 48.menu.clock.8MHz_internal.bootloader.file=empty/empty.hex
 48.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
-#make atmega48p AVR_FREQ=1000000L BAUD_RATE=9600 LED=B5 LED_START_FLASHES=2
-#make atmega48 AVR_FREQ=1000000L BAUD_RATE=9600 LED=B5 LED_START_FLASHES=2
 48.menu.clock.1MHz_internal=1 MHz internal
 48.menu.clock.1MHz_internal.upload.speed=9600
 48.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
@@ -467,7 +427,6 @@ menu.LTO=Compiler LTO
 8.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
 
 # Clock frequencies - This is the second part of the low fuse bit concatenation
-#make atmega8 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 8.menu.clock.16MHz_external=16 MHz external
 8.menu.clock.16MHz_external.upload.speed=115200
 8.menu.clock.16MHz_external.bootloader.sut_cksel_bits=111111
@@ -475,7 +434,6 @@ menu.LTO=Compiler LTO
 8.menu.clock.16MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 8.menu.clock.16MHz_external.build.f_cpu=16000000L
 
-#make atmega8 AVR_FREQ=20000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
 8.menu.clock.20MHz_external=20 MHz external
 8.menu.clock.20MHz_external.upload.speed=115200
 8.menu.clock.20MHz_external.bootloader.sut_cksel_bits=111111
@@ -483,7 +441,13 @@ menu.LTO=Compiler LTO
 8.menu.clock.20MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 8.menu.clock.20MHz_external.build.f_cpu=20000000L
 
-#make atmega8 AVR_FREQ=12000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
+8.menu.clock.18_432MHz_external=18.432 MHz external
+8.menu.clock.18_432MHz_external.upload.speed=115200
+8.menu.clock.18_432MHz_external.bootloader.sut_cksel_bits=111111
+8.menu.clock.18_432MHz_external.bootloader.high_fuses=0xc4
+8.menu.clock.18_432MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
+8.menu.clock.18_432MHz_external.build.f_cpu=18432000L
+
 8.menu.clock.12MHz_external=12 MHz external
 8.menu.clock.12MHz_external.upload.speed=57600
 8.menu.clock.12MHz_external.bootloader.sut_cksel_bits=111111
@@ -491,8 +455,6 @@ menu.LTO=Compiler LTO
 8.menu.clock.12MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 8.menu.clock.12MHz_external.build.f_cpu=12000000L
 
-#make atmega8 AVR_FREQ=8000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2
-#make atmega8 AVR_FREQ=8000000L BAUD_RATE=57600 LED=B5 LED_START_FLASHES=2
 8.menu.clock.8MHz_external=8 MHz external
 8.menu.clock.8MHz_external.upload.speed=38400
 8.menu.clock.8MHz_external.bootloader.sut_cksel_bits=111111
@@ -500,8 +462,6 @@ menu.LTO=Compiler LTO
 8.menu.clock.8MHz_external.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 8.menu.clock.8MHz_external.build.f_cpu=8000000L
 
-#make atmega8 AVR_FREQ=8000000L BAUD_RATE=38400 LED=B5 LED_START_FLASHES=2
-#make atmega8 AVR_FREQ=8000000L BAUD_RATE=19200 LED=B5 LED_START_FLASHES=2
 8.menu.clock.8MHz_internal=8 MHz internal
 8.menu.clock.8MHz_internal.upload.speed=38400
 8.menu.clock.8MHz_internal.bootloader.sut_cksel_bits=100100
@@ -509,7 +469,6 @@ menu.LTO=Compiler LTO
 8.menu.clock.8MHz_internal.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.speed}_{build.f_cpu}.hex
 8.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
-#make atmega8 AVR_FREQ=1000000L BAUD_RATE=9600 LED=B5 LED_START_FLASHES=2
 8.menu.clock.1MHz_internal=1 MHz internal
 8.menu.clock.1MHz_internal.upload.speed=9600
 8.menu.clock.1MHz_internal.bootloader.sut_cksel_bits=100001
