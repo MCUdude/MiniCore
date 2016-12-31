@@ -29,6 +29,14 @@ If you're into "pure" AVR programming, I'm happy to tell you that all relevant k
 
 <b>*</b> All variants (A, P, PA) except PB
 
+Can't decide what microcontroller to choose? Have a look at the specification table below:
+
+|              | ATmega328 | ATmega168 | ATmega88 | ATmega48 | ATmega8 |
+|--------------|-----------|-----------|----------|----------|---------|
+| **Flash**    | 32kB      | 16kB      | 8kB      | 4kB      | 8kB     |
+| **RAM**      | 2kB       | 1kB       | 1kB      | 512B     | 1kB     |
+| **EEPROM**   | 1kB       | 512B      | 512B     | 256B     | 512B    |
+| **PWM pins** | 6         | 6         | 6        | 6        | 3       |
 
 ## Why add Arduino support for these microcontrollers?
 * They are all Arduino UNO compatible (drop-in replacement)
@@ -53,7 +61,7 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
 
 <b>*</b> When using the 18.432 MHz option (or any frequency by which 64 cannot be divided evenly), micros() is 4-5 times slower (~110 clocks). It reports the time at the point when it was called, not the end.
 This clock frequency is not recommended if your application relies on accurate timing, but is [superb for UART communication](http://wormfood.net/avrbaudcalc.php?bitrate=300%2C600%2C1200%2C2400%2C4800%2C9600%2C14.4k%2C19.2k%2C28.8k%2C38.4k%2C57.6k%2C76.8k%2C115.2k%2C230.4k%2C250k%2C.5m%2C1m&clock=18.432&databits=8). 
-Millis() is not effected, only micros() and delay(). Micros() executes equally fast at all clock speeds, but returns wrong values with anything that 64 doesn't divide evenly by.
+Millis() is not affected, only micros() and delay(). Micros() executes equally fast at all clock speeds, but returns wrong values with anything that 64 doesn't divide evenly by.
 <br/>
 
 <b>**</b> There might be some issues related to the internal oscillator. It's factory calibrated, but may be a little "off" depending on the calibration, ambient temperature and operating voltage. If uploading failes while using the 8 MHz internal oscillator you have three options:
