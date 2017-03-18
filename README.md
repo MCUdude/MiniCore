@@ -141,15 +141,12 @@ Your code should now be running on your microcontroller! If you experience any i
 This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](http://www.atmel.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
 <b>Click to enlarge:</b> 
 </br> </br>
-<img src="http://i.imgur.com/fW0xF06.jpg" width="800">
-</br> </br> </br>
-<img src="http://i.imgur.com/Zj7PPNV.jpg" width="800"> 
-<br/> <br/> </br>
-<img src="http://i.imgur.com/9jjc19I.jpg" width="800">
-<br/> <br/> </br>
-<img src="http://i.imgur.com/UsKFMEO.jpg" width="800">
+<img src="http://i.imgur.com/bOJPN5h.jpg" width="800">
+</br> </br>
+<img src="http://i.imgur.com/Nqkis6g.jpg" width="800"> 
 
 
+  
 ##Minimal setup
 Here is a simple schematic showing a minimal setup using an external crystal. Skip the crystal and the two 22pF capacitors if you're using the internal oscillator. If you don't want to mess with breadboards, components and wiring; simply use your Arduino UNO!<br/>
 <img src="http://i.imgur.com/d7Xhtht.png" width="750">
