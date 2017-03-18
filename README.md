@@ -46,7 +46,7 @@ Can't decide what microcontroller to choose? Have a look at the specification ta
 * You can now choose the suited microcontroller for your project. No need to go for overkill!
 
 
-##Supported clock frequencies
+## Supported clock frequencies
 * 16 MHz external oscillator (default)
 * 20 MHz external oscillator
 * 18.432 Mhz external oscillator <b>*</b>
@@ -70,7 +70,7 @@ Millis() is not affected, only micros() and delay(). Micros() executes equally f
 * Use the 1 MHz option instead 
 
 
-##BOD option
+## BOD option
 Brown out detection, or BOD for short lets the microcontroller sense the input voltage and shut down if the voltage goes below the brown out setting. To change the BOD settings you'll have to connect an ISP programmer and hit "Burn bootloader". Below is a table that shows the available BOD options:
 <br/>
 
@@ -82,26 +82,26 @@ Brown out detection, or BOD for short lets the microcontroller sense the input v
 | Disabled  | Disabled  | Disabled | Disabled | Disabled |
 
 
-##Link time optimization / LTO
+## Link time optimization / LTO
 After Arduino IDE 1.6.11 where released, There have been support for link time optimization or LTO for short. The LTO optimizes the code at link time, making the code (often) significantly smaller without making it "slower". In Arduino IDE 1.6.11 and newer LTO is enabled by default. I've chosen to disable this by default to make sure the core keep its backwards compatibility. Enabling LTO in IDE 1.6.10 and older will return an error. 
 I encourage you to try the new LTO option and see how much smaller your code gets! Note that you don't need to hit "Burn Bootloader" in order to enable LTO. Simply enable it in the "Tools" menu, and your code is ready for compilation. If you want to read more about LTO and GCC flags in general, head over to the [GNU GCC website](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)!
 
 
-##Programmers
+## Programmers
 Mini does not adds its own copies of all the standard programmers to the "Programmer" menu. Just select one of the stock programmers in the "Programmers" menu, and you're ready to "Burn Bootloader" or "Upload Using Programmer".
 
 Select your microcontroller in the boards menu, then select the clock frequency. You'll have to hit "Burn bootloader" in order to set the correct fuses and upload the correct bootloader. <br/>
 Make sure you connect an ISP programmer, and select the correct one in the "Programmers" menu. For time critical operations an external oscillator is recommended.
  
  
-##Write to own flash
+## Write to own flash
 A while ago [@majekw](https://github.com/majekw) announced that he'd [successfully modified the Optiboot bootloader](http://forum.arduino.cc/index.php?topic=332191.0) to let the running program permanently store content in the flash memory.
 The flash memory is much faster than the EEPROM, and can handle about 10 000 write cycles before it's worn out. <br/>
 To enable this feature your original bootloader needs to be replaced by the new one. Simply hit "Burn Bootloader", and it's done! <br/>
 Please check out the [Optiboot flasher example](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/Optiboot_flasher/examples/SerialReadWrite) for more info about how this feature works, and how you can try it on your MiniCore compatible microcontroller.
 
 
-##How to install
+## How to install
 #### Boards Manager Installation
 This installation method requires Arduino IDE version 1.6.4 or greater.
 * Open the Arduino IDE.
@@ -120,7 +120,7 @@ Click on the "Download ZIP" button in the upper right corner. Exctract the ZIP f
 Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
 
 
-##Getting started with MiniCore
+## Getting started with MiniCore
 Ok, so you're downloaded and installed MiniCore, but do I get the wheels spinning? Here's a quick start guide:
 * Hook up your microcontroller as shown in the [pinout diagram](#pinout), or simply just plut it into an Arduino UNO board.
 	- (If you're not planning to use the bootloader (uploading code using a USB to serial adapter), the FTDI header and the 100 nF capacitor on the reset pin can be omitted.) 
@@ -137,16 +137,16 @@ Ok, so you're downloaded and installed MiniCore, but do I get the wheels spinnin
 Your code should now be running on your microcontroller! If you experience any issues related to bootloader burning or serial uploading, please use *[this forum post](https://forum.arduino.cc/index.php?topic=412070.0)* or create an issue on Github.
 
 
-##Pinout
+## Pinout
 This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](http://www.atmel.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
 <b>Click to enlarge:</b> 
 </br> </br>
 <img src="http://i.imgur.com/bOJPN5h.jpg" width="800">
 </br> </br>
-<img src="http://i.imgur.com/Nqkis6g.jpg" width="800"> 
+<center> <img src="http://i.imgur.com/Nqkis6g.jpg" width="700"> </center>
 
 
   
-##Minimal setup
+## Minimal setup
 Here is a simple schematic showing a minimal setup using an external crystal. Skip the crystal and the two 22pF capacitors if you're using the internal oscillator. If you don't want to mess with breadboards, components and wiring; simply use your Arduino UNO!<br/>
 <img src="http://i.imgur.com/d7Xhtht.png" width="750">
