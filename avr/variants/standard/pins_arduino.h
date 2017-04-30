@@ -89,7 +89,8 @@
 
 
 #define NUM_DIGITAL_PINS            23
-#define NUM_ANALOG_INPUTS           8  // 8 for TQFP, 6 for DIP 
+#define NUM_ANALOG_INPUTS           8  // 8 for TQFP, 6 for DIP
+#define EXTERNAL_NUM_INTERRUPTS     2
 #define analogInputToDigitalPin(p)  ((p < 5) ? (p) + 14 : ((p < 8) ? (p) + 17) : -1)
 #define analogPinToChannel(p)      ((p) < NUM_ANALOG_INPUTS ? (p) : (p) >= 14 ? (p) - 14 : -1)
 
