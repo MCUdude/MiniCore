@@ -91,6 +91,7 @@
 #define NUM_DIGITAL_PINS            23
 #define NUM_ANALOG_INPUTS           8  // 8 for TQFP, 6 for DIP 
 #define analogInputToDigitalPin(p)  ((p < 5) ? (p) + 14 : ((p < 8) ? (p) + 17) : -1)
+#define analogPinToChannel(p)      ((p) < NUM_ANALOG_INPUTS ? (p) : (p) >= 14 ? (p) - 14 : -1)
 
 #if defined(__AVR_ATmega8__)
 #define digitalPinHasPWM(p)         ((p) == 9 || (p) == 10 || (p) == 11)
