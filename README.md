@@ -107,6 +107,7 @@ This installation method requires Arduino IDE version 1.6.4 or greater.
 * Open the Arduino IDE.
 * Open the **File > Preferences** menu item.
 * Enter the following URL in **Additional Boards Manager URLs**: 
+
         ```
 	https://mcudude.github.io/MiniCore/package_MCUdude_MiniCore_index.json
 	```
