@@ -131,6 +131,8 @@ menu.LTO=Compiler LTO
 # Variants
 168.menu.variant.modelP=168P / 168PA
 168.menu.variant.modelP.build.mcu=atmega168p
+168.menu.variant.modelPB=168PB
+168.menu.variant.modelPB.build.mcu=atmega168pb
 168.menu.variant.modelNonP=168 / 168A
 168.menu.variant.modelNonP.build.mcu=atmega168
 
