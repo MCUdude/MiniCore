@@ -262,8 +262,10 @@ void init()
 	// this combination is for the ATmega8535, ATmega8, ATmega16, ATmega32, ATmega8515, ATmega162
 	sbi(TCCR0, CS01);
 	sbi(TCCR0, CS00);
-	sbi(TCCR0, WGM00);
-	sbi(TCCR0, WGM01);
+		#if defined(WGM00) && defined(WGM01) // The ATmega8 doesn't have WGM00 and WGM01
+	  sbi(TCCR0, WGM00);
+	  sbi(TCCR0, WGM01);
+	#endif
 #elif defined(TCCR0B) && defined(CS01) && defined(CS00)
 	// this combination is for the standard 168/328/640/1280/1281/2560/2561
 	sbi(TCCR0B, CS01);
