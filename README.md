@@ -1,7 +1,7 @@
 # MiniCore
-An Arduino core for the ATmega8, ATmega48, ATmega88, ATmega168 and ATmega328, all running a [modified version of Optiboot](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.6.5+ is recommended. <br/>
+An Arduino core for the ATmega8, ATmega48, ATmega88, ATmega168 and ATmega328, all running a [custom version of Optiboot for increased functionality](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.6.5+ is recommended. <br/>
 **This core gives you two extra IO pins if you're using the internal oscillator!** PB6 and PB7 is mapped to [Arduino pin 20 and 21](#pinout).<br/>
-If you're into "pure" AVR programming, I'm happy to tell you that all relevant keywords are being highlighted by the IDE through a separate keywords file. Make sure to test the [example files](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/AVR_examples/examples) (File > Examples > AVR C code examples). Try writing a register name, <i>DDRB</i> for instance, and see for yourself!
+If you're into "generic" AVR programming, I'm happy to tell you that all relevant keywords are being highlighted by the IDE through a separate keywords file. Make sure to test the [example files](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/AVR_examples/examples) (File > Examples > AVR C code examples). Try writing a register name, <i>DDRB</i> for instance, and see for yourself!
 
 
 # Table of contents
@@ -95,9 +95,8 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
  
  
 ## Write to own flash
-A while ago [@majekw](https://github.com/majekw) announced that he'd [successfully modified the Optiboot bootloader](http://forum.arduino.cc/index.php?topic=332191.0) to let the running program permanently store content in the flash memory.
-The flash memory is much faster than the EEPROM, and can handle about 10 000 write cycles before it's worn out. <br/>
-To enable this feature your original bootloader needs to be replaced by the new one. Simply hit "Burn Bootloader", and it's done! <br/>
+MiniCore implements [@majekw](https://github.com/majekw) fork of Optiboot, which enables flash writing functionality within the running application. This means that content from e.g. a sensor can be stored in the flash memory directly, without the need of externa memory. Flash memory is much faster than EEPROM, and can handle about 10 000 write cycles.  
+To enable this feature your original bootloader needs to be replaced by the new one. Simply hit "Burn Bootloader", and it's done!  
 Please check out the [Optiboot flasher example](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/Optiboot_flasher/examples/SerialReadWrite) for more info about how this feature works, and how you can try it on your MiniCore compatible microcontroller.
 
 
