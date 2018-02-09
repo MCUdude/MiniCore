@@ -1,4 +1,5 @@
 # MiniCore
+[![Build Status](https://travis-ci.org/MCUdude/MiniCore.svg?branch=master)](https://travis-ci.org/MCUdude/MiniCore)
 An Arduino core for the ATmega8, ATmega48, ATmega88, ATmega168 and ATmega328, all running a [custom version of Optiboot for increased functionality](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.6.5+ is recommended. <br/>
 **This core gives you two extra IO pins if you're using the internal oscillator!** PB6 and PB7 is mapped to [Arduino pin 20 and 21](#pinout).<br/>
 If you're into "generic" AVR programming, I'm happy to tell you that all relevant keywords are being highlighted by the IDE through a separate keywords file. Make sure to test the [example files](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/AVR_examples/examples) (File > Examples > AVR C code examples). Try writing a register name, <i>DDRB</i> for instance, and see for yourself!
