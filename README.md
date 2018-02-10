@@ -23,22 +23,24 @@ If you're into "generic" AVR programming, I'm happy to tell you that all relevan
 
 
 ## Supported microcontrollers:
-* ATmega8<b>*</b>
-* ATmega48<b>*</b>
-* ATmega88<b>*</b>
-* ATmega168<b>*</b>
-* ATmega328<b>*</b>
+* ATmega8
+* ATmega48
+* ATmega88
+* ATmega168
+* ATmega328
 
-<b>*</b> All variants (A, P, PA) except PB
+<b>*</b> All variants (A, P, PA and PB)
 
 Can't decide what microcontroller to choose? Have a look at the specification table below:
 
-|              | ATmega328 | ATmega168 | ATmega88 | ATmega48 | ATmega8 |
-|--------------|-----------|-----------|----------|----------|---------|
-| **Flash**    | 32kB      | 16kB      | 8kB      | 4kB      | 8kB     |
-| **RAM**      | 2kB       | 1kB       | 1kB      | 512B     | 1kB     |
-| **EEPROM**   | 1kB       | 512B      | 512B     | 256B     | 512B    |
-| **PWM pins** | 6         | 6         | 6        | 6        | 3       |
+|              |  ATmega328  | ATmega168 | ATmega88 | ATmega48 | ATmega8 |
+|--------------|-------------|-----------|----------|----------|---------|
+| **Flash**    | 32kB        | 16kB      | 8kB      | 4kB      | 8kB     |
+| **RAM**      | 2kB         | 1kB       | 1kB      | 512B     | 1kB     |
+| **EEPROM**   | 1kB         | 512B      | 512B     | 256B     | 512B    |
+| **PWM pins** | 6/9<b>*</b> | 6         | 6        | 6        | 3       |
+  
+<b>*</b> ATmega328PB has 9 PWM pins
 
 ## Why add Arduino support for these microcontrollers?
 * They are all Arduino UNO compatible (drop-in replacement)
@@ -147,7 +149,7 @@ Your code should now be running on your microcontroller! If you experience any i
 This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](http://www.atmel.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
 <b>Click to enlarge:</b> 
 </br> </br>
-<img src="https://i.imgur.com/6APbkuR.jpg" width="400"> <img src="https://i.imgur.com/KAIZwNF.png" width="460">
+<img src="https://i.imgur.com/qXIEchT.jpg" width="320"> <img src="https://i.imgur.com/TZ4GmyR.jpg" width="260"> <img src="https://i.imgur.com/ZQsjLwL.jpg" width="260">
 
   
 ## Minimal setup
