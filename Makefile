@@ -282,6 +282,14 @@ atmega88p: atmega88p/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).h
 atmega88p: atmega88p/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 atmega88pa: atmega88p
 
+#ATmega8PB
+atmega88pb: TARGET = atmega88pb
+atmega88pb: MCU_TARGET = atmega88pb
+atmega88pb: CFLAGS += $(COMMON_OPTIONS)
+atmega88pb: AVR_FREQ ?= 16000000L 
+atmega88pb: atmega88pb/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega88pb: atmega88pb/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+
 #ATmega128/A
 atmega128: TARGET = atmega128
 atmega128: MCU_TARGET = atmega128
@@ -341,6 +349,14 @@ atmega168p: AVR_FREQ ?= 16000000L
 atmega168p: atmega168p/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 atmega168p: atmega168p/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 atmega168pa: atmega168p
+
+#ATmega168PB
+atmega168pb: TARGET = atmega168pb
+atmega168pb: MCU_TARGET = atmega168pb
+atmega168pb: CFLAGS += $(COMMON_OPTIONS)
+atmega168pb: AVR_FREQ ?= 16000000L 
+atmega168pb: atmega168pb/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega168pb: atmega168pb/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 
 #ATmega169/A
 atmega169: TARGET = atmega169
@@ -412,6 +428,15 @@ atmega328p: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.
 atmega328p: atmega328p/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 atmega328p: atmega328p/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 atmega328pa: atmega328p
+
+#ATmega328PB
+atmega328pb: TARGET = atmega328pb
+atmega328pb: MCU_TARGET = atmega328pb
+atmega328pb: CFLAGS += $(COMMON_OPTIONS)
+atmega328pb: AVR_FREQ ?= 16000000L
+atmega328pb: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
+atmega328pb: atmega328pb/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega328pb: atmega328pb/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 
 #ATmega329/A
 atmega329: TARGET = atmega329
@@ -642,6 +667,7 @@ clean:
 	rm -rf atmega640/*.hex atmega640/*.lst
 	rm -rf atmega329p/*.hex atmega329p/*.lst
 	rm -rf atmega329/*.hex atmega329/*.lst
+	rm -rf atmega328pb/*.hex atmega328pb/*.lst
 	rm -rf atmega328p/*.hex atmega328p/*.lst
 	rm -rf atmega328/*.hex atmega328/*.lst
 	rm -rf atmega324p/*.hex atmega324p/*.lst
@@ -649,12 +675,14 @@ clean:
 	rm -rf atmega324a/*.hex atmega324a/*.lst
 	rm -rf atmega169p/*.hex atmega169p/*.lst
 	rm -rf atmega169/*.hex atmega169/*.lst
+	rm -rf atmega168pb/*.hex atmega168pb/*.lst	
 	rm -rf atmega168p/*.hex atmega168p/*.lst	
 	rm -rf atmega168/*.hex atmega168/*.lst
 	rm -rf atmega164p/*.hex atmega164p/*.lst
 	rm -rf atmega164a/*.hex atmega164a/*.lst
 	rm -rf atmega162/*.hex atmega162/*.lst	
 	rm -rf atmega128/*.hex atmega128/*.lst
+	rm -rf atmega88pb/*.hex atmega88pb/*.lst
 	rm -rf atmega88p/*.hex atmega88p/*.lst
 	rm -rf atmega88/*.hex atmega88/*.lst
 	rm -rf atmega64/*.hex atmega64/*.lst
@@ -683,6 +711,7 @@ clean_asm:
 	rm -rf atmega640/*.lst
 	rm -rf atmega329p/*.lst
 	rm -rf atmega329/*.lst
+	rm -rf atmega328pb/*.lst
 	rm -rf atmega328p/*.lst
 	rm -rf atmega328/*.lst
 	rm -rf atmega324p/*.lst
@@ -690,12 +719,14 @@ clean_asm:
 	rm -rf atmega324a/*.lst
 	rm -rf atmega169p/*.lst
 	rm -rf atmega169/*.lst
+	rm -rf atmega168pb/*.lst
 	rm -rf atmega168p/*.lst
 	rm -rf atmega168/*.lst
 	rm -rf atmega164p/*.lst
 	rm -rf atmega164a/*.lst
 	rm -rf atmega162/*.lst	
 	rm -rf atmega128/*.lst
+	rm -rf atmega88pb/*.lst
 	rm -rf atmega88p/*.lst
 	rm -rf atmega88/*.lst
 	rm -rf atmega64/*.lst
