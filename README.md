@@ -38,7 +38,7 @@ The table below shows the available serial ports for the corresponding microcont
 |                                                                                                           | UART0 | UART1 | UART2 | UART3 |
 |-----------------------------------------------------------------------------------------------------------|-------|-------|-------|-------|
 | ATmega8/88/168/328 <br/> ATmega8515 <br/> ATmega8535/16/32  <br/> ATmega169/329/649  <br/>ATmega3290/6490 | X     |       |       |       |
-| ATmega162 <br/> ATmega164/324/644/1284 <br/> ATmega64/128 <br/> ATmega1281/2561                           | X     | X     |       |       |
+| ATmega162 <br/> ATmega328PB <br/> ATmega164/324/644/1284 <br/> ATmega64/128 <br/> ATmega1281/2561         | X     | X     |       |       |
 | ATmega640/1280/2560                                                                                       | X     | X     | X     | X     |
 
 
