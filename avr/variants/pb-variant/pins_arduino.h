@@ -90,17 +90,28 @@ static const uint8_t A7 = 26;
 
 // Make sure the ATmega328PB is backwards compatible with the 328 and 328P
 #if defined(__AVR_ATmega328PB__)
-//SPI
+// SPI
 #define SPCR SPCR0
 #define SPSR SPSR0
 #define SPDR SPDR0
-//I2C
+#define SPI_STC_vect SPI0_STC_vect
+#define SPI_STC_vect_num SPI0_STC_vect_num
+// I2C
 #define TWBR TWBR0
 #define TWSR TWSR0
 #define TWAR TWAR0
 #define TWDR TWDR0
 #define TWCR TWCR0
 #define TWAMR TWAMR0
+#define TWI_vect TWI0_vect
+#define TWI_vect_num TWI0_vect_num
+// UART
+#define USART_RX_vect USART0_RX_vect
+#define USART_RX_vect_num USART0_RX_vect_num
+#define USART_UDRE_vect USART0_UDRE_vect
+#define USART_UDRE_vect_num USART0_UDRE_vect_num
+#define USART_TX_vect USART0_TX_vect
+#define USART_TX_vect_num USART0_TX_vect_num
 #endif
 
 #ifdef ARDUINO_MAIN
