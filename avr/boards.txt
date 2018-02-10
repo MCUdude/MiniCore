@@ -42,19 +42,23 @@ menu.LTO=Compiler LTO
 328.bootloader.high_fuses=0xd6
 
 328.build.core=MCUdude_corefiles
-328.build.variant=standard
 328.build.board=AVR_ATmega328
 
 # Variants
 328.menu.variant.modelP=328P / 328PA
 328.menu.variant.modelP.bootloader.cksel_bits=0111
+328.menu.variant.modelP.build.variant=standard
 328.menu.variant.modelP.build.mcu=atmega328p
+
 328.menu.variant.modelNonP=328 / 328A
 328.menu.variant.modelNonP.bootloader.cksel_bits=0111
+328.menu.variant.modelNonP.build.variant=standard
 328.menu.variant.modelNonP.build.mcu=atmega328
-#328.menu.variant.modelPB=328PB
-#328.menu.variant.modelPB.bootloader.cksel_bits=1111
-#328.menu.variant.modelPB.build.mcu=atmega328pb
+
+328.menu.variant.modelPB=328PB
+328.menu.variant.modelPB.bootloader.cksel_bits=1111
+328.menu.variant.modelPB.build.variant=pb-variant
+328.menu.variant.modelPB.build.mcu=atmega328pb
 
 # Brown out detection
 328.menu.BOD.2v7=2.7v
@@ -146,18 +150,22 @@ menu.LTO=Compiler LTO
 168.bootloader.extended_fuses=0xfc
 
 168.build.core=MCUdude_corefiles
-168.build.variant=standard
 168.build.board=AVR_ATmega168
 
 # Variants
 168.menu.variant.modelP=168P / 168PA
 168.menu.variant.modelP.bootloader.cksel_bits=0111
+168.menu.variant.modelP.build.variant=standard
 168.menu.variant.modelP.build.mcu=atmega168p
+
 168.menu.variant.modelNonP=168 / 168A
 168.menu.variant.modelNonP.bootloader.cksel_bits=0111
+168.menu.variant.modelNonP.build.variant=standard
 168.menu.variant.modelNonP.build.mcu=atmega168
+
 168.menu.variant.modelPB=168PB
 168.menu.variant.modelPB.bootloader.cksel_bits=1111
+168.menu.variant.modelPB.build.variant=pb-variant
 168.menu.variant.modelPB.build.mcu=atmega168pb
 
 # Brown out detection
@@ -250,18 +258,22 @@ menu.LTO=Compiler LTO
 88.bootloader.extended_fuses=0xfc
 
 88.build.core=MCUdude_corefiles
-88.build.variant=standard
 88.build.board=AVR_ATmega88
 
 # Variants
 88.menu.variant.modelP=88P / 88PA
 88.menu.variant.modelP.bootloader.cksel_bits=0111
+88.menu.variant.modelP.build.variant=standard
 88.menu.variant.modelP.build.mcu=atmega88p
+
 88.menu.variant.modelNonP=88 / 88A
 88.menu.variant.modelNonP.bootloader.cksel_bits=0111
+88.menu.variant.modelNonP.build.variant=standard
 88.menu.variant.modelNonP.build.mcu=atmega88
+
 88.menu.variant.modelPB=88PB
 88.menu.variant.modelPB.bootloader.cksel_bits=1111
+88.menu.variant.modelPB.build.variant=pb-variant
 88.menu.variant.modelPB.build.mcu=atmega88pb
 
 # Brown out detection
@@ -354,18 +366,22 @@ menu.LTO=Compiler LTO
 48.bootloader.extended_fuses=0xff
 
 48.build.core=MCUdude_corefiles
-48.build.variant=standard
 48.build.board=AVR_ATmega48
 
 # Variants
 48.menu.variant.modelP=48P / 48PA (no bootloader)
-48.menu.variant.modelP.build.mcu=atmega48p
 48.menu.variant.modelP.bootloader.cksel_bits=0111
+48.menu.variant.modelP.build.variant=standard
+48.menu.variant.modelP.build.mcu=atmega48p
+
 48.menu.variant.modelNonP=48 / 48A (no bootloader)
-48.menu.variant.modelNonP.build.mcu=atmega48
 48.menu.variant.modelNonP.bootloader.cksel_bits=0111
+48.menu.variant.modelNonP.build.variant=standard
+48.menu.variant.modelNonP.build.mcu=atmega48
+
 48.menu.variant.modelPB=48PB (no bootloader)
 48.menu.variant.modelPB.bootloader.cksel_bits=1111
+48.menu.variant.modelPB.build.variant=pb-variant
 48.menu.variant.modelPB.build.mcu=atmega48pb
 
 # Brown out detection
