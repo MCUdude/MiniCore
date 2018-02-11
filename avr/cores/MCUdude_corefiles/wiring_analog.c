@@ -210,6 +210,9 @@ void analogWrite(uint8_t pin, int val)
       #if defined(TCCR3A) && defined(COM3B1)
       case TIMER3B:
         // connect pwm to pin on timer 3, channel B
+        #if defined(__AVR_ATmega328PB__) // Fix ATmega328PB silicon bug
+        sbi(PORTD, PD2);
+        #endif
         sbi(TCCR3A, COM3B1);
         OCR3B = val; // set pwm duty
         break;
@@ -237,6 +240,9 @@ void analogWrite(uint8_t pin, int val)
       #if defined(TCCR4A) && defined(COM4B1)
       case TIMER4B:
         // connect pwm to pin on timer 4, channel B
+        #if defined(__AVR_ATmega328PB__) // Fix ATmega328PB silicon bug
+        sbi(PORTD, PD2);
+        #endif
         sbi(TCCR4A, COM4B1);
         OCR4B = val; // set pwm duty
         break;
