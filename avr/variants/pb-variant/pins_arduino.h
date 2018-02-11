@@ -215,7 +215,7 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 #elif	defined(__AVR_ATmega328PB__)
   TIMER3A,      // PD0 - D0
 	TIMER4A,      // PD1 - D1
-	TIMER4B,      // PD2 - D2 -> TIMER4A is also an option
+	TIMER4B,      // PD2 - D2 -> TIMER3B is also an option
 #endif
 	TIMER2B,      // PD3 - D3
 	NOT_ON_TIMER, // PD4 - D4
