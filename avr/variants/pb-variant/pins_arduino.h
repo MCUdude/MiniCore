@@ -174,7 +174,7 @@ const uint8_t PROGMEM digital_pin_to_port_PGM[] = {
 	PE, // PE0 - D23
 	PE, // PE1 - D24
 	PE, // PE2 - D25 / A6
-	PE, // PE2 - D26 / A7
+	PE, // PE3 - D26 / A7
 };
 
 const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = {
