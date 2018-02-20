@@ -56,7 +56,7 @@ Can't decide what microcontroller to choose? Have a look at the specification ta
 ## Supported clock frequencies
 * 16 MHz external oscillator (default)
 * 20 MHz external oscillator
-* 18.432 Mhz external oscillator <b>*</b>
+* 18.432 MHz external oscillator <b>*</b>
 * 12 MHz external oscillator
 * 8 MHz external oscillator
 * 8 MHz internal oscillator <b>**</b>
@@ -88,7 +88,7 @@ Note that you need to select **Bootloader: "No"** and actually hit **Burn bootlo
 Brown out detection, or BOD for short lets the microcontroller sense the input voltage and shut down if the voltage goes below the brown out setting. To change the BOD settings you'll have to connect an ISP programmer and hit "Burn bootloader". Below is a table that shows the available BOD options:
 <br/>
 
-| ATmega328 | Atmega168 | ATmega88 | ATmega48 | ATmega8  |
+| ATmega328 | ATmega168 | ATmega88 | ATmega48 | ATmega8  |
 |-----------|-----------|----------|----------|----------|
 | 4.3v      | 4.3v      | 4.3v     | 4.3v     | 4.0v     |
 | 2.7v      | 2.7v      | 2.7v     | 2.7v     | 2.7v     |
