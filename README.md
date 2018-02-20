@@ -1,5 +1,8 @@
 # Optiboot flash
 Optiboot is an easy to install bootloader for the Arduino environment.
+  
+All hex files in this repository are build with `avr-gcc 5.4.0-atmel3.6.1-arduino2`on MacOS.  
+This toolchain version ships with Arduino AVR boards version 1.6.206, which can be found in the Arduino boards manager menu.
 
 
 ### Key features:
