@@ -1,7 +1,7 @@
 # MiniCore
 [![Build Status](https://travis-ci.org/MCUdude/MiniCore.svg?branch=master)](https://travis-ci.org/MCUdude/MiniCore) [![MiniCore forum thread](https://img.shields.io/badge/support-forum-blue.svg)](https://forum.arduino.cc/index.php?topic=412070.0)  
 
-An Arduino core for the ATmega8, ATmega48, ATmega88, ATmega168 and ATmega328, all running a [custom version of Optiboot for increased functionality](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.8.5+ is recommended. <br/>
+An Arduino core for the ATmega328, ATmega168, ATmega88, ATmega48 and ATmega8, all running a [custom version of Optiboot for increased functionality](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.8.5+ is recommended. <br/>
 **This core gives you two extra IO pins if you're using the internal oscillator!** PB6 and PB7 is mapped to [Arduino pin 20 and 21](#pinout).<br/>
 If you're into "generic" AVR programming, I'm happy to tell you that all relevant keywords are being highlighted by the IDE through a separate keywords file. Make sure to test the [example files](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/AVR_examples/examples) (File > Examples > AVR C code examples). Try writing a register name, <i>DDRB</i> for instance, and see for yourself!
 
@@ -18,6 +18,7 @@ If you're into "generic" AVR programming, I'm happy to tell you that all relevan
 * **[How to install](#how-to-install)**
 	- [Boards Manager Installation](#boards-manager-installation)
 	- [Manual Installation](#manual-installation)
+	- **[ATmega48/88/168/328PB series](#atmega4888168328pb-series)**
 * **[Getting started with MiniCore](#getting-started-with-minicore)**
 * **[Pinout](#pinout)**
 * **[Minimal setup](#minimal-setup)**
@@ -43,11 +44,12 @@ Can't decide what microcontroller to choose? Have a look at the specification ta
   
 <b>*</b> ATmega328PB has 9 PWM pins
 
+
 ## Why add Arduino support for these microcontrollers?
 * They are all Arduino UNO compatible (drop-in replacement)
 * They're extremely popular and used in almost every Arduino project out there
 * They're cheap (some can be bought for less than a dollar at AliExpress and Ebay)
-* They come in both DIP and TQFP packages
+* They come in both DIP, TQFP and QFN packages
 * You can now choose the suited microcontroller for your project. No need to go for overkill!
 
 
@@ -95,7 +97,7 @@ Brown out detection, or BOD for short lets the microcontroller sense the input v
 
 
 ## Link time optimization / LTO
-After Arduino IDE 1.6.11 where released, There have been support for link time optimization or LTO for short. The LTO optimizes the code at link time, making the code (often) significantly smaller without making it "slower". In Arduino IDE 1.6.11 and newer LTO is enabled by default. I've chosen to disable this by default to make sure the core keep its backwards compatibility. Enabling LTO in IDE 1.6.10 and older will return an error. 
+After Arduino IDE 1.6.11 where released, There have been support for link time optimization or LTO for short. The LTO optimizes the code at link time, making the code (often) significantly smaller without making it "slower". In Arduino IDE 1.6.11 and newer LTO is enabled by default. I've chosen to disable this by default to make sure the core keep its backwards compatibility. Enabling LTO in IDE 1.6.10 or older will return an error. 
 I encourage you to try the new LTO option and see how much smaller your code gets! Note that you don't need to hit "Burn Bootloader" in order to enable LTO. Simply enable it in the "Tools" menu, and your code is ready for compilation. If you want to read more about LTO and GCC flags in general, head over to the [GNU GCC website](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)!
 
 
@@ -130,14 +132,22 @@ This installation method requires Arduino IDE version 1.6.4 or greater.
 * Click **Install**.
 * After installation is complete close the **Boards Manager** window.
 
-
 #### Manual Installation
 Click on the "Download ZIP" button in the upper right corner. Exctract the ZIP file, and move the extracted folder to the location "**~/Documents/Arduino/hardware**". Create the "hardware" folder if it doesn't exist.
 Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
 
+#### ATmega48/88/168/328PB series
+If you plan to use the *PB series, you'll need to update to the latest version of the Arduino toolchain. At the time of writing the latest version is *1.6.206*. Here's how you install it:
+* Open Arduino IDE.
+* Open the **Tools > Board > Boards Manager...** menu item.
+* Wait for the platform indexes to finish downloading.
+* The top is named **Arduino AVR boards**. Click on this item and select the latest version in the dropdown menu.
+* Click **Install**.
+* After installation is complete close the **Boards Manager** window.
+
 
 ## Getting started with MiniCore
-Ok, so you're downloaded and installed MiniCore, but do I get the wheels spinning? Here's a quick start guide:
+Ok, so you're downloaded and installed MiniCore, but how to get started? Here's a quick guide:
 * Hook up your microcontroller as shown in the [pinout diagram](#pinout), or simply just plut it into an Arduino UNO board.
 	- (If you're not planning to use the bootloader (uploading code using a USB to serial adapter), the FTDI header and the 100 nF capacitor on the reset pin can be omitted.) 
 * Open the **Tools > Board** menu item, and select a MiniCore compatible microcontroller.
@@ -154,7 +164,7 @@ Your code should now be running on your microcontroller! If you experience any i
 
 
 ## Pinout
-This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](http://www.atmel.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
+This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](https://www.microchip.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
 <b>Click to enlarge:</b> 
 </br> </br>
 <img src="https://i.imgur.com/qXIEchT.jpg" width="320"> <img src="https://i.imgur.com/TZ4GmyR.jpg" width="260"> <img src="https://i.imgur.com/ZQsjLwL.jpg" width="260">
