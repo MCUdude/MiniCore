@@ -87,7 +87,7 @@ else ifeq ($(ENV), arduinodev)
 # Arduino IDE source code environment.  Use the unpacked compilers created
 # by the build (you'll need to do "ant build" first.)
 ifeq ($(OS), macosx)
-TOOLROOT = ../../../../build/macosx/work/Arduino.app/Contents/Resources/Java/hardware/tools
+TOOLROOT = /Applications/Arduino.app/Contents/Java/hardware/tools
 endif
 ifeq ($(OS), windows)
 TOOLROOT = ../../../../build/windows/work/hardware/tools
@@ -101,10 +101,6 @@ GCCROOT =
 AVRDUDE_CONF =
 endif
 
-STK500 = "C:\Program Files\Atmel\AVR Tools\STK500\Stk500.exe"
-STK500-1 = $(STK500) -e -d$(MCU_TARGET) -pf -vf -if$(PROGRAM)_$(TARGET).hex \
-           -lFF -LFF -f$(HFUSE)$(LFUSE) -EF8 -ms -q -cUSB -I200kHz -s -wt
-STK500-2 = $(STK500) -d$(MCU_TARGET) -ms -q -lCF -LCF -cUSB -I200kHz -s -wt
 #
 # End of build environment code.
 
@@ -207,18 +203,6 @@ endif
 # not have "standard" values for things like clock speed, LED pin, etc.
 # Makes for chip-level platforms should usually explicitly define their
 # options like: "make atmega1281 AVR_FREQ=16000000L LED=B5"
-#---------------------------------------------------------------------------
-#
-# Note about fuses:
-# the efuse should really be 0xf8; since, however, only the lower
-# three bits of that byte are used on the atmega168, avrdude gets
-# confused if you specify 1's for the higher bits, see:
-# http://tinker.it/now/2007/02/24/the-tale-of-avrdude-atmega168-and-extended-bits-fuses/
-#
-# similarly, the lock bits should be 0xff instead of 0x3f (to
-# unlock the bootloader section) and 0xcf instead of 0x2f (to
-# lock it), but since the high two bits of the lock byte are
-# unused, avrdude would get confused.
 #---------------------------------------------------------------------------
 #
 
@@ -421,6 +405,16 @@ atmega324pa: AVR_FREQ ?= 16000000L
 atmega324pa: LDSECTIONS  = -Wl,--section-start=.text=0x7e00
 atmega324pa: atmega324pa/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 atmega324pa: atmega324pa/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+
+#ATmega324PB
+atmega324pb: TARGET = atmega324pb
+atmega324pb: MCU_TARGET = atmega324pb
+atmega324pb: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
+atmega324pb: LIBS += -latmega324pb
+atmega324pb: AVR_FREQ ?= 16000000L
+atmega324pb: LDSECTIONS  = -Wl,--section-start=.text=0x7e00
+atmega324pb: atmega324pb/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega324pb: atmega324pb/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 
 #ATmega328/A
 atmega328: TARGET = atmega328
@@ -664,13 +658,6 @@ baudcheck: FORCE
 	- @$(CC) $(CFLAGS) -E baudcheck.c -o baudcheck.tmp.sh
 	- @$(SH) baudcheck.tmp.sh
 
-isp: $(TARGET)
-	$(MAKE) -f Makefile.isp isp TARGET=$(TARGET)
-
-isp-stk500: $(PROGRAM)_$(TARGET).hex
-	$(STK500-1)
-	$(STK500-2)
-
 %.elf: $(OBJ) baudcheck $(dummy)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)
 	$(SIZE) $@
@@ -701,6 +688,7 @@ clean:
 	rm -rf atmega328/*.hex atmega328/*.lst
 	rm -rf atmega324p/*.hex atmega324p/*.lst
 	rm -rf atmega324pa/*.hex atmega324pa/*.lst
+	rm -rf atmega324pb/*.hex atmega324pb/*.lst
 	rm -rf atmega324a/*.hex atmega324a/*.lst
 	rm -rf atmega169p/*.hex atmega169p/*.lst
 	rm -rf atmega169/*.hex atmega169/*.lst
@@ -745,6 +733,7 @@ clean_asm:
 	rm -rf atmega328/*.lst
 	rm -rf atmega324p/*.lst
 	rm -rf atmega324pa/*.lst
+	rm -rf atmega324pb/*.lst
 	rm -rf atmega324a/*.lst
 	rm -rf atmega169p/*.lst
 	rm -rf atmega169/*.lst
