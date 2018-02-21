@@ -31,7 +31,9 @@ This repository contains a lot of precomppiled hex file with a variety of clock 
 | 18.432 MHz |    |      |      | X      |       |       |       |      |
 | 16 MHz     | X  | X    | X    | X      |       |       |       |      |
 | 12 MHz     |    | X    | X    |        | X     |       |       |      |
-| 8 MHz      |    |      | X    | X      | X     | X     | X     |      |
+| 8 MHz      | X  | X    | X    | X      | X     | X     | X     |      |
+| 4 MHz      |    | X    | X    |        |       |       | X     | X    |
+| 2 MHz      |    |      | X    |        |       |       | X     | X    |
 | 1 MHz      |    |      |      |        |       |       |       | X    |
 
 
