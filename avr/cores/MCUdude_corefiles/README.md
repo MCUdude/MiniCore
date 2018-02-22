@@ -1,7 +1,7 @@
 # Arduino core files for MCUdude's cores
 [![Build Status](https://travis-ci.org/MCUdude/MCUdude_corefiles.svg?branch=master)](https://travis-ci.org/MCUdude/MCUdude_corefiles)
 
-This repo contains the Arduino corefiles used with [MightyCore](https://github.com/MCUdude/MightyCore), [MegaCore](https://github.com/MCUdude/MegaCore) and [MajorCore](https://github.com/MCUdude/MightyCore).
+This repo contains the Arduino corefiles used with [MightyCore](https://github.com/MCUdude/MightyCore), [MegaCore](https://github.com/MCUdude/MegaCore), [MiniCore](https://github.com/MCUdude/MiniCore) and [MajorCore](https://github.com/MCUdude/MightyCore).
 
 ## Supported devices
 * ATmega640, ATmega1280, ATmega2560

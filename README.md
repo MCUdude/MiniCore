@@ -1,7 +1,7 @@
 # MiniCore
 [![Build Status](https://travis-ci.org/MCUdude/MiniCore.svg?branch=master)](https://travis-ci.org/MCUdude/MiniCore) [![MiniCore forum thread](https://img.shields.io/badge/support-forum-blue.svg)](https://forum.arduino.cc/index.php?topic=412070.0)  
 
-An Arduino core for the ATmega8, ATmega48, ATmega88, ATmega168 and ATmega328, all running a [custom version of Optiboot for increased functionality](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.6.5+ is recommended. <br/>
+An Arduino core for the ATmega328, ATmega168, ATmega88, ATmega48 and ATmega8, all running a [custom version of Optiboot for increased functionality](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.8.5+ is recommended. <br/>
 **This core gives you two extra IO pins if you're using the internal oscillator!** PB6 and PB7 is mapped to [Arduino pin 20 and 21](#pinout).<br/>
 If you're into "generic" AVR programming, I'm happy to tell you that all relevant keywords are being highlighted by the IDE through a separate keywords file. Make sure to test the [example files](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/AVR_examples/examples) (File > Examples > AVR C code examples). Try writing a register name, <i>DDRB</i> for instance, and see for yourself!
 
@@ -9,6 +9,7 @@ If you're into "generic" AVR programming, I'm happy to tell you that all relevan
 # Table of contents
 * [Supported microcontrollers](#supported-microcontrollers)
 * [Supported clock frequencies](#supported-clock-frequencies)
+* [Bootloader option](#bootloader-option)
 * [BOD option](#bod-option)
 * [Link time optimization / LTO](#link-time-optimization--lto)
 * [Programmers](#programmers)
@@ -17,41 +18,45 @@ If you're into "generic" AVR programming, I'm happy to tell you that all relevan
 * **[How to install](#how-to-install)**
 	- [Boards Manager Installation](#boards-manager-installation)
 	- [Manual Installation](#manual-installation)
+	- **[ATmega48/88/168/328PB series](#atmega4888168328pb-series)**
 * **[Getting started with MiniCore](#getting-started-with-minicore)**
 * **[Pinout](#pinout)**
 * **[Minimal setup](#minimal-setup)**
 
 
 ## Supported microcontrollers:
-* ATmega8<b>*</b>
-* ATmega48<b>*</b>
-* ATmega88<b>*</b>
-* ATmega168<b>*</b>
-* ATmega328<b>*</b>
+* ATmega8
+* ATmega48
+* ATmega88
+* ATmega168
+* ATmega328
 
-<b>*</b> All variants (A, P, PA) except PB
+<b>*</b> All variants (A, P, PA and PB)
 
 Can't decide what microcontroller to choose? Have a look at the specification table below:
 
-|              | ATmega328 | ATmega168 | ATmega88 | ATmega48 | ATmega8 |
-|--------------|-----------|-----------|----------|----------|---------|
-| **Flash**    | 32kB      | 16kB      | 8kB      | 4kB      | 8kB     |
-| **RAM**      | 2kB       | 1kB       | 1kB      | 512B     | 1kB     |
-| **EEPROM**   | 1kB       | 512B      | 512B     | 256B     | 512B    |
-| **PWM pins** | 6         | 6         | 6        | 6        | 3       |
+|              |  ATmega328  | ATmega168 | ATmega88 | ATmega48 | ATmega8 |
+|--------------|-------------|-----------|----------|----------|---------|
+| **Flash**    | 32kB        | 16kB      | 8kB      | 4kB      | 8kB     |
+| **RAM**      | 2kB         | 1kB       | 1kB      | 512B     | 1kB     |
+| **EEPROM**   | 1kB         | 512B      | 512B     | 256B     | 512B    |
+| **PWM pins** | 6/9<b>*</b> | 6         | 6        | 6        | 3       |
+  
+<b>*</b> ATmega328PB has 9 PWM pins
+
 
 ## Why add Arduino support for these microcontrollers?
 * They are all Arduino UNO compatible (drop-in replacement)
 * They're extremely popular and used in almost every Arduino project out there
 * They're cheap (some can be bought for less than a dollar at AliExpress and Ebay)
-* They come in both DIP and TQFP packages
+* They come in both DIP, TQFP and QFN packages
 * You can now choose the suited microcontroller for your project. No need to go for overkill!
 
 
 ## Supported clock frequencies
 * 16 MHz external oscillator (default)
 * 20 MHz external oscillator
-* 18.432 Mhz external oscillator <b>*</b>
+* 18.432 MHz external oscillator <b>*</b>
 * 12 MHz external oscillator
 * 8 MHz external oscillator
 * 8 MHz internal oscillator <b>**</b>
@@ -69,14 +74,21 @@ Millis() is not affected, only micros() and delay(). Micros() executes equally f
 <b>**</b> There might be some issues related to the internal oscillator. It's factory calibrated, but may be a little "off" depending on the calibration, ambient temperature and operating voltage. If uploading failes while using the 8 MHz internal oscillator you have three options:
 * Edit the baudrate line in the [boards.txt](https://github.com/MCUdude/MiniCore/blob/3ba977a7c6f948beff5a928d7f11a627282779e2/avr/boards.txt#L83) file, and choose either 115200, 57600, 38400 or 19200 baud.
 * Upload the code using a programmer (USBasp, USBtinyISP etc.) or skip the bootloader by holding down the shift key while clicking the "Upload" button
-* Use the 1 MHz option instead 
+* Use the 1 MHz option instead  
+
+
+## Bootloader option
+If your application doesn't need or require a bootloader for uploading code, you can choose to disable this.
+This free 512 bytes of the flash memory, which is significant if you're working with a small microcontroller such as ATmega8 or ATmega88.  
+
+Note that you need to select **Bootloader: "No"** and actually hit **Burn bootloader** in order to set the correct fuse bits. Now you're no longer able to upload using serial, until you select *Bootloader: "Yes"* and burn the bootloader again.
 
 
 ## BOD option
 Brown out detection, or BOD for short lets the microcontroller sense the input voltage and shut down if the voltage goes below the brown out setting. To change the BOD settings you'll have to connect an ISP programmer and hit "Burn bootloader". Below is a table that shows the available BOD options:
 <br/>
 
-| ATmega328 | Atmega168 | ATmega88 | ATmega48 | ATmega8  |
+| ATmega328 | ATmega168 | ATmega88 | ATmega48 | ATmega8  |
 |-----------|-----------|----------|----------|----------|
 | 4.3v      | 4.3v      | 4.3v     | 4.3v     | 4.0v     |
 | 2.7v      | 2.7v      | 2.7v     | 2.7v     | 2.7v     |
@@ -85,12 +97,12 @@ Brown out detection, or BOD for short lets the microcontroller sense the input v
 
 
 ## Link time optimization / LTO
-After Arduino IDE 1.6.11 where released, There have been support for link time optimization or LTO for short. The LTO optimizes the code at link time, making the code (often) significantly smaller without making it "slower". In Arduino IDE 1.6.11 and newer LTO is enabled by default. I've chosen to disable this by default to make sure the core keep its backwards compatibility. Enabling LTO in IDE 1.6.10 and older will return an error. 
+After Arduino IDE 1.6.11 where released, There have been support for link time optimization or LTO for short. The LTO optimizes the code at link time, making the code (often) significantly smaller without making it "slower". In Arduino IDE 1.6.11 and newer LTO is enabled by default. I've chosen to disable this by default to make sure the core keep its backwards compatibility. Enabling LTO in IDE 1.6.10 or older will return an error. 
 I encourage you to try the new LTO option and see how much smaller your code gets! Note that you don't need to hit "Burn Bootloader" in order to enable LTO. Simply enable it in the "Tools" menu, and your code is ready for compilation. If you want to read more about LTO and GCC flags in general, head over to the [GNU GCC website](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)!
 
 
 ## Programmers
-Mini does not adds its own copies of all the standard programmers to the "Programmer" menu. Just select one of the stock programmers in the "Programmers" menu, and you're ready to "Burn Bootloader" or "Upload Using Programmer".
+MiniCore does not adds its own copies of all the standard programmers to the "Programmer" menu. Just select one of the stock programmers in the "Programmers" menu, and you're ready to "Burn Bootloader" or "Upload Using Programmer".
 
 Select your microcontroller in the boards menu, then select the clock frequency. You'll have to hit "Burn bootloader" in order to set the correct fuses and upload the correct bootloader. <br/>
 Make sure you connect an ISP programmer, and select the correct one in the "Programmers" menu. For time critical operations an external oscillator is recommended.
@@ -99,7 +111,7 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
 ## Write to own flash
 MiniCore implements [@majekw](https://github.com/majekw) fork of Optiboot, which enables flash writing functionality within the running application. This means that content from e.g. a sensor can be stored in the flash memory directly, without the need of external memory. Flash memory is much faster than EEPROM, and can handle about 10 000 write cycles.  
 To enable this feature your original bootloader needs to be replaced by the new one. Simply hit "Burn Bootloader", and it's done!  
-Please check out the [Optiboot flasher example](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/Optiboot_flasher/examples/SerialReadWrite) for more info about how this feature works, and how you can try it on your MiniCore compatible microcontroller.
+Check out the [Optiboot flasher example](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/Optiboot_flasher/examples/SerialReadWrite) for more info about how this feature works, and how you can try it on your MiniCore compatible microcontroller.
 
 
 ## How to install
@@ -120,14 +132,22 @@ This installation method requires Arduino IDE version 1.6.4 or greater.
 * Click **Install**.
 * After installation is complete close the **Boards Manager** window.
 
-
 #### Manual Installation
 Click on the "Download ZIP" button in the upper right corner. Exctract the ZIP file, and move the extracted folder to the location "**~/Documents/Arduino/hardware**". Create the "hardware" folder if it doesn't exist.
 Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
 
+#### ATmega48/88/168/328PB series
+If you plan to use the *PB series, you'll need to update to the latest version of the Arduino toolchain. At the time of writing the latest version is *1.6.206*. Here's how you install it:
+* Open Arduino IDE.
+* Open the **Tools > Board > Boards Manager...** menu item.
+* Wait for the platform indexes to finish downloading.
+* The top is named **Arduino AVR boards**. Click on this item and select the latest version in the dropdown menu.
+* Click **Install**.
+* After installation is complete close the **Boards Manager** window.
+
 
 ## Getting started with MiniCore
-Ok, so you're downloaded and installed MiniCore, but do I get the wheels spinning? Here's a quick start guide:
+Ok, so you're downloaded and installed MiniCore, but how to get started? Here's a quick guide:
 * Hook up your microcontroller as shown in the [pinout diagram](#pinout), or simply just plut it into an Arduino UNO board.
 	- (If you're not planning to use the bootloader (uploading code using a USB to serial adapter), the FTDI header and the 100 nF capacitor on the reset pin can be omitted.) 
 * Open the **Tools > Board** menu item, and select a MiniCore compatible microcontroller.
@@ -144,10 +164,10 @@ Your code should now be running on your microcontroller! If you experience any i
 
 
 ## Pinout
-This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](http://www.atmel.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
+This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](https://www.microchip.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
 <b>Click to enlarge:</b> 
 </br> </br>
-<img src="https://i.imgur.com/6APbkuR.jpg" width="400"> <img src="https://i.imgur.com/KAIZwNF.png" width="460">
+<img src="https://i.imgur.com/qXIEchT.jpg" width="320"> <img src="https://i.imgur.com/TZ4GmyR.jpg" width="260"> <img src="https://i.imgur.com/ZQsjLwL.jpg" width="260">
 
   
 ## Minimal setup

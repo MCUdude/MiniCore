@@ -28,191 +28,483 @@ env:
     # Each line in the matrix will be run as a separate job in the Travis CI build
 
     # ATmega328
-    # variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:328:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:328:variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # variant=modelNonP, BOD=4v3, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:328:variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # BOD=1v8, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:328:variant=modelP,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # BOD=disabled, clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:328:variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # clock=8MHz_internal
-    # F_CPU of 8 MHz has already been fully tested and the BOD and internal clock configuration will have no effect on code so it's only necessary to do a single verification per IDE version for the 8 MHz internal clock setting
-    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:328:variant=modelP,BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:328:variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
-    # ATmega168
-    # variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:168:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:168:variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # variant=modelNonP, BOD=4v3, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:168:variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # BOD=1v8, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:168:variant=modelP,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # BOD=disabled, clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:168:variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=8MHz_internal
-    # F_CPU of 8 MHz has already been fully tested and the BOD and internal clock configuration will have no effect on code so it's only necessary to do a single verification per IDE version for the 8 MHz internal clock setting
-    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:168:variant=modelP,BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # F_CPU of 8 MHz will be fully tested for clock=8MHz_external and internal clock configuration will have no effect on code so it's only necessary to do a single verification per IDE version for the 8 MHz internal clock setting
+    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # AVR_examples
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:328:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:168:variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # Optiboot_flasher
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:328:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SoftwareSerial
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:328:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SPI
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:328:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SPI1
+    # This library is only for use with the ATmega328PB
+    # bootloader=true, variant=modelPB, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI1" BOARD_ID="MiniCore:avr:328:bootloader=false,variant=modelPB,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # Wire
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:328:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # Wire1
+    # This library is only for use with the ATmega328PB
+    # bootloader=true, variant=modelPB, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire1" BOARD_ID="MiniCore:avr:328:bootloader=false,variant=modelPB,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire1" BOARD_ID="MiniCore:avr:328:bootloader=true,variant=modelPB,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # atmega168
+
+    # clock=8MHz_internal
+    # F_CPU of 8 MHz will be fully tested for clock=8MHz_external and internal clock configuration will have no effect on code so it's only necessary to do a single verification per IDE version for the 8 MHz internal clock setting
+    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # AVR_examples
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:168:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # Optiboot_flasher
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:168:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SoftwareSerial
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:168:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SPI
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:168:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SPI1
+    # This library is only for use with the ATmega328PB
+
+    # Wire
+    # This library is not compatible with the modelPB variant
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:168:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:168:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # Wire1
+    # This library is only for use with the ATmega328PB
 
     # ATmega88
-    # variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:88:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:88:variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # variant=modelNonP, BOD=4v3, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:88:variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # BOD=1v8, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:88:variant=modelP,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # BOD=disabled, clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:88:variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
     # clock=8MHz_internal
-    # F_CPU of 8 MHz has already been fully tested and the BOD and internal clock configuration will have no effect on code so it's only necessary to do a single verification per IDE version for the 8 MHz internal clock setting
-    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:88:variant=modelP,BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # F_CPU of 8 MHz will be fully tested for clock=8MHz_external and internal clock configuration will have no effect on code so it's only necessary to do a single verification per IDE version for the 8 MHz internal clock setting
+    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # AVR_examples
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:88:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries" BOARD_ID="MiniCore:avr:88:variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # Optiboot_flasher
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:88:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SoftwareSerial
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:88:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SPI
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:88:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SPI1
+    # This library is only for use with the ATmega328PB
+
+    # Wire
+    # bootloader=true, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:88:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:88:bootloader=true,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # Wire1
+    # This library is only for use with the ATmega328PB
 
     # ATmega48
     # clock=8MHz_internal
     # F_CPU of 8 MHz will be fully tested for clock=8MHz_external and internal clock configuration will have no effect on code so it's only necessary to do a single verification per IDE version for the 8 MHz internal clock setting
-    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
     # Some library examples use more memory than this microcontroller provides so each library or sketch must be be done in a separate job
     # AVR_examples
-    # variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # bootloader=false, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
     # variant=modelNonP, BOD=4v3, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
-    # BOD=1v8, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # BOD=disabled, clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
     # Optiboot_flasher
     # SerialReadWrite
     # Fails to compile "Sketch too big" for ATmega48 so this library can't be tested
 
     # SoftwareSerial
-    # Compilation of TwoPortRecieve example sketch with LTO=Os fails: "Sketch too big"
+    # Compilation of TwoPortReceive example sketch with LTO=Os fails: "Sketch too big"
     # LTO=Os
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial/examples/SoftwareSerialExample/SoftwareSerialExample.ino" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # variant=modelP, BOD=2v7, LTO=Os_flto, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=2v7,LTO=Os_flto,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial/examples/SoftwareSerialExample/SoftwareSerialExample.ino" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, variant=modelP, BOD=2v7, LTO=Os_flto, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os_flto,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
     # clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
     # variant=modelNonP, BOD=4v3, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:variant=modelNonP,BOD=4v3,LTO=Os_flto,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # BOD=1v8, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=1v8,LTO=Os_flto,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os_flto,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelPB,BOD=1v8,LTO=Os_flto,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
     # BOD=disabled, clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=disabled,LTO=Os_flto,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=disabled,LTO=Os_flto,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:variant=modelP,BOD=2v7,LTO=Os_flto,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os_flto,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+
+    # SPI
+    # Compilation of BarometricPressureSensor example fails "Sketch too big"
+    # bootloader=false, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SPI1
+    # This library is only for use with the ATmega328PB
+
+    # Wire
+    # This library is not compatible with the modelPB variant
+    # Compilation of SFRRanger_reader fails with LTO=Os "Sketch too big" so all tests are done with LTO=Os_flto to avoid the need to add 36 more jobs
+    # bootloader=false, variant=modelP, BOD=2v7, LTO=LTO=Os_flto, , clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os_flto,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # variant=modelNonP, BOD=4v3, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelNonP,BOD=4v3,LTO=Os_flto,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # variant=modelPB, BOD=1v8, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelPB,BOD=1v8,LTO=Os_flto,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=disabled,LTO=Os_flto,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:48:bootloader=false,variant=modelP,BOD=2v7,LTO=Os_flto,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # Wire1
+    # This library is only for use with the ATmega328PB
+
 
     # ATmega8
     # Compilation of an example sketch for ATmega8 fails so each library/example must be done in separate jobs
 
     # clock=8MHz_internal
     # F_CPU of 8 MHz will be fully tested for clock=8MHz_external and internal clock configuration will have no effect on code so it's only necessary to do a single verification per IDE version for the 8 MHz internal clock setting
-    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=8MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
     # AVR_examples
     # Blink
-    # BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # bootloader=true, bootloader=true, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # BOD=4v0, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v0, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:bootloader=false,BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # BOD=disabled, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Blink" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
     # Blink_using_Timer0
     # Compilation of this example sketch for ATmeta8 fails: "error: 'OCR0' was not declared in this scope"
 
     # Measure_period_length
-    # BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # bootloader=true, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # BOD=4v0, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v0, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:bootloader=false,BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # BOD=disabled, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Measure_period_length" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
     # Read_port_write_port
-    # BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # bootloader=true, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # BOD=4v0, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v0, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:bootloader=false,BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # BOD=disabled, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Read_port_write_port" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
     # Watch_dog_timer
-    # BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # bootloader=true, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # BOD=4v0, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v0, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:bootloader=false,BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # BOD=disabled, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/AVR_examples/examples/Watch_dog_timer" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
     # Optiboot_flasher
-    # BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # bootloader=true, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # BOD=4v0, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v0, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:bootloader=false,BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # BOD=disabled, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Optiboot_flasher" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
     # SoftwareSerial
-    # BOD=2v7, LTO=Os, clock=16MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # bootloader=true, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
-    # BOD=4v0, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v0, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:bootloader=false,BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # BOD=disabled, clock=12MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SoftwareSerial" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SPI
+    # bootloader=true, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v0, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:8:bootloader=false,BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # SPI1
+    # This library is only for use with the modelPB variant
+
+    # Wire
+    # bootloader=true, BOD=2v7, LTO=Os, clock=16MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # LTO=Os_flto, clock=20MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    # bootloader=false, BOD=4v0, clock=18_432MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:8:bootloader=false,BOD=4v0,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # BOD=disabled, clock=12MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=disabled,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=8MHz_external
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    # clock=1MHz_internal
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/Wire" BOARD_ID="MiniCore:avr:8:bootloader=true,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+
+    # Wire1
+    # This library is only for use with the modelPB variant
 
 
 before_install:
@@ -236,6 +528,9 @@ before_install:
 
   # Install all IDE version required by the job
   - install_ide "$IDE_VERSIONS"
+
+  # Install Arduino AVR Boards 1.6.20x for modelPB variant support. This package is provided by Arduino for testing purposes: https://github.com/arduino/toolchain-avr/pull/47#issue-133713450
+  - install_package "arduino:avr" "https://downloads.arduino.cc/packages/package_avr_3.6.0_index.json"
 
   # Install MiniCore from the repository
   - install_package

@@ -1,5 +1,8 @@
 # Optiboot flash
 Optiboot is an easy to install bootloader for the Arduino environment.
+  
+All hex files in this repository are build with `avr-gcc 5.4.0-atmel3.6.1-arduino2`on MacOS.  
+This toolchain version ships with Arduino AVR boards version 1.6.206, which can be found in the Arduino boards manager menu.
 
 
 ### Key features:
@@ -14,7 +17,7 @@ Optiboot is an easy to install bootloader for the Arduino environment.
 * [ATmega64, ATmega128, ATmega1281, ATmega2561](https://github.com/MCUdude/MegaCore)
 * [ATmega8535, ATmega16, ATmega32, ATmega164A/P, ATmega324A/P/PA, ATmega644/P, ATmega1284/P](https://github.com/MCUdude/MightyCore)
 * [ATmega8515, ATmega162](https://github.com/MCUdude/MajorCore)
-* [ATmega8, ATmega88/P, ATmega168/P, ATmega328/P](https://github.com/MCUdude/MiniCore)
+* [ATmega8, ATmega88/P/PB, ATmega168/P/PB, ATmega328/P/PB](https://github.com/MCUdude/MiniCore)
 * [ATmega169/P, ATmega329/P, ATmega649/P](https://github.com/MCUdude/ButterflyCore)
 * ATmega3290/P, ATmega6490/P
 
@@ -28,7 +31,9 @@ This repository contains a lot of precomppiled hex file with a variety of clock 
 | 18.432 MHz |    |      |      | X      |       |       |       |      |
 | 16 MHz     | X  | X    | X    | X      |       |       |       |      |
 | 12 MHz     |    | X    | X    |        | X     |       |       |      |
-| 8 MHz      |    |      | X    | X      | X     | X     | X     |      |
+| 8 MHz      | X  | X    | X    | X      | X     | X     | X     |      |
+| 4 MHz      |    | X    | X    |        |       |       | X     | X    |
+| 2 MHz      |    |      | X    |        |       |       | X     | X    |
 | 1 MHz      |    |      |      |        |       |       |       | X    |
 
 
@@ -38,7 +43,7 @@ The table below shows the available serial ports for the corresponding microcont
 |                                                                                                           | UART0 | UART1 | UART2 | UART3 |
 |-----------------------------------------------------------------------------------------------------------|-------|-------|-------|-------|
 | ATmega8/88/168/328 <br/> ATmega8515 <br/> ATmega8535/16/32  <br/> ATmega169/329/649  <br/>ATmega3290/6490 | X     |       |       |       |
-| ATmega162 <br/> ATmega164/324/644/1284 <br/> ATmega64/128 <br/> ATmega1281/2561                           | X     | X     |       |       |
+| ATmega162 <br/> ATmega328PB <br/> ATmega164/324/644/1284 <br/> ATmega64/128 <br/> ATmega1281/2561         | X     | X     |       |       |
 | ATmega640/1280/2560                                                                                       | X     | X     | X     | X     |
 
 

@@ -24,14 +24,14 @@ install:
   - set_application_folder "$APPLICATION_FOLDER"
   - set_sketchbook_folder "$SKETCHBOOK_FOLDER"
 
-  # The oldest version of the Aruino IDE that MightyCore's platform.txt is compatible with is 1.6.2 but that IDE version has a bug that interferes with other installations of the IDE so I'm starting from 1.6.3
+  # The oldest version of the Arduino IDE that MightyCore's platform.txt is compatible with is 1.6.2 but that IDE version has a bug that interferes with other installations of the IDE so I'm starting from 1.6.3
   - install_ide "1.6.3" "newest"
 
   # Install MightyCore
   - install_package "https://github.com/MCUdude/MightyCore/archive/master.zip"
   # Replace the core with the current version from this repository
-  - rm --force --recursive --verbose "${SKETCHBOOK_FOLDER}/hardware/MightyCore-master/avr/cores/MightyCore/*"
-  - cp --force --recursive --verbose "$TRAVIS_BUILD_DIR"/* "${SKETCHBOOK_FOLDER}/hardware/MightyCore-master/avr/cores/MightyCore"
+  - rm --force --recursive --verbose "${SKETCHBOOK_FOLDER}/hardware/MightyCore-master/avr/cores/MCUdude_corefiles/*"
+  - cp --force --recursive --verbose "$TRAVIS_BUILD_DIR"/* "${SKETCHBOOK_FOLDER}/hardware/MightyCore-master/avr/cores/MCUdude_corefiles"
 
   # MegaCore
   - install_package "https://github.com/MCUdude/MegaCore/archive/master.zip"
@@ -40,13 +40,13 @@ install:
 
   # MajorCore
   - install_package "https://github.com/MCUdude/MajorCore/archive/master.zip"
-  - rm --force --recursive --verbose "${SKETCHBOOK_FOLDER}/hardware/MajorCore-master/avr/cores/majorcore/*"
-  - cp --force --recursive --verbose "$TRAVIS_BUILD_DIR"/* "${SKETCHBOOK_FOLDER}/hardware/MajorCore-master/avr/cores/majorcore"
+  - rm --force --recursive --verbose "${SKETCHBOOK_FOLDER}/hardware/MajorCore-master/avr/cores/MCUdude_corefiles/*"
+  - cp --force --recursive --verbose "$TRAVIS_BUILD_DIR"/* "${SKETCHBOOK_FOLDER}/hardware/MajorCore-master/avr/cores/MCUdude_corefiles"
 
-  # MiniCore (disabled until build.core value is changed in MiniCore's boards.txt)
-  #- install_package "https://github.com/MCUdude/MiniCore/archive/master.zip"
-  #- rm --force --recursive --verbose "${SKETCHBOOK_FOLDER}/hardware/MiniCore-master/avr/cores/MCUdude_corefiles/*"
-  #- cp --force --recursive --verbose "$TRAVIS_BUILD_DIR"/* "${SKETCHBOOK_FOLDER}/hardware/MiniCore-master/avr/cores/MCUdude_corefiles"
+  # MiniCore
+  - install_package "https://github.com/MCUdude/MiniCore/archive/master.zip"
+  - rm --force --recursive --verbose "${SKETCHBOOK_FOLDER}/hardware/MiniCore-master/avr/cores/MCUdude_corefiles/*"
+  - cp --force --recursive --verbose "$TRAVIS_BUILD_DIR"/* "${SKETCHBOOK_FOLDER}/hardware/MiniCore-master/avr/cores/MCUdude_corefiles"
 
 
 script:
@@ -70,18 +70,18 @@ script:
   - build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MajorCore-master:avr:162:BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
   - build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MajorCore-master:avr:8515:BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
 
-  #- build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:328:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
-  #- build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:168:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
-  #- build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:88:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
-  #- build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:48:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
-  #- build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:8:BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
+  - build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:328:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
+  - build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:168:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
+  - build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:88:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
+  - build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:48:variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
+  - build_sketch "${APPLICATION_FOLDER}/arduino/examples/01.Basics/BareMinimum/BareMinimum.ino" "MiniCore-master:avr:8:BOD=2v7,LTO=Os,clock=16MHz_external" "false" "all"
 
 
 after_script:
   # Determine user name and repository name from TRAVIS_REPO_SLUG so the configuration will automatically adjust to forks
   - USER_NAME="$(echo "$TRAVIS_REPO_SLUG" | cut -d'/' -f 1)"
   - REPOSITORY_NAME="$(echo "$TRAVIS_REPO_SLUG" | cut -d'/' -f 2)"
-  # Commit a report of the job results to a folder named with the build number in the MegaCore branch of the Travis-build-outputs repository
+  # Commit a report of the job results to a folder named with the build number in the MCUdude_corefiles branch of the CI-reports repository
   - publish_report_to_repository "$REPORT_GITHUB_TOKEN" "https://github.com/${USER_NAME}/CI-reports.git" "$REPOSITORY_NAME" "build_$(printf "%05d\n" "${TRAVIS_BUILD_NUMBER}")" "false"
 
   # Print a tab separated report of all sketch verification results to the log
