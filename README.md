@@ -139,10 +139,15 @@ Open Arduino IDE, and a new category in the boards menu called "MiniCore" will s
 #### ATmega48/88/168/328PB series
 If you plan to use the *PB series, you'll need to update to the latest version of the Arduino toolchain. At the time of writing the latest version is *1.6.206*. Here's how you install it:
 * Open Arduino IDE.
+* Open the **File > Preferences** menu item.
+* In the **Additional Boards Manager URLs** field, add:
+    ```
+    https://downloads.arduino.cc/packages/package_avr_3.6.0_index.json
+    ```
 * Open the **Tools > Board > Boards Manager...** menu item.
 * Wait for the platform indexes to finish downloading.
-* The top is named **Arduino AVR boards**. Click on this item and select the latest version in the dropdown menu.
-* Click **Install**.
+* The top is named **Arduino AVR boards**. Click on this item.
+* Click **Update**.
 * After installation is complete close the **Boards Manager** window.
 
 
