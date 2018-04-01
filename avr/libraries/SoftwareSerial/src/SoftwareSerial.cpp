@@ -217,11 +217,13 @@ uint8_t SoftwareSerial::rx_pin_read()
 // Interrupt handling
 //
 
-// gets called from attachInterrupt
+// Gets called from attachInterrupt
+#if defined(INT_ONLY) || defined(INT_AND_PCINT)
 static void isr()
 {
   SoftwareSerial::handle_interrupt();
 }
+#endif
 
 /* static */
 inline void SoftwareSerial::handle_interrupt()
@@ -254,7 +256,7 @@ ISR(PCINT3_vect, ISR_ALIASOF(PCINT0_vect));
 //
 // Constructor
 //
-SoftwareSerial::SoftwareSerial(uint8_t receivePin, uint8_t transmitPin, bool inverse_logic /* = false */) : 
+SoftwareSerial::SoftwareSerial(int8_t receivePin, int8_t transmitPin, bool inverse_logic /* = false */) : 
   _rx_delay_centering(0),
   _rx_delay_intrabit(0),
   _rx_delay_stopbit(0),
@@ -274,7 +276,7 @@ SoftwareSerial::~SoftwareSerial()
   end();
 }
 
-void SoftwareSerial::setTX(uint8_t tx)
+void SoftwareSerial::setTX(int8_t tx)
 {
   // First write, then set output. If we do this the other way around,
   // the pin would be output low for a short while before switching to
@@ -287,7 +289,7 @@ void SoftwareSerial::setTX(uint8_t tx)
   _transmitPortRegister = portOutputRegister(port);
 }
 
-void SoftwareSerial::setRX(uint8_t rx)
+void SoftwareSerial::setRX(int8_t rx)
 {
   pinMode(rx, INPUT);
   if (!_inverse_logic)
@@ -310,7 +312,7 @@ uint16_t SoftwareSerial::subtract_cap(uint16_t num, uint16_t sub) {
 //
 
 void SoftwareSerial::begin(long speed)
-{
+{ 
   _rx_delay_centering = _rx_delay_intrabit = _rx_delay_stopbit = _tx_delay = 0;
 
   // Precalculate the various delays, in number of 4-cycle delays
@@ -323,6 +325,7 @@ void SoftwareSerial::begin(long speed)
   // timings are the most critical (deviations stack 8 times)
   _tx_delay = subtract_cap(bit_delay, 15 / 4);
 
+#if defined(PCINT_ONLY) || defined(INT_AND_PCINT)
   // Only setup rx when we have a valid PCINT for this pin
   if (digitalPinToPCICR(_receivePin)) {
     #if GCC_VERSION > 40800
@@ -373,11 +376,14 @@ void SoftwareSerial::begin(long speed)
 
     tunedDelay(_tx_delay); // if we were low this establishes the end
   }
-  
-   // The microcontroller doesn't have PCINTs. Using regular interrupts instead
-  else 
+#endif //end PCINT_ONLY || INT_AND_PCINT
+
+#if defined(INT_AND_PCINT)
+  else
+#endif  
+#if defined(INT_ONLY) || defined(INT_AND_PCINT)
   {
-     // direct interrupts
+     // Direct interrupts
      attachInterrupt(digitalPinToInterrupt(_receivePin), isr, CHANGE);
      
     #if GCC_VERSION > 40800
@@ -418,6 +424,7 @@ void SoftwareSerial::begin(long speed)
 
     tunedDelay(_tx_delay); // if we were low this establishes the end
   }
+#endif // INT_ONLY || INT_AND_PCINT
 
 #if _DEBUG
   pinMode(_DEBUG_PIN1, OUTPUT);

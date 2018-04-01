@@ -36,15 +36,21 @@ http://arduiniana.org.
 #include <inttypes.h>
 #include <Stream.h>
 
-// Add dummy PCINT macros
-#if defined(__AVR_ATmega8535__) || defined(__AVR_ATmega8535__) || defined(__AVR_ATmega8__) \
-|| defined(__AVR_ATmega16__) || defined(__AVR_ATmega32__) || defined(__AVR_ATmega64__)     \
-|| defined(__AVR_ATmega128__)
-#define digitalPinToPCICR(p)    ((uint8_t *) 0)
-#define digitalPinToPCICRbit(p) (0)
-#define digitalPinToPCMSK(p)    ((uint8_t *) 0)
-#define digitalPinToPCMSKbit(p) (0)
+
+// Microcontrollers that only make use of INTs
+#if defined(__AVR_ATmega8__)  || defined(__AVR_ATmega16__)  || defined(__AVR_ATmega32__)   || \
+    defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__) || defined(__AVR_ATmega8515__) || \
+    defined(__AVR_ATmega8535__)
+  #define INT_ONLY
+// Microcontrollers that make use of INTs and PCINTs
+#elif defined(__AVR_ATmega162__)  || defined(__AVR_ATmega640__)  || defined(__AVR_ATmega1280__) || \
+      defined(__AVR_ATmega1281__) || defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)
+  #define INT_AND_PCINT
+// Microcontrollers that only make use of PCINTs
+#else
+  #define PCINT_ONLY
 #endif
+
 
 /******************************************************************************
 * Definitions
@@ -62,7 +68,7 @@ class SoftwareSerial : public Stream
 {
 private:
   // per object data
-  uint8_t _receivePin;
+  int8_t _receivePin;
   uint8_t _receiveBitMask;
   volatile uint8_t *_receivePortRegister;
   uint8_t _transmitBitMask;
@@ -88,8 +94,8 @@ private:
   // private methods
   inline void recv() __attribute__((__always_inline__));
   uint8_t rx_pin_read();
-  void setTX(uint8_t transmitPin);
-  void setRX(uint8_t receivePin);
+  void setTX(int8_t transmitPin);
+  void setRX(int8_t receivePin);
   inline void setRxIntMsk(bool enable) __attribute__((__always_inline__));
 
   // Return num - sub, or 1 if the result would be < 1
@@ -100,7 +106,7 @@ private:
 
 public:
   // public methods
-  SoftwareSerial(uint8_t receivePin, uint8_t transmitPin, bool inverse_logic = false);
+  SoftwareSerial(int8_t receivePin, int8_t transmitPin, bool inverse_logic = false);
   ~SoftwareSerial();
   void begin(long speed);
   bool listen();
