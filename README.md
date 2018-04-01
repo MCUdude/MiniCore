@@ -172,9 +172,15 @@ Your code should now be running on your microcontroller! If you experience any i
 This core uses the standard Arduino UNO pinout and will not break compatibility of any existing code or libraries. What's different about this pinout compared to the original one is that this got three aditinal IO pins available. You can use digital pin 20 and 21 (PB6 and PB7) as regular IO pins if you're ussing the internal oscillator instead of an external crystal. If you're willing to disable the reset pin (can be enabled using [high voltage parallel programming](https://www.microchip.com/webdoc/stk500/stk500.highVoltageProgramming.html)) it can be used as a regular IO pin, and is assigned to digital pin 22 (PC6). 
 <b>Click to enlarge:</b> 
 </br> </br>
-<img src="https://i.imgur.com/qXIEchT.jpg" width="320"> <img src="https://i.imgur.com/TZ4GmyR.jpg" width="260"> <img src="https://i.imgur.com/ZQsjLwL.jpg" width="260">
+
+| DIP-28 package  *ATmega8/48/88/168/328*               | TQFP-32 SMD package  *ATmega8/48/88/168/328*          | TQFP-32 SMD package  *ATmega48/88/168/328PB*          |
+|-------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
+|<img src="https://i.imgur.com/qXIEchT.jpg" width="280">|<img src="https://i.imgur.com/TZ4GmyR.jpg" width="260">|<img src="https://i.imgur.com/ZQsjLwL.jpg" width="260">|
 
   
 ## Minimal setup
-Here is a simple schematic showing a minimal setup using an external crystal. Skip the crystal and the two 22pF capacitors if you're using the internal oscillator. If you don't want to mess with breadboards, components and wiring; simply use your Arduino UNO!<br/>
-<img src="http://i.imgur.com/d7Xhtht.png" width="750">
+Here is a simple schematic showing a minimal setup using an external crystal. Skip the crystal and the two 22pF capacitors if you're using the internal oscillator. If you don't want to mess with breadboards, components and wiring; simply use your Arduino UNO! <b>Click to enlarge:</b> <br/>
+
+| DIP-28 package  *ATmega8/48/88/168/328*               | TQFP-32 SMD package  *ATmega8/48/88/168/328*          | TQFP-32 SMD package  *ATmega48/88/168/328PB*          |
+|-------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
+|<img src="https://i.imgur.com/1k4q3xF.png" width="280">|<img src="https://i.imgur.com/bp7KI9f.png" width="280">|<img src="https://i.imgur.com/LrEokO9.png" width="280">|
