@@ -26,7 +26,6 @@ int main (void)
 
   #if defined(__AVR_ATmega8__)  
     TCCR0 = 0x05; // clock frequency / 1024 
-    OCR0 = 0x00;  // Output compare
     TCNT0 = 0; // Start to count from zero
     TIMSK = 0x01; // Enable overflow interrupt
 
