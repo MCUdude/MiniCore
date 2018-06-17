@@ -25,11 +25,6 @@ extern "C" {
   #include <inttypes.h>
   #include "utility/twi1.h"
 }
-  
-  //328PB test
-  # if !defined(__AVR_ATmega328PB__) 
-  #error "Only for 328PB"
-  #endif
 
 #include "Wire1.h"
 

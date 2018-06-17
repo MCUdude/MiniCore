@@ -16,6 +16,10 @@
 
 #include <Arduino.h>
 
+#if defined(SPI1_STC_vect)
+  #include <SPI1.h>
+#endif  
+
 // SPI_HAS_TRANSACTION means SPI has beginTransaction(), endTransaction(),
 // usingInterrupt(), and SPISetting(clock, bitOrder, dataMode)
 #define SPI_HAS_TRANSACTION 1
