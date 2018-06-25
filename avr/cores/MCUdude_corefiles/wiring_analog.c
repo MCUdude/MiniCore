@@ -128,11 +128,11 @@ void analogWrite(uint8_t pin, int val)
         break;
         
       case TIMER0A:
-				// connect pwm to pin on timer 0
-				// this combination is for the ATmega8535, ATmega16 and ATmega32
-				sbi(TCCR0, COM01);
-				OCR0 = val; // set pwm duty
-				break;  
+        // connect pwm to pin on timer 0
+        // this combination is for the ATmega8535, ATmega16 and ATmega32
+        sbi(TCCR0, COM01);
+        OCR0 = val; // set pwm duty
+        break;  
       #endif
 
       #if defined(TCCR0A) && defined(COM0A1)
@@ -210,8 +210,10 @@ void analogWrite(uint8_t pin, int val)
       #if defined(TCCR3A) && defined(COM3B1)
       case TIMER3B:
         // connect pwm to pin on timer 3, channel B
-        #if defined(__AVR_ATmega328PB__) // Fix ATmega328PB silicon bug
+        #if defined(__AVR_ATmega328PB__) // Fix 324PB/328PB silicon bug
         sbi(PORTD, PD2);
+        #elif defined(__AVR_ATmega324PB__)
+        sbi(PORTB, PB7);
         #endif
         sbi(TCCR3A, COM3B1);
         OCR3B = val; // set pwm duty
@@ -240,8 +242,10 @@ void analogWrite(uint8_t pin, int val)
       #if defined(TCCR4A) && defined(COM4B1)
       case TIMER4B:
         // connect pwm to pin on timer 4, channel B
-        #if defined(__AVR_ATmega328PB__) // Fix ATmega328PB silicon bug
+        #if defined(__AVR_ATmega328PB__) // Fix 324PB/328PB silicon bug
         sbi(PORTD, PD2);
+        #elif defined(__AVR_ATmega324PB__)
+        sbi(PORTB, PB7);
         #endif
         sbi(TCCR4A, COM4B1);
         OCR4B = val; // set pwm duty

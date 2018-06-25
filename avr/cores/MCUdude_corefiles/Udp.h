@@ -76,7 +76,7 @@ public:
   virtual int read(char* buffer, size_t len) =0;
   // Return the next byte from the current packet without moving on to the next byte
   virtual int peek() =0;
-  virtual void flush() =0;	// Finish reading the current packet
+  virtual void flush() =0;  // Finish reading the current packet
 
   // Return the IP address of the host who sent the current incoming packet
   virtual IPAddress remoteIP() =0;
