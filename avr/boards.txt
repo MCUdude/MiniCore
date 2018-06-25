@@ -1,25 +1,30 @@
-##########################################################################################
-## This file is created by MCUdude for use with MiniCore                                ##
-## https://github.com/MCUdude/MiniCore                                                  ##
-##                                                                                      ##
-## This is the file where fuse settings, clock frequencies and compiler flags           ##
-## are located.                                                                         ##
-##                                                                                      ##
-## The table below shows the available precompiled bootloaders for the corresponding    ##
-## clock frequencies and baud rates. Modify the upload.speed field to change baud rate. ##
-##                                                                                      ##
-##  |            | 1000000 | 500000 | 250000 | 115200 | 57600 | 38400 | 19200 | 9600 |  ##
-##  |------------|---------|--------|--------|--------|-------|-------|-------|------|  ##
-##  | 20 MHz     |         |  X     |  X     |  X     |       |       |       |      |  ##
-##  | 18.432 MHz |         |        |        |  X     |       |       |       |      |  ##
-##  | 16 MHz     |  X      |  X     |  X     |  X     |       |       |       |      |  ##
-##  | 12 MHz     |         |  X     |  X     |        |  X    |       |       |      |  ##
-##  | 8 MHz      |  X      |  X     |  X     |  X     |  X    |  X    |  X    |      |  ##
-##  | 4 MHz      |         |  X     |  X     |        |       |       |  X    |  X   |  ##
-##  | 2 MHz      |         |        |  X     |        |       |       |  X    |  X   |  ##
-##  | 1 MHz      |         |        |        |        |       |       |       |  X   |  ## 
-##                                                                                      ##
-##########################################################################################
+##################################################################################################
+## This file is created by MCUdude for use with MiniCore                                        ##
+## https://github.com/MCUdude/MiniCore                                                          ##
+##                                                                                              ##
+## This is the file where fuse settings, clock frequencies and compiler flags                   ##
+## are located.                                                                                 ##
+##                                                                                              ##
+## The table below shows the available precompiled bootloaders for the corresponding            ##
+## clock frequencies and baud rates. Modify the upload.speed field to change baud rate.         ##
+##                                                                                              ##
+## |             | 1000000 | 500000 | 250000 | 230400 | 115200 | 57600 | 38400 | 19200 | 9600 | ##
+## |-------------|---------|--------|--------|--------|--------|-------|-------|-------|------| ##
+## | 20 MHz      |         |  X     |  X     |        |  X     |       |       |  X    |      | ##
+## | 18.4320 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ##
+## | 16 MHz      |  X      |  X     |  X     |        |  X     |       |  X    |  X    |  X   | ##
+## | 14.7456 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 12 MHz      |         |  X     |  X     |        |        |  X    |       |  X    |  X   | ##
+## | 11.0592 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 8 MHz       |  X      |  X     |  X     |        |  X     |  X    |  X    |  X    |  X   | ##
+## | 7.3728 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 4 MHz       |         |  X     |  X     |        |        |       |       |  X    |  X   | ##
+## | 3.6864 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 2 MHz       |         |        |  X     |        |        |       |       |  X    |  X   | ##
+## | 1.8432 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 1 MHz       |         |        |        |        |        |       |       |       |  X   | ## 
+##                                                                                              ##
+##################################################################################################
 
 # Menu options
 menu.bootloader=Bootloader
@@ -48,7 +53,7 @@ menu.variant=Variant
 328.menu.bootloader.true.upload.maximum_size=32256
 328.menu.bootloader.true.upload.protocol=arduino
 328.menu.bootloader.true.bootloader.high_fuses=0xd6
-328.menu.bootloader.true.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}.hex
+328.menu.bootloader.true.bootloader.file=optiboot_flash/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}.hex
 
 328.menu.bootloader.false=No
 328.menu.bootloader.false.upload.maximum_size=32768
@@ -158,7 +163,7 @@ menu.variant=Variant
 168.menu.bootloader.true.upload.maximum_size=15872
 168.menu.bootloader.true.upload.protocol=arduino
 168.menu.bootloader.true.bootloader.extended_fuses=0xfc
-168.menu.bootloader.true.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}.hex
+168.menu.bootloader.true.bootloader.file=optiboot_flash/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}.hex
 
 168.menu.bootloader.false=No
 168.menu.bootloader.false.upload.maximum_size=16384
@@ -267,7 +272,7 @@ menu.variant=Variant
 88.menu.bootloader.true.upload.maximum_size=7680
 88.menu.bootloader.true.upload.protocol=arduino
 88.menu.bootloader.true.bootloader.extended_fuses=0xfc
-88.menu.bootloader.true.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}.hex
+88.menu.bootloader.true.bootloader.file=optiboot_flash/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}.hex
 
 88.menu.bootloader.false=No
 88.menu.bootloader.false.upload.maximum_size=8192
@@ -477,7 +482,7 @@ menu.variant=Variant
 8.menu.bootloader.true.upload.maximum_size=7680
 8.menu.bootloader.true.upload.protocol=arduino
 8.menu.bootloader.true.bootloader.bootrst_bit=0
-8.menu.bootloader.true.bootloader.file=optiboot_flash/{build.mcu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}.hex
+8.menu.bootloader.true.bootloader.file=optiboot_flash/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}.hex
 
 8.menu.bootloader.false=No
 8.menu.bootloader.false.upload.maximum_size=8192
