@@ -63,28 +63,31 @@ menu.variant=Variant
 # Variants
 328.menu.variant.modelP=328P / 328PA
 328.menu.variant.modelP.bootloader.cksel_bits=0111
+328.menu.variant.modelP.bootloader.cfd_bit=1
 328.menu.variant.modelP.build.variant=standard
 328.menu.variant.modelP.build.mcu=atmega328p
 
 328.menu.variant.modelNonP=328 / 328A
 328.menu.variant.modelNonP.bootloader.cksel_bits=0111
+328.menu.variant.modelNonP.bootloader.cfd_bit=1
 328.menu.variant.modelNonP.build.variant=standard
 328.menu.variant.modelNonP.build.mcu=atmega328
 
 328.menu.variant.modelPB=328PB
 328.menu.variant.modelPB.bootloader.cksel_bits=1111
+328.menu.variant.modelPB.bootloader.cfd_bit=0
 328.menu.variant.modelPB.build.variant=pb-variant
 328.menu.variant.modelPB.build.mcu=atmega328pb
 
 # Brown out detection
 328.menu.BOD.2v7=2.7v
-328.menu.BOD.2v7.bootloader.extended_fuses=0xfd
+328.menu.BOD.2v7.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}101
 328.menu.BOD.4v3=4.3v
-328.menu.BOD.4v3.bootloader.extended_fuses=0xfc
+328.menu.BOD.4v3.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}100
 328.menu.BOD.1v8=1.8v
-328.menu.BOD.1v8.bootloader.extended_fuses=0xfe
+328.menu.BOD.1v8.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}110
 328.menu.BOD.disabled=Disabled
-328.menu.BOD.disabled.bootloader.extended_fuses=0xff
+328.menu.BOD.disabled.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}111
 
 # Compiler link time optimization
 328.menu.LTO.Os=Disabled (default)
