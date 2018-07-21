@@ -29,8 +29,8 @@
 class IPAddress : public Printable {
 private:
     union {
-	uint8_t bytes[4];  // IPv4 address
-	uint32_t dword;
+        uint8_t bytes[4];  // IPv4 address
+        uint32_t dword;
     } _address;
 
     // Access the raw byte array containing the address.  Because this returns a pointer

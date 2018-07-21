@@ -198,6 +198,35 @@ size_t Print::println(const Printable& x)
   return n;
 }
 
+// Custom implementation of printf borrowed from the teensy core files
+static int16_t printf_putchar(char c, FILE *fp)
+{
+	((class Print *)(fdev_get_udata(fp)))->write((uint8_t)c);
+	return 0;
+}
+
+int16_t Print::printf(const char *format, ...)
+{
+	FILE f;
+	va_list ap;
+
+	fdev_setup_stream(&f, printf_putchar, NULL, _FDEV_SETUP_WRITE);
+	fdev_set_udata(&f, this);
+	va_start(ap, format);
+	return vfprintf(&f, format, ap);
+}
+
+int16_t Print::printf(const __FlashStringHelper *format, ...)
+{
+	FILE f;
+	va_list ap;
+
+	fdev_setup_stream(&f, printf_putchar, NULL, _FDEV_SETUP_WRITE);
+	fdev_set_udata(&f, this);
+	va_start(ap, format);
+	return vfprintf_P(&f, (const char *)format, ap);
+}
+
 // Private Methods /////////////////////////////////////////////////////////////
 
 size_t Print::printNumber(unsigned long n, uint8_t base)

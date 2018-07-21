@@ -225,7 +225,7 @@ extern const uint8_t PROGMEM digital_pin_to_timer_PGM[];
 #if defined(__AVR_ATmega8__) || defined(__AVR_ATmega8535__) || defined(__AVR_ATmega16__) \
 || defined(__AVR_ATmega32__) || defined(__AVR_ATmega8515__)
 #else 
-#define PE 5	
+#define PE 5
 #endif
 
 #define PF 6

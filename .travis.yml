@@ -12,6 +12,12 @@ env:
 
 
 install:
+  # Check for tabs
+  - "if grep --line-number --recursive --binary-files=without-match --exclude-dir=.git --exclude-dir=travis-ci/arduino-ci-script --regexp=$'\t' .; then echo 'Tab found.'; false; fi"
+
+  # Check for non-Unix line endings
+  - "if grep --files-with-matches --recursive --binary-files=without-match --exclude-dir=.git --exclude-dir=travis-ci/arduino-ci-script --regexp=$'\r$' .; then echo 'Non-Unix EOL detected.'; false; fi"
+
   # Install the script used to simplify use of Travis CI for testing Arduino projects
   - source "${TRAVIS_BUILD_DIR}/travis-ci/arduino-ci-script/arduino-ci-script.sh"
 
