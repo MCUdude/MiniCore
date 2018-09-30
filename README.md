@@ -18,7 +18,6 @@ If you're into "generic" AVR programming, I'm happy to tell you that all relevan
 * **[How to install](#how-to-install)**
 	- [Boards Manager Installation](#boards-manager-installation)
 	- [Manual Installation](#manual-installation)
-	- **[ATmega48/88/168/328PB series](#atmega4888168328pb-series)**
 * **[Getting started with MiniCore](#getting-started-with-minicore)**
 * **[Pinout](#pinout)**
 * **[Minimal setup](#minimal-setup)**
@@ -47,9 +46,9 @@ Can't decide what microcontroller to choose? Have a look at the specification ta
 
 ## Why add Arduino support for these microcontrollers?
 * They are all Arduino UNO compatible (drop-in replacement)
-* They're extremely popular and used in almost every Arduino project out there
-* They're cheap (some can be bought for less than a dollar at AliExpress and Ebay)
-* They come in both DIP, TQFP and QFN packages
+* They're extremely popular and used in many Arduino project out there
+* They're cheap (some can be bought for less than a dollar on AliExpress and Ebay)
+* They come in DIP, TQFP and QFN packages
 * You can now choose the suited microcontroller for your project. No need to go for overkill!
 
 
@@ -66,9 +65,8 @@ Select your microcontroller in the boards menu, then select the clock frequency.
 Make sure you connect an ISP programmer, and select the correct one in the "Programmers" menu. For time critical operations an external oscillator is recommended. 
 </br></br>
 
-<b>*</b> When using the 18.432 MHz option (or any frequency by which 64 cannot be divided evenly), micros() is 4-5 times slower (~110 clocks). It reports the time at the point when it was called, not the end.
-This clock frequency is not recommended if your application relies on accurate timing, but is [superb for UART communication](http://wormfood.net/avrbaudcalc.php?bitrate=300%2C600%2C1200%2C2400%2C4800%2C9600%2C14.4k%2C19.2k%2C28.8k%2C38.4k%2C57.6k%2C76.8k%2C115.2k%2C230.4k%2C250k%2C.5m%2C1m&clock=18.432&databits=8). 
-Millis() is not affected, only micros() and delay(). Micros() executes equally fast at all clock speeds, but returns wrong values with anything that 64 doesn't divide evenly by.
+<b>*</b> When using the 18.432 MHz option (or any frequency by which 64 cannot be divided evenly), timing functions (`millis`, `micros`, `delay`, `delayMicroseconds`) will not be accurate. These clock frequencies is therefore not recommended if your application relies on accurate timing, but is superb for UART communication. If you need accurate timing you may use `_delay_ms`, `delay_us` or simply write your own timing function.
+
 <br/>
 
 <b>**</b> There might be some issues related to the internal oscillator. It's factory calibrated, but may be a little "off" depending on the calibration, ambient temperature and operating voltage. If uploading failes while using the 8 MHz internal oscillator you have three options:
@@ -128,27 +126,18 @@ This installation method requires Arduino IDE version 1.6.4 or greater.
 * Open the **Tools > Board > Boards Manager...** menu item.
 * Wait for the platform indexes to finish downloading.
 * Scroll down until you see the **MiniCore** entry and click on it.
-  * **Note**: If you are using Arduino IDE 1.6.6 then you may need to close **Boards Manager** and then reopen it before the **MiniCore** entry will appear.
 * Click **Install**.
 * After installation is complete close the **Boards Manager** window.
+* **Note**: If you plan to use the *PB series, you need the latest version of the Arduino toolchain. This toolchain is available through IDE 1.8.6 or newer. Here's how you install/enable the toolchain:
+  - Open the **Tools > Board > Boards Manager...** menu item.
+  - Wait for the platform indexes to finish downloading.
+  - The top is named **Arduino AVR boards**. Click on this item.
+  - Make sure the latest version is installed and selected
+  - Close the **Boards Manager** window.
 
 #### Manual Installation
 Click on the "Download ZIP" button in the upper right corner. Exctract the ZIP file, and move the extracted folder to the location "**~/Documents/Arduino/hardware**". Create the "hardware" folder if it doesn't exist.
 Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
-
-#### ATmega48/88/168/328PB series
-If you plan to use the *PB series, you'll need to update to the latest version of the Arduino toolchain. At the time of writing the latest version is *1.6.206*. Here's how you install it:
-* Open Arduino IDE.
-* Open the **File > Preferences** menu item.
-* In the **Additional Boards Manager URLs** field, add:
-    ```
-    https://downloads.arduino.cc/packages/package_avr_3.6.0_index.json
-    ```
-* Open the **Tools > Board > Boards Manager...** menu item.
-* Wait for the platform indexes to finish downloading.
-* The top is named **Arduino AVR boards**. Click on this item.
-* Click **Update**.
-* After installation is complete close the **Boards Manager** window.
 
 
 ## Getting started with MiniCore
