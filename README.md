@@ -19,6 +19,7 @@ If you're into "generic" AVR programming, I'm happy to tell you that all relevan
 	- [Boards Manager Installation](#boards-manager-installation)
 	- [Manual Installation](#manual-installation)
 * **[Getting started with MiniCore](#getting-started-with-minicore)**
+* [Wiring reference](#wiring-reference) 
 * **[Pinout](#pinout)**
 * **[Minimal setup](#minimal-setup)**
 
@@ -155,6 +156,23 @@ Ok, so you're downloaded and installed MiniCore, but how to get started? Here's 
 	- Keep your programmer connected, and hold down the `shift` button while clicking **Upload**. This will erase the bootloader and upload your code using the programmer tool.
 
 Your code should now be running on your microcontroller! If you experience any issues related to bootloader burning or serial uploading, please use *[this forum post](https://forum.arduino.cc/index.php?topic=412070.0)* or create an issue on Github.
+
+
+## Wiring reference
+To extend this core's functionality a bit futher, I've added a few missing Wiring functions. As many of you know Arduino is based on Wiring, but that doesn't mean the Wiring development isn't active. These functions are used as "regular" Arduino functions, and there's no need to include an external library.<br/>
+I hope you find this useful, because they really are!
+
+### Function list
+* portMode()
+* portRead()
+* portWrite()
+* sleepMode()
+* sleep()
+* noSleep()
+* enablePower() 
+* disablePower()
+
+### For further information please view the [Wiring reference page](https://github.com/MCUdude/MiniCore/blob/master/Wiring_reference.md)!
 
 
 ## Pinout
