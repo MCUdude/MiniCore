@@ -105,6 +105,8 @@ MiniCore does not adds its own copies of all the standard programmers to the "Pr
 
 Select your microcontroller in the boards menu, then select the clock frequency. You'll have to hit "Burn bootloader" in order to set the correct fuses and upload the correct bootloader. <br/>
 Make sure you connect an ISP programmer, and select the correct one in the "Programmers" menu. For time critical operations an external oscillator is recommended.
+
+If you are using Arduino as ISP as your programmer, some versions of the "Arduino as ISP" sketch included in the IDE examples won't work. The best option is to update your **Arduino AVR boards** via the boards manager to ensure you have at least version 1.6.207. The other workaround is to edit the "Arduino as ISP" sketch as per this [Arduino forum thread](https://forum.arduino.cc/index.php?topic=538183.msg3693676#msg3693676).
  
  
 ## Write to own flash
