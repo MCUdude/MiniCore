@@ -39,39 +39,71 @@
 #define digitalPinHasPWM(p)         ((p) == 0 || (p) == 1 || (p) == 2 ||(p) == 3 || (p) == 5 || (p) == 6 || (p) == 9 || (p) == 10 || (p) == 11)
 #endif
 
+#define PIN_SPI_SS    (10)
+#define PIN_SPI_MOSI  (11)
+#define PIN_SPI_MISO  (12)
+#define PIN_SPI_SCK   (13)
+
+static const uint8_t SS   = PIN_SPI_SS;
+static const uint8_t MOSI = PIN_SPI_MOSI;
+static const uint8_t MISO = PIN_SPI_MISO;
+static const uint8_t SCK  = PIN_SPI_SCK;
+
+#define PIN_WIRE_SDA        (18)
+#define PIN_WIRE_SCL        (19)
+
+static const uint8_t SDA = PIN_WIRE_SDA;
+static const uint8_t SCL = PIN_WIRE_SCL;
+
 #define LED_BUILTIN 13
 
-static const uint8_t SS   = 10;
-static const uint8_t MOSI = 11;
-static const uint8_t MISO = 12;
-static const uint8_t SCK  = 13;
-static const uint8_t SDA  = 18;
-static const uint8_t SCL  = 19;
-
 #if defined(__AVR_ATmega328PB__)
-static const uint8_t SS0   = 10;
-static const uint8_t MOSI0 = 11;
-static const uint8_t MISO0 = 12;
-static const uint8_t SCK0  = 13;
-static const uint8_t SDA0  = 18;
-static const uint8_t SCL0  = 19;
+#define PIN_SPI_SS0          PIN_SPI_SS
+#define PIN_SPI_MOSI0        PIN_SPI_MOSI
+#define PIN_SPI_MISO0        PIN_SPI_MISO
+#define PIN_SPI_SCK0         PIN_SPI_SCK
+#define PIN_WIRE_SDA0        PIN_WIRE_SDA
+#define PIN_WIRE_SCL0        PIN_WIRE_SCL
 
-static const uint8_t MISO1 = 14;
-static const uint8_t SCK1  = 15;
-static const uint8_t SDA1  = 23;
-static const uint8_t SCL1  = 24;
-static const uint8_t SS1   = 25;
-static const uint8_t MOSI1 = 26;
+static const uint8_t SS0   = PIN_SPI_SS0;
+static const uint8_t MOSI0 = PIN_SPI_MOSI0;
+static const uint8_t MISO0 = PIN_SPI_MISO0;
+static const uint8_t SCK0  = PIN_SPI_SCK0;
+static const uint8_t SDA0  = PIN_WIRE_SDA0;
+static const uint8_t SCL0  = PIN_WIRE_SCL0;
+
+#define PIN_SPI_SS1          (25)
+#define PIN_SPI_MOSI1        (26)
+#define PIN_SPI_MISO1        (14)
+#define PIN_SPI_SCK1         (15)
+#define PIN_WIRE_SDA1        (23)
+#define PIN_WIRE_SCL1        (24)
+
+static const uint8_t SS1   = PIN_SPI_SS1;
+static const uint8_t MOSI1 = PIN_SPI_MOSI1;
+static const uint8_t MISO1 = PIN_SPI_MISO1;
+static const uint8_t SCK1  = PIN_SPI_SCK1;
+static const uint8_t SDA1  = PIN_WIRE_SDA1;
+static const uint8_t SCL1  = PIN_WIRE_SCL1;
 #endif
 
-static const uint8_t A0 = 14;
-static const uint8_t A1 = 15;
-static const uint8_t A2 = 16;
-static const uint8_t A3 = 17;
-static const uint8_t A4 = 18;
-static const uint8_t A5 = 19;
-static const uint8_t A6 = 25;
-static const uint8_t A7 = 26;
+#define PIN_A0   (14)
+#define PIN_A1   (15)
+#define PIN_A2   (16)
+#define PIN_A3   (17)
+#define PIN_A4   (18)
+#define PIN_A5   (19)
+#define PIN_A6   (25)
+#define PIN_A7   (26)
+
+static const uint8_t A0 = PIN_A0;
+static const uint8_t A1 = PIN_A1;
+static const uint8_t A2 = PIN_A2;
+static const uint8_t A3 = PIN_A3;
+static const uint8_t A4 = PIN_A4;
+static const uint8_t A5 = PIN_A5;
+static const uint8_t A6 = PIN_A6;
+static const uint8_t A7 = PIN_A7;
 
 #if defined(__AVR_ATmega48PB__) || defined(__AVR_ATmega88PB__) || defined(__AVR_ATmega168PB__)
 #define digitalPinToPCICR(p)     (((p) >= 0 && (p) <= 22) ? (&PCICR) : ((uint8_t *)0))
