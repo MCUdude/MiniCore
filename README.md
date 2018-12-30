@@ -182,7 +182,7 @@ This core uses the standard Arduino UNO pinout and will not break compatibility 
 
 | DIP-28 package  *ATmega8/48/88/168/328*               | TQFP-32 SMD package  *ATmega8/48/88/168/328*          | TQFP-32 SMD package  *ATmega48/88/168/328PB*          |
 |-------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
-|<img src="https://i.imgur.com/qXIEchT.jpg" width="280">|<img src="https://i.imgur.com/TZ4GmyR.jpg" width="260">|<img src="https://i.imgur.com/ZQsjLwL.jpg" width="260">|
+|<img src="https://i.imgur.com/qXIEchT.jpg" width="280">|<img src="https://i.imgur.com/naweqE6.jpg" width="260">|<img src="https://i.imgur.com/ZQsjLwL.jpg" width="260">|
 
   
 ## Minimal setup
