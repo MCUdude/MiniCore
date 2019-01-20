@@ -2,8 +2,9 @@
 ## This file is created by MCUdude for use with MiniCore                                        ##
 ## https://github.com/MCUdude/MiniCore                                                          ##
 ##                                                                                              ##
-## This is the file where fuse settings, clock frequencies and compiler flags                   ##
-## are located.                                                                                 ##
+## This is the file where fuse settings, clock frequencies and compiler flags are located.      ##
+##                                                                                              ##
+## You may change the upload serial port by modifying the upload.port field (ATmega324PB only). ##
 ##                                                                                              ##
 ## The table below shows the available precompiled bootloaders for the corresponding            ##
 ## clock frequencies and baud rates. Modify the upload.speed field to change baud rate.         ##
@@ -90,13 +91,13 @@ menu.variant=Variant
 328.menu.BOD.disabled.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}111
 
 # Compiler link time optimization
-328.menu.LTO.Os=Disabled (default)
+328.menu.LTO.Os=LTO disabled
 328.menu.LTO.Os.compiler.c.extra_flags=
 328.menu.LTO.Os.compiler.c.elf.extra_flags=
 328.menu.LTO.Os.compiler.cpp.extra_flags=
 328.menu.LTO.Os.ltoarcmd=avr-ar
 
-328.menu.LTO.Os_flto=Enabled
+328.menu.LTO.Os_flto=LTO enabled
 328.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 328.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g 
 328.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
@@ -190,23 +191,23 @@ menu.variant=Variant
 168.menu.variant.modelPB.build.mcu=atmega168pb
 
 # Brown out detection
-168.menu.BOD.2v7=2.7v
+168.menu.BOD.2v7=BOD 2.7V
 168.menu.BOD.2v7.bootloader.high_fuses=0xd5
-168.menu.BOD.4v3=4.3v
+168.menu.BOD.4v3=BOD 4.3V
 168.menu.BOD.4v3.bootloader.high_fuses=0xd4
-168.menu.BOD.1v8=1.8v
+168.menu.BOD.1v8=BOD 1.8V
 168.menu.BOD.1v8.bootloader.high_fuses=0xd6
-168.menu.BOD.disabled=Disabled
+168.menu.BOD.disabled=BOD disabled
 168.menu.BOD.disabled.bootloader.high_fuses=0xd7
 
 # Compiler link time optimization
-168.menu.LTO.Os=Disabled (default)
+168.menu.LTO.Os=LTO Disabled
 168.menu.LTO.Os.compiler.c.extra_flags=
 168.menu.LTO.Os.compiler.c.elf.extra_flags=
 168.menu.LTO.Os.compiler.cpp.extra_flags=
 168.menu.LTO.Os.ltoarcmd=avr-ar
 
-168.menu.LTO.Os_flto=Enabled
+168.menu.LTO.Os_flto=LTO Enabled
 168.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 168.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
 168.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
@@ -299,23 +300,23 @@ menu.variant=Variant
 88.menu.variant.modelPB.build.mcu=atmega88pb
 
 # Brown out detection
-88.menu.BOD.2v7=2.7v
+88.menu.BOD.2v7=BOD 2.7V
 88.menu.BOD.2v7.bootloader.high_fuses=0xd5
-88.menu.BOD.4v3=4.3v
+88.menu.BOD.4v3=BOD 4.3V
 88.menu.BOD.4v3.bootloader.high_fuses=0xd4
-88.menu.BOD.1v8=1.8v
+88.menu.BOD.1v8=BOD 1.8V
 88.menu.BOD.1v8.bootloader.high_fuses=0xd6
-88.menu.BOD.disabled=Disabled
+88.menu.BOD.disabled=BOD Disabled
 88.menu.BOD.disabled.bootloader.high_fuses=0xd7
 
 # Compiler link time optimization
-88.menu.LTO.Os=Disabled (default)
+88.menu.LTO.Os=LTO Disabled
 88.menu.LTO.Os.compiler.c.extra_flags=
 88.menu.LTO.Os.compiler.c.elf.extra_flags=
 88.menu.LTO.Os.compiler.cpp.extra_flags=
 88.menu.LTO.Os.ltoarcmd=avr-ar
 
-88.menu.LTO.Os_flto=Enabled
+88.menu.LTO.Os_flto=LTO Enabled
 88.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 88.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
 88.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
@@ -404,23 +405,23 @@ menu.variant=Variant
 48.menu.variant.modelPB.build.mcu=atmega48pb
 
 # Brown out detection
-48.menu.BOD.2v7=2.7v
+48.menu.BOD.2v7=BOD 2.7V
 48.menu.BOD.2v7.bootloader.high_fuses=0xd5
-48.menu.BOD.4v3=4.3v
+48.menu.BOD.4v3=BOD 4.3V
 48.menu.BOD.4v3.bootloader.high_fuses=0xd4
-48.menu.BOD.1v8=1.8v
+48.menu.BOD.1v8=BOD 1.8V
 48.menu.BOD.1v8.bootloader.high_fuses=0xd6
-48.menu.BOD.disabled=Disabled
+48.menu.BOD.disabled=BOD disabled
 48.menu.BOD.disabled.bootloader.high_fuses=0xd7
 
 # Compiler link time optimization
-48.menu.LTO.Os=Disabled (default)
+48.menu.LTO.Os=LTO disabled
 48.menu.LTO.Os.compiler.c.extra_flags=
 48.menu.LTO.Os.compiler.c.elf.extra_flags=
 48.menu.LTO.Os.compiler.cpp.extra_flags=
 48.menu.LTO.Os.ltoarcmd=avr-ar
 
-48.menu.LTO.Os_flto=Enabled
+48.menu.LTO.Os_flto=BOD enabled
 48.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 48.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
 48.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
@@ -475,6 +476,7 @@ menu.variant=Variant
 8.bootloader.unlock_bits=0x3f
 8.bootloader.lock_bits=0x0f
 8.bootloader.low_fuses=0b{bootloader.bod_bits}{bootloader.sut_cksel_bits}
+8.bootloader.high_fuses=0b110{bootloader.ckopt_bit}010{bootloader.bootrst_bit}
 8.build.core=MCUdude_corefiles
 8.build.variant=standard
 8.build.board=AVR_ATmega8
@@ -493,21 +495,21 @@ menu.variant=Variant
 8.menu.bootloader.false.bootloader.file=empty/empty.hex
 
 # Brown out detection - This is the first part of the low fuse bit concatenation
-8.menu.BOD.2v7=2.7v
+8.menu.BOD.2v7=BOD 2.7V
 8.menu.BOD.2v7.bootloader.bod_bits=10
-8.menu.BOD.4v0=4.0v
+8.menu.BOD.4v0=BOD 4.0V
 8.menu.BOD.4v0.bootloader.bod_bits=00
-8.menu.BOD.disabled=Disabled
+8.menu.BOD.disabled=BOD disabled
 8.menu.BOD.disabled.bootloader.bod_bits=11
 
 # Compiler link time optimization
-8.menu.LTO.Os=Disabled (default)
+8.menu.LTO.Os=LTO disabled
 8.menu.LTO.Os.compiler.c.extra_flags=
 8.menu.LTO.Os.compiler.c.elf.extra_flags=
 8.menu.LTO.Os.compiler.cpp.extra_flags=
 8.menu.LTO.Os.ltoarcmd=avr-ar
 
-8.menu.LTO.Os_flto=Enabled
+8.menu.LTO.Os_flto=LTO enabled
 8.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 8.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
 8.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
@@ -518,49 +520,47 @@ menu.variant=Variant
 8.menu.clock.16MHz_external.upload.port=UART0
 8.menu.clock.16MHz_external.upload.speed=115200
 8.menu.clock.16MHz_external.bootloader.sut_cksel_bits=111111
-8.menu.clock.16MHz_external.bootloader.high_fuses=0b1100010{bootloader.bootrst_bit}
+8.menu.clock.20MHz_external.bootloader.ckopt_bit=0
 8.menu.clock.16MHz_external.build.f_cpu=16000000L
 
 8.menu.clock.20MHz_external=20 MHz external
 8.menu.clock.20MHz_external.upload.port=UART0
 8.menu.clock.20MHz_external.upload.speed=115200
 8.menu.clock.20MHz_external.bootloader.sut_cksel_bits=111111
-8.menu.clock.20MHz_external.bootloader.high_fuses=0b1100010{bootloader.bootrst_bit}
+8.menu.clock.20MHz_external.bootloader.ckopt_bit=0
 8.menu.clock.20MHz_external.build.f_cpu=20000000L
 
 8.menu.clock.18_432MHz_external=18.432 MHz external
 8.menu.clock.18_432MHz_external.upload.port=UART0
 8.menu.clock.18_432MHz_external.upload.speed=115200
 8.menu.clock.18_432MHz_external.bootloader.sut_cksel_bits=111111
-8.menu.clock.18_432MHz_external.bootloader.high_fuses=0b1100010{bootloader.bootrst_bit}
+8.menu.clock.18_432MHz_external.bootloader.ckopt_bit=0
 8.menu.clock.18_432MHz_external.build.f_cpu=18432000L
 
 8.menu.clock.12MHz_external=12 MHz external
 8.menu.clock.12MHz_external.upload.port=UART0
 8.menu.clock.12MHz_external.upload.speed=57600
 8.menu.clock.12MHz_external.bootloader.sut_cksel_bits=111111
-8.menu.clock.12MHz_external.bootloader.high_fuses=0b1100010{bootloader.bootrst_bit}
+8.menu.clock.12MHz_external.bootloader.ckopt_bit=0
 8.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 8.menu.clock.8MHz_external=8 MHz external
 8.menu.clock.8MHz_external.upload.port=UART0
 8.menu.clock.8MHz_external.upload.speed=38400
 8.menu.clock.8MHz_external.bootloader.sut_cksel_bits=111111
-8.menu.clock.8MHz_external.bootloader.high_fuses=0b1100010{bootloader.bootrst_bit}
+8.menu.clock.8MHz_external.bootloader.ckopt_bit=0
 8.menu.clock.8MHz_external.build.f_cpu=8000000L
 
 8.menu.clock.8MHz_internal=8 MHz internal
 8.menu.clock.8MHz_internal.upload.port=UART0
 8.menu.clock.8MHz_internal.upload.speed=38400
 8.menu.clock.8MHz_internal.bootloader.sut_cksel_bits=100100
-8.menu.clock.8MHz_internal.bootloader.high_fuses=0b1101010{bootloader.bootrst_bit}
+8.menu.clock.8MHz_internal.bootloader.ckopt_bit=1
 8.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
 8.menu.clock.1MHz_internal=1 MHz internal
 8.menu.clock.1MHz_internal.upload.port=UART0
 8.menu.clock.1MHz_internal.upload.speed=9600
 8.menu.clock.1MHz_internal.bootloader.sut_cksel_bits=100001
-8.menu.clock.1MHz_internal.bootloader.high_fuses=0b1101010{bootloader.bootrst_bit}
+8.menu.clock.1MHz_internal.bootloader.ckopt_bit=1
 8.menu.clock.1MHz_internal.build.f_cpu=1000000L
-
-############################################################
