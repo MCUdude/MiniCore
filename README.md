@@ -77,10 +77,10 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
 
 
 ## Bootloader option
-If your application doesn't need or require a bootloader for uploading code, you can choose to disable this.
-This free 512 bytes of the flash memory, which is significant if you're working with a small microcontroller such as ATmega8 or ATmega88.  
+MiniCore lets you select which serial port you want to use for uploading. UART0 is the default port for all targets, but ATmega328PB can also use UART1.
+If your application doesn't need or require a bootloader for uploading code you can also choose to disable this by selecting *No bootloader*. This frees 512 bytes of flash memory.
 
-Note that you need to select **Bootloader: "No"** and actually hit **Burn bootloader** in order to set the correct fuse bits. Now you're no longer able to upload using serial, until you select *Bootloader: "Yes"* and burn the bootloader again.
+Note that you have need to connect a programmer and hit **Burn bootloader** if you want to change any of the *Upload port settings*.
 
 
 ## BOD option
