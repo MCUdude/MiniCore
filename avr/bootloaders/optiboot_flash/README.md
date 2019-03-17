@@ -6,10 +6,14 @@ This toolchain version ships with Arduino AVR boards version 1.6.206, which can 
 
 
 ### Key features:
-* Small in size (512B)
+* Small in size (<512B when EEPROM upload support is disabled)
 * Supports baudrates upto 1Mbit
 * Supports write to flash within application
 * Compatible with a most AVR microcontrollers
+<<<<<<< HEAD
+=======
+* EEPROM upload support 
+>>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 
 ## Supported devices
