@@ -25,7 +25,7 @@ void setup()
     This will make your code portable to all AVR processors.    
   ***/
   
-  for ( int i = 0 ; i < EEPROM.length() ; i++ )
+  for (unsigned int i = 0 ; i < EEPROM.length() ; i++ )
     EEPROM.write(i, 0);
 
   // turn the LED on when we're done

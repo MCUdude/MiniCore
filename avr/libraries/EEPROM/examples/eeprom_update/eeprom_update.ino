@@ -14,7 +14,7 @@
 #include <EEPROM.h>
 
 /** the current address in the EEPROM (i.e. which byte we're going to write to next) **/
-int address = 0;
+unsigned int address = 0;
 
 void setup(){ /** EMpty setup **/ }
 
