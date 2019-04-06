@@ -8,10 +8,7 @@ This repository contains a total of 5168 precompiled hex built for 42 different 
 * Supports baudrates upto 1Mbit
 * Supports write to flash within application
 * Compatible with a most AVR microcontrollers
-<<<<<<< HEAD
-=======
 * EEPROM upload support 
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 
 ## Supported devices

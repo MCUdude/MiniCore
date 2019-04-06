@@ -12,22 +12,16 @@ set -e
 ## the mcu_and_params array if you want to add, remove or edit any of the settings. You can     ##
 ## also modify the clock_and_baud array if you need other F_CPUs or baudrates.                  ##
 ##                                                                                              ##
-<<<<<<< HEAD
-=======
 ## Note that all microcontrollers with 64kB flash or more is built with bootloader EEPROM       ##
 ## upload by default. Use SUPPORT_EEPROM=0 if you want to disable this feature. Note that you   ##
 ## may add EEPROM upload functionality by adding SUPPORT_EEPROM=1 .                             ##
 ##                                                                                              ##
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 ## The table below shows the available precompiled bootloaders for the corresponding            ##
 ## clock frequencies and baud rates.                                                            ##
 ##                                                                                              ##
 ## |             | 1000000 | 500000 | 250000 | 230400 | 115200 | 57600 | 38400 | 19200 | 9600 | ##
 ## |-------------|---------|--------|--------|--------|--------|-------|-------|-------|------| ##
-<<<<<<< HEAD
-=======
 ## | 24 MHz      |  X      |  X     |  X     |  X     |  X     |  X    |  X    |  X    |      | ##
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 ## | 20 MHz      |         |  X     |  X     |        |  X     |       |       |  X    |      | ##
 ## | 18.4320 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ##
 ## | 16 MHz      |  X      |  X     |  X     |        |  X     |       |  X    |  X    |  X   | ##
@@ -48,17 +42,6 @@ declare -a mcu_and_params=(
 "atmega8"     "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega16"    "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega32"    "LED=B0 LED_START_FLASHES=2 UART=0"
-<<<<<<< HEAD
-"atmega64"    "LED=B5 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega64"    "LED=B5 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega88"    "LED=B5 LED_START_FLASHES=2 UART=0"
-"atmega88p"   "LED=B5 LED_START_FLASHES=2 UART=0"
-"atmega88pb"  "LED=B5 LED_START_FLASHES=2 UART=0"
-"atmega128"   "LED=B5 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega128"   "LED=B5 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega162"   "LED=B0 LED_START_FLASHES=2 UART=0"
-"atmega162"   "LED=B0 LED_START_FLASHES=2 UART=1"
-=======
 "atmega64"    "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega64"    "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega88"    "LED=B5 LED_START_FLASHES=2 UART=0"
@@ -68,7 +51,6 @@ declare -a mcu_and_params=(
 "atmega128"   "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega162"   "LED=B0 LED_START_FLASHES=0 UART=0"
 "atmega162"   "LED=B0 LED_START_FLASHES=0 UART=1"
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 "atmega164a"  "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega164a"  "LED=B0 LED_START_FLASHES=2 UART=1"
 "atmega164p"  "LED=B0 LED_START_FLASHES=2 UART=0"
@@ -93,38 +75,6 @@ declare -a mcu_and_params=(
 "atmega328pb" "LED=B5 LED_START_FLASHES=2 UART=1"
 "atmega329"   "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega329p"  "LED=B5 LED_START_FLASHES=2 UART=0"
-<<<<<<< HEAD
-"atmega640"   "LED=B7 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega640"   "LED=B7 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega640"   "LED=B7 LED_START_FLASHES=2 UART=2 -BIGBOOT"
-"atmega640"   "LED=B7 LED_START_FLASHES=2 UART=3 -BIGBOOT"
-"atmega644"   "LED=B0 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega644"   "LED=B0 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega644p"  "LED=B0 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega644p"  "LED=B0 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega649"   "LED=B5 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega649p"  "LED=B5 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega1280"  "LED=B7 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega1280"  "LED=B7 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega1280"  "LED=B7 LED_START_FLASHES=2 UART=2 -BIGBOOT"
-"atmega1280"  "LED=B7 LED_START_FLASHES=2 UART=3 -BIGBOOT"
-"atmega1281"  "LED=B5 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega1281"  "LED=B5 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega1284"  "LED=B0 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega1284"  "LED=B0 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega1284p" "LED=B0 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega1284p" "LED=B0 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega2560"  "LED=B7 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega2560"  "LED=B7 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega2560"  "LED=B7 LED_START_FLASHES=2 UART=2 -BIGBOOT"
-"atmega2560"  "LED=B7 LED_START_FLASHES=2 UART=3 -BIGBOOT"
-"atmega2561"  "LED=B5 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega2561"  "LED=B5 LED_START_FLASHES=2 UART=1 -BIGBOOT"
-"atmega3290"  "LED=B5 LED_START_FLASHES=2 UART=0"
-"atmega3290p" "LED=B5 LED_START_FLASHES=2 UART=0"
-"atmega6490"  "LED=B5 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-"atmega6490p" "LED=B5 LED_START_FLASHES=2 UART=0 -BIGBOOT"
-=======
 "atmega640"   "LED=B7 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega640"   "LED=B7 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega640"   "LED=B7 LED_START_FLASHES=2 UART=2 SUPPORT_EEPROM=1"
@@ -155,14 +105,11 @@ declare -a mcu_and_params=(
 "atmega3290p" "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega6490"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega6490p" "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 "atmega8515"  "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega8535"  "LED=B0 LED_START_FLASHES=2 UART=0"
 )
 
 declare -a clock_and_baud=(
-<<<<<<< HEAD
-=======
 "24000000L" "1000000"
 "24000000L" "500000"
 "24000000L" "250000"
@@ -171,7 +118,6 @@ declare -a clock_and_baud=(
 "24000000L" "57600"
 "24000000L" "38400"
 "24000000L" "19200"
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 "20000000L" "500000"
 "20000000L" "250000"
 "20000000L" "115200"
@@ -242,12 +188,6 @@ declare -a clock_and_baud=(
 "1000000L" "9600"
 )
 
-<<<<<<< HEAD
-
-# Start out by deleting all previous generated files
-echo -e "\x1B[7m\n\nDeleting all previous generated files \x1B[0m"
-make clean_all
-=======
 # Set this variable to true if you want the script to abort if compilation fails
 abort_on_fail=false
 
@@ -302,29 +242,10 @@ then
   find . -iname "atmega*" -type d -empty -delete
   echo -e "\n\n"
 fi
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 # Loop through all MCUs and parameters
 for((i=0; i < ${#mcu_and_params[@]}; i+=2));
 do
-<<<<<<< HEAD
-  # Loop through all clock speeds and baud rated
-  for((j=0; j < ${#clock_and_baud[@]}; j+=2));
-  do
-     # Count how many builds that have been ran
-     COUNTER=$(($COUNTER + 1))
-     echo -e "\x1B[7m\n\n$COUNTER of $((${#mcu_and_params[@]} * ${#clock_and_baud[@]} / 4))"
-     # Print out current build info
-     echo -e " ${mcu_and_params[$i]} AVR_FREQ=${clock_and_baud[$j]} BAUD_RATE=${clock_and_baud[$j+1]} ${mcu_and_params[$i+1]} \x1B[0m"
-     # Build
-     make ${mcu_and_params[$i]} AVR_FREQ=${clock_and_baud[$j]} BAUD_RATE=${clock_and_baud[$j+1]} ${mcu_and_params[$i+1]}
-  done
-done
-
-# Finish up by removing all *.lst files
-echo -e "\x1B[7m\n\nDeleting all generated *.lst files \x1B[0m"
-make clean_asm
-=======
   # Create MCU folder if it doesn't exist already
   mkdir -p bootloaders/${mcu_and_params[$i]}
   
@@ -425,4 +346,3 @@ find . -name "*.tmp.sh" -exec rm {} \;
 find . -name "temp.txt" -exec rm {} \;
 
 echo -e "\x1B[7m\n\n Done! \n\x1B[0m"
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f

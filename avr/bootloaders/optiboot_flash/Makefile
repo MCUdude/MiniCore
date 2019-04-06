@@ -218,17 +218,12 @@ atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_R
 endif
 else
 atmega8: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-<<<<<<< HEAD
-atmega8: atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega8: atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
 
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega8a: atmega8
 
 #ATmega16/A
@@ -244,16 +239,11 @@ atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAU
 endif
 else
 atmega16: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-<<<<<<< HEAD
-atmega16: atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega16: atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega16a: atmega16
 
 #ATmega32/A
@@ -269,16 +259,11 @@ atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAU
 endif
 else
 atmega32: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega32: atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega32: atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega32a: atmega32
 
 #ATmega64/A
@@ -286,10 +271,6 @@ atmega64: TARGET = atmega64
 atmega64: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega64: maketargetdir
 atmega64: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
-<<<<<<< HEAD
-atmega64: atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega64: atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM)))
 atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -302,7 +283,6 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega64a: atmega64
 
 #ATmega88/A
@@ -318,16 +298,11 @@ atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAU
 endif
 else
 atmega88: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-<<<<<<< HEAD
-atmega88: atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega88: atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega88a: atmega88
 
 #ATmega88P/PA
@@ -343,16 +318,11 @@ atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(
 endif
 else
 atmega88p: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-<<<<<<< HEAD
-atmega88p: atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega88p: atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega88pa: atmega88p
 
 #ATmega88PB
@@ -368,26 +338,17 @@ atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)
 endif
 else
 atmega88pb: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-<<<<<<< HEAD
-atmega88pb: atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega88pb: atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega128/A
 atmega128: TARGET = atmega128
 atmega128: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega128: maketargetdir
 atmega128: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
-<<<<<<< HEAD
-atmega128: atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega128: atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM)))
 atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -400,7 +361,6 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega128a: atmega128
 
 #ATmega162
@@ -416,16 +376,11 @@ atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(
 endif
 else
 atmega162: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-<<<<<<< HEAD
-atmega162: atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega162: atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega164/A
 atmega164a: TARGET = atmega164a
@@ -440,16 +395,11 @@ atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)
 endif
 else
 atmega164a: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-<<<<<<< HEAD
-atmega164a: atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega164a: atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega164: atmega164a
 
 #ATmega164P/PA
@@ -465,16 +415,11 @@ atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)
 endif
 else
 atmega164p: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-<<<<<<< HEAD
-atmega164p: atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega164p: atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega164pa: atmega164p
 
 #ATmega168/A
@@ -490,16 +435,11 @@ atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(
 endif
 else
 atmega168: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-<<<<<<< HEAD
-atmega168: atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega168: atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega168a: atmega168
 
 #ATmega168P/PA
@@ -515,16 +455,11 @@ atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)
 endif
 else
 atmega168p: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-<<<<<<< HEAD
-atmega168p: atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega168p: atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega168pa: atmega168p
 
 #ATmega168PB
@@ -540,16 +475,11 @@ atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UA
 endif
 else
 atmega168pb: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-<<<<<<< HEAD
-atmega168pb: atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega168pb: atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega169/A
 atmega169: TARGET = atmega169
@@ -564,16 +494,11 @@ atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(
 endif
 else
 atmega169: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-<<<<<<< HEAD
-atmega169: atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega169: atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega169a: atmega169
 
 #ATmega169P/PA
@@ -589,16 +514,11 @@ atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)
 endif
 else
 atmega169p: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-<<<<<<< HEAD
-atmega169p: atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega169p: atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega169pa: atmega169
 
 #ATmega324A
@@ -614,16 +534,11 @@ atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)
 endif
 else
 atmega324a: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega324a: atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega324a: atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega324: atmega324a
 
 #ATmega324P
@@ -639,16 +554,11 @@ atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)
 endif
 else
 atmega324p: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega324p: atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega324p: atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega324PA
 atmega324pa: TARGET = atmega324pa
@@ -663,16 +573,11 @@ atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UA
 endif
 else
 atmega324pa: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega324pa: atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega324pa: atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega324PB
 atmega324pb: TARGET = atmega324pb
@@ -687,16 +592,11 @@ atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UA
 endif
 else
 atmega324pb: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega324pb: atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega324pb: atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega328/A
 atmega328: TARGET = atmega328
@@ -711,16 +611,11 @@ atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(
 endif
 else
 atmega328: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega328: atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega328: atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega328a: atmega328
 
 #ATmega328P/PA
@@ -736,16 +631,11 @@ atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)
 endif
 else
 atmega328p: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega328p: atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega328p: atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega328pa: atmega328p
 
 #ATmega328PB
@@ -761,16 +651,11 @@ atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UA
 endif
 else
 atmega328pb: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega328pb: atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega328pb: atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega329/A
 atmega329: TARGET = atmega329
@@ -785,16 +670,11 @@ atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(
 endif
 else
 atmega329: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega329: atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega329: atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega329a: atmega329
 
 #ATmega329P/PA
@@ -810,16 +690,11 @@ atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)
 endif
 else
 atmega329p: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega329p: atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega329p: atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega329pa: atmega329p
 
 #ATmega640
@@ -827,21 +702,6 @@ atmega640: TARGET = atmega640
 atmega640: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega640: maketargetdir
 atmega640: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
-<<<<<<< HEAD
-atmega640: atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega640: atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-
-#ATmega644/A
-atmega644: TARGET = atmega644a
-atmega644: MCU_TARGET = atmega644a
-atmega644: CFLAGS += $(COMMON_OPTIONS) -DBIGBOOT $(UART_CMD)
-atmega644: LIBS += -latmega644a
-atmega644: AVR_FREQ ?= 16000000L
-atmega644: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
-atmega644: atmega644/$(AVR_FREQ)/$(PROGRAM)_atmega644_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega644: atmega644/$(AVR_FREQ)/$(PROGRAM)_atmega644_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-atmega644a: atmega644
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega640: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -873,17 +733,12 @@ atmega644a: bootloaders/atmega644a/$(AVR_FREQ)/$(PROGRAM)_atmega644a_UART$(UART)
 endif
 endif
 atmega644: atmega644a
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega644P/PA
 atmega644p: TARGET = atmega644p
 atmega644p: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega644p: maketargetdir
 atmega644p: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
-<<<<<<< HEAD
-atmega644p: atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega644p: atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -896,7 +751,6 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega644pa: atmega644p
 
 #ATmega649
@@ -904,10 +758,6 @@ atmega649: TARGET = atmega649
 atmega649: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega649: maketargetdir
 atmega649: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
-<<<<<<< HEAD
-atmega649: atmega649/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega649: atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega649: bootloaders/atmega649/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -920,17 +770,12 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega649: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega649P
 atmega649p: TARGET = atmega649p
 atmega649p: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega649p: maketargetdir
 atmega649p: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
-<<<<<<< HEAD
-atmega649p: atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega649p: atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -943,17 +788,12 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega1280
 atmega1280: TARGET = atmega1280
 atmega1280: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega1280: maketargetdir
 atmega1280: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
-<<<<<<< HEAD
-atmega1280: atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega1280: atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -966,17 +806,12 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega1281
 atmega1281: TARGET = atmega1281
 atmega1281: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega1281: maketargetdir
 atmega1281: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
-<<<<<<< HEAD
-atmega1281: atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega1281: atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -989,17 +824,12 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega1284
 atmega1284: TARGET = atmega1284
 atmega1284: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega1284: maketargetdir
 atmega1284: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
-<<<<<<< HEAD
-atmega1284: atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega1284: atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -1012,17 +842,12 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega1284P
 atmega1284p: TARGET = atmega1284p
 atmega1284p: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega1284p: maketargetdir
 atmega1284p: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
-<<<<<<< HEAD
-atmega1284p: atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega1284p: atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -1035,17 +860,12 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega2560
 atmega2560: TARGET = atmega2560
 atmega2560: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega2560: maketargetdir
 atmega2560: LDSECTIONS = -Wl,--section-start=.text=0x3fc00 -Wl,--section-start=.version=0x3fffe
-<<<<<<< HEAD
-atmega2560: atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega2560: atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -1058,17 +878,12 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega2561
 atmega2561: TARGET = atmega2561
 atmega2561: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega2561: maketargetdir
 atmega2561: LDSECTIONS = -Wl,--section-start=.text=0x3fc00 -Wl,--section-start=.version=0x3fffe
-<<<<<<< HEAD
-atmega2561: atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega2561: atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -1081,7 +896,6 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega3290
 atmega3290: TARGET = atmega3290
@@ -1096,16 +910,11 @@ atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)
 endif
 else
 atmega3290: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega3290: atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega3290: atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega3290P/PA
 atmega3290p: TARGET = atmega3290p
@@ -1120,16 +929,11 @@ atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UA
 endif
 else
 atmega3290p: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-<<<<<<< HEAD
-atmega3290p: atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega3290p: atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 atmega3290pa: atmega3290p
 
 #ATmega6490
@@ -1137,10 +941,6 @@ atmega6490: TARGET = atmega6490
 atmega6490: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega6490: maketargetdir
 atmega6490: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
-<<<<<<< HEAD
-atmega6490: atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega6490: atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -1153,17 +953,12 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega6490P
 atmega6490p: TARGET = atmega6490p
 atmega6490p: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
 atmega6490p: maketargetdir
 atmega6490p: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
-<<<<<<< HEAD
-atmega6490p: atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega6490p: atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(BIGBOOT) $(SUPPORT_EEPROM))) 
 atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_eeprom_support.hex
@@ -1176,7 +971,6 @@ ifeq ($(ASM_OUTPUT), 1)
 atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega8515
 atmega8515: TARGET = atmega8515
@@ -1191,16 +985,11 @@ atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)
 endif
 else
 atmega8515: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe
-<<<<<<< HEAD
-atmega8515: atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega8515: atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-=======
 atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 #ATmega8535
 atmega8535: TARGET = atmega8535
@@ -1215,17 +1004,11 @@ atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)
 endif
 else
 atmega8535: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe
-<<<<<<< HEAD
-atmega8535: atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
-atmega8535: atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
-
-=======
 atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
 ifeq ($(ASM_OUTPUT), 1)
 atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
 endif
 endif
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 
 
@@ -1243,12 +1026,6 @@ baudcheck: FORCE
 	- @echo "\x1B[1m\x1B[4m"
 	- @$(CC) $(CFLAGS) -E baudcheck.c -o baudcheck.tmp.sh
 	- @$(SH) baudcheck.tmp.sh
-<<<<<<< HEAD
-
-%.elf: $(OBJ) baudcheck $(dummy)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)
-	$(SIZE) $@
-=======
 	- @echo "\x1B[0m"
 
 %.elf: $(OBJ) baudcheck $(dummy) 
@@ -1262,11 +1039,7 @@ maketargetdir:
 else
 maketargetdir:
 	mkdir -p bootloaders/$(TARGET)/$(AVR_FREQ)
-<<<<<<< HEAD
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
-=======
 endif	
->>>>>>> 0a0acd72ed62440f50d49deaf15ad1064cb780d0
 
 clean_all:	
 	find . -name "*.o" -exec rm {} \;
@@ -1280,12 +1053,6 @@ clean_all:
 	find . -name "*.tmp.sh" -exec rm {} \;
 	find . -name "*.hex" -exec rm {} \;
 	find . -name "*.lst" -exec rm {} \;
-<<<<<<< HEAD
-
-clean_asm: 
-	find . -name "*.lst" -exec rm {} \;
-	rm -rf baudcheck.tmp.sh
-=======
 
 clean_lst: 
 	find . -name "*.lst" -exec rm {} \;
@@ -1294,7 +1061,6 @@ clean_lst:
 gcc_version:
 	- @echo -n avr-gcc\ 
 	- @$(CC) -dumpversion
->>>>>>> 59d5f3d7f2e4d89056abad581afc3335cc4d055f
 
 %.lst: %.elf
 	$(OBJDUMP) -h -S $< > $@
