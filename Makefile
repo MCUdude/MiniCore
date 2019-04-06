@@ -113,11 +113,19 @@ SIZE           = $(GCCROOT)avr-size
 # appropriate parameters ("-DLED_START_FLASHES=10") to gcc
 #
 
+ifndef AVR_FREQ
+$(info )
+$(info Error AVR_FREQ not specified!)
+MISSING_PARAMETERS=TRUE
+endif
+
 ifdef BAUD_RATE
 BAUD_RATE_CMD = -DBAUD_RATE=$(BAUD_RATE)
 dummy = FORCE
 else
-BAUD_RATE_CMD = -DBAUD_RATE=115200
+$(info )
+$(info Error BAUD_RATE not specified!)
+MISSING_PARAMETERS=TRUE
 endif
 
 ifdef LED_START_FLASHES
@@ -182,6 +190,15 @@ endif
 # dummy = FORCE
 # endif
 #
+
+# Output decent error message if mandatory parameters are missing
+ifeq ($(MISSING_PARAMETERS),TRUE)
+$(info Command should look like this:)
+$(info make atmega328p AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2 UART=0)
+$(info Where only the last three parameters are optional.)
+$(info )
+$(error )
+endif
 
 #.PRECIOUS: %.elf
 
