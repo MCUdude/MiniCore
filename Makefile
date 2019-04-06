@@ -1,8 +1,11 @@
-# Makefile for Majek's Optiboot fork
-# https://github.com/majekw/optiboot
+# Makefile for MCUdude's Optiboot fork
+# https://github.com/MCUdude/optiboot_flash
 #
 
 # Edit History
+# 201903xx: MCUdude: Add updated automatic OS detection and tool path selection.
+#                    Makeall script can now be executed through this makefile
+#
 # 201701xx: MCUdude: Small layout changes to make it look like the other makefile	
 # 
 # 201406xx: WestfW: More Makefile restructuring.
@@ -10,6 +13,7 @@
 #                   So that in theory, the main Makefile contains only the
 #                   official platforms, and does not need to be modified to
 #                   add "less supported" chips and boards.
+#
 # 201303xx: WestfW: Major Makefile restructuring.
 #                   Allows options on Make command line "make xx LED=B3"
 #                   (see also pin_defs.h)
@@ -17,8 +21,8 @@
 #                   Most boards are (recursive) board targets with options.
 #                   Move isp target to separate makefile (fixes m8 EFUSE)
 #                   Some (many) targets will now be rebuilt when not
-#                     strictly necessary, so that options will be included.
-#                     (any "make" with options will always compile.)
+#                   strictly necessary, so that options will be included.
+#                   (any "make" with options will always compile.)
 #                   Set many variables with ?= so they can be overridden
 #                   Use arduinoISP settings as default for ISP targets
 #
@@ -28,73 +32,56 @@
 # * See optiboot.c for details.
 
 #----------------------------------------------------------------------
-#
+
+
 # program name should not be changed...
 PROGRAM = optiboot_flash
 
-# The default behavior is to build using tools that are in the users
-# current path variables, but we can also build using an installed
-# Arduino user IDE setup, or the Arduino source tree.
-# Uncomment this next lines to build within the arduino environment,
-# using the arduino-included avrgcc toolset (mac and pc)
-# ENV ?= arduino
-# ENV ?= arduinodev
-# OS ?= macosx
-# OS ?= windows
-
-# export symbols to recursive makes (for ISP)
-export
-
 # Build environments
-# Start of some ugly makefile-isms to allow optiboot to be built
-# in several different environments.  See the README.TXT file for
-# details.
+# Start of some makefile-isms to allow optiboot
+# to be built in several different environments.
 
-# default
+# Default
 fixpath = $(1)
 SH := bash
 
-ifeq ($(ENV), arduino)
-# For Arduino, we assume that we're connected to the optiboot directory
-# included with the arduino distribution, which means that the full set
-# of avr-tools are "right up there" in standard places.
-# (except that in 1.5.x, there's an additional level of "up")
-TESTDIR := $(firstword $(wildcard ../../../tools/*))
-ifeq (,$(TESTDIR))
-# Arduino 1.5.x tool location compared to optiboot dir
-  TOOLROOT = ../../../../tools
+# Uncomment this line to set a custom tool path 
+# This directory should contain a folder bin, which again contains avr-gcc
+# Leave the path empty (but keep the "" 's) to use pre-installed avr build tools (Crosspack AVR etc.)
+#CUSTOM_TOOLROOT = "~/Library/Arduino15/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2"
+
+# Set default tool path based on OS if custom toolpath isn't specified
+ifeq ($(OS),Windows_NT)
+	# On windows, SOME of the tool paths will need to have backslashes instead
+	# of forward slashes (because they use windows cmd.exe for execution instead
+	# of a unix/mingw shell?)  We also have to ensure that a consistent shell
+	# is used even if a unix shell is installed (ie as part of WINAVR)
+	TOOLROOT = /some/windows/path
+	fixpath = $(subst /,\,$1)
+	SHELL = cmd.exe
+	SH = sh
 else
-# Arduino 1.0 (and earlier) tool location
-  TOOLROOT = ../../../tools
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Darwin)
+		TOOLROOT = /Applications/Arduino.app/Contents/Java/hardware/tools/avr
+	endif
+	ifeq ($(UNAME_S),Linux)
+	  # Replace ArduinoInstallPath with the actual path
+		TOOLROOT = ArduinoInstallPath/hardware/tools/avr
+	endif
 endif
-GCCROOT = $(TOOLROOT)/avr/bin/
-
-ifeq ($(OS), windows)
-# On windows, SOME of the tool paths will need to have backslashes instead
-# of forward slashes (because they use windows cmd.exe for execution instead
-# of a unix/mingw shell?)  We also have to ensure that a consistent shell
-# is used even if a unix shell is installed (ie as part of WINAVR)
-fixpath = $(subst /,\,$1)
-SHELL = cmd.exe
-SH = sh
-endif
-
-else ifeq ($(ENV), arduinodev)
-# Arduino IDE source code environment.  Use the unpacked compilers created
-# by the build (you'll need to do "ant build" first.)
-ifeq ($(OS), macosx)
-TOOLROOT = /Applications/Arduino.app/Contents/Java/hardware/tools
-endif
-ifeq ($(OS), windows)
-TOOLROOT = ../../../../build/windows/work/hardware/tools
+	
+# Set custom toolpath if specified
+ifdef CUSTOM_TOOLROOT
+	TOOLROOT = $(CUSTOM_TOOLROOT)
 endif
 
-GCCROOT = $(TOOLROOT)/avr/bin/
-AVRDUDE_CONF = -C$(TOOLROOT)/avr/etc/avrdude.conf
+# Use TOOLROOT to generate GCCROOT
+GCCROOT = $(TOOLROOT)/bin/
 
-else
-GCCROOT =
-AVRDUDE_CONF =
+# Make GCCROOT empty if no custom path is specified
+ifeq ($(CUSTOM_TOOLROOT),"")
+	GCCROOT =
 endif
 
 # End of build environment code.
@@ -102,17 +89,15 @@ endif
 
 
 OBJ        = $(PROGRAM).o
-OPTIMIZE = -Os -fno-split-wide-types -mrelax
+OPTIMIZE   = -Os -fno-split-wide-types -mrelax
 
 # This _is_ infact a custom version of Optiboot!
 DEFS       = -DOPTIBOOT_CUSTOMVER=1
 
-
-#CC         =  $(GCCROOT)avr-gcc
-CC         = ~/Library/Arduino15/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2/bin/avr-gcc
+# avr-gcc path
+CC         =  $(GCCROOT)avr-gcc
 
 # Override is only needed by avr-lib build system.
-
 override CFLAGS        = -g -Wall $(OPTIMIZE) -mmcu=$(TARGET) -DF_CPU=$(AVR_FREQ) $(DEFS)
 override LDFLAGS       = $(LDSECTIONS) -Wl,--relax -nostartfiles
 #-Wl,--gc-sections
@@ -199,6 +184,18 @@ endif
 #
 
 #.PRECIOUS: %.elf
+
+# Run build script if this makefile is executed without parameters
+ifeq ($(OS),Windows_NT)
+all:
+	@echo ERROR
+	@echo This makefile is trying to execute the makeall build script.
+	@echo Windows CMD.exe does not support Unix shell scripts.
+	@echo You need a Unix environment to run makeall.
+else
+all:
+	./makeall
+endif
 
 #-------------------------------------------------------------------------------------------------------
 # "Chip-level Platform" targets.
@@ -1035,9 +1032,14 @@ baudcheck: FORCE
 	- $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)
 	- @echo
 	- $(SIZE) $@
-	
+
+ifeq ($(OS),Windows_NT)
+maketargetdir:
+	if not exist "bootloaders\$(TARGET)\$(AVR_FREQ)" mkdir bootloaders\$(TARGET)\$(AVR_FREQ)
+else
 maketargetdir:
 	mkdir -p bootloaders/$(TARGET)/$(AVR_FREQ)
+endif	
 
 clean_all:	
 	find . -name "*.o" -exec rm {} \;
