@@ -1,8 +1,6 @@
 # Optiboot flash
-Optiboot flash is an easy to install bootloader for the Arduino environment.
-  
-All hex files in this repository are build with `avr-gcc 5.4.0-atmel3.6.1-arduino2`on MacOS.  
-This toolchain version ships with Arduino AVR boards version 1.6.206, which can be found in the Arduino boards manager menu.
+Optiboot flash is an easy to install bootloader for the Arduino environment. 
+This repository contains a total of 5168 precompiled hex built for 42 different targets with 14 diffrent clock frequencies to choose from.
 
 
 ### Key features:
@@ -31,6 +29,7 @@ This repository contains a bunch of precompiled hex file with a variety of clock
 
 |             | 1000000 | 500000 | 250000 | 230400 | 115200 | 57600 | 38400 | 19200 | 9600 |
 |-------------|---------|--------|--------|--------|--------|-------|-------|-------|------|
+| 24 MHz      |  X      |  X     |  X     |  X     |  X     |  X    |  X    |  X    |      |
 | 20 MHz      |         |  X     |  X     |        |  X     |       |       |  X    |      |
 | 18.4320 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   |
 | 16 MHz      |  X      |  X     |  X     |        |  X     |       |  X    |  X    |  X   |
@@ -58,10 +57,13 @@ The table below shows the available serial ports for the corresponding microcont
 
 
 ## Building from source
-You need to install `make`, `avr-libc`, `avr-binutils` and `avr-gcc`. [This guide](http://maxembedded.com/2015/06/setting-up-avr-gcc-toolchain-on-linux-and-mac-os-x/) contains everything you need for MacOS and Linux.
+You need to have `make` installed. You also need `avr-libc`, `avr-binutils` and `avr-gcc`. Alternatively you can install Arduino IDE, which comes with all these packages except `make`.
+Install Arduino IDE 1.8.9 or newer to be able to build for the new ATmega324PB and ATmega328PB.
 
-To build bootloaders for all supported devices, simply run `$ ./makeall`.
+To execute the build script you can either cd into the optiboot_flash folder and run `make`, or you can execute the script directly by running `./makeall`.  
+If you just want to build a single file for a single target you can instead execute a make command formatted like this:
 
+`make atmega8 AVR_FREQ=16000000L BAUD_RATE=115200 LED=B5 LED_START_FLASHES=2 UART=0`
 
 ## Acknowledgements
 
