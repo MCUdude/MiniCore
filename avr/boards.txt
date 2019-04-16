@@ -508,7 +508,7 @@ menu.bootloader=Bootloader
 8.menu.clock.16MHz_external=16 MHz external
 8.menu.clock.16MHz_external.upload.speed=115200
 8.menu.clock.16MHz_external.bootloader.sut_cksel_bits=111111
-8.menu.clock.20MHz_external.bootloader.ckopt_bit=0
+8.menu.clock.16MHz_external.bootloader.ckopt_bit=0
 8.menu.clock.16MHz_external.build.f_cpu=16000000L
 
 8.menu.clock.20MHz_external=20 MHz external
