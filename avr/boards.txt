@@ -88,13 +88,13 @@ menu.bootloader=Bootloader
 328.menu.variant.modelPB.build.mcu=atmega328pb
 
 # Brown out detection
-328.menu.BOD.2v7=2.7v
+328.menu.BOD.2v7=BOD 2.7V
 328.menu.BOD.2v7.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}101
-328.menu.BOD.4v3=4.3v
+328.menu.BOD.4v3=BOD 4.3V
 328.menu.BOD.4v3.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}100
-328.menu.BOD.1v8=1.8v
+328.menu.BOD.1v8=BOD 1.8V
 328.menu.BOD.1v8.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}110
-328.menu.BOD.disabled=Disabled
+328.menu.BOD.disabled=BOD  disabled
 328.menu.BOD.disabled.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}111
 
 # Compiler link time optimization
