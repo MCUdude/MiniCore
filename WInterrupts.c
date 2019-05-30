@@ -73,8 +73,9 @@ void attachInterrupt(uint8_t interruptNum, void (*userFunc)(void), int mode)
     // Enable interrupt        
     switch(interruptNum) 
     {
-// ATmega64, ATmega128, ATmega1281, ATmega2561
-      #if defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__) || defined(__AVR_ATmega1281__) || defined(__AVR_ATmega2561__)    
+// ATmega64, ATmega128, ATmega1281, ATmega2561, AT90CAN32, AT90CAN64, AT90CAN128
+      #if defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__) || defined(__AVR_ATmega1281__) || defined(__AVR_ATmega2561__) \
+        || defined(__AVR_AT90CAN32__) || defined(__AVR_AT90CAN64__) || defined(__AVR_AT90CAN128__)
         case 0:
           EICRA = (EICRA & ~((1 << ISC00) | (1 << ISC01))) | (mode << ISC00);
           EIMSK |= (1 << INT0);
@@ -190,8 +191,12 @@ void attachInterrupt(uint8_t interruptNum, void (*userFunc)(void), int mode)
           GICR |= (1 << INT1);
           break;
         case 2:
-          #if defined(INT2) // Will exclude ATmega8, since it doesn't have INT2
-          MCUCSR = (MCUCSR & ~((1 << ISC2))) | ((mode & 0x01) << ISC2);
+          #if defined(INT2) 
+          #if defined(EMCUCR) 
+          EMCUCR = (EMCUCR & ~((1 << ISC2))) | ((mode & 0x01) << ISC2); // ATmega8515/162
+          #else
+          MCUCSR = (MCUCSR & ~((1 << ISC2))) | ((mode & 0x01) << ISC2); // ATmega8535/16/32
+          #endif
           GICR |= (1 << INT2);          
           #endif
           break; 
@@ -199,7 +204,7 @@ void attachInterrupt(uint8_t interruptNum, void (*userFunc)(void), int mode)
 // ATmega164A/P, ATmega324A/P/PA, ATmega644/P, ATmega1284/P      
       #elif defined(__AVR_ATmega164A__) || defined(__AVR_ATmega164P__) || defined(__AVR_ATmega324A__) \
       || defined(__AVR_ATmega324P__) || defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega324PB__) \
-      || defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__) || defined(__AVR_ATmega1284__) \
+      || defined(__AVR_ATmega644A__) || defined(__AVR_ATmega644P__) || defined(__AVR_ATmega1284__) \
       || defined(__AVR_ATmega1284P__)
         case 0:
           EICRA = (EICRA & ~((1 << ISC00) | (1 << ISC01))) | (mode << ISC00);
@@ -376,8 +381,9 @@ void detachInterrupt(uint8_t interruptNum)
     intFunc[interrupt](); \
   }
 
-// ATmega64, ATmega128, ATmega1281, ATmega2561
-#if defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__) || defined(__AVR_ATmega1281__) || defined(__AVR_ATmega2561__)
+// ATmega64, ATmega128, ATmega1281, ATmega2561, AT90CAN32, AT90CAN64, AT90CAN128
+#if defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__) || defined(__AVR_ATmega1281__) || defined(__AVR_ATmega2561__) \
+ || defined(__AVR_AT90CAN32__) || defined(__AVR_AT90CAN64__) || defined(__AVR_AT90CAN128__)
   IMPLEMENT_ISR(INT0_vect, EXTERNAL_INT_0)
   IMPLEMENT_ISR(INT1_vect, EXTERNAL_INT_1)
   IMPLEMENT_ISR(INT2_vect, EXTERNAL_INT_2)

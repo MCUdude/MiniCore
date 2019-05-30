@@ -94,7 +94,7 @@ void yield(void);
 
 // ATmega164A/P, ATmega324A/P/PA, ATmega644/P, ATmega1284/P
 #elif defined(__AVR_ATmega164A__) || defined(__AVR_ATmega164P__) || defined(__AVR_ATmega324A__) \
-|| defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega324P__) || defined(__AVR_ATmega644__)  \
+|| defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega324P__) || defined(__AVR_ATmega644A__)  \
 || defined(__AVR_ATmega644P__)  || defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__)   
   #define EXTERNAL 0
   #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin

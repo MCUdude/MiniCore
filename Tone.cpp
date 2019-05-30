@@ -52,6 +52,9 @@ Version Modified By Date     Comments
   #define OCIE2A OCIE2
   #define TIMER2_COMPA_vect TIMER2_COMP_vect
   #define TIMSK1 TIMSK
+#elif defined(__AVR_AT90CAN32__) || defined(__AVR_AT90CAN64__) || defined(__AVR_AT90CAN128__)
+  #define TCCR2B TCCR2A
+  #define TIMER2_COMPA_vect TIMER2_COMP_vect
 #endif
 
 // timerx_toggle_count:
