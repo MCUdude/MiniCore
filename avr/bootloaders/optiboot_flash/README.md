@@ -1,6 +1,6 @@
 # Optiboot flash
 Optiboot flash is an easy to install bootloader for the Arduino environment. 
-This repository contains a total of 5168 precompiled hex built for 42 different targets with 14 diffrent clock frequencies to choose from.
+This repository contains a total of 5928 precompiled hex files built for 49 different targets with 14 different clock frequencies and 9 different baud rates to choose from.
 
 
 ### Key features:
@@ -14,43 +14,46 @@ This repository contains a total of 5168 precompiled hex built for 42 different 
 ## Supported devices
 * [ATmega640, ATmega1280, ATmega2560](https://github.com/MCUdude/MegaCore)
 * [ATmega64, ATmega128, ATmega1281, ATmega2561](https://github.com/MCUdude/MegaCore)
+* [AT90CAN32, AT90CAN64, AT90CAN128](https://github.com/MCUdude/MegaCore)
 * [ATmega8535, ATmega16, ATmega32, ATmega164A/P, ATmega324A/P/PA/PB, ATmega644/P, ATmega1284/P](https://github.com/MCUdude/MightyCore)
 * [ATmega8515, ATmega162](https://github.com/MCUdude/MajorCore)
 * [ATmega8, ATmega88/P/PB, ATmega168/P/PB, ATmega328/P/PB](https://github.com/MCUdude/MiniCore)
 * [ATmega169/P, ATmega329/P, ATmega649/P](https://github.com/MCUdude/ButterflyCore)
+* ATmega325, ATmega645,
+* ATmega3250, ATmega6450
 * ATmega3290/P, ATmega6490/P
 
 
 ## Precompiled binaries
 This repository contains a bunch of precompiled hex file with a variety of clock frequencies and baud rates:
 
-|             | 1000000 | 500000 | 250000 | 230400 | 115200 | 57600 | 38400 | 19200 | 9600 |
-|-------------|---------|--------|--------|--------|--------|-------|-------|-------|------|
-| 24 MHz      |  X      |  X     |  X     |  X     |  X     |  X    |  X    |  X    |      |
-| 20 MHz      |         |  X     |  X     |        |  X     |       |       |  X    |      |
-| 18.4320 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   |
-| 16 MHz      |  X      |  X     |  X     |        |  X     |       |  X    |  X    |  X   |
-| 14.7456 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | 
-| 12 MHz      |         |  X     |  X     |        |        |  X    |       |  X    |  X   |
-| 11.0592 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | 
-| 8 MHz       |  X      |  X     |  X     |        |  X     |  X    |  X    |  X    |  X   |
-| 7.3728 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | 
-| 4 MHz       |         |  X     |  X     |        |        |       |       |  X    |  X   |
-| 3.6864 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | 
-| 2 MHz       |         |        |  X     |        |        |       |       |  X    |  X   |
-| 1.8432 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | 
-| 1 MHz       |         |        |        |        |        |       |       |       |  X   | 
+|             | 1000000 | 500000 | 460800 | 250000 | 230400 | 115200 | 57600 | 38400 | 19200 | 9600 |
+|-------------|---------|--------|--------|--------|--------|--------|-------|-------|-------|------|
+| 24 MHz      |  X      |  X     |        |  X     |  X     |  X     |  X    |  X    |  X    |      |
+| 20 MHz      |         |  X     |        |  X     |        |  X     |       |       |  X    |      |
+| 18.4320 MHz |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   |
+| 16 MHz      |  X      |  X     |        |  X     |        |  X     |       |  X    |  X    |  X   |
+| 14.7456 MHz |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   | 
+| 12 MHz      |         |  X     |        |  X     |        |        |  X    |       |  X    |  X   |
+| 11.0592 MHz |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   | 
+| 8 MHz       |  X      |  X     |        |  X     |        |  X     |  X    |  X    |  X    |  X   |
+| 7.3728 MHz  |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   | 
+| 4 MHz       |         |  X     |        |  X     |        |        |       |       |  X    |  X   |
+| 3.6864 MHz  |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   | 
+| 2 MHz       |         |        |        |  X     |        |        |       |       |  X    |  X   |
+| 1.8432 MHz  |         |        |        |        |  X     |  X     |  X    |  X    |  X    |  X   | 
+| 1 MHz       |         |        |        |        |        |        |       |       |       |  X   | 
 
 
 ## Using different UARTs
 The table below shows the available serial ports for the corresponding microcontroller. This repository contains precompiled hex files if you want to use other serial ports than UART0.
 
-|                                                                                                           | UART0 | UART1 | UART2 | UART3 |
-|-----------------------------------------------------------------------------------------------------------|-------|-------|-------|-------|
-| ATmega8/88/168/328 <br/> ATmega8515 <br/> ATmega8535/16/32  <br/> ATmega169/329/649  <br/>ATmega3290/6490 | X     |       |       |       |
-| ATmega162 <br/> ATmega328PB <br/> ATmega164/324/644/1284 <br/> ATmega64/128 <br/> ATmega1281/2561         | X     | X     |       |       |
-| ATmega324PB                                                                                               | X     | X     | X     |       |
-| ATmega640/1280/2560                                                                                       | X     | X     | X     | X     |
+|                                                                                                                                                    | UART0 | UART1 | UART2 | UART3 |
+|----------------------------------------------------------------------------------------------------------------------------------------------------|-------|-------|-------|-------|
+| ATmega8/88/168/328 <br/> ATmega8515 <br/> ATmega8535/16/32 <br/> ATmega169/329/649 <br/> ATmega325/645 <br/> ATmega3250/6450 <br/> ATmega3290/6490 | X     |       |       |       |
+| ATmega162 <br/> ATmega328PB <br/> ATmega164/324/644/1284 <br/> ATmega64/128 <br/> AT90CAN32/64/128 <br/> ATmega1281/2561                           | X     | X     |       |       |
+| ATmega324PB                                                                                                                                        | X     | X     | X     |       |
+| ATmega640/1280/2560                                                                                                                                | X     | X     | X     | X     |
 
 
 ## Building from source

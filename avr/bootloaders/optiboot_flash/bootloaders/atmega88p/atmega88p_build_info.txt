@@ -82,3 +82,16 @@ F_CPU:		UART NUMBER:	LED PIN:	LED FLASHES:	DESIRED BAUD:	ACTUAL BAUD:	ERROR:	COM
 1000000L	UART0		B5		2		9600		9615		0.1%	460 bytes	optiboot_flash_atmega88p_UART0_9600_1000000L.hex
 
 
+Optiboot_flash build output for atmega88p 
+https://github.com/MCUdude/optiboot_flash 
+Build date and time: 18.05.2019 20:26 
+Compiler: avr-gcc 5.4.0
+ 
+F_CPU:		UART NUMBER:	LED PIN:	LED FLASHES:	EEPROM SUPPORT:	FLASH PG COPY:	DESIRED BAUD:	ACTUAL BAUD:	ERROR:	COMPILED SIZE:	OUTPUT FILE:
+18432000L	UART0		B5		2		No		No		460800		460800		0.0%	460 bytes	optiboot_flash_atmega88p_UART0_460800_18432000L.hex
+14745600L	UART0		B5		2		No		No		460800		460800		0.0%	460 bytes	optiboot_flash_atmega88p_UART0_460800_14745600L.hex
+11059200L	UART0		B5		2		No		No		460800		460800		0.0%	458 bytes	optiboot_flash_atmega88p_UART0_460800_11059200L.hex
+7372800L	UART0		B5		2		No		No		460800		460800		0.0%	460 bytes	optiboot_flash_atmega88p_UART0_460800_7372800L.hex
+3686400L	UART0		B5		2		No		No		460800		460800		0.0%	458 bytes	optiboot_flash_atmega88p_UART0_460800_3686400L.hex
+
+
