@@ -61,6 +61,14 @@
 #define TIFR1   TIFR
 #define WDTCSR  WDTCR
 
+#ifndef MCUSR
+#define MCUSR MCUCSR
+#endif
+
+#ifndef SPMCR
+#define SPMCR SPMCSR
+#endif
+
 /* Ports for soft UART */
 #ifdef SOFT_UART
 #define UART_PORT   PORTD
@@ -92,6 +100,15 @@
 #define FE0     FE
 #define TIFR1   TIFR
 #define WDTCSR  WDTCR
+
+#ifndef MCUSR
+#define MCUSR MCUCSR
+#endif
+
+#ifndef SPMCR
+#define SPMCR SPMCSR
+#endif
+
 #endif
 #if defined(__AVR_ATmega16__) || defined(__AVR_ATmega32__)
 #define WDCE        WDTOE
@@ -218,8 +235,13 @@
 
 #define TIFR1 TIFR
 #define WDTCSR WDTCR
-//#define MCUSR MCUCSR
-//#define SPMCR SPMCSR
+
+// MCUSR is flagged as poisoned in iom128.h
+#if !defined(__AVR_ATmega128__)
+#ifndef MCUSR
+#define MCUSR MCUCSR
+#endif
+#endif
 
 /* Ports for soft UART */
 #ifdef SOFT_UART
@@ -233,11 +255,36 @@
 
 
 /*------------------------------------------------------------------------ */
-#if defined(__AVR_ATmega640__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+#if defined(__AVR_AT90CAN32__) || defined(__AVR_AT90CAN64__) || defined(__AVR_AT90CAN128__)
 /*------------------------------------------------------------------------ */
 #if !defined(LED)
-#define LED         B7
+#define LED         B5
 #endif
+
+#define WDTCSR WDTCR
+#define SPMCR SPMCSR
+
+/* Ports for soft UART */
+#ifdef SOFT_UART
+#define UART_PORT   PORTE
+#define UART_PIN    PINE
+#define UART_DDR    DDRE
+#define UART_TX_BIT 1
+#define UART_RX_BIT 0
+#endif
+#endif
+
+
+/*------------------------------------------------------------------------ */
+#if defined(__AVR_ATmega325__) || defined(__AVR_ATmega645__) \
+|| defined(__AVR_ATmega3250__) || defined(__AVR_ATmega6450__)
+/*------------------------------------------------------------------------ */
+#if !defined(LED)
+#define LED         B5
+#endif
+
+#define WDTCSR WDTCR
+#define SPMCR SPMCSR
 
 /* Ports for soft UART */
 #ifdef SOFT_UART

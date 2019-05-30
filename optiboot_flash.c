@@ -30,31 +30,8 @@
 /*   Arduino flash settings                               */
 /*                                                        */
 /*                                                        */
-/* Supported microcontrollers:                           */
-/*   ATmega2560                                           */
-/*   ATmega1280                                           */
-/*   ATmega640                                            */
-/*                                                        */
-/*   ATmega2561                                           */
-/*   ATmega1281                                           */
-/*   ATmega128/A                                          */
-/*   ATmega64/A                                           */
-/*                                                        */
-/*   ATmega1284/P                                         */
-/*   ATmega644/P/PA                                       */
-/*   ATmega324A/P/PA/PB                                   */
-/*   ATmega164A/P/PA                                      */
-/*   ATmega32/A                                           */
-/*   ATmega16/A                                           */
-/*   ATmega8535                                           */
-/*                                                        */
-/*   ATmega162                                            */
-/*   ATmega8515                                           */
-/*                                                        */
-/*   ATmega328/P/PA/PB                                    */
-/*   ATmega168/P/PA/PB                                    */
-/*   ATmega88/P/PA/PB                                     */
-/*   ATmega8/A                                            */
+/* Supported microcontrollers:                            */
+/* See https://github.com/MCUdude/optiboot_flash          */
 /*                                                        */                                                      
 /* Assumptions:                                           */
 /*   The code makes several assumptions that reduce the   */
@@ -106,9 +83,6 @@
 /*                                                        */
 /**********************************************************/
 /*                                                        */
-/* BIGBOOT:                                               */
-/* Build a 1k bootloader, not 512 bytes. This turns on    */
-/* extra functionality.                                   */
 /*                                                        */
 /* BAUD_RATE:                                             */
 /* Set bootloader baud rate.                              */
@@ -123,17 +97,21 @@
 /* Flash LED when transferring data. For boards without   */
 /* TX or RX LEDs, or for people who like blinky lights.   */
 /*                                                        */
-/* SUPPORT_EEPROM:                                        */
-/* Support reading and writing from EEPROM. This is not   */
-/* used by Arduino, so off by default.                    */
+/* UART:                                                  */
+/* UART number (0..n) for devices with more than          */
+/* one hardware uart (644P, 1284P, etc)                   */
 /*                                                        */
 /* TIMEOUT_MS:                                            */
 /* Bootloader timeout period, in milliseconds.            */
 /* 500,1000,2000,4000,8000 supported.                     */
 /*                                                        */
-/* UART:                                                  */
-/* UART number (0..n) for devices with more than          */
-/* one hardware uart (644P, 1284P, etc)                   */
+/* SUPPORT_EEPROM:                                        */
+/* Support reading and writing from EEPROM. This is not   */
+/* used by Arduino, so off by default.                    */
+/*                                                        */
+/* COPY_FLASH_PAGES:                                      */
+/* Adds function to copy flash pages. The function is     */
+/* intended to be called by the application.              */
 /*                                                        */
 /**********************************************************/
 
@@ -161,7 +139,7 @@
 /* Edit History:                                          */
 /*                                                        */
 /* July 2018                                              */
-/* 7.0	WestfW (with much input from others)              */
+/* 7.0  WestfW (with much input from others)              */
 /*    Fix MCUSR treatement as per much discussion,        */
 /*    Patches by MarkG55, majekw.                         */ 
 /*    Preserve value for the application,                 */
@@ -483,6 +461,9 @@ void pre_main(void) {
   asm volatile (
     " rjmp 1f\n"
     " rjmp do_spm\n"
+#ifdef COPY_FLASH_PAGES_FNC
+    " rjmp copy_flash_pages\n"
+#endif
     "1:\n"
   );
 }
@@ -511,9 +492,10 @@ int main(void) {
   // If not, uncomment the following instructions:
   // cli();
   asm volatile ("clr __zero_reg__");
-#if defined(__AVR_ATmega8__) || defined(__AVR_ATmega8515__) || defined(__AVR_ATmega8535__) \
-|| defined (__AVR_ATmega16__) || defined (__AVR_ATmega32__) || defined (__AVR_ATmega64__)  \
-|| defined (__AVR_ATmega128__) || defined (__AVR_ATmega162__)
+#if defined(__AVR_ATmega8__) || defined(__AVR_ATmega8515__) || defined(__AVR_ATmega8535__)   \
+|| defined (__AVR_ATmega16__) || defined (__AVR_ATmega32__) || defined (__AVR_ATmega64__)    \
+|| defined (__AVR_ATmega128__) || defined (__AVR_ATmega162__) || defined (__AVR_AT90CAN32__) \
+|| defined (__AVR_AT90CAN64__) || defined (__AVR_AT90CAN128__)
   SP=RAMEND;  // This is done by hardware reset
 #endif
 
@@ -525,13 +507,13 @@ int main(void) {
    * see discusion in https://github.com/Optiboot/optiboot/issues/97
    */
    
-// Fix missing definitions in avr-libc   
-#if defined(__AVR_ATmega8515__) || defined(__AVR_ATmega8535__) || defined(__AVR_ATmega16__) \
-|| defined(__AVR_ATmega162__) || defined (__AVR_ATmega128__)
-  ch = MCUCSR;
+// Fix ATmega128 avr-libc bug
+#if defined(__AVR_ATmega128__)
+	ch = MCUCSR;
 #else
-  ch = MCUSR;
+	ch = MCUSR;
 #endif
+
   // Skip all logic and run bootloader if MCUSR is cleared (application request)
   if (ch != 0) {
     /*
@@ -554,44 +536,43 @@ int main(void) {
          * '&' operation is skipped to spare few bytes as bits in MCUSR
          * can only be cleared.
          */
-         
-// Fix missing definitions in avr-libc         
-#if defined(__AVR_ATmega8515__) || defined(__AVR_ATmega8535__) || defined(__AVR_ATmega16__) \
-|| defined(__AVR_ATmega162__) || defined(__AVR_ATmega128__)
-        MCUCSR = ~(_BV(WDRF));  
+
+// Fix ATmega128 avr-libc bug
+#if defined(__AVR_ATmega128__)
+	      MCUCSR = ~(_BV(WDRF));  
 #else
-        MCUSR = ~(_BV(WDRF));  
-#endif
+	      MCUSR = ~(_BV(WDRF));  
+#endif 
       }
       /* 
- 	     * save the reset flags in the designated register
- 	     * This can be saved in a main program by putting code in .init0 (which
- 	     * executes before normal c init code) to save R2 to a global variable.
- 	     */
- 	    __asm__ __volatile__ ("mov r2, %0\n" :: "r" (ch));
+       * save the reset flags in the designated register
+       * This can be saved in a main program by putting code in .init0 (which
+       * executes before normal c init code) to save R2 to a global variable.
+       */
+      __asm__ __volatile__ ("mov r2, %0\n" :: "r" (ch));
 
- 	    // Turn off watchdog
- 	    watchdogConfig(WATCHDOG_OFF);
- 	    // Note that appstart_vec is defined so that this works with either
- 	    // real or virtual boot partitions.
- 	     __asm__ __volatile__ (
- 	    // Jump to 'save' or RST vector
+      // Turn off watchdog
+      watchdogConfig(WATCHDOG_OFF);
+      // Note that appstart_vec is defined so that this works with either
+      // real or virtual boot partitions.
+       __asm__ __volatile__ (
+      // Jump to 'save' or RST vector
  #ifdef VIRTUAL_BOOT_PARTITION
- 	    // full code version for virtual boot partition
- 	    "ldi r30,%[rstvec]\n"
- 	    "clr r31\n"
- 	    "ijmp\n"::[rstvec] "M"(appstart_vec)
+      // full code version for virtual boot partition
+      "ldi r30,%[rstvec]\n"
+      "clr r31\n"
+      "ijmp\n"::[rstvec] "M"(appstart_vec)
  #else
  #ifdef RAMPZ
- 	    // use absolute jump for devices with lot of flash
- 	    "jmp 0\n"::
+      // use absolute jump for devices with lot of flash
+      "jmp 0\n"::
  #else
- 	    // use rjmp to go around end of flash to address 0
- 	    // it uses fact that optiboot_version constant is 2 bytes before end of flash
- 	    "rjmp optiboot_version+2\n"
+      // use rjmp to go around end of flash to address 0
+      // it uses fact that optiboot_version constant is 2 bytes before end of flash
+      "rjmp optiboot_version+2\n"
  #endif //RAMPZ
  #endif //VIRTUAL_BOOT_PARTITION
- 	  );
+    );
     }
   }
   
@@ -1170,3 +1151,54 @@ static void do_spm(uint16_t address, uint8_t command, uint16_t data) {
     }
 #endif
 }
+
+
+#ifdef COPY_FLASH_PAGES
+/*
+* Helper function do_spm_rampz wraps do_spm to handle RAMPZ
+* for copy_flash_pages function. It is inlined by the compiler.
+* 
+* On devices with more than 64kB flash, 16 bit address is not enough,
+* so there is also RAMPZ used in that case.
+*/
+void do_spm_rampz(uint32_t address, uint8_t command, uint16_t data) {
+#ifdef RAMPZ
+  RAMPZ = (address >> 16) & 0xff;  // address bits 23-16 goes to RAMPZ
+  do_spm((address & 0xffff), command, data); // do_spm accepts only lower 16 bits of address
+#else
+  do_spm(address, command, data);  // 16 bit address - no problems to pass directly
+#endif
+}
+
+/*
+* Function copy_flash_pages uses do_spm() function to copy flash pages.
+* It is intended to be called by the application over the 'vector table' in pre_main().
+* It uses 32bit addresses for use on devices with more then 64 kB flash memory.
+* The destination and source address must be page aligned.
+* Additionally parameter reset_mcu activates an (almost) immediate watchdog reset of the MCU after pages are copied.
+*
+* It was created to copy a new version of the aplication stored in the upper half of the flash memory 
+* to the beginnig of the flash and then reset the MCU to run the new version. 
+* It is used by ArduinoOTA libray in InternalStorageAVR over utility/optiboot.h.
+*/
+void copy_flash_pages(uint32_t dest_page_addr, uint32_t src_page_addr, uint16_t page_count, uint8_t reset_mcu) {
+  int i, j;
+  for (i = 0; i < page_count; i++) { // do standard spm steps for every page
+    do_spm_rampz(dest_page_addr, __BOOT_PAGE_ERASE, 0); // erase page
+    for (j = 0; j < SPM_PAGESIZE; j += 2) { // fill the bytes for the page
+#ifdef RAMPZ // only devices with RAMPZ have pgm_read_word_far()
+      do_spm_rampz(dest_page_addr + j, __BOOT_PAGE_FILL, pgm_read_word_far(src_page_addr + j));
+#else
+      do_spm(dest_page_addr + j, __BOOT_PAGE_FILL, pgm_read_word(src_page_addr + j));
+#endif
+    }
+    do_spm_rampz(dest_page_addr, __BOOT_PAGE_WRITE, 0); // write the page
+    dest_page_addr += SPM_PAGESIZE;
+    src_page_addr += SPM_PAGESIZE;
+  }
+  if (reset_mcu) {
+  watchdogConfig(WATCHDOG_16MS); // for a reset of the MCU
+  while (1); // to prevent return to application in the 15MS to reset
+  }
+}
+#endif

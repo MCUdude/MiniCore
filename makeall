@@ -13,8 +13,10 @@ set -e
 ## also modify the clock_and_baud array if you need other F_CPUs or baudrates.                  ##
 ##                                                                                              ##
 ## Note that all microcontrollers with 64kB flash or more is built with bootloader EEPROM       ##
-## upload by default. Use SUPPORT_EEPROM=0 if you want to disable this feature. Note that you   ##
-## may add EEPROM upload functionality by adding SUPPORT_EEPROM=1 .                             ##
+## upload and flash page copy functionality by default. Use SUPPORT_EEPROM=0 and                ##
+## COPY_FLASH_PAGES=0 (or just remove them completely) if you want to disable these features.   ##
+## Note that you can add EEPROM upload and flash page copy functionality to any target by       ##
+## adding SUPPORT_EEPROM=1 and COPY_FLASH_PAGES=1 or simply, BIGBOOT=1.                         ##
 ##                                                                                              ##
 ## The table below shows the available precompiled bootloaders for the corresponding            ##
 ## clock frequencies and baud rates.                                                            ##
@@ -42,13 +44,19 @@ declare -a mcu_and_params=(
 "atmega8"     "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega16"    "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega32"    "LED=B0 LED_START_FLASHES=2 UART=0"
+"at90can32"   "LED=B0 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+"at90can32"   "LED=B0 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega64"    "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega64"    "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"at90can64"   "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+"at90can64"   "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega88"    "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega88p"   "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega88pb"  "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega128"   "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega128"   "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"at90can128"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+"at90can128"  "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega162"   "LED=B0 LED_START_FLASHES=0 UART=0"
 "atmega162"   "LED=B0 LED_START_FLASHES=0 UART=1"
 "atmega164a"  "LED=B0 LED_START_FLASHES=2 UART=0"
@@ -69,6 +77,7 @@ declare -a mcu_and_params=(
 "atmega324pb" "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega324pb" "LED=B0 LED_START_FLASHES=2 UART=1"
 "atmega324pb" "LED=B0 LED_START_FLASHES=2 UART=2"
+"atmega325"   "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega328"   "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega328p"  "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega328pb" "LED=B5 LED_START_FLASHES=2 UART=0"
@@ -83,6 +92,7 @@ declare -a mcu_and_params=(
 "atmega644a"  "LED=B0 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega644p"  "LED=B0 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega644p"  "LED=B0 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"atmega645"   "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega649"   "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega649p"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega1280"  "LED=B7 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
@@ -101,8 +111,10 @@ declare -a mcu_and_params=(
 "atmega2560"  "LED=B7 LED_START_FLASHES=2 UART=3 SUPPORT_EEPROM=1"
 "atmega2561"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega2561"  "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"atmega3250"  "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega3290"  "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega3290p" "LED=B5 LED_START_FLASHES=2 UART=0"
+"atmega6450"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega6490"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega6490p" "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega8515"  "LED=B0 LED_START_FLASHES=2 UART=0"
@@ -122,6 +134,7 @@ declare -a clock_and_baud=(
 "20000000L" "250000"
 "20000000L" "115200"
 "20000000L" "19200"
+"18432000L" "460800"
 "18432000L" "230400"
 "18432000L" "115200"
 "18432000L" "57600"
@@ -135,6 +148,7 @@ declare -a clock_and_baud=(
 "16000000L" "38400"
 "16000000L" "19200"
 "16000000L" "9600"
+"14745600L" "460800"
 "14745600L" "230400"
 "14745600L" "115200"
 "14745600L" "57600"
@@ -146,6 +160,7 @@ declare -a clock_and_baud=(
 "12000000L" "57600"
 "12000000L" "19200"
 "12000000L" "9600"
+"11059200L" "460800"
 "11059200L" "230400"
 "11059200L" "115200"
 "11059200L" "57600"
@@ -160,6 +175,7 @@ declare -a clock_and_baud=(
 "8000000L" "38400"
 "8000000L" "19200"
 "8000000L" "9600"
+"7372800L" "460800"
 "7372800L" "230400"
 "7372800L" "115200"
 "7372800L" "57600"
@@ -170,6 +186,7 @@ declare -a clock_and_baud=(
 "4000000L" "250000"
 "4000000L" "19200"
 "4000000L" "9600"
+"3686400L" "460800"
 "3686400L" "230400"
 "3686400L" "115200"
 "3686400L" "57600"
@@ -246,19 +263,24 @@ fi
 # Loop through all MCUs and parameters
 for((i=0; i < ${#mcu_and_params[@]}; i+=2));
 do
+  # Count how many targets we've built for
+  TARGET_COUNTER=$(($TARGET_COUNTER + 1))
+  
   # Create MCU folder if it doesn't exist already
   mkdir -p bootloaders/${mcu_and_params[$i]}
   
   # Print build header if one or more builds is ran
-  build_info_header_printed="false"
+  build_info_header_is_printed="false"
   
   # Loop through all clock speeds and baud rates
   for((j=0; j < ${#clock_and_baud[@]}; j+=2));
   do
     # Count how many builds that have been ran
-    COUNTER=$(($COUNTER + 1))
-    echo -e "\x1B[7m\n\n $COUNTER of $((${#mcu_and_params[@]} * ${#clock_and_baud[@]} / 4)) "
-     
+    BUILD_COUNTER=$(($BUILD_COUNTER + 1))
+    echo -e "\x1B[7m\n\n Build $BUILD_COUNTER of $((${#mcu_and_params[@]} * ${#clock_and_baud[@]} / 4)) "
+    echo -e "\x1B[0mTarget $TARGET_COUNTER of $((${#mcu_and_params[@]} / 2)) " 
+    echo -e "\x1B[0mSub build $((j / 2)) of $((${#clock_and_baud[@]} / 2)) \x1B[7m" 
+    
      # Check if hex file already exists
      if [[ $overwrite_files = false && $delete_all_files = false ]]
      then
@@ -266,27 +288,30 @@ do
        if [ -e "${bootloader_file}" ];
        then
          file_exists=true
-         build_info_header_printed="N/A"
+         if [ $build_info_header_is_printed != "true" ]
+         then
+           build_info_header_is_printed="N/A"
+         fi
        else
          file_exists=false
-         if [ $build_info_header_printed == "N/A" ]
+         if [ $build_info_header_is_printed == "N/A" ]
          then
-           build_info_header_printed="false"
+           build_info_header_is_printed="false"
          fi  
        fi
      fi
      
     # Make sure the build info header is printed only once
-    if [ $build_info_header_printed = "false" ]
+    if [ $build_info_header_is_printed = "false" ]
     then
       # Create header and build info file once
       echo -e "Optiboot_flash build output for ${mcu_and_params[$i]}"\
       "\nhttps://github.com/MCUdude/optiboot_flash"\
       "\nBuild date and time: $(date +%d.%m.%Y\ %H:%M)"\
       "\nCompiler: $(make gcc_version)\n"\
-      "\nF_CPU:\t\tUART NUMBER:\tLED PIN:\tLED FLASHES:\tDESIRED BAUD:\tACTUAL BAUD:\tERROR:\tCOMPILED SIZE:\tOUTPUT FILE:"\
+      "\nF_CPU:\t\tUART NUMBER:\tLED PIN:\tLED FLASHES:\tEEPROM SUPPORT:\tFLASH PG COPY:\tDESIRED BAUD:\tACTUAL BAUD:\tERROR:\tCOMPILED SIZE:\tOUTPUT FILE:"\
       >> bootloaders/${mcu_and_params[$i]}/${mcu_and_params[$i]}_build_info.txt
-      build_info_header_printed="true"
+      build_info_header_is_printed="true"
     fi
      
      
@@ -306,6 +331,10 @@ do
         if ($1 ~ "UART") printf($3 "\t\t")
         if ($4 ~ "LED_PIN") printf($6 "\t\t")
         if ($7 ~ "LED_FLASHES") printf($9 "\t\t")
+        if ($10 ~ "SUPPORT_EEPROM" && $12 == "1") printf("Yes\t\t")
+        if ($10 ~ "SUPPORT_EEPROM" && $12 != "1") printf("No\t\t")
+        if (($12 ~ "COPY_FLASH_PAGES" && $14 == "1" ) || ($13 ~ "COPY_FLASH_PAGES" && $15 == "1")) printf("Yes\t\t")
+        if (($12 ~ "COPY_FLASH_PAGES" && $14 != "1" ) || ($13 ~ "COPY_FLASH_PAGES" && $15 != "1")) printf("No\t\t")
         if ($4 ~ "Desired:") printf($5 "\t\t")
         if ($6 ~ "Real:") printf($7 "\t\t")
         if ($11 ~ "Difference:") printf($12 "%%\t")
@@ -337,8 +366,11 @@ do
     fi      
   done
   
-  # Add a few newlines at the end of the build info file
-  echo -e "\n" >> bootloaders/${mcu_and_params[$i]}/${mcu_and_params[$i]}_build_info.txt
+  # Add a few newlines at the end of the build info file if something was added
+  if [ $build_info_header_is_printed != "N/A" ]
+  then
+    echo -e "\n" >> bootloaders/${mcu_and_params[$i]}/${mcu_and_params[$i]}_build_info.txt
+    fi
 done
 
 # Delete temporary shell script files
