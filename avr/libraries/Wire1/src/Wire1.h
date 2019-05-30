@@ -28,8 +28,6 @@
 #include "Stream.h"
 
 
-#define BUFFER_LENGTH 32
-
 // WIRE_HAS_END means Wire has end()
 #define WIRE_HAS_END 1
 
@@ -63,7 +61,7 @@ class TwoWire1 : public Stream
     uint8_t endTransmission(uint8_t);
     uint8_t requestFrom(uint8_t, uint8_t);
     uint8_t requestFrom(uint8_t, uint8_t, uint8_t);
-	uint8_t requestFrom(uint8_t, uint8_t, uint32_t, uint8_t, uint8_t);
+    uint8_t requestFrom(uint8_t, uint8_t, uint32_t, uint8_t, uint8_t);
     uint8_t requestFrom(int, int);
     uint8_t requestFrom(int, int, int);
     virtual size_t write(uint8_t);

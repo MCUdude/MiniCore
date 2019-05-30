@@ -26,12 +26,6 @@
 #include <inttypes.h>
 #include "Stream.h"
 
-// Only include Wire1 if two i2c channels are available
-#if defined(TWI1_vect)
-  #include <Wire1.h>
-#endif
-
-#define BUFFER_LENGTH 32
 
 // WIRE_HAS_END means Wire has end()
 #define WIRE_HAS_END 1
@@ -66,7 +60,7 @@ class TwoWire : public Stream
     uint8_t endTransmission(uint8_t);
     uint8_t requestFrom(uint8_t, uint8_t);
     uint8_t requestFrom(uint8_t, uint8_t, uint8_t);
-	uint8_t requestFrom(uint8_t, uint8_t, uint32_t, uint8_t, uint8_t);
+    uint8_t requestFrom(uint8_t, uint8_t, uint32_t, uint8_t, uint8_t);
     uint8_t requestFrom(int, int);
     uint8_t requestFrom(int, int, int);
     virtual size_t write(uint8_t);
