@@ -18,6 +18,7 @@ If you're into "generic" AVR programming, I'm happy to tell you that all relevan
 * **[How to install](#how-to-install)**
 	- [Boards Manager Installation](#boards-manager-installation)
 	- [Manual Installation](#manual-installation)
+	- [PlatformIO](#platformio)
 * **[Getting started with MiniCore](#getting-started-with-minicore)**
 * [Wiring reference](#wiring-reference) 
 * **[Pinout](#pinout)**
@@ -139,6 +140,11 @@ This installation method requires Arduino IDE version 1.6.4 or greater.
 #### Manual Installation
 Click on the "Download ZIP" button in the upper right corner. Exctract the ZIP file, and move the extracted folder to the location "**~/Documents/Arduino/hardware**". Create the "hardware" folder if it doesn't exist.
 Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
+
+#### PlatformIO
+[PlatformIO](http://platformio.org) is an open source ecosystem for IoT development and supports MiniCore.
+
+**See [PlatformIO.md](https://github.com/MCUdude/MiniCore/blob/master/PlatformIO.md) for more information.*
 
 
 ## Getting started with MiniCore
