@@ -43,8 +43,6 @@ board = ATMEGA328P
 board_build.f_cpu = 16000000L
 
 ; BUILD OPTIONS
-; Current pinout
-board_build.variant = minicore_standard
 ; Comment out to enable LTO (this line unflags it)
 build_unflags = -flto
 ; Extra build flags
@@ -105,10 +103,6 @@ Below is a table with the default clocks and baud rates for MiniCore:
 | 8 MHz       | External   | 8000000L          | 57600              |
 | 8 MHz       | Internal   | 8000000L          | 38400              |
 | 1 MHz       | Internal   | 1000000L          | 9600               |
-
-
-### `board_build.variant`
-Holds the current pinout in use. Valid pinouts is `minicore_standard` and `minicore_pb-variant`.
 
 
 ### `build_unflags`
