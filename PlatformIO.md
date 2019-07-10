@@ -38,7 +38,7 @@ framework = arduino
 
 ; TARGET SETTINGS
 ; PlatformIO requires the board parameter. Must match your actual hardware
-board = ATMEGA328P
+board = ATmega328P
 ; Clock frequency in [Hz]
 board_build.f_cpu = 16000000L
 
@@ -73,20 +73,19 @@ The table below shows what board name should be used for each target
 
 | Target                                                          | Board name  |
 |-----------------------------------------------------------------|-------------|
-| ATmega328PB                                                     | ATMEGA328PB |
-| ATmega328P <br/> ATmega328PA                                    | ATMEGA328P  |
-| ATmega328                                                       | ATMEGA328   |
-| ATmega168PB                                                     | ATMEGA168PB |
-| ATmega168P <br/> ATmega168PA                                    | ATMEGA168P  |
-| ATmega168 <br/> ATmega168A                                      | ATMEGA168   |
-| ATmega88PB                                                      | ATMEGA88PB  |
-| ATmega88P <br/> ATmega88PA                                      | ATMEGA88P   |
-| ATmega88 <br/> ATmega88A                                        | ATMEGA88    |
-| ATmega48PB                                                      | ATMEGA48PB  |
-| ATmega48P <br/> ATmega48PA                                      | ATMEGA48P   |
-| ATmega48 <br/> ATmega48A                                        | ATMEGA48    |
-| ATmega48 <br/> ATmega48A                                        | ATMEGA48    |
-| ATmega8 <br/> ATmega8A                                          | ATMEGA8     |
+| ATmega328PB                                                     | ATmega328PB |
+| ATmega328P <br/> ATmega328PA                                    | ATmega328P  |
+| ATmega328                                                       | ATmega328   |
+| ATmega168PB                                                     | ATmega168PB |
+| ATmega168P <br/> ATmega168PA                                    | ATmega168P  |
+| ATmega168 <br/> ATmega168A                                      | ATmega168   |
+| ATmega88PB                                                      | ATmega88PB  |
+| ATmega88P <br/> ATmega88PA                                      | ATmega88P   |
+| ATmega88 <br/> ATmega88A                                        | ATmega88    |
+| ATmega48PB                                                      | ATmega48PB  |
+| ATmega48P <br/> ATmega48PA                                      | ATmega48P   |
+| ATmega48 <br/> ATmega48A                                        | ATmega48    |
+| ATmega8 <br/> ATmega8A                                          | ATmega8     |
 
 
 ### `board_build.f_cpu`
