@@ -27,7 +27,7 @@ For more information about the `build` option, check out PlatformIO's [Project C
 ;   Advanced options: extra scripting
 ;
 ; Please visit documentation for the other options
-; https://github.com/MCUdude/MiniCore/PlatformIO.md
+; https://github.com/MCUdude/MiniCore/blob/master/PlatformIO.md
 ; https://docs.platformio.org/page/projectconf.html
 
 
