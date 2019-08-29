@@ -48,8 +48,8 @@ static const uint8_t LED = LED_BUILTIN;
 #define PIN_A3 (17)
 #define PIN_A4 (18)
 #define PIN_A5 (19)
-#define PIN_A6 (6)
-#define PIN_A7 (7)
+#define PIN_A6 (25)
+#define PIN_A7 (26)
 static const uint8_t A0 = PIN_A0;
 static const uint8_t A1 = PIN_A1;
 static const uint8_t A2 = PIN_A2;
@@ -59,7 +59,7 @@ static const uint8_t A5 = PIN_A5;
 static const uint8_t A6 = PIN_A6;
 static const uint8_t A7 = PIN_A7;
 #define NUM_ANALOG_INPUTS           (8)
-#define analogInputToDigitalPin(p)  (((p) < 5) ? ((p) + 14) : (((p) < 8) ? ((p) + 17) : -1))
+#define analogInputToDigitalPin(p)  (((p) < 5) ? ((p) + 14) : (((p) < 8) ? ((p) + 19) : -1))
 #define analogPinToChannel(p)       ((p) < NUM_ANALOG_INPUTS ? (p) : ((p) >= 14 && (p) < 25) ? (p) - 14 : ((p) >= 25) ? (p) - 19 : -1)
 
 // SPI
