@@ -118,7 +118,7 @@ static const uint8_t A5 = PIN_A5;
 static const uint8_t A6 = PIN_A6;
 static const uint8_t A7 = PIN_A7;
 #define NUM_ANALOG_INPUTS           (8)
-#define analogInputToDigitalPin(p)  (((p) < 5) ? ((p) + 14) : (((p) < 8) ? ((p) + 17) : -1))
+#define analogInputToDigitalPin(p)  ((p < 6) ? (p) + 14 : -1)
 #define analogPinToChannel(p)       ((p) < NUM_ANALOG_INPUTS ? (p) : (p) >= 14 ? (p) - 14 : -1)
 
 // SPI
