@@ -409,7 +409,7 @@ menu.bootloader=Bootloader
 48.menu.LTO.Os.compiler.cpp.extra_flags=
 48.menu.LTO.Os.ltoarcmd=avr-ar
 
-48.menu.LTO.Os_flto=BOD enabled
+48.menu.LTO.Os_flto=LTO enabled
 48.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 48.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
 48.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
