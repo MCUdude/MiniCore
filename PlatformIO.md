@@ -99,7 +99,7 @@ Below is a table with the default clocks and baud rates for MiniCore:
 | 18.432 MHz  | External   | 18432000L         | 115200             |
 | 16 MHz      | External   | 16000000L         | 115200             |
 | 12 MHz      | External   | 12000000L         | 57600              |
-| 8 MHz       | External   | 8000000L          | 57600              |
+| 8 MHz       | External   | 8000000L          | 38400              |
 | 8 MHz       | Internal   | 8000000L          | 38400              |
 | 1 MHz       | Internal   | 1000000L          | 9600               |
 
