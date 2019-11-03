@@ -132,7 +132,7 @@ menu.bootloader=Bootloader
 328.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 328.menu.clock.8MHz_external=8 MHz external
-328.menu.clock.8MHz_external.upload.speed=38400
+328.menu.clock.8MHz_external.upload.speed=57600
 328.menu.clock.8MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.8MHz_external.build.f_cpu=8000000L
 
@@ -236,7 +236,7 @@ menu.bootloader=Bootloader
 168.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 168.menu.clock.8MHz_external=8 MHz external
-168.menu.clock.8MHz_external.upload.speed=38400
+168.menu.clock.8MHz_external.upload.speed=57600
 168.menu.clock.8MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.8MHz_external.build.f_cpu=8000000L
 
@@ -339,7 +339,7 @@ menu.bootloader=Bootloader
 88.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 88.menu.clock.8MHz_external=8 MHz external
-88.menu.clock.8MHz_external.upload.speed=38400
+88.menu.clock.8MHz_external.upload.speed=57600
 88.menu.clock.8MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.8MHz_external.build.f_cpu=8000000L
 
@@ -437,7 +437,7 @@ menu.bootloader=Bootloader
 48.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 48.menu.clock.8MHz_external=8 MHz external
-48.menu.clock.8MHz_external.upload.speed=38400
+48.menu.clock.8MHz_external.upload.speed=57600
 48.menu.clock.8MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 48.menu.clock.8MHz_external.build.f_cpu=8000000L
 
@@ -530,7 +530,7 @@ menu.bootloader=Bootloader
 8.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 8.menu.clock.8MHz_external=8 MHz external
-8.menu.clock.8MHz_external.upload.speed=38400
+8.menu.clock.8MHz_external.upload.speed=57600
 8.menu.clock.8MHz_external.bootloader.sut_cksel_bits=111111
 8.menu.clock.8MHz_external.bootloader.ckopt_bit=0
 8.menu.clock.8MHz_external.build.f_cpu=8000000L
