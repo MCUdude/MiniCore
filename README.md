@@ -55,26 +55,28 @@ Can't decide what microcontroller to choose? Have a look at the specification ta
 
 
 ## Supported clock frequencies
-* 16 MHz external oscillator (default)
-* 20 MHz external oscillator
-* 18.432 MHz external oscillator <b>*</b>
-* 12 MHz external oscillator
-* 8 MHz external oscillator
-* 8 MHz internal oscillator <b>**</b>
-* 1 MHz internal oscillator
+MiniCore supports a variety of different clock frequencies. Select the microcontroller in the boards menu, then select the clock frequency. You'll have to hit "Burn bootloader" in order to set the correct fuses and upload the correct bootloader.  
+Make sure you connect an ISP programmer, and select the correct one in the "Programmers" menu. For time critical operations an external crystal/oscillator is recommended.  
 
-Select your microcontroller in the boards menu, then select the clock frequency. You'll have to hit "Burn bootloader" in order to set the correct fuses and upload the correct bootloader. <br/>
-Make sure you connect an ISP programmer, and select the correct one in the "Programmers" menu. For time critical operations an external oscillator is recommended. 
-</br></br>
-
-<b>*</b> When using the 18.432 MHz option (or any frequency by which 64 cannot be divided evenly), timing functions (`millis`, `micros`, `delay`, `delayMicroseconds`) will not be accurate. These clock frequencies is therefore not recommended if your application relies on accurate timing, but is superb for UART communication. If you need accurate timing you may use `_delay_ms`, `delay_us` or simply write your own timing function.
-
-<br/>
-
-<b>**</b> There might be some issues related to the internal oscillator. It's factory calibrated, but may be a little "off" depending on the calibration, ambient temperature and operating voltage. If uploading failes while using the 8 MHz internal oscillator you have three options:
-* Edit the baudrate line in the [boards.txt](https://github.com/MCUdude/MiniCore/blob/3ba977a7c6f948beff5a928d7f11a627282779e2/avr/boards.txt#L83) file, and choose either 115200, 57600, 38400 or 19200 baud.
+You might experience upload issues when using the internal oscillator. It's factory calibrated but may be a little "off" depending on the calibration, ambient temperature and operating voltage. If uploading failes while using the 8 MHz internal oscillator you have these options:
+* Edit the baudrate line in the boards.txt file, and choose either 115200, 57600, 38400 or 19200 baud.
 * Upload the code using a programmer (USBasp, USBtinyISP etc.) or skip the bootloader by holding down the shift key while clicking the "Upload" button
-* Use the 1 MHz option instead  
+* Use the 1 MHz option instead
+
+| Frequency   | Oscillator type             | Comment                                                       |
+|-------------|-----------------------------|---------------------------------------------------------------|
+| 16 MHz      | External crystal/oscillator | Default clock on most AVR based Arduino boards and MiniCore   |
+| 20 MHz      | External crystal/oscillator |                                                               |
+| 18.4320 MHz | External crystal/oscillator | Great clock for UART communication with no error              |
+| 14.7456 MHz | External crystal/oscillator | Great clock for UART communication with no error              |
+| 12 MHz      | External crystal/oscillator | Useful when working with USB 1.1 (12 Mbit/s)                  |
+| 11.0592 MHz | External crystal/oscillator | Great clock for UART communication with no error              |
+| 8 MHz       | External crystal/oscillator | Common clock when working with 3.3V                           |
+| 7.3728 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
+| 3.6864 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
+| 1.8432 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
+| 8 MHz       | Internal oscillator         | Might cause UART upload issues. See comment above this table  |
+| 1 MHz       | Internal oscillator         | Derived from the 8 MHz internal oscillator                    |
 
 
 ## Bootloader option
@@ -90,9 +92,9 @@ Brown out detection, or BOD for short lets the microcontroller sense the input v
 
 | ATmega328 | ATmega168 | ATmega88 | ATmega48 | ATmega8  |
 |-----------|-----------|----------|----------|----------|
-| 4.3v      | 4.3v      | 4.3v     | 4.3v     | 4.0v     |
-| 2.7v      | 2.7v      | 2.7v     | 2.7v     | 2.7v     |
-| 1.8v      | 1.8v      | 1.8v     | 1.8v     | -        |
+| 4.3V      | 4.3V      | 4.3V     | 4.3V     | 4.0V     |
+| 2.7V      | 2.7V      | 2.7V     | 2.7V     | 2.7V     |
+| 1.8V      | 1.8V      | 1.8V     | 1.8V     | -        |
 | Disabled  | Disabled  | Disabled | Disabled | Disabled |
 
 
