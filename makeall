@@ -1,124 +1,182 @@
 #!/bin/bash
 set -e
 
-##################################################################################################
-## Created by MCUdude for compiling Optiboot flash from source                                  ##
-## https://github.com/MCUdude/optiboot_flash                                                    ##
-##                                                                                              ##
-## Execute ./makeall to build all variants of this bootloader.                                  ##
-## Run $ chmod +x if this file isn't executable.                                                ##
-##                                                                                              ##
-## This is the file contains all all make procedures for all microcontrollers. You can modify   ##
-## the mcu_and_params array if you want to add, remove or edit any of the settings. You can     ##
-## also modify the clock_and_baud array if you need other F_CPUs or baudrates.                  ##
-##                                                                                              ##
-## Note that all microcontrollers with 64kB flash or more is built with bootloader EEPROM       ##
-## upload and flash page copy functionality by default. Use SUPPORT_EEPROM=0 and                ##
-## COPY_FLASH_PAGES=0 (or just remove them completely) if you want to disable these features.   ##
-## Note that you can add EEPROM upload and flash page copy functionality to any target by       ##
-## adding SUPPORT_EEPROM=1 and COPY_FLASH_PAGES=1 or simply, BIGBOOT=1.                         ##
-##                                                                                              ##
-## The table below shows the available precompiled bootloaders for the corresponding            ##
-## clock frequencies and baud rates.                                                            ##
-##                                                                                              ##
-## |             | 1000000 | 500000 | 250000 | 230400 | 115200 | 57600 | 38400 | 19200 | 9600 | ##
-## |-------------|---------|--------|--------|--------|--------|-------|-------|-------|------| ##
-## | 24 MHz      |  X      |  X     |  X     |  X     |  X     |  X    |  X    |  X    |      | ##
-## | 20 MHz      |         |  X     |  X     |        |  X     |       |       |  X    |      | ##
-## | 18.4320 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ##
-## | 16 MHz      |  X      |  X     |  X     |        |  X     |       |  X    |  X    |  X   | ##
-## | 14.7456 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 12 MHz      |         |  X     |  X     |        |        |  X    |       |  X    |  X   | ##
-## | 11.0592 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 8 MHz       |  X      |  X     |  X     |        |  X     |  X    |  X    |  X    |  X   | ##
-## | 7.3728 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 4 MHz       |         |  X     |  X     |        |        |       |       |  X    |  X   | ##
-## | 3.6864 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 2 MHz       |         |        |  X     |        |        |       |       |  X    |  X   | ##
-## | 1.8432 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 1 MHz       |         |        |        |        |        |       |       |       |  X   | ## 
-##                                                                                              ##
-##################################################################################################
+###########################################################################################################
+## Created by MCUdude for compiling Optiboot flash from source                                           ##
+## https://github.com/MCUdude/optiboot_flash                                                             ##
+##                                                                                                       ##
+## Execute ./makeall to build all variants of this bootloader.                                           ##
+## Run $ chmod +x if this file isn't executable.                                                         ##
+##                                                                                                       ##
+## This is the file contains all all make procedures for all microcontrollers. You can modify the        ##
+## mcu_and_params array if you want to add, remove or edit any of the settings. You can also modify      ##
+## the clock_and_baud array if you need other F_CPUs or baudrates.                                       ##
+##                                                                                                       ##
+## Note that all microcontrollers with 64kB flash or more is built with bootloader EEPROM upload and     ##
+## flash page copy functionality by default. Use SUPPORT_EEPROM=0 and COPY_FLASH_PAGES=0 (or just        ##
+## remove them completely) if you want to disable these features.                                        ##
+## Note that you can add EEPROM upload and flash page copy functionality to any target by adding         ##
+## SUPPORT_EEPROM=1 and COPY_FLASH_PAGES=1 or simply, BIGBOOT=1.                                         ##
+##                                                                                                       ##
+## The table below shows the available precompiled bootloaders for the corresponding clock frequencies   ##
+## and baud rates.                                                                                       ##
+##                                                                                                       ##
+## |             | 1000000 | 500000 | 460800 | 250000 | 230400 | 115200 | 57600 | 38400 | 19200 | 9600 | ##
+## |-------------|---------|--------|--------|--------|--------|--------|-------|-------|-------|------| ##
+## | 24 MHz      |  X      |  X     |        |  X     |  X     |  X     |  X    |  X    |  X    |      | ##
+## | 22.1184 MHz |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |      | ##
+## | 20 MHz      |         |  X     |        |  X     |        |  X     |       |       |  X    |      | ##
+## | 18.4320 MHz |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   | ##
+## | 16 MHz      |  X      |  X     |        |  X     |        |  X     |       |  X    |  X    |  X   | ##
+## | 14.7456 MHz |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 12 MHz      |         |  X     |        |  X     |        |        |  X    |       |  X    |  X   | ##
+## | 11.0592 MHz |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 8 MHz       |  X      |  X     |        |  X     |        |  X     |  X    |  X    |  X    |  X   | ##
+## | 7.3728 MHz  |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 4 MHz       |         |  X     |        |  X     |        |        |       |       |  X    |  X   | ##
+## | 3.6864 MHz  |         |        |  X     |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 2 MHz       |         |        |        |  X     |        |        |       |       |  X    |  X   | ##
+## | 1.8432 MHz  |         |        |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 1 MHz       |         |        |        |        |        |        |       |       |       |  X   | ## 
+##                                                                                                       ##
+###########################################################################################################
 
 declare -a mcu_and_params=(
 "atmega8"     "LED=B5 LED_START_FLASHES=2 UART=0"
+
 "atmega16"    "LED=B0 LED_START_FLASHES=2 UART=0"
+"atmega16"    "LED=B7 LED_START_FLASHES=2 UART=0"
+
 "atmega32"    "LED=B0 LED_START_FLASHES=2 UART=0"
-"at90can32"   "LED=B0 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
-"at90can32"   "LED=B0 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"atmega32"    "LED=B7 LED_START_FLASHES=2 UART=0"
+
+"at90can32"   "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+"at90can32"   "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "atmega64"    "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega64"    "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "at90can64"   "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "at90can64"   "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "atmega88"    "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega88p"   "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega88pb"  "LED=B5 LED_START_FLASHES=2 UART=0"
+
 "atmega128"   "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega128"   "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "at90can128"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "at90can128"  "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "atmega162"   "LED=B0 LED_START_FLASHES=0 UART=0"
 "atmega162"   "LED=B0 LED_START_FLASHES=0 UART=1"
+
 "atmega164a"  "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega164a"  "LED=B0 LED_START_FLASHES=2 UART=1"
+"atmega164a"  "LED=B7 LED_START_FLASHES=2 UART=0"
+"atmega164a"  "LED=B7 LED_START_FLASHES=2 UART=1"
 "atmega164p"  "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega164p"  "LED=B0 LED_START_FLASHES=2 UART=1"
+"atmega164p"  "LED=B7 LED_START_FLASHES=2 UART=0"
+"atmega164p"  "LED=B7 LED_START_FLASHES=2 UART=1"
+
 "atmega168"   "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega168p"  "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega168pb" "LED=B5 LED_START_FLASHES=2 UART=0"
+
 "atmega169"   "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega169p"  "LED=B5 LED_START_FLASHES=2 UART=0"
+
 "atmega324a"  "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega324a"  "LED=B0 LED_START_FLASHES=2 UART=1"
+"atmega324a"  "LED=B7 LED_START_FLASHES=2 UART=0"
+"atmega324a"  "LED=B7 LED_START_FLASHES=2 UART=1"
 "atmega324p"  "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega324p"  "LED=B0 LED_START_FLASHES=2 UART=1"
+"atmega324p"  "LED=B7 LED_START_FLASHES=2 UART=0"
+"atmega324p"  "LED=B7 LED_START_FLASHES=2 UART=1"
 "atmega324pa" "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega324pa" "LED=B0 LED_START_FLASHES=2 UART=1"
+"atmega324pa" "LED=B7 LED_START_FLASHES=2 UART=0"
+"atmega324pa" "LED=B7 LED_START_FLASHES=2 UART=1"
 "atmega324pb" "LED=B0 LED_START_FLASHES=2 UART=0"
 "atmega324pb" "LED=B0 LED_START_FLASHES=2 UART=1"
 "atmega324pb" "LED=B0 LED_START_FLASHES=2 UART=2"
+"atmega324pb" "LED=B7 LED_START_FLASHES=2 UART=0"
+"atmega324pb" "LED=B7 LED_START_FLASHES=2 UART=1"
+"atmega324pb" "LED=B7 LED_START_FLASHES=2 UART=2"
+
 "atmega325"   "LED=B5 LED_START_FLASHES=2 UART=0"
+
 "atmega328"   "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega328p"  "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega328pb" "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega328pb" "LED=B5 LED_START_FLASHES=2 UART=1"
+
 "atmega329"   "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega329p"  "LED=B5 LED_START_FLASHES=2 UART=0"
+
 "atmega640"   "LED=B7 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega640"   "LED=B7 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega640"   "LED=B7 LED_START_FLASHES=2 UART=2 SUPPORT_EEPROM=1"
 "atmega640"   "LED=B7 LED_START_FLASHES=2 UART=3 SUPPORT_EEPROM=1"
+
 "atmega644a"  "LED=B0 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega644a"  "LED=B0 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"atmega644a"  "LED=B7 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"atmega644a"  "LED=B7 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega644p"  "LED=B0 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega644p"  "LED=B0 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"atmega644p"  "LED=B7 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+"atmega644p"  "LED=B7 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "atmega645"   "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+
 "atmega649"   "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega649p"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+
 "atmega1280"  "LED=B7 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega1280"  "LED=B7 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega1280"  "LED=B7 LED_START_FLASHES=2 UART=2 SUPPORT_EEPROM=1"
 "atmega1280"  "LED=B7 LED_START_FLASHES=2 UART=3 SUPPORT_EEPROM=1"
+
 "atmega1281"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega1281"  "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "atmega1284"  "LED=B0 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega1284"  "LED=B0 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"atmega1284"  "LED=B7 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+"atmega1284"  "LED=B7 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "atmega1284p" "LED=B0 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega1284p" "LED=B0 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+"atmega1284p" "LED=B7 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+"atmega1284p" "LED=B7 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "atmega2560"  "LED=B7 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega2560"  "LED=B7 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
 "atmega2560"  "LED=B7 LED_START_FLASHES=2 UART=2 SUPPORT_EEPROM=1"
 "atmega2560"  "LED=B7 LED_START_FLASHES=2 UART=3 SUPPORT_EEPROM=1"
+
 "atmega2561"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega2561"  "LED=B5 LED_START_FLASHES=2 UART=1 SUPPORT_EEPROM=1"
+
 "atmega3250"  "LED=B5 LED_START_FLASHES=2 UART=0"
+
 "atmega3290"  "LED=B5 LED_START_FLASHES=2 UART=0"
 "atmega3290p" "LED=B5 LED_START_FLASHES=2 UART=0"
+
 "atmega6450"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+
 "atmega6490"  "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
 "atmega6490p" "LED=B5 LED_START_FLASHES=2 UART=0 SUPPORT_EEPROM=1"
+
 "atmega8515"  "LED=B0 LED_START_FLASHES=2 UART=0"
+
 "atmega8535"  "LED=B0 LED_START_FLASHES=2 UART=0"
+"atmega8535"  "LED=B7 LED_START_FLASHES=2 UART=0"
+
 )
 
 declare -a clock_and_baud=(
@@ -130,6 +188,12 @@ declare -a clock_and_baud=(
 "24000000L" "57600"
 "24000000L" "38400"
 "24000000L" "19200"
+"22118400L" "460800"
+"22118400L" "230400"
+"22118400L" "115200"
+"22118400L" "57600"
+"22118400L" "38400"
+"22118400L" "19200"
 "20000000L" "500000"
 "20000000L" "250000"
 "20000000L" "115200"
@@ -157,6 +221,7 @@ declare -a clock_and_baud=(
 "14745600L" "9600"
 "12000000L" "500000"
 "12000000L" "250000"
+"12000000L" "115200"
 "12000000L" "57600"
 "12000000L" "19200"
 "12000000L" "9600"
@@ -254,9 +319,9 @@ then
   echo -e "\n\nDeleting all previous generated files and empty folders"
   make clean_all
   find . -iname ".DS_Store" -type f -delete
-  find . -iname "*_build_info.txt" -type f -delete
+  #find . -iname "*_build_info.txt" -type f -delete
   find . -iname "[1-9]*" -type d -empty -delete
-  find . -iname "atmega*" -type d -empty -delete
+  #find . -iname "atmega*" -type d -empty -delete
   echo -e "\n\n"
 fi
 

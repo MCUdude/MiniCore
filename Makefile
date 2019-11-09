@@ -165,6 +165,8 @@ endif
 ifdef LED
 LED_CMD = -DLED=$(LED)
 dummy = FORCE
+else
+LED = NOLED
 endif
 
 ifdef SINGLESPEED
@@ -250,15 +252,15 @@ atmega8: maketargetdir
 # Move bootloader location + change name if eeprom or flash page copy support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega8: LDSECTIONS = -Wl,--section-start=.text=0x1c00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega8: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega8: bootloaders/atmega8/$(AVR_FREQ)/$(PROGRAM)_atmega8_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -271,15 +273,15 @@ atmega16: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega16: LDSECTIONS = -Wl,--section-start=.text=0x3c00 -Wl,--section-start=.version=0x3ffe
-atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega16: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega16: bootloaders/atmega16/$(AVR_FREQ)/$(PROGRAM)_atmega16_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega16a: atmega16
@@ -291,15 +293,15 @@ atmega32: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega32: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega32: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega32: bootloaders/atmega32/$(AVR_FREQ)/$(PROGRAM)_atmega32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega32a: atmega32
@@ -311,14 +313,14 @@ at90can32: maketargetdir
 at90can32: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
-at90can32: bootloaders/at90can32/$(AVR_FREQ)/$(PROGRAM)_at90can32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+at90can32: bootloaders/at90can32/$(AVR_FREQ)/$(PROGRAM)_at90can32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-at90can32: bootloaders/at90can32/$(AVR_FREQ)/$(PROGRAM)_at90can32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+at90can32: bootloaders/at90can32/$(AVR_FREQ)/$(PROGRAM)_at90can32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-at90can32: bootloaders/at90can32/$(AVR_FREQ)/$(PROGRAM)_at90can32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+at90can32: bootloaders/at90can32/$(AVR_FREQ)/$(PROGRAM)_at90can32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-at90can32: bootloaders/at90can32/$(AVR_FREQ)/$(PROGRAM)_at90can32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+at90can32: bootloaders/at90can32/$(AVR_FREQ)/$(PROGRAM)_at90can32_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -329,14 +331,14 @@ atmega64: maketargetdir
 atmega64: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
-atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega64: bootloaders/atmega64/$(AVR_FREQ)/$(PROGRAM)_atmega64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega64a: atmega64
@@ -348,14 +350,14 @@ at90can64: maketargetdir
 at90can64: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
-at90can64: bootloaders/at90can64/$(AVR_FREQ)/$(PROGRAM)_at90can64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+at90can64: bootloaders/at90can64/$(AVR_FREQ)/$(PROGRAM)_at90can64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-at90can64: bootloaders/at90can64/$(AVR_FREQ)/$(PROGRAM)_at90can64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+at90can64: bootloaders/at90can64/$(AVR_FREQ)/$(PROGRAM)_at90can64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-at90can64: bootloaders/at90can64/$(AVR_FREQ)/$(PROGRAM)_at90can64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+at90can64: bootloaders/at90can64/$(AVR_FREQ)/$(PROGRAM)_at90can64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-at90can64: bootloaders/at90can64/$(AVR_FREQ)/$(PROGRAM)_at90can64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+at90can64: bootloaders/at90can64/$(AVR_FREQ)/$(PROGRAM)_at90can64_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -366,15 +368,15 @@ atmega88: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega88: LDSECTIONS = -Wl,--section-start=.text=0x1c00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega88: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega88: bootloaders/atmega88/$(AVR_FREQ)/$(PROGRAM)_atmega88_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega88a: atmega88
@@ -386,15 +388,15 @@ atmega88p: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega88p: LDSECTIONS = -Wl,--section-start=.text=0x1c00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega88p: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega88p: bootloaders/atmega88p/$(AVR_FREQ)/$(PROGRAM)_atmega88p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega88pa: atmega88p
@@ -406,15 +408,15 @@ atmega88pb: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega88pb: LDSECTIONS = -Wl,--section-start=.text=0x1c00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega88pb: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe -Wl,--gc-sections -Wl,--undefined=optiboot_version
-atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega88pb: bootloaders/atmega88pb/$(AVR_FREQ)/$(PROGRAM)_atmega88pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -425,14 +427,14 @@ atmega128: maketargetdir
 atmega128: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
-atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega128: bootloaders/atmega128/$(AVR_FREQ)/$(PROGRAM)_atmega128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega128a: atmega128
@@ -444,14 +446,14 @@ at90can128: maketargetdir
 at90can128: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
-at90can128: bootloaders/at90can128/$(AVR_FREQ)/$(PROGRAM)_at90can128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+at90can128: bootloaders/at90can128/$(AVR_FREQ)/$(PROGRAM)_at90can128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-at90can128: bootloaders/at90can128/$(AVR_FREQ)/$(PROGRAM)_at90can128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+at90can128: bootloaders/at90can128/$(AVR_FREQ)/$(PROGRAM)_at90can128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-at90can128: bootloaders/at90can128/$(AVR_FREQ)/$(PROGRAM)_at90can128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+at90can128: bootloaders/at90can128/$(AVR_FREQ)/$(PROGRAM)_at90can128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-at90can128: bootloaders/at90can128/$(AVR_FREQ)/$(PROGRAM)_at90can128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+at90can128: bootloaders/at90can128/$(AVR_FREQ)/$(PROGRAM)_at90can128_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -462,15 +464,15 @@ atmega162: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega162: LDSECTIONS = -Wl,--section-start=.text=0x3c00 -Wl,--section-start=.version=0x3ffe
-atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega162: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega162: bootloaders/atmega162/$(AVR_FREQ)/$(PROGRAM)_atmega162_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -481,15 +483,15 @@ atmega164a: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega164a: LDSECTIONS = -Wl,--section-start=.text=0x3c00 -Wl,--section-start=.version=0x3ffe
-atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega164a: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega164a: bootloaders/atmega164a/$(AVR_FREQ)/$(PROGRAM)_atmega164a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega164: atmega164a
@@ -501,15 +503,15 @@ atmega164p: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega164p: LDSECTIONS = -Wl,--section-start=.text=0x3c00 -Wl,--section-start=.version=0x3ffe
-atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega164p: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega164p: bootloaders/atmega164p/$(AVR_FREQ)/$(PROGRAM)_atmega164p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega164pa: atmega164p
@@ -521,15 +523,15 @@ atmega168: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega168: LDSECTIONS = -Wl,--section-start=.text=0x3c00 -Wl,--section-start=.version=0x3ffe
-atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega168: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega168: bootloaders/atmega168/$(AVR_FREQ)/$(PROGRAM)_atmega168_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega168a: atmega168
@@ -541,15 +543,15 @@ atmega168p: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega168p: LDSECTIONS = -Wl,--section-start=.text=0x3c00 -Wl,--section-start=.version=0x3ffe
-atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega168p: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega168p: bootloaders/atmega168p/$(AVR_FREQ)/$(PROGRAM)_atmega168p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega168pa: atmega168p
@@ -561,15 +563,15 @@ atmega168pb: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega168pb: LDSECTIONS = -Wl,--section-start=.text=0x3c00 -Wl,--section-start=.version=0x3ffe
-atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega168pb: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega168pb: bootloaders/atmega168pb/$(AVR_FREQ)/$(PROGRAM)_atmega168pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -580,15 +582,15 @@ atmega169: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega169: LDSECTIONS = -Wl,--section-start=.text=0x3c00 -Wl,--section-start=.version=0x3ffe
-atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega169: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega169: bootloaders/atmega169/$(AVR_FREQ)/$(PROGRAM)_atmega169_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega169a: atmega169
@@ -600,15 +602,15 @@ atmega169p: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega169p: LDSECTIONS = -Wl,--section-start=.text=0x3c00 -Wl,--section-start=.version=0x3ffe
-atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega169p: LDSECTIONS = -Wl,--section-start=.text=0x3e00 -Wl,--section-start=.version=0x3ffe
-atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega169p: bootloaders/atmega169p/$(AVR_FREQ)/$(PROGRAM)_atmega169p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega169pa: atmega169
@@ -620,15 +622,15 @@ atmega324a: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega324a: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega324a: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega324a: bootloaders/atmega324a/$(AVR_FREQ)/$(PROGRAM)_atmega324a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega324: atmega324a
@@ -640,15 +642,15 @@ atmega324p: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega324p: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega324p: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega324p: bootloaders/atmega324p/$(AVR_FREQ)/$(PROGRAM)_atmega324p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -659,15 +661,15 @@ atmega324pa: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega324pa: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega324pa: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega324pa: bootloaders/atmega324pa/$(AVR_FREQ)/$(PROGRAM)_atmega324pa_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -678,15 +680,15 @@ atmega324pb: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega324pb: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega324pb: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega324pb: bootloaders/atmega324pb/$(AVR_FREQ)/$(PROGRAM)_atmega324pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -697,15 +699,15 @@ atmega325: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega325: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega325: bootloaders/atmega325/$(AVR_FREQ)/$(PROGRAM)_atmega325_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega325: bootloaders/atmega325/$(AVR_FREQ)/$(PROGRAM)_atmega325_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega325: bootloaders/atmega325/$(AVR_FREQ)/$(PROGRAM)_atmega325_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega325: bootloaders/atmega325/$(AVR_FREQ)/$(PROGRAM)_atmega325_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega325: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega325: bootloaders/atmega325/$(AVR_FREQ)/$(PROGRAM)_atmega325_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega325: bootloaders/atmega325/$(AVR_FREQ)/$(PROGRAM)_atmega325_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega325: bootloaders/atmega325/$(AVR_FREQ)/$(PROGRAM)_atmega325_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega325: bootloaders/atmega325/$(AVR_FREQ)/$(PROGRAM)_atmega325_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -716,15 +718,15 @@ atmega328: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega328: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega328: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega328: bootloaders/atmega328/$(AVR_FREQ)/$(PROGRAM)_atmega328_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega328a: atmega328
@@ -736,15 +738,15 @@ atmega328p: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega328p: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega328p: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega328p: bootloaders/atmega328p/$(AVR_FREQ)/$(PROGRAM)_atmega328p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega328pa: atmega328p
@@ -756,15 +758,15 @@ atmega328pb: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega328pb: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega328pb: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega328pb: bootloaders/atmega328pb/$(AVR_FREQ)/$(PROGRAM)_atmega328pb_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -775,15 +777,15 @@ atmega329: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega329: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega329: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega329: bootloaders/atmega329/$(AVR_FREQ)/$(PROGRAM)_atmega329_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega329a: atmega329
@@ -795,15 +797,15 @@ atmega329p: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega329p: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega329p: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega329p: bootloaders/atmega329p/$(AVR_FREQ)/$(PROGRAM)_atmega329p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega329pa: atmega329p
@@ -815,14 +817,14 @@ atmega640: maketargetdir
 atmega640: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega640: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega640: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega640: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega640: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega640: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega640: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega640: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega640: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega640_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -833,14 +835,14 @@ atmega644a: maketargetdir
 atmega644a: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega644a: bootloaders/atmega644a/$(AVR_FREQ)/$(PROGRAM)_atmega644a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega644a: bootloaders/atmega644a/$(AVR_FREQ)/$(PROGRAM)_atmega644a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega644a: bootloaders/atmega644a/$(AVR_FREQ)/$(PROGRAM)_atmega644a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega644a: bootloaders/atmega644a/$(AVR_FREQ)/$(PROGRAM)_atmega644a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega644a: bootloaders/atmega644a/$(AVR_FREQ)/$(PROGRAM)_atmega644a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega644a: bootloaders/atmega644a/$(AVR_FREQ)/$(PROGRAM)_atmega644a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega644a: bootloaders/atmega644a/$(AVR_FREQ)/$(PROGRAM)_atmega644a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega644a: bootloaders/atmega644a/$(AVR_FREQ)/$(PROGRAM)_atmega644a_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega644: atmega644a
@@ -852,14 +854,14 @@ atmega644p: maketargetdir
 atmega644p: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega644p: bootloaders/atmega644p/$(AVR_FREQ)/$(PROGRAM)_atmega644p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega644pa: atmega644p
@@ -871,14 +873,14 @@ atmega645: maketargetdir
 atmega645: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega645: bootloaders/atmega645/$(AVR_FREQ)/$(PROGRAM)_atmega645_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega645: bootloaders/atmega645/$(AVR_FREQ)/$(PROGRAM)_atmega645_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega645: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega645_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega645: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega645_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega645: bootloaders/atmega645/$(AVR_FREQ)/$(PROGRAM)_atmega645_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega645: bootloaders/atmega645/$(AVR_FREQ)/$(PROGRAM)_atmega645_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega645: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega645_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega645: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega645_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -889,14 +891,14 @@ atmega649: maketargetdir
 atmega649: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega649: bootloaders/atmega649/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega649: bootloaders/atmega649/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega649: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega649: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega649: bootloaders/atmega649/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega649: bootloaders/atmega649/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega649: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega649: bootloaders/atmega640/$(AVR_FREQ)/$(PROGRAM)_atmega649_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -907,14 +909,14 @@ atmega649p: maketargetdir
 atmega649p: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega649p: bootloaders/atmega649p/$(AVR_FREQ)/$(PROGRAM)_atmega649p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -925,14 +927,14 @@ atmega1280: maketargetdir
 atmega1280: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega1280: bootloaders/atmega1280/$(AVR_FREQ)/$(PROGRAM)_atmega1280_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -943,14 +945,14 @@ atmega1281: maketargetdir
 atmega1281: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega1281: bootloaders/atmega1281/$(AVR_FREQ)/$(PROGRAM)_atmega1281_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -961,14 +963,14 @@ atmega1284: maketargetdir
 atmega1284: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega1284: bootloaders/atmega1284/$(AVR_FREQ)/$(PROGRAM)_atmega1284_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -979,14 +981,14 @@ atmega1284p: maketargetdir
 atmega1284p: LDSECTIONS = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega1284p: bootloaders/atmega1284p/$(AVR_FREQ)/$(PROGRAM)_atmega1284p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -997,14 +999,14 @@ atmega2560: maketargetdir
 atmega2560: LDSECTIONS = -Wl,--section-start=.text=0x3fc00 -Wl,--section-start=.version=0x3fffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega2560: bootloaders/atmega2560/$(AVR_FREQ)/$(PROGRAM)_atmega2560_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -1015,14 +1017,14 @@ atmega2561: maketargetdir
 atmega2561: LDSECTIONS = -Wl,--section-start=.text=0x3fc00 -Wl,--section-start=.version=0x3fffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega2561: bootloaders/atmega2561/$(AVR_FREQ)/$(PROGRAM)_atmega2561_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -1033,15 +1035,15 @@ atmega3250: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega3250: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega3250: bootloaders/atmega3250/$(AVR_FREQ)/$(PROGRAM)_atmega3250_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega3250: bootloaders/atmega3250/$(AVR_FREQ)/$(PROGRAM)_atmega3250_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega3250: bootloaders/atmega3250/$(AVR_FREQ)/$(PROGRAM)_atmega3250_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega3250: bootloaders/atmega3250/$(AVR_FREQ)/$(PROGRAM)_atmega3250_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega3250: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega3250: bootloaders/atmega3250/$(AVR_FREQ)/$(PROGRAM)_atmega3250_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega3250: bootloaders/atmega3250/$(AVR_FREQ)/$(PROGRAM)_atmega3250_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega3250: bootloaders/atmega3250/$(AVR_FREQ)/$(PROGRAM)_atmega3250_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega3250: bootloaders/atmega3250/$(AVR_FREQ)/$(PROGRAM)_atmega3250_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -1052,15 +1054,15 @@ atmega3290: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega3290: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega3290: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega3290: bootloaders/atmega3290/$(AVR_FREQ)/$(PROGRAM)_atmega3290_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -1071,15 +1073,15 @@ atmega3290p: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega3290p: LDSECTIONS = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
-atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega3290p: LDSECTIONS = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega3290p: bootloaders/atmega3290p/$(AVR_FREQ)/$(PROGRAM)_atmega3290p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 atmega3290pa: atmega3290p
@@ -1091,14 +1093,14 @@ atmega6450: maketargetdir
 atmega6450: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega6450: bootloaders/atmega6450/$(AVR_FREQ)/$(PROGRAM)_atmega6450_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega6450: bootloaders/atmega6450/$(AVR_FREQ)/$(PROGRAM)_atmega6450_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega6450: bootloaders/atmega6450/$(AVR_FREQ)/$(PROGRAM)_atmega6450_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega6450: bootloaders/atmega6450/$(AVR_FREQ)/$(PROGRAM)_atmega6450_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega6450: bootloaders/atmega6450/$(AVR_FREQ)/$(PROGRAM)_atmega6450_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega6450: bootloaders/atmega6450/$(AVR_FREQ)/$(PROGRAM)_atmega6450_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega6450: bootloaders/atmega6450/$(AVR_FREQ)/$(PROGRAM)_atmega6450_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega6450: bootloaders/atmega6450/$(AVR_FREQ)/$(PROGRAM)_atmega6450_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -1109,14 +1111,14 @@ atmega6490: maketargetdir
 atmega6490: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega6490: bootloaders/atmega6490/$(AVR_FREQ)/$(PROGRAM)_atmega6490_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -1127,14 +1129,14 @@ atmega6490p: maketargetdir
 atmega6490p: LDSECTIONS = -Wl,--section-start=.text=0xfc00 -Wl,--section-start=.version=0xfffe
 # Change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM))) 
-atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
-atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega6490p: bootloaders/atmega6490p/$(AVR_FREQ)/$(PROGRAM)_atmega6490p_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -1145,15 +1147,15 @@ atmega8515: maketargetdir
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 # Move bootloader location + change name if eeprom support is preset
 atmega8515: LDSECTIONS = -Wl,--section-start=.text=0x1c00 -Wl,--section-start=.version=0x1ffe
-atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega8515: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe
-atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega8515: bootloaders/atmega8515/$(AVR_FREQ)/$(PROGRAM)_atmega8515_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
@@ -1164,15 +1166,15 @@ atmega8535: maketargetdir
 # Move bootloader location + change name if eeprom support is preset
 ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
 atmega8535: LDSECTIONS = -Wl,--section-start=.text=0x1c00 -Wl,--section-start=.version=0x1ffe
-atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.hex
+atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_BIGBOOT.lst
+atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
 endif
 else
 atmega8535: LDSECTIONS = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe
-atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).hex
+atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
 ifeq ($(ASM_OUTPUT), 1)
-atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ).lst
+atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
 endif
 endif
 
