@@ -12,8 +12,8 @@ If you're into "generic" AVR programming, I'm happy to tell you that all relevan
 * [Bootloader option](#bootloader-option)
 * [BOD option](#bod-option)
 * [Link time optimization / LTO](#link-time-optimization--lto)
+* [Printf support](#printf-support)
 * [Programmers](#programmers)
-* [Why add Arduino support for these microcontrollers?](#why-add-arduino-support-for-these-microcontrollers)
 * [Write to own flash](#write-to-own-flash)
 * **[How to install](#how-to-install)**
 	- [Boards Manager Installation](#boards-manager-installation)
@@ -44,14 +44,6 @@ Can't decide what microcontroller to choose? Have a look at the specification ta
 | **PWM pins** | 6/9<b>*</b> | 6         | 6        | 6        | 3       |
   
 <b>*</b> ATmega328PB has 9 PWM pins
-
-
-## Why add Arduino support for these microcontrollers?
-* They are all Arduino UNO compatible (drop-in replacement)
-* They're extremely popular and used in many Arduino project out there
-* They're cheap (some can be bought for less than a dollar on AliExpress and Ebay)
-* They come in DIP, TQFP and QFN packages
-* You can now choose the suited microcontroller for your project. No need to go for overkill!
 
 
 ## Supported clock frequencies
@@ -101,6 +93,12 @@ Brown out detection, or BOD for short lets the microcontroller sense the input v
 ## Link time optimization / LTO
 After Arduino IDE 1.6.11 where released, There have been support for link time optimization or LTO for short. The LTO optimizes the code at link time, making the code (often) significantly smaller without making it "slower". In Arduino IDE 1.6.11 and newer LTO is enabled by default. I've chosen to disable this by default to make sure the core keep its backwards compatibility. Enabling LTO in IDE 1.6.10 or older will return an error. 
 I encourage you to try the new LTO option and see how much smaller your code gets! Note that you don't need to hit "Burn Bootloader" in order to enable LTO. Simply enable it in the "Tools" menu, and your code is ready for compilation. If you want to read more about LTO and GCC flags in general, head over to the [GNU GCC website](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)!
+
+
+## Printf support
+Unlike the official Arduino cores, MiniCore has printf support out of the box. If you're not familiar with printf you should probably [read this first](https://www.tutorialspoint.com/c_standard_library/c_function_printf.htm). It's added to the Print class and will work with all libraries that inherit Print. Printf is a standard C function that lets you format text much easier than using Arduino's built-in print and println. Note that this implementation of printf will NOT print floats or doubles. This is a limitation of the avr-libc printf implementation on AVR microcontrollers, and nothing I can easily fix.
+
+If you're using a serial port, simply use `Serial.printf("Milliseconds since start: %ld\n", millis());`. Other libraries that inherit the Print class (and thus supports printf) are the LiquidCrystal LCD library and the U8G2 graphical LCD library.
 
 
 ## Programmers
