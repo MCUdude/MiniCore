@@ -1,7 +1,7 @@
 # PlatformIO
 
 [PlatformIO](https://platformio.org) is an open source ecosystem for embedded development. 
-It has a built-in library manager and is Arduino compatible. It supports most operating systems; Windows, MacOS, Linux 32 and 64-bit; ARM and X86.  
+It has a built-in library manager and is Arduino compatible. It supports most operating systems; Windows, MacOS, Linux 32 and 64-bit, ARM and X86.  
 And best of all, MiniCore is supported!
 
 * [What is PlatformIO?](http://docs.platformio.org/en/latest/what-is-platformio.html)
@@ -11,17 +11,21 @@ And best of all, MiniCore is supported!
 * [Project Examples](http://docs.platformio.org/en/latest/platforms/atmelavr.html#examples)
 
 
-## MiniCore + PlatformIO 
-At the moment it is not possible to burn the bootloader or set fuses using PlatformIO. You will still have to use Arduino IDE for this. 
-However, PlatformIO really shows its stength when working on large projects, often with a lot of dependencies. 
-I've made a simple platformio.ini template you can use when creating a project for a MiniCore compatible device. The most common functionality is available through this template.
-For more information about the `build` option, check out PlatformIO's [Project Configuration File Doc page](https://docs.platformio.org/page/projectconf.html).
+## MiniCore + PlatformIO
+MiniCore and PlatformIO goes great together. You can do serial uploads and upload using a dedicated programmer, but you can also let PlatformIO calulate the fuses and load the correct bootloader file, just like Arduino IDE does!
+
+PlatformIO uses the information provided in platformio.ini to calculate what fuse bits and what bootloader file to load.  Simply provide enough information and run the following commands:  
+`pio run --target fuses` to only set the fuses  
+`pio run --target bootloader` to set the fuses and burn the bootloader.
+
+You can find a platformio.ini template you can use when creating a project for a MiniCore compatible device below. The most common functionality is available in this template. More information on what each line means can be found futher down on this page.
 
 ``` ini
-; PlatformIO Project Configuration File for MiniCore
+; PlatformIO template project configuration file for MiniCore
 ; https://github.com/MCUdude/MiniCore/
 ;
 ;   Build options: build flags, source filter
+;   Hardware options: oscillator type, BOD, UART number, EEPROM retain
 ;   Upload options: custom upload port, speed, and extra flags
 ;   Library options: dependencies, extra library storages
 ;   Advanced options: extra scripting
@@ -29,6 +33,7 @@ For more information about the `build` option, check out PlatformIO's [Project C
 ; Please visit documentation for the other options
 ; https://github.com/MCUdude/MiniCore/blob/master/PlatformIO.md
 ; https://docs.platformio.org/page/projectconf.html
+; https://docs.platformio.org/en/latest/platforms/atmelavr.html
 
 
 ; ENVIRONMENT SETTINGS
@@ -42,17 +47,27 @@ board = ATmega328P
 ; Clock frequency in [Hz]
 board_build.f_cpu = 16000000L
 
+; HARDWARE SETTINGS
+; Oscillator option
+board_hardware.oscillator = external
+; Hardware UART for serial upload
+board_hardware.uart = uart0
+; Brown-out detection
+board_hardware.bod = 2.7v
+; EEPROM retain
+board_hardware.eesave = yes
+
+; UPLOAD SETTINGS
+board_upload.speed = 115200
+; Upload serial port is automatically detected by default. Override by uncommenting the line below
+;upload_port = /dev/cu.usbserial*
+
+
 ; BUILD OPTIONS
 ; Comment out to enable LTO (this line unflags it)
 build_unflags = -flto
 ; Extra build flags
 build_flags = 
-
-; UPLOAD SETTINGS
-; Upload serial port is automatically detected by default. Override by uncommenting the line below
-;upload_port = /dev/cu.usbserial*
-; Upload baud rate
-board_upload.speed = 115200
 
 ; Upload using programmer
 ;upload_protocol = usbasp
@@ -71,37 +86,91 @@ monitor_speed = 9600
 PlatformIO requires the `board` parameter to be present.
 The table below shows what board name should be used for each target
 
-| Target                                                          | Board name  |
-|-----------------------------------------------------------------|-------------|
-| ATmega328PB                                                     | ATmega328PB |
-| ATmega328P <br/> ATmega328PA                                    | ATmega328P  |
-| ATmega328                                                       | ATmega328   |
-| ATmega168PB                                                     | ATmega168PB |
-| ATmega168P <br/> ATmega168PA                                    | ATmega168P  |
-| ATmega168 <br/> ATmega168A                                      | ATmega168   |
-| ATmega88PB                                                      | ATmega88PB  |
-| ATmega88P <br/> ATmega88PA                                      | ATmega88P   |
-| ATmega88 <br/> ATmega88A                                        | ATmega88    |
-| ATmega48PB                                                      | ATmega48PB  |
-| ATmega48P <br/> ATmega48PA                                      | ATmega48P   |
-| ATmega48 <br/> ATmega48A                                        | ATmega48    |
-| ATmega8 <br/> ATmega8A                                          | ATmega8     |
+| Target                                                          | Board name    |
+|-----------------------------------------------------------------|---------------|
+| ATmega328PB                                                     | `ATmega328PB` |
+| ATmega328P/PA                                                   | `ATmega328P`  |
+| ATmega328                                                       | `ATmega328`   |
+| ATmega168PB                                                     | `ATmega168PB` |
+| ATmega168P/PA                                                   | `ATmega168P`  |
+| ATmega168/A                                                     | `ATmega168`   |
+| ATmega88PB                                                      | `ATmega88PB`  |
+| ATmega88P/PA                                                    | `ATmega88P`   |
+| ATmega88/A                                                      | `ATmega88`    |
+| ATmega48PB                                                      | `ATmega48PB`  |
+| ATmega48P/PA                                                    | `ATmega48P`   |
+| ATmega48/A                                                      | `ATmega48`    |
+| ATmega8/A                                                       | `ATmega8`     |
 
 
 ### `board_build.f_cpu`
-Holds the main clock frequency in [Hz]. 
-Note that the clock frequency and upload baud rate will have to match if uploading using a serial bootloader.  
-Below is a table with the default clocks and baud rates for MiniCore:
+Specifies the clock frequency in [Hz]. 
+Used to determine what oscillator option to choose. A capital L has to be added to the end of the frequency number.
+Below is a table with supported clocks for MiniCore. Defaults to 16 MHz if not specified.
 
-| Clock speed | Oscillator | board_build.f_cpu | board_upload.speed |
-|-------------|------------|-------------------|--------------------|
-| 20 MHz      | External   | 20000000L         | 115200             |
-| 18.432 MHz  | External   | 18432000L         | 115200             |
-| 16 MHz      | External   | 16000000L         | 115200             |
-| 12 MHz      | External   | 12000000L         | 57600              |
-| 8 MHz       | External   | 8000000L          | 57600              |
-| 8 MHz       | Internal   | 8000000L          | 38400              |
-| 1 MHz       | Internal   | 1000000L          | 9600               |
+| Clock speed | Oscillator | board_build.f_cpu         |
+|-------------|------------|---------------------------|
+| 20 MHz      | External   | `20000000L`               |
+| 18.432 MHz  | External   | `18432000L`               |
+| 16 MHz      | External   | `16000000L` (default)     |
+| 12 MHz      | External   | `12000000L`               |
+| 8 MHz       | External   | `8000000L`                |
+| 8 MHz       | Internal   | `8000000L`                |
+| 1 MHz       | Internal   | `1000000L`                |
+
+
+### `board_hardware.oscillator`
+Spefices to use the internal or an external oscillator.  
+Internal oscillator only works with `board_build.f_cpu` values `8000000L` and `1000000L`.
+
+| Oscillator option    |
+|----------------------|
+| `external` (default) |
+| `internal`           |
+
+
+### `board_hardware.uart`
+Specifies the hardware UART port used for serial upload. Use `no_bootloader` if you’re using a dedicated programmer, i.e not using a bootloader for serial upload.
+
+| Upload serial port option |
+|---------------------------|
+| `no_bootloader`           |
+| `uart0` (default)         |
+| `uart1` (328PB only)      |
+
+
+### `board_hardware.bod`
+Specifies the hardware brown-out detection. Use `disabled` to disable.
+
+| ATmega48/88/168/328 | ATmega8          |
+|---------------------|------------------|
+| `4.3v`              | `4.0v`           |
+| `2.7v` (default)    | `2.7v` (default) |
+| `1.8v`              |                  |
+| `disabled`          | `disabled`       |
+
+
+### `board_hardware.eesave`
+Specifies if the EEPROM memory should be retained when uploading using a programmer. Use `no` to disable.
+
+| EEPROM retain   |
+|-----------------|
+| `yes` (default) |
+| `no`            |
+
+
+### `board_upload.speed`
+Specifies the upload baud rate. Available baud rates is shown in the table below, had has to corrolate with `build_board.f_cpu`.  
+Recommended baud rate for the particular clock speed is in **bold text**.
+
+|             | 1000000 | 500000 | 460800 | 250000 | 230400 | 115200 | 57600  | 38400  | 19200 | 9600   |
+|-------------|---------|--------|--------|--------|--------|--------|--------|--------|-------|--------|
+| `20000000L` |         |  X     |        |  X     |        |  **X** |        |        |  X    |        |
+| `18432000L` |         |        |  X     |        |  X     |  **X** |  X     |  X     |  X    |  X     |
+| `16000000L` |  X      |  X     |        |  X     |        |  **X** |        |  X     |  X    |  X     |
+| `12000000L` |         |  X     |        |  X     |        |        |  **X** |        |  X    |  X     |
+| `8000000L`  |  X      |  X     |        |  X     |        |  X     |  X     |  **X** |  X    |  X     |
+| `1000000L`  |         |        |        |        |        |        |        |        |       |  **X** |
 
 
 ### `build_unflags`
@@ -123,11 +192,7 @@ This parameter is used to set compiler flags. This is useful if you want to for 
 
 
 ### `upload_port`
-Holds the serial port used for uploading. PlatformIO automatically detects the serial port. However, if you want to override this you can uncomment `upload_port`. Use `/dev/[port]` on Unix compatible systems, and use `COMx` on Windows.
-
-
-### `board_upload.speed`
-Upload baudrate. See [board_build.f_cpu](#board_buildf_cpu) for more details.
+Specifies the serial port used for uploading. PlatformIO automatically detects the serial port. However, if you want to override this you can uncomment `upload_port`. Use `/dev/[port]` on Unix compatible systems, and use `COMx` on Windows.
 
 
 ### `upload_protocol`
