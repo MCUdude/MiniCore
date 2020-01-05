@@ -80,9 +80,9 @@ void TwoWire1::end(void)
   twi_disable1();
 }
 
-void TwoWire1::setClock(uint32_t frequency)
+void TwoWire1::setClock(uint32_t clock)
 {
-  TWBR1 = ((F_CPU / frequency) - 16) / 2;
+  twi_setFrequency1(clock);
 }
 
 uint8_t TwoWire1::requestFrom(uint8_t address, uint8_t quantity, uint32_t iaddress, uint8_t isize, uint8_t sendStop)

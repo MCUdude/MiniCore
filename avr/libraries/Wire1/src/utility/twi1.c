@@ -90,7 +90,7 @@ void twi_init1(void)
   TWCR1 = _BV(TWEN) | _BV(TWIE) | _BV(TWEA);
 }
 
-/* 
+/*
  * Function twi_disable
  * Desc     disables twi pins
  * Input    none
@@ -106,7 +106,7 @@ void twi_disable1(void)
   digitalWrite(SCL, 0);
 }
 
-/* 
+/*
  * Function twi_slaveInit
  * Desc     sets slave address and enables interrupt
  * Input    none
@@ -116,6 +116,22 @@ void twi_setAddress1(uint8_t address)
 {
   // set twi slave address (skip over TWGCE bit)
   TWAR1 = address << 1;
+}
+
+/*
+ * Function twi_setFrequency
+ * Desc     sets twi bit rate
+ * Input    Clock frequency
+ * Output   none
+ */
+void twi_setFrequency1(uint32_t frequency)
+{
+  TWBR = ((F_CPU / frequency) - 16) / 2;
+
+  /* twi bit rate formula from atmega128 manual pg 204
+  SCL Frequency = CPU Clock Frequency / (16 + (2 * TWBR1))
+  note: TWBR1 should be 10 or higher for master mode
+  It is 72 for a 16mhz Wiring board with 100kHz TWI */
 }
 
 /* 

@@ -41,6 +41,7 @@
   void twi_init1(void);
   void twi_disable1(void);
   void twi_setAddress1(uint8_t);
+  void twi_setFrequency1(uint32_t);
   uint8_t twi_readFrom1(uint8_t, uint8_t*, uint8_t, uint8_t);
   uint8_t twi_writeTo1(uint8_t, uint8_t*, uint8_t, uint8_t, uint8_t);
   uint8_t twi_transmit1(const uint8_t*, uint8_t);
