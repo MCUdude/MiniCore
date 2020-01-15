@@ -22,8 +22,6 @@
 
   #include <inttypes.h>
 
-  //#define ATMEGA8
-
   #ifndef TWI_FREQ
   #define TWI_FREQ 100000L
   #endif
