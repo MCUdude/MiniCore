@@ -68,8 +68,6 @@ void TwoWire::begin(void)
 void TwoWire::begin(uint8_t address)
 {
   begin();
-  twi_attachSlaveTxEvent(onRequestService);
-  twi_attachSlaveRxEvent(onReceiveService);
   twi_setAddress(address);
 }
 

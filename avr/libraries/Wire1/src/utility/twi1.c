@@ -314,7 +314,6 @@ uint8_t twi_transmit1(const uint8_t* data, uint8_t length)
   }
   
   // set length and copy data into tx buffer
-  twi_txBufferLength = length;
   for(i = 0; i < length; ++i){
     twi_txBuffer[twi_txBufferLength+i] = data[i];
   }
