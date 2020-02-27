@@ -80,7 +80,7 @@ void yield(void);
   #define EXTERNAL 0
   #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
   #define INTERNAL1V1 3
-  #define INTERNAL 3  
+  #define INTERNAL 3
 
 // ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561
 #elif defined(__AVR_ATmega640__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__) \
@@ -89,18 +89,19 @@ void yield(void);
   #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
   #define INTERNAL1V1 2
   #define INTERNAL2V56 3
-  #define INTERNAL 3  
+  #define INTERNAL 3
 
 
-// ATmega164A/P, ATmega324A/P/PA, ATmega644/P, ATmega1284/P
+// ATmega164A/P, ATmega324A/P/PA/PB, ATmega644/P, ATmega1284/P
 #elif defined(__AVR_ATmega164A__) || defined(__AVR_ATmega164P__) || defined(__AVR_ATmega324A__) \
-|| defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega324P__) || defined(__AVR_ATmega644A__)  \
-|| defined(__AVR_ATmega644P__)  || defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__)   
+|| defined(__AVR_ATmega324P__) || defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega324PB__)  \
+|| defined(__AVR_ATmega644A__) || defined(__AVR_ATmega644P__)  || defined(__AVR_ATmega1284__)   \
+|| defined(__AVR_ATmega1284P__)
   #define EXTERNAL 0
   #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
   #define INTERNAL1V1 2
   #define INTERNAL2V56 3
-  #define INTERNAL 3  
+  #define INTERNAL 3
 
 #endif
 
