@@ -196,6 +196,8 @@ ifeq ($(SUPPORT_EEPROM),1)
 SUPPORT_EEPROM_CMD = -DSUPPORT_EEPROM=1
 dummy = FORCE
 endif
+else
+SUPPORT_EEPROM=0
 endif
 
 # Ability to copy flash pages
@@ -204,6 +206,8 @@ ifeq ($(COPY_FLASH_PAGES),1)
 COPY_FLASH_PAGES_CMD = -DCOPY_FLASH_PAGES=1
 dummy = FORCE
 endif
+else
+COPY_FLASH_PAGES=0
 endif
 
 
