@@ -1,0 +1,24 @@
+
+usbtinyisp.name=USBtinyISP (MiniCore)
+usbtinyisp.protocol=usbtiny
+usbtinyisp.program.tool=avrdude
+usbtinyisp.program.extra_params=
+
+usbtinyisp_slow.name=USBtinyISP slow (MiniCore)
+usbtinyisp_slow.protocol=usbtiny
+usbtinyisp_slow.program.tool=avrdude
+usbtinyisp_slow.program.extra_params=-B32
+
+usbasp.name=USBasp (MiniCore)
+usbasp.communication=usb
+usbasp.protocol=usbasp
+usbasp.program.protocol=usbasp
+usbasp.program.tool=avrdude
+usbasp.program.extra_params=-Pusb
+
+usbasp_slow.name=USBasp slow (MiniCore)
+usbasp_slow.communication=usb
+usbasp_slow.protocol=usbasp
+usbasp_slow.program.protocol=usbasp
+usbasp_slow.program.tool=avrdude
+usbasp_slow.program.extra_params=-Pusb -B32
