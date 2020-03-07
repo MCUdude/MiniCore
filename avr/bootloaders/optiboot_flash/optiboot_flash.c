@@ -461,7 +461,7 @@ void pre_main(void) {
   asm volatile (
     " rjmp 1f\n"
     " rjmp do_spm\n"
-#ifdef COPY_FLASH_PAGES_FNC
+#ifdef COPY_FLASH_PAGES
     " rjmp copy_flash_pages\n"
 #endif
     "1:\n"
