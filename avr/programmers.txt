@@ -1,3 +1,23 @@
+stk500.name=STK500 as ISP (MiniCore)
+stk500.communication=serial
+stk500.protocol=stk500
+stk500.program.protocol=stk500
+stk500.program.tool=avrdude
+stk500.program.extra_params= -P {serial.port}
+
+avrisp.name=AVR ISP (MiniCore)
+avrisp.communication=serial
+avrisp.protocol=stk500v1
+avrisp.program.protocol=stk500v1
+avrisp.program.tool=avrdude
+avrisp.program.extra_params=-P{serial.port}
+
+avrispmkii.name=AVRISP mkII (MiniCore)
+avrispmkii.communication=usb
+avrispmkii.protocol=stk500v2
+avrispmkii.program.protocol=stk500v2
+avrispmkii.program.tool=avrdude
+avrispmkii.program.extra_params=-Pusb
 
 usbtinyisp.name=USBtinyISP (MiniCore)
 usbtinyisp.protocol=usbtiny
@@ -22,3 +42,19 @@ usbasp_slow.protocol=usbasp
 usbasp_slow.program.protocol=usbasp
 usbasp_slow.program.tool=avrdude
 usbasp_slow.program.extra_params=-Pusb -B32
+
+arduinoasisp.name=Arduino as ISP (MiniCore)
+arduinoasisp.communication=serial
+arduinoasisp.protocol=stk500v1
+arduinoasisp.speed=19200
+arduinoasisp.program.protocol=stk500v1
+arduinoasisp.program.speed=19200
+arduinoasisp.program.tool=avrdude
+arduinoasisp.program.extra_params=-P{serial.port} -b{program.speed}
+
+atmel_ice.name=Atmel-ICE (AVR) (MiniCore)
+atmel_ice.communication=usb
+atmel_ice.protocol=atmelice_isp
+atmel_ice.program.protocol=atmelice_isp
+atmel_ice.program.tool=avrdude
+atmel_ice.program.extra_params=-Pusb
