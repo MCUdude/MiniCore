@@ -66,8 +66,11 @@ You might experience upload issues when using the internal oscillator. It's fact
 | 11.0592 MHz | External crystal/oscillator | Great clock for UART communication with no error              |
 | 8 MHz       | External crystal/oscillator | Common clock when working with 3.3V                           |
 | 7.3728 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
+| 4 MHz       | External crystal/oscillator |                                                               |
 | 3.6864 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
+| 2 MHz       | External crystal/oscillator |                                                               |
 | 1.8432 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
+| 1 MHz       | External crystal/oscillator |                                                               |
 | 8 MHz       | Internal oscillator         | Might cause UART upload issues. See comment above this table  |
 | 4 MHz       | Internal oscillator         | Derived from the 8 MHz internal oscillator                    |
 | 2 MHz       | Internal oscillator         | Derived from the 8 MHz internal oscillator                    |
