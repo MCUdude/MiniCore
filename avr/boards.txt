@@ -195,14 +195,14 @@ menu.bootloader=Bootloader
 
 328.menu.clock.4MHz_internal=Internal 4 MHz
 328.menu.clock.4MHz_internal.upload.speed=9600
-328.menu.clock.4MHz_internal.bootloader.low_fuses=0xa2
+328.menu.clock.4MHz_internal.bootloader.low_fuses=0xe2
 328.menu.clock.4MHz_internal.build.clkpr=-DOSC_PRESCALER=0x01
 328.menu.clock.4MHz_internal.build.clock_speed=8000000L
 328.menu.clock.4MHz_internal.build.f_cpu=4000000L
 
 328.menu.clock.2MHz_internal=Internal 2 MHz
 328.menu.clock.2MHz_internal.upload.speed=9600
-328.menu.clock.2MHz_internal.bootloader.low_fuses=0xa2
+328.menu.clock.2MHz_internal.bootloader.low_fuses=0xe2
 328.menu.clock.2MHz_internal.build.clkpr=-DOSC_PRESCALER=0x02
 328.menu.clock.2MHz_internal.build.clock_speed=8000000L
 328.menu.clock.2MHz_internal.build.f_cpu=2000000L
