@@ -13,6 +13,7 @@ If you're into "generic" AVR programming, I'm happy to tell you that all relevan
 * [BOD option](#bod-option)
 * [Link time optimization / LTO](#link-time-optimization--lto)
 * [Printf support](#printf-support)
+* [Pin macros](#pin-macros)
 * [Programmers](#programmers)
 * [Write to own flash](#write-to-own-flash)
 * **[How to install](#how-to-install)**
@@ -53,7 +54,7 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
 You might experience upload issues when using the internal oscillator. It's factory calibrated but may be a little "off" depending on the calibration, ambient temperature and operating voltage. If uploading failes while using the 8 MHz internal oscillator you have these options:
 * Edit the baudrate line in the boards.txt file, and choose either 115200, 57600, 38400 or 19200 baud.
 * Upload the code using a programmer (USBasp, USBtinyISP etc.) or skip the bootloader by holding down the shift key while clicking the "Upload" button
-* Use the 1 MHz option instead
+* Use the 4, 2 or 1 MHz option instead
 
 | Frequency   | Oscillator type             | Comment                                                       |
 |-------------|-----------------------------|---------------------------------------------------------------|
@@ -68,6 +69,8 @@ You might experience upload issues when using the internal oscillator. It's fact
 | 3.6864 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
 | 1.8432 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
 | 8 MHz       | Internal oscillator         | Might cause UART upload issues. See comment above this table  |
+| 4 MHz       | Internal oscillator         | Derived from the 8 MHz internal oscillator                    |
+| 2 MHz       | Internal oscillator         | Derived from the 8 MHz internal oscillator                    |
 | 1 MHz       | Internal oscillator         | Derived from the 8 MHz internal oscillator                    |
 
 
@@ -99,6 +102,19 @@ I encourage you to try the new LTO option and see how much smaller your code get
 Unlike the official Arduino cores, MiniCore has printf support out of the box. If you're not familiar with printf you should probably [read this first](https://www.tutorialspoint.com/c_standard_library/c_function_printf.htm). It's added to the Print class and will work with all libraries that inherit Print. Printf is a standard C function that lets you format text much easier than using Arduino's built-in print and println. Note that this implementation of printf will NOT print floats or doubles. This is a limitation of the avr-libc printf implementation on AVR microcontrollers, and nothing I can easily fix.
 
 If you're using a serial port, simply use `Serial.printf("Milliseconds since start: %ld\n", millis());`. Other libraries that inherit the Print class (and thus supports printf) are the LiquidCrystal LCD library and the U8G2 graphical LCD library.
+
+
+# Pin macros
+Note that you don't have to use the analog pin numbers to refer to the pins. You can also use some predefined macros that maps "Arduino pins" to the port and port number:
+
+```c++
+// Use PIN_PB5 macro to refer to pin PB5 (Arduino pin 13)
+digitalWrite(PIN_PB5, HIGH);
+
+// Results in the exact same compiled code
+digitalWrite(13, HIGH);
+
+```
 
 
 ## Programmers
