@@ -231,6 +231,30 @@ const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = {
 	_BV(6), // PC6 - D22 / RESET
 };
 
+#define PIN_PD0 0
+#define PIN_PD1 1
+#define PIN_PD2 2
+#define PIN_PD3 3
+#define PIN_PD4 4
+#define PIN_PD5 5
+#define PIN_PD6 6
+#define PIN_PD7 7
+#define PIN_PB0 8
+#define PIN_PB1 9
+#define PIN_PB2 10
+#define PIN_PB3 11
+#define PIN_PB4 12
+#define PIN_PB5 13
+#define PIN_PC0 14 // A0
+#define PIN_PC1 15 // A1
+#define PIN_PC2 16 // A2
+#define PIN_PC3 17 // A3
+#define PIN_PC4 18 // A4
+#define PIN_PC5 19 // A5
+#define PIN_PB6 20 // XTAL1
+#define PIN_PB7 21 // XTAL2
+#define PIN_PC6 22 // RESET
+
 const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 	NOT_ON_TIMER, /* 0 - port D */
 	NOT_ON_TIMER,
