@@ -514,6 +514,12 @@ int main(void) {
 	ch = MCUSR;
 #endif
 
+// This is necessary on targets that where the CLKPR has been set in user application
+#ifdef CLKPR
+  CLKPR = 0x80; // Enable the clock prescaler
+  CLKPR = 0x00; // Set prescaler to 1
+#endif
+
   // Skip all logic and run bootloader if MCUSR is cleared (application request)
   if (ch != 0) {
     /*
