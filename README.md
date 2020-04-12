@@ -107,8 +107,8 @@ Unlike the official Arduino cores, MiniCore has printf support out of the box. I
 If you're using a serial port, simply use `Serial.printf("Milliseconds since start: %ld\n", millis());`. Other libraries that inherit the Print class (and thus supports printf) are the LiquidCrystal LCD library and the U8G2 graphical LCD library.
 
 
-# Pin macros
-Note that you don't have to use the analog pin numbers to refer to the pins. You can also use some predefined macros that maps "Arduino pins" to the port and port number:
+## Pin macros
+Note that you don't have to use the digital pin numbers to refer to the pins. You can also use some predefined macros that maps "Arduino pins" to the port and port number:
 
 ```c++
 // Use PIN_PB5 macro to refer to pin PB5 (Arduino pin 13)
