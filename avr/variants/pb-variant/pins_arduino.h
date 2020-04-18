@@ -123,8 +123,33 @@ static const uint8_t SCL = PIN_WIRE_SCL;
 #define digitalPinToPCMSKbit(p)  (((p) <= 7) ? (p) : (((p) <= 13) ? ((p) - 8) : ((p) <= 21) ? ((p) - 14) : ((p) == 22) ? ((p) - 16) : ((p) - 23)))
 #endif
 
-
-
+#define PIN_PD0 0
+#define PIN_PD1 1
+#define PIN_PD2 2
+#define PIN_PD3 3
+#define PIN_PD4 4
+#define PIN_PD5 5
+#define PIN_PD6 6
+#define PIN_PD7 7
+#define PIN_PB0 8
+#define PIN_PB1 9
+#define PIN_PB2 10
+#define PIN_PB3 11
+#define PIN_PB4 12
+#define PIN_PB5 13
+#define PIN_PC0 14 // A0
+#define PIN_PC1 15 // A1
+#define PIN_PC2 16 // A2
+#define PIN_PC3 17 // A3
+#define PIN_PC4 18 // A4
+#define PIN_PC5 19 // A5
+#define PIN_PB6 20 // XTAL1
+#define PIN_PB7 21 // XTAL2
+#define PIN_PC6 22 // RESET
+#define PIN_PE0 23
+#define PIN_PE1 24
+#define PIN_PE2 25 // A6
+#define PIN_PE3 26 // A7
 
 #ifdef ARDUINO_MAIN
 
@@ -217,34 +242,6 @@ const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = {
 	_BV(2), // PE2 - D25 / A6
 	_BV(3), // PE3 - D26 / A7
 };
-
-#define PIN_PD0 0
-#define PIN_PD1 1
-#define PIN_PD2 2
-#define PIN_PD3 3
-#define PIN_PD4 4
-#define PIN_PD5 5
-#define PIN_PD6 6
-#define PIN_PD7 7
-#define PIN_PB0 8
-#define PIN_PB1 9
-#define PIN_PB2 10
-#define PIN_PB3 11
-#define PIN_PB4 12
-#define PIN_PB5 13
-#define PIN_PC0 14 // A0
-#define PIN_PC1 15 // A1
-#define PIN_PC2 16 // A2
-#define PIN_PC3 17 // A3
-#define PIN_PC4 18 // A4
-#define PIN_PC5 19 // A5
-#define PIN_PB6 20 // XTAL1
-#define PIN_PB7 21 // XTAL2
-#define PIN_PC6 22 // RESET
-#define PIN_PE0 23
-#define PIN_PE1 24
-#define PIN_PE2 25 // A6
-#define PIN_PE3 26 // A7
 
 const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 #if defined(__AVR_ATmega48PB__) || defined(__AVR_ATmega88PB__) || defined(__AVR_ATmega168PB__)	
