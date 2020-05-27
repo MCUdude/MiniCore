@@ -515,7 +515,7 @@ int main(void) {
 #endif
 
 // This is necessary on targets that where the CLKPR has been set in user application
-#ifdef CLKPR
+#if defined(CLKPR) && F_CPU != 1000000L
   CLKPR = 0x80; // Enable the clock prescaler
   CLKPR = 0x00; // Set prescaler to 1
 #endif

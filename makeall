@@ -344,12 +344,12 @@ do
     BUILD_COUNTER=$(($BUILD_COUNTER + 1))
     echo -e "\x1B[7m\n\n Build $BUILD_COUNTER of $((${#mcu_and_params[@]} * ${#clock_and_baud[@]} / 4)) "
     echo -e "\x1B[0mTarget $TARGET_COUNTER of $((${#mcu_and_params[@]} / 2)) " 
-    echo -e "\x1B[0mSub build $((j / 2)) of $((${#clock_and_baud[@]} / 2)) \x1B[7m" 
+    echo -e "\x1B[0mSub build $(((j+2) / 2)) of $((${#clock_and_baud[@]} / 2)) \x1B[7m"
     
      # Check if hex file already exists
      if [[ $overwrite_files = false && $delete_all_files = false ]]
      then
-       bootloader_file=(bootloaders/${mcu_and_params[$i]}/${clock_and_baud[$j]}/optiboot_flash_${mcu_and_params[$i]}_$(echo ${mcu_and_params[$i+1]} | awk -F'=| ' '{printf("UART" $6)}')_${clock_and_baud[$j+1]}_${clock_and_baud[$j]}*)
+       bootloader_file=(bootloaders/${mcu_and_params[$i]}/${clock_and_baud[$j]}/optiboot_flash_${mcu_and_params[$i]}_$(echo ${mcu_and_params[$i+1]} | awk -F'=| ' '{printf("UART" $6)}')_${clock_and_baud[$j+1]}_${clock_and_baud[$j]}_$(echo ${mcu_and_params[$i+1]} | awk -F'=| ' '{printf($2)}')*)
        if [ -e "${bootloader_file}" ];
        then
          file_exists=true
