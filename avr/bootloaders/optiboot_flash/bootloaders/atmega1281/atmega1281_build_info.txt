@@ -620,3 +620,21 @@ F_CPU:		UART NUMBER:	LED PIN:	LED FLASHES:	EEPROM SUPPORT:	FLASH PG COPY:	DESIRE
 1000000L	UART1		B5		2		Yes		No		9600		9615		0.1%	648 bytes	optiboot_flash_atmega1281_UART1_9600_1000000L_B5_BIGBOOT.hex
 
 
+Optiboot_flash build output for atmega1281 
+https://github.com/MCUdude/optiboot_flash 
+Build date and time: 27.05.2020 07:53 
+Compiler: avr-gcc 7.3.0
+ 
+F_CPU:		UART NUMBER:	LED PIN:	LED FLASHES:	EEPROM SUPPORT:	FLASH PG COPY:	DESIRED BAUD:	ACTUAL BAUD:	ERROR:	COMPILED SIZE:	OUTPUT FILE:
+1000000L	UART0		B5		2		Yes		No		9600		9615		0.1%	638 bytes	optiboot_flash_atmega1281_UART0_9600_1000000L_B5_BIGBOOT.hex
+
+
+Optiboot_flash build output for atmega1281 
+https://github.com/MCUdude/optiboot_flash 
+Build date and time: 27.05.2020 07:53 
+Compiler: avr-gcc 7.3.0
+ 
+F_CPU:		UART NUMBER:	LED PIN:	LED FLASHES:	EEPROM SUPPORT:	FLASH PG COPY:	DESIRED BAUD:	ACTUAL BAUD:	ERROR:	COMPILED SIZE:	OUTPUT FILE:
+1000000L	UART1		B5		2		Yes		No		9600		9615		0.1%	638 bytes	optiboot_flash_atmega1281_UART1_9600_1000000L_B5_BIGBOOT.hex
+
+

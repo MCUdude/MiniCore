@@ -620,3 +620,21 @@ F_CPU:		UART NUMBER:	LED PIN:	LED FLASHES:	EEPROM SUPPORT:	FLASH PG COPY:	DESIRE
 1000000L	UART1		B5		2		Yes		No		9600		9615		0.1%	652 bytes	optiboot_flash_at90can32_UART1_9600_1000000L_B5_BIGBOOT.hex
 
 
+Optiboot_flash build output for at90can32 
+https://github.com/MCUdude/optiboot_flash 
+Build date and time: 27.05.2020 07:53 
+Compiler: avr-gcc 7.3.0
+ 
+F_CPU:		UART NUMBER:	LED PIN:	LED FLASHES:	EEPROM SUPPORT:	FLASH PG COPY:	DESIRED BAUD:	ACTUAL BAUD:	ERROR:	COMPILED SIZE:	OUTPUT FILE:
+1000000L	UART0		B5		2		Yes		No		9600		9615		0.1%	642 bytes	optiboot_flash_at90can32_UART0_9600_1000000L_B5_BIGBOOT.hex
+
+
+Optiboot_flash build output for at90can32 
+https://github.com/MCUdude/optiboot_flash 
+Build date and time: 27.05.2020 07:53 
+Compiler: avr-gcc 7.3.0
+ 
+F_CPU:		UART NUMBER:	LED PIN:	LED FLASHES:	EEPROM SUPPORT:	FLASH PG COPY:	DESIRED BAUD:	ACTUAL BAUD:	ERROR:	COMPILED SIZE:	OUTPUT FILE:
+1000000L	UART1		B5		2		Yes		No		9600		9615		0.1%	642 bytes	optiboot_flash_at90can32_UART1_9600_1000000L_B5_BIGBOOT.hex
+
+
