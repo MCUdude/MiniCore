@@ -58,6 +58,7 @@ menu.bootloader=Bootloader
 328.menu.bootloader.uart0.upload.maximum_size=32256
 328.menu.bootloader.uart0.upload.protocol=arduino
 328.menu.bootloader.uart0.upload.port=UART0
+328.menu.bootloader.uart0.build.export_merged_output=true
 328.menu.bootloader.uart0.bootloader.high_fuses=0xd6
 328.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
 
@@ -65,11 +66,13 @@ menu.bootloader=Bootloader
 328.menu.bootloader.uart1.upload.maximum_size=32256
 328.menu.bootloader.uart1.upload.protocol=arduino
 328.menu.bootloader.uart1.upload.port=UART1
+328.menu.bootloader.uart1.build.export_merged_output=true
 328.menu.bootloader.uart1.bootloader.high_fuses=0xd6
 328.menu.bootloader.uart1.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
 
 328.menu.bootloader.no_bootloader=No bootloader
 328.menu.bootloader.no_bootloader.upload.maximum_size=32768
+328.menu.bootloader.no_bootloader.build.export_merged_output=false
 328.menu.bootloader.no_bootloader.bootloader.high_fuses=0xd7
 328.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
@@ -258,11 +261,13 @@ menu.bootloader=Bootloader
 168.menu.bootloader.uart0.upload.maximum_size=15872
 168.menu.bootloader.uart0.upload.protocol=arduino
 168.menu.bootloader.uart0.upload.port=UART0
+168.menu.bootloader.uart0.build.export_merged_output=true
 168.menu.bootloader.uart0.bootloader.extended_fuses=0xfc
 168.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
 
 168.menu.bootloader.no_bootloader=No bootloader
 168.menu.bootloader.no_bootloader.upload.maximum_size=16384
+168.menu.bootloader.no_bootloader.build.export_merged_output=false
 168.menu.bootloader.no_bootloader.bootloader.extended_fuses=0xfd
 168.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
@@ -447,11 +452,13 @@ menu.bootloader=Bootloader
 88.menu.bootloader.uart0.upload.maximum_size=7680
 88.menu.bootloader.uart0.upload.protocol=arduino
 88.menu.bootloader.uart0.upload.port=UART0
+88.menu.bootloader.uart0.build.export_merged_output=true
 88.menu.bootloader.uart0.bootloader.extended_fuses=0xfc
 88.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
 
 88.menu.bootloader.no_bootloader=No bootloader
 88.menu.bootloader.no_bootloader.upload.maximum_size=8192
+88.menu.bootloader.no_bootloader.build.export_merged_output=false
 88.menu.bootloader.no_bootloader.bootloader.extended_fuses=0xfd
 88.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
@@ -637,6 +644,7 @@ menu.bootloader=Bootloader
 # Bootloader select
 48.menu.bootloader.no_bootloader=No bootloader
 48.menu.bootloader.no_bootloader.upload.maximum_size=4096
+48.menu.bootloader.no_bootloader.build.export_merged_output=false
 48.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
 # Variants
@@ -806,11 +814,13 @@ menu.bootloader=Bootloader
 8.menu.bootloader.uart0.upload.maximum_size=7680
 8.menu.bootloader.uart0.upload.protocol=arduino
 8.menu.bootloader.uart0.upload.port=UART0
+8.menu.bootloader.uart0.build.export_merged_output=true
 8.menu.bootloader.uart0.bootloader.bootrst_bit=0
 8.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}.hex
 
 8.menu.bootloader.no_bootloader=No bootloader
 8.menu.bootloader.no_bootloader.upload.maximum_size=8192
+8.menu.bootloader.no_bootloader.build.export_merged_output=false
 8.menu.bootloader.no_bootloader.bootloader.bootrst_bit=1
 8.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
