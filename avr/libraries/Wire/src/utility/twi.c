@@ -445,7 +445,7 @@ ISR(TWI_vect)
     case TW_MR_DATA_ACK: // data received, ack sent
       // put byte into buffer
       twi_masterBuffer[twi_masterBufferIndex++] = TWDR;
-      __attribute__ ((fallthrough));
+      /* fall through */
     case TW_MR_SLA_ACK:  // address sent, ack received
       // ack if more bytes are expected, otherwise nack
       if(twi_masterBufferIndex < twi_masterBufferLength){
@@ -532,7 +532,7 @@ ISR(TWI_vect)
         twi_txBuffer[0] = 0x00;
       }
       // transmit first byte from buffer, fall
-      __attribute__ ((fallthrough));
+      /* fall through */
     case TW_ST_DATA_ACK: // byte sent, ack returned
       // copy data to output register
       TWDR = twi_txBuffer[twi_txBufferIndex++];
