@@ -113,8 +113,13 @@ Below is a table with supported clocks for MiniCore. Defaults to 16 MHz if not s
 | 20 MHz      | External   | `20000000L`               |
 | 18.432 MHz  | External   | `18432000L`               |
 | 16 MHz      | External   | `16000000L` (default)     |
+| 14.7456 MHz | External   | `14745600L`               |
 | 12 MHz      | External   | `12000000L`               |
+| 11.0592 MHz | External   | `11059200L`               |
 | 8 MHz       | External   | `8000000L`                |
+| 7.3728  MHz | External   | `7372800L`                |
+| 3.6864  MHz | External   | `3686400L`                |
+| 1.8432  MHz | External   | `1843200L`                |
 | 8 MHz       | Internal   | `8000000L`                |
 | 1 MHz       | Internal   | `1000000L`                |
 
@@ -161,16 +166,28 @@ Specifies if the EEPROM memory should be retained when uploading using a program
 
 ### `board_upload.speed`
 Specifies the upload baud rate. Available baud rates is shown in the table below, had has to corrolate with `build_board.f_cpu`.  
-Recommended baud rate for the particular clock speed is in **bold text**.
+  
+**Note that if you're using a programmer that communicates with Avrdude with a serial port (Arduino as ISP, STK500, etc.) the `board_upload.speed` field will interfere with the programmer's baud rate. In this case, use `board_bootloader.speed` to set the bootloader baud rate, and `board_upload.speed` to set the baud rate for the programmer.**
+
+Recommended baud rate for the particular clock speed is in **bold text**.  
+
+### `board_upload.speed`
+Specifies the upload baud rate. Available baud rates is shown in the table below, had has to corrolate with `build_board.f_cpu`.  
+Recommended baud rate for the particular clock speed is in *italic text*.
 
 |             | 1000000 | 500000 | 460800 | 250000 | 230400 | 115200 | 57600  | 38400  | 19200 | 9600   |
 |-------------|---------|--------|--------|--------|--------|--------|--------|--------|-------|--------|
-| `20000000L` |         |  X     |        |  X     |        |  **X** |        |        |  X    |        |
-| `18432000L` |         |        |  X     |        |  X     |  **X** |  X     |  X     |  X    |  X     |
-| `16000000L` |  X      |  X     |        |  X     |        |  **X** |        |  X     |  X    |  X     |
-| `12000000L` |         |  X     |        |  X     |        |        |  **X** |        |  X    |  X     |
-| `8000000L`  |  X      |  X     |        |  X     |        |  X     |  X     |  **X** |  X    |  X     |
-| `1000000L`  |         |        |        |        |        |        |        |        |       |  **X** |
+| `20000000L` |         |  X     |        |  X     |        |  *X*   |        |        |  X    |        |
+| `18432000L` |         |        |  X     |        |  X     |  *X*   |  X     |  X     |  X    |  X     |
+| `16000000L` |  X      |  X     |        |  X     |        |  *X*   |        |  X     |  X    |  X     |
+| `14745600L` |         |        |  X     |        |  X     |  *X*   |  X     |  X     |  X    |  X     |
+| `12000000L` |         |  X     |        |  X     |        |        |  *X*   |        |  X    |  X     |
+| `11059200L` |         |        |  X     |        |  X     |  X     |  *X*   |  X     |  X    |  X     |
+| `8000000L`  |  X      |  X     |        |  X     |        |  X     |  X     |  *X*   |  X    |  X     |
+| `7372800L`  |         |        |  X     |        |  X     |  *X*   |  X     |  X     |  X    |  X     |
+| `3686400L`  |         |        |  X     |        |  X     |  *X*   |  X     |  X     |  X    |  X     |
+| `1843200L`  |         |        |        |        |  X     |  *X*   |  X     |  X     |  X    |  X     |
+| `1000000L`  |         |        |        |        |        |        |        |        |       |  *X*   |
 
 
 ### `build_unflags`
@@ -182,6 +199,7 @@ This parameter is used to set compiler flags. This is useful if you want to for 
 
 | Flag                        | Default size | Description                                               |
 |-----------------------------|--------------|-----------------------------------------------------------|
+| -lprintf_flt                |              | Lets you print floats with printf (occupies ~1.5 kB)      |
 | -DSERIAL_RX_BUFFER_SIZE=128 | 64 bytes     | Sets the serial RX buffer to 128 bytes                    |
 | -DSERIAL_TX_BUFFER_SIZE=128 | 64 bytes     | Sets the serial TX buffer to 128 bytes                    |
 | -DTWI_BUFFER_SIZE=64        | 32 bytes     | Sets the TWI (i2c) buffer to 64 bytes                     |
@@ -202,7 +220,13 @@ Supports all Avrdude compatible programmers such as `usbasp`, `usbtiny` and `stk
 
 ### `upload_flags`
 Used to pass extra flags to Avrdude when uploading using a programmer.  
-Typical parameters are `-PUSB`, `-B[clock divider]` and `-b[baudrate]`
+Typical parameters are `-PUSB`, `-B[clock divider]` and `-b[baudrate]`.  
+**Note that every flag has to be on its own line, and they have to be indented with two spaces:**
+```ini
+upload_flags = -PUSB
+  -B32
+  -v
+```
 
 
 ### `monitor_port`
