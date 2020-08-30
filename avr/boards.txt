@@ -32,6 +32,7 @@
 # Menu options
 menu.clock=Clock
 menu.BOD=BOD
+menu.eeprom=EEPROM
 menu.LTO=Compiler LTO 
 menu.variant=Variant
 menu.bootloader=Bootloader
@@ -59,7 +60,7 @@ menu.bootloader=Bootloader
 328.menu.bootloader.uart0.upload.protocol=arduino
 328.menu.bootloader.uart0.upload.port=UART0
 328.menu.bootloader.uart0.build.export_merged_output=true
-328.menu.bootloader.uart0.bootloader.high_fuses=0xd6
+328.menu.bootloader.uart0.bootloader.high_fuses=0b1101{bootloader.eesave_bit}110
 328.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
 
 328.menu.bootloader.uart1=Yes (UART1 328PB only)
@@ -67,14 +68,20 @@ menu.bootloader=Bootloader
 328.menu.bootloader.uart1.upload.protocol=arduino
 328.menu.bootloader.uart1.upload.port=UART1
 328.menu.bootloader.uart1.build.export_merged_output=true
-328.menu.bootloader.uart1.bootloader.high_fuses=0xd6
+328.menu.bootloader.uart1.bootloader.high_fuses=0b1101{bootloader.eesave_bit}110
 328.menu.bootloader.uart1.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
 
 328.menu.bootloader.no_bootloader=No bootloader
 328.menu.bootloader.no_bootloader.upload.maximum_size=32768
 328.menu.bootloader.no_bootloader.build.export_merged_output=false
-328.menu.bootloader.no_bootloader.bootloader.high_fuses=0xd7
+328.menu.bootloader.no_bootloader.bootloader.high_fuses=0b1101{bootloader.eesave_bit}111
 328.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
+
+# EEPROM
+328.menu.eeprom.keep=EEPROM retained
+328.menu.eeprom.keep.bootloader.eesave_bit=0
+328.menu.eeprom.erase=EEPROM not retained
+328.menu.eeprom.erase.bootloader.eesave_bit=1
 
 # Variants
 328.menu.variant.modelP=328P / 328PA
@@ -271,6 +278,12 @@ menu.bootloader=Bootloader
 168.menu.bootloader.no_bootloader.bootloader.extended_fuses=0xfd
 168.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
+# EEPROM
+168.menu.eeprom.keep=EEPROM retained
+168.menu.eeprom.keep.bootloader.eesave_bit=0
+168.menu.eeprom.erase=EEPROM not retained
+168.menu.eeprom.erase.bootloader.eesave_bit=1
+
 # Variants
 168.menu.variant.modelP=168P / 168PA
 168.menu.variant.modelP.bootloader.cksel_bits=0111
@@ -289,13 +302,13 @@ menu.bootloader=Bootloader
 
 # Brown out detection
 168.menu.BOD.2v7=BOD 2.7V
-168.menu.BOD.2v7.bootloader.high_fuses=0xd5
+168.menu.BOD.2v7.bootloader.high_fuses=0b1101{bootloader.eesave_bit}101
 168.menu.BOD.4v3=BOD 4.3V
-168.menu.BOD.4v3.bootloader.high_fuses=0xd4
+168.menu.BOD.4v3.bootloader.high_fuses=0b1101{bootloader.eesave_bit}100
 168.menu.BOD.1v8=BOD 1.8V
-168.menu.BOD.1v8.bootloader.high_fuses=0xd6
+168.menu.BOD.1v8.bootloader.high_fuses=0b1101{bootloader.eesave_bit}110
 168.menu.BOD.disabled=BOD disabled
-168.menu.BOD.disabled.bootloader.high_fuses=0xd7
+168.menu.BOD.disabled.bootloader.high_fuses=0b1101{bootloader.eesave_bit}111
 
 # Compiler link time optimization
 168.menu.LTO.Os=LTO Disabled
@@ -462,6 +475,12 @@ menu.bootloader=Bootloader
 88.menu.bootloader.no_bootloader.bootloader.extended_fuses=0xfd
 88.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
+# EEPROM
+88.menu.eeprom.keep=EEPROM retained
+88.menu.eeprom.keep.bootloader.eesave_bit=0
+88.menu.eeprom.erase=EEPROM not retained
+88.menu.eeprom.erase.bootloader.eesave_bit=1
+
 # Variants
 88.menu.variant.modelP=88P / 88PA
 88.menu.variant.modelP.bootloader.cksel_bits=0111
@@ -480,13 +499,13 @@ menu.bootloader=Bootloader
 
 # Brown out detection
 88.menu.BOD.2v7=BOD 2.7V
-88.menu.BOD.2v7.bootloader.high_fuses=0xd5
+88.menu.BOD.2v7.bootloader.high_fuses=0b1101{bootloader.eesave_bit}101
 88.menu.BOD.4v3=BOD 4.3V
-88.menu.BOD.4v3.bootloader.high_fuses=0xd4
+88.menu.BOD.4v3.bootloader.high_fuses=0b1101{bootloader.eesave_bit}100
 88.menu.BOD.1v8=BOD 1.8V
-88.menu.BOD.1v8.bootloader.high_fuses=0xd6
+88.menu.BOD.1v8.bootloader.high_fuses=0b1101{bootloader.eesave_bit}110
 88.menu.BOD.disabled=BOD Disabled
-88.menu.BOD.disabled.bootloader.high_fuses=0xd7
+88.menu.BOD.disabled.bootloader.high_fuses=0b1101{bootloader.eesave_bit}111
 
 # Compiler link time optimization
 88.menu.LTO.Os=LTO Disabled
@@ -647,6 +666,12 @@ menu.bootloader=Bootloader
 48.menu.bootloader.no_bootloader.build.export_merged_output=false
 48.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
+# EEPROM
+48.menu.eeprom.keep=EEPROM retained
+48.menu.eeprom.keep.bootloader.eesave_bit=0
+48.menu.eeprom.erase=EEPROM not retained
+48.menu.eeprom.erase.bootloader.eesave_bit=1
+
 # Variants
 48.menu.variant.modelP=48P / 48PA
 48.menu.variant.modelP.bootloader.cksel_bits=0111
@@ -665,13 +690,13 @@ menu.bootloader=Bootloader
 
 # Brown out detection
 48.menu.BOD.2v7=BOD 2.7V
-48.menu.BOD.2v7.bootloader.high_fuses=0xd5
+48.menu.BOD.2v7.bootloader.high_fuses=0b1101{bootloader.eesave_bit}101
 48.menu.BOD.4v3=BOD 4.3V
-48.menu.BOD.4v3.bootloader.high_fuses=0xd4
+48.menu.BOD.4v3.bootloader.high_fuses=0b1101{bootloader.eesave_bit}100
 48.menu.BOD.1v8=BOD 1.8V
-48.menu.BOD.1v8.bootloader.high_fuses=0xd6
-48.menu.BOD.disabled=BOD disabled
-48.menu.BOD.disabled.bootloader.high_fuses=0xd7
+48.menu.BOD.1v8.bootloader.high_fuses=0b1101{bootloader.eesave_bit}110
+48.menu.BOD.disabled=BOD Disabled
+48.menu.BOD.disabled.bootloader.high_fuses=0b1101{bootloader.eesave_bit}111
 
 # Compiler link time optimization
 48.menu.LTO.Os=LTO disabled
@@ -802,7 +827,7 @@ menu.bootloader=Bootloader
 8.bootloader.unlock_bits=0x3f
 8.bootloader.lock_bits=0x0f
 8.bootloader.low_fuses=0b{bootloader.bod_bits}{bootloader.sut_cksel_bits}
-8.bootloader.high_fuses=0b110{bootloader.ckopt_bit}010{bootloader.bootrst_bit}
+8.bootloader.high_fuses=0b110{bootloader.ckopt_bit}{bootloader.eesave_bit}10{bootloader.bootrst_bit}
 8.build.core=MCUdude_corefiles
 8.build.variant=standard
 8.build.board=AVR_ATmega8
@@ -823,6 +848,12 @@ menu.bootloader=Bootloader
 8.menu.bootloader.no_bootloader.build.export_merged_output=false
 8.menu.bootloader.no_bootloader.bootloader.bootrst_bit=1
 8.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
+
+# EEPROM
+8.menu.eeprom.keep=EEPROM retained
+8.menu.eeprom.keep.bootloader.eesave_bit=0
+8.menu.eeprom.erase=EEPROM not retained
+8.menu.eeprom.erase.bootloader.eesave_bit=1
 
 # Brown out detection - This is the first part of the low fuse bit concatenation
 8.menu.BOD.2v7=BOD 2.7V
