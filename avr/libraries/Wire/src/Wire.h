@@ -30,6 +30,8 @@
 // WIRE_HAS_END means Wire has end()
 #define WIRE_HAS_END 1
 
+#ifndef TWI1_vect
+
 class TwoWire : public Stream
 {
   private:
@@ -79,7 +81,87 @@ class TwoWire : public Stream
     using Print::write;
 };
 
-extern TwoWire Wire;
+#else
+
+class TwoWire : public Stream
+{
+  private:
+    int bufferLength;
+    uint8_t* rxBuffer;
+    uint8_t rxBufferIndex;
+    uint8_t rxBufferLength;
+
+    uint8_t txAddress;
+    uint8_t* txBuffer;
+    uint8_t txBufferIndex;
+    uint8_t txBufferLength;
+
+    uint8_t transmitting;
+    void (*user_onRequest)(void);
+    void (*user_onReceive)(int);
+    void setAddress();
+    void (*tw_init)(void);
+    void (*tw_disable)(void);
+    void (*tw_setAddress)(uint8_t);
+    void (*tw_setFrequency)(uint32_t);
+    uint8_t (*tw_readFrom)(uint8_t, uint8_t*, uint8_t, uint8_t);
+    uint8_t (*tw_writeTo)(uint8_t, uint8_t*, uint8_t, uint8_t, uint8_t);
+    uint8_t (*tw_transmit)(const uint8_t*, uint8_t);
+    void (*tw_reply)(uint8_t);
+    void (*tw_stop)(void);
+    void (*tw_releaseBus)(void);
+  public:
+    TwoWire(int bufferLength,
+            void (*tw_init)(void),
+            void (*tw_disable)(void),
+            void (*tw_setAddress)(uint8_t),
+            void (*tw_setFrequency)(uint32_t),
+            uint8_t (*tw_readFrom)(uint8_t, uint8_t*, uint8_t, uint8_t),
+            uint8_t (*tw_writeTo)(uint8_t, uint8_t*, uint8_t, uint8_t, uint8_t),
+            uint8_t (*tw_transmit)(const uint8_t*, uint8_t),
+            void (*tw_reply)(uint8_t),
+            void (*tw_stop)(void),
+            void (*twi_releaseBus)(void),
+            void (*tw_attachSlaveRxEvent)( void (*onReceive)(uint8_t*, int) ),
+            void (*onReceive)(uint8_t*, int),
+            void (*tw_attachSlaveTxEvent)( void (*onTrasmit)(void) ),
+            void (*onTrasmit)(void));
+    ~TwoWire();
+    void begin();
+    void begin(uint8_t);
+    void begin(int);
+    void end();
+    void setClock(uint32_t);
+    void beginTransmission(uint8_t);
+    void beginTransmission(int);
+    uint8_t endTransmission(void);
+    uint8_t endTransmission(uint8_t);
+    uint8_t requestFrom(uint8_t, uint8_t);
+    uint8_t requestFrom(uint8_t, uint8_t, uint8_t);
+    uint8_t requestFrom(uint8_t, uint8_t, uint32_t, uint8_t, uint8_t);
+    uint8_t requestFrom(int, int);
+    uint8_t requestFrom(int, int, int);
+    virtual size_t write(uint8_t);
+    virtual size_t write(const uint8_t *, size_t);
+    virtual int available(void);
+    virtual int read(void);
+    virtual int peek(void);
+    virtual void flush(void);
+    void onReceive( void (*)(int) );
+    void onRequest( void (*)(void) );
+
+    void onRequestService(void);
+    void onReceiveService(uint8_t*, int);
+
+    inline size_t write(unsigned long n) { return write((uint8_t)n); }
+    inline size_t write(long n) { return write((uint8_t)n); }
+    inline size_t write(unsigned int n) { return write((uint8_t)n); }
+    inline size_t write(int n) { return write((uint8_t)n); }
+    using Print::write;
+};
 
 #endif
 
+extern TwoWire Wire;
+
+#endif
