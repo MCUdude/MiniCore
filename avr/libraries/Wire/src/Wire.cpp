@@ -18,6 +18,7 @@
  
   Modified 2012 by Todd Krein (todd@krein.org) to implement repeated starts
   Modified 2017 by Chuck Todd (ctodd@cableone.net) to correct Unconfigured Slave Mode reboot
+  Modified 2020 by Asuki Kono (asukiaaa@gmail.com) to use TwoWire class for Wire1
 */
 
 extern "C" {
