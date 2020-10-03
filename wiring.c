@@ -183,50 +183,84 @@ void delay(unsigned long ms)
   }
 }
 
-/* Delay for the given number of microseconds.  Assumes a 1, 8, 12, 16, 18.432, 20, 24 or 32 MHz clock. */
+/* Delay for the given number of microseconds.
+ * Assumes a 1, 1.8432, 2, 3.6864, 4, 7.3728, 8, 9.216, 10, 11.0592, 12, 14.7456, 16,
+ * 18.432, 20, 24, 25 or 32 MHz clock. */
+
+#define _MORENOP_ ""
+
+/* Link time optimization (LTO for short) has been supported by the IDE since v1.6.11.
+ * In Arduino IDE 1.6.11 and newer LTO is enabled by default.  The LTO optimizes the code
+ * at link time, making the code (often) significantly smaller without making it "slower"
+ * and sometimes destroy acccurate software timings like delayMicroseconds() with lower values.
+ * To avoid LTO optimization, the line of delayMicrosecons() definition in arduino.h must be replace to this:
+ * void delayMicroseconds(unsigned int) __attribute__ ((noinline)) ;
+ */
 void delayMicroseconds(unsigned int us)
 {
-  // call = 4 cycles + 2 to 4 cycles to init us(2 for constant delay, 4 for variable)
+  // call = 4 cycles + 1 to 4 cycles to init us(2 for constant delay, 4 for variable,
+  //                                            1 for register variable)
 
   // calling avrlib's delay_us() function with low values (e.g. 1 or
   // 2 microseconds) gives delays longer than desired.
   //delay_us(us);
-#if F_CPU >= 32000000L
-  // zero delay fix
-  if (!us) return; //  = 3 cycles, (4 when true)
 
-  // the following loop takes a 1/8 of a microsecond (4 cycles)
-  // per iteration, so execute it eight times for each microsecond of
+#if F_CPU >= 32000000L
+  // the following loop takes a 1/4 of a microsecond (8 cycles with nops)
+  // per iteration, so execute it four times for each microsecond of
   // delay requested.
-  us <<= 3; // x8 us, = 6 cycles
+  us <<= 2; // x4 us, = 4 cycles
+
+  // 32 MHz is two times faster than 16 MHz so need more nop in the
+  // wait cycle and keep the same delay capability than 16 MHz
+#undef  _MORENOP_
+#define _MORENOP_ " nop \n\t  nop \n\t  nop \n\t  nop \n\t"
 
   // account for the time taken in the preceeding commands.
-  // we just burned 21 (23) cycles above, remove 5, (5*4=20)
-  // us is at least 8 so we can substract 5
-  us -= 5; //=2 cycles
+  // we just burned 16 (18) cycles above, remove 3, (2*8=16)
+  // us is at least 4 so we can substract 2
+  us -= 2; // = 2 cycles
+
+// # elif F_CPU >= 29491200L
+
+#elif F_CPU >= 25000000L
+  // the following loop takes a 1/5 of a microsecond (5 cycles)
+  // per iteration, so execute it six times for each microsecond of
+  // delay requested.
+  us = (us << 2) + us; // x5 us, = 7 cycles
+
+#undef  _MORENOP_
+#define _MORENOP_ " nop \n\t"
+
+  // account for the time taken in the preceeding commands.
+  // we just burned 19 (21) cycles above, remove 4, (4*5=20)
+  // us is at least 5 so we can substract 4
+  us -= 4; // = 2 cycles
 
 #elif F_CPU >= 24000000L
-  // zero delay fix
-  if (!us) return; //  = 3 cycles, (4 when true)
+  // for the 24 MHz external clock if someone is working with USB
 
   // the following loop takes a 1/6 of a microsecond (4 cycles)
   // per iteration, so execute it six times for each microsecond of
   // delay requested.
-  us *= 6; // x6 us, = 7 cycles
+  us *= 6; // x6 us, = 9 cycles [{ us = (us<<2)+(us<<1); = 9 cycles too }]
 
   // account for the time taken in the preceeding commands.
-  // we just burned 22 (24) cycles above, remove 5, (5*4=20)
+  // we just burned 21 (23) cycles above, remove 5, (5*4=20)
   // us is at least 6 so we can substract 5
-  us -= 5; //=2 cycles
+  us -= 5; // = 2 cycles
+
+// #elif F_CPU >= 22118400L
 
 #elif F_CPU >= 20000000L
-  // for a one-microsecond delay, simply return.  the overhead
-  // of the function call takes 18 (20) cycles, which is 1us
   __asm__ __volatile__ (
     "nop" "\n\t"
     "nop" "\n\t"
     "nop" "\n\t"
-    "nop"); //just waiting 4 cycles
+    "nop" "\n\t"
+    "nop"); // just waiting 5 cycles
+  // for a one-microsecond delay, simply return.  the overhead
+  // of the function call takes 19 (21) cycles, which is 1us
   if (us <= 1) return; //  = 3 cycles, (4 when true)
 
   // the following loop takes a 1/5 of a microsecond (4 cycles)
@@ -235,52 +269,50 @@ void delayMicroseconds(unsigned int us)
   us = (us << 2) + us; // x5 us, = 7 cycles
 
   // account for the time taken in the preceeding commands.
-  // we just burned 26 (28) cycles above, remove 7, (7*4=28)
-  // us is at least 10 so we can substract 7
-  us -= 7; // 2 cycles
+  // we just burned 27 (29) cycles above, remove 7, (7*4=28)
+  // to 2nd us is at least 10 so we can substract 7
+  us -= 7; // = 2 cycles
 
 #elif F_CPU >= 18432000L
-  // for a one-microsecond delay, simply return.  the overhead
-  // of the function call takes 17 (19) cycles, which is aprox. 1us
   __asm__ __volatile__ (
     "nop" "\n\t"
     "nop" "\n\t"
     "nop" "\n\t"
-    "nop"); //just waiting 4 cycles
-
-  if (us <= 1) //  = 3 cycles, (4 when true)
-    return;
+    "nop"); // just waiting 4 cycles
+  // for a one-microsecond delay, simply return.  the overhead
+  // of the function call takes 18 (20) cycles, which is aprox. 1us
+  if (us <= 1) return; // = 3 cycles, (4 when true)
 
   // the following loop takes nearly 1/5 (0.217%) of a microsecond (4 cycles)
   // per iteration, so execute it five times for each microsecond of
   // delay requested.
   us = (us << 2) + us; // x5 us, = 7 cycles
 
-  // user wants to wait longer than 9us - here we can use approximation with multiplication
-  if (us > 36) // 3 cycles
+                       // +1 cycle (register save)
+  // user wants to wait longer than 3 us
+  if (us > 15) // = 3 cycles
   {
     // Since the loop is not accurately 1/5 of a microsecond we need
-    // to multiply us by 0,9216 (18.432 / 20)
-    us = (us >> 1) + (us >> 2) + (us >> 3) + (us >> 4); // x0.9375 us, = 20 cycles (TODO: the cycle count needs to be validated)
+    // to multiply us by 0.9216 (18.432 / 20)
+    us = (us * 60398L) >> 16;   // x0.9216 us = 29 cycles (60398 = 0.9216 * 0x10000L)
 
     // account for the time taken in the preceeding commands.
-    // we just burned 45 (47) cycles above, remove 12, (12*4=48) (TODO: calculate real number of cycles burned)
-    // additionaly, since we are not 100% precise (we are slower), subtract a bit more to fit for small values
-    // us is at least 46, so we can substract 18
-    us -= 19; // 2 cycles
-  } 
-  
+    // we just burned 59 (61) cycles above, remove 15, (15*4=60)
+    us -= 15; // = 2 cycles
+  }
   else 
-  { 
+  {
     // account for the time taken in the preceeding commands.
-    // we just burned 30 (32) cycles above, remove 8, (8*4=32)
-    // us is at least 10, so we can substract 8
-    us -= 8; // 2 cycles
+    // we just burned 33 (35) cycles above, remove 9, (9*4=36)
+
+             // 1 cycle when if jump here
+    us -= 9; // 2 cycles
+             // 2 cycles to jump back to delay cycle.
   }
 
 #elif F_CPU >= 16000000L
   // for a one-microsecond delay, simply return.  the overhead
-  // of the function call takes 14 (16) cycles, which is 1us
+  // of the function call takes 14 (16) cycles, which is 1 us
   if (us <= 1) return; //  = 3 cycles, (4 when true)
 
   // the following loop takes 1/4 of a microsecond (4 cycles)
@@ -290,39 +322,43 @@ void delayMicroseconds(unsigned int us)
 
   // account for the time taken in the preceeding commands.
   // we just burned 19 (21) cycles above, remove 5, (5*4=20)
-  // us is at least 8 so we can substract 5
+  // to 2nd us is at least 8 so we can substract 5
   us -= 5; // = 2 cycles,
 
 #elif F_CPU >= 14745600L
-  // The overhead of the function call is 14 (16) cycles which is ~1 us
-  if (us <= 2)
-    return;
+  // The overhead of the function call is 14 (16) cycles which is 1 us
+  if (us <= 1) return; //  = 3 cycles, (4 when true)
 
-  else if (us <= 9) 
+  us <<= 2; // x4 us, = 4 cycles
+
+                       // +1 cycle (register save)
+  // user wants to wait longer than 3 us
+  if (us > 15) // = 3 cycles
   {
-    us -= 2; // The requested microseconds are too small to multiplicate correct, so we do an approximation
-    us = (us << 2); // Subtract microseconds that were wasted in this function
+    // Since the loop is not accurately 1/4 of a microsecond we need
+    // to multiply us by 0.9216 (14.7456 / 16)
+    us = (us * 60398L) >> 16;   // x0.9216 us = 29 cycles (60398 = 0.9216 x 0x10000L)
+
+    // account for the time taken in the preceeding commands.
+    // we just burned 53 (57) cycles above, remove 13, (13*4=52)
+    us -= 13; // = 2 cycles
   }
   else
   {
-    // The following loop takes 0.27126 microseconds (4 cycles)
-    // per iteration, so execute it us*3.6864 times
-    // for each microsecond requested
-    us = (us << 2) - (us >> 2) - (us >> 4); // multiply with 3.6875
-    us -= 16; // Subtract microseconds that were wasted in this function
+    // account for the time taken in the preceeding commands.
+    // we just burned 27 (29) cycles above, remove 7, (7*4=28)
 
-     __asm__ __volatile__ (
-    "nop" "\n\t"
-    "nop" "\n\t"
-    "nop"); // Wait 3 cycles to accomodate imprecisions in approximation
-  } 
+             // 1 cycle when if jump here
+    us -= 7; // 2 cycles
+             // 2 cycles to jump back to delay cycle.
+  }
 
 #elif F_CPU >= 12000000L
   // for the 12 MHz clock if somebody is working with USB
 
   // for a 1 microsecond delay, simply return.  the overhead
-  // of the function call takes 14 (16) cycles, which is 1.5us
-  if (us <= 1) return; //  = 3 cycles, (4 when true)
+  // of the function call takes 14 (16) cycles, which is 1.2 us
+  if (us <= 1) return; // = 3 cycles, (4 when true)
 
   // the following loop takes 1/3 of a microsecond (4 cycles)
   // per iteration, so execute it three times for each microsecond of
@@ -332,32 +368,91 @@ void delayMicroseconds(unsigned int us)
   // account for the time taken in the preceeding commands.
   // we just burned 20 (22) cycles above, remove 5, (5*4=20)
   // us is at least 6 so we can substract 5
-  us -= 5; //2 cycles
+  us -= 5; // = 2 cycles
 
 #elif F_CPU >= 11059200L
-  // The overhead of the function call is 14 (16) cycles which is ~2 us
-  if (us <= 2)
-    return;
+  // the overhead of the function call is 14 (16) cycles which is ~1.3 us
+  if (us <= 2) return; // = 3 cycles, (4 when true)
 
-  else if (us <= 5)
+  us = (us << 1) + us; // x3 us, = 5 cycles
+
+                       // +1 cycle (register save)
+  // user wants to wait longer than 4 us
+  if (us > 14) // = 3 cycles
   {
-    // The requested microseconds are too small to multiplicate correct, so we do an approximation
-    us -= 2; // Subtract microseconds that were wasted in this function
-    us = (us << 1) + (us >> 1) - (us >> 2);
-  }
+    // since the loop is not accurately 1/3 of a microsecond we need
+    // to multiply us by 0.9216 (11.0592 / 12)
+    us = (us * 60398L) >> 16;   // x0.9216 us = 29 cycles (60398 = 0.9216 x 0x10000L)
 
+    // account for the time taken in the preceeding commands.
+    // we just burned 53 (55) cycles above, remove 13, (13*4=52)
+    us -= 13; // = 2 cycles
+  }
   else
   {
-    us = (us << 1) + (us >> 1) + (us >> 2) + (us >> 5); // multiply with 2.78125
-    us -= 14; // Subtract microseconds that were wasted in this function
+    // account for the time taken in the preceeding commands.
+    // we just burned 27 (29) cycles above, remove 7, (7*4=28)
+
+             // 1 cycle when if jump here
+    us -= 7; // 2 cycles
+             // 2 cycles to jump back to delay cycle.
+  }
+
+#elif F_CPU >= 10000000L
+  // for the 10 MHz clock
+
+  // for a 1 or 2 microsecond delay, simply return.  the overhead
+  // of the function call takes 14 (16) cycles, which is 1.5 us
+  if (us <= 2) return; // = 3 cycles, (4 when true)
+
+  // the following loop takes 2/5 of a microsecond (4 cycles)
+  // per iteration, so execute it three times for each microsecond of
+  // delay requested.
+  us = (us << 1) + (us >> 1); // x2.5 us, = 7 cycles
+
+  // account for the time taken in the preceeding commands.
+  // we just burned 22 (24) cycles above, remove 5, (5*4=20)
+  // us is at least 20 so we can substract 5
+  us -= 5; // = 2 cycles
+
+#elif F_CPU >= 9216000L
+  // the overhead of the function call is 14 (16) cycles which is ~1.5 us
+  if (us <= 3) return; // = 3 cycles, (4 when true)
+
+  us = (us << 2) + us ; // x2.5x2 us, = 7 cycles
+
+                       // +1 cycle (register save)
+  // user wants to wait longer than 6 us
+  if (us > 30) // = 3 cycles
+  {
+    // since the loop is not accurately 2/5 of a microsecond we need
+    // to multiply us by 0.9216 (11.0592 / 12)
+    us = (us * 30199L) >> 16;   // x(0.9216/2) us = 29 cycles (30199 = 0.4608 x 0x10000L)
+
+    // account for the time taken in the preceeding commands.
+    // we just burned 53 (55) cycles above, remove 13, (13*4=52)
+    us -= 13; // = 2 cycles
+  }
+  else
+  {
+    // account for the time taken in the preceeding commands.
+    // we just burned 31 (33) cycles above, remove 8, (8*4=32)
+
+              // 1 cycle when if jump here
+    us >>= 1; // 2 cycles restore x2.5 us
+    us -=  8; // 2 cycles
+              // 2 cycles to jump back to delay cycle.
   }
 
 #elif F_CPU >= 8000000L
-  // for the 8 MHz internal clock
+  // for the 8 MHz clock
+  __asm__ __volatile__ (
+    "nop" "\n\t"
+    "nop"); //just waiting 2 cycles
 
   // for a 1 and 2 microsecond delay, simply return.  the overhead
-  // of the function call takes 14 (16) cycles, which is 2us
-  if (us <= 2) return; //  = 3 cycles, (4 when true)
+  // of the function call takes 16 (18) cycles, which is 2us
+  if (us <= 2) return; // = 3 cycles, (4 when true)
 
   // the following loop takes 1/2 of a microsecond (4 cycles)
   // per iteration, so execute it twice for each microsecond of
@@ -365,98 +460,121 @@ void delayMicroseconds(unsigned int us)
   us <<= 1; //x2 us, = 2 cycles
 
   // account for the time taken in the preceeding commands.
-  // we just burned 17 (19) cycles above, remove 4, (4*4=16)
-  // us is at least 6 so we can substract 4
-  us -= 4; // = 2 cycles
+  // we just burned 19 (21) cycles above, remove 5, (5*4=20)
+  // us is at least 6 so we can substract 5
+  us -= 5; // = 2 cycles
 
 #elif F_CPU >= 7372800L
-  // The overhead of the function call is 14 (16) cycles which is ~2 us
-  if (us <= 2)
-    return;
+  __asm__ __volatile__ ("nop"); // just waiting 1 cycle
 
-  else if (us <= 12)
+  // for a 1, 2 and 3 microsecond delay, simply return. the overhead
+  // of the function call takes 15 (17) cycles, which is 2 us
+  if (us <= 3) return; // = 3 cycles, (4 when true)
+
+  us <<= 1; //x2 us, = 2 cycles
+
+                       // +1 cycle (register save)
+  // user wants to wait longer than 7 us
+  if (us > 15) // = 3 cycles
   {
-    // The requested microseconds are too small to multiplicate correct, so we do an approximation
-    us -= 2; // Subtract microseconds that were wasted in this function
-    us = us + (us >> 1) - (us >> 4);
-  }
+    // since the loop is not accurately 1/2 of a microsecond we need
+    // to multiply us by 0.9216 (7.3728 / 8)
+    us = (us * 60398L) >> 16;   // x0.9216 us = 29 cycles (60398 = 0.9216 x 0x10000L)
 
+    // account for the time taken in the preceeding commands.
+    // we just burned 52 (54) cycles above, remove 13, (13*4=52)
+    // (50 cycles = 6.78 us) + (12 cycles = 1.63 us) = 8.41 us when 8 us wanted
+    us -= 13; // = 2 cycles
+  }
   else
   {
-    // The following loop takes 0.5425 microseconds (4 cycles)
-    // per iteration, so execute it us*1.8432 times
-    // for each microsecond requested
-    us = (us << 1) - (us >> 3) - (us >> 4) + (us >> 5); // Multiply with 1.84375
-    us -= 24;
+    // account for the time taken in the preceeding commands.
+    // we just burned 26 (28) cycles above, remove 7, (7*4=28)
+
+             // 1 cycle when if jump here
+    us -= 7; // 2 cycles
+             // 2 cycles to jump back to delay cycle.
   }
 
 #elif F_CPU >= 4000000L
-  // The overhead of the function call is 14 (16) cycles which is 4 us
-  if (us <= 2)
-    return;
+  __asm__ __volatile__ ("nop"); // just waiting 1 cycle
+  // the overhead of the function call is 15 (17) cycles which is 4 us
+  if (us <= 4) return; // = 3 cycles, (4 when true)
 
-  // Subtract microseconds that were wasted in this function
-  us -= 2;
+  // subtract microseconds that were wasted in this function
+  us -= 4; // = 2 cycles
 
-  // We don't need to multiply here because one request microsecond is exactly one loop cycle
+  // we don't need to multiply here because one request microsecond is exactly one loop cycle
 
 #elif F_CPU >= 3686400L
-  // The overhead of the function call is 14 (16) cycles which is ~6 us
-  if (us <= 7)
-    return;
+  // for less than 7 microsecond delay, simply return. the overhead
+  // of the function call takes 14 (16) cycles, which is almost 4 us
+  if (us <= 6) return; // = 3 cycles, (4 when true)
 
-  else if (us <= 30)
+                       // +1 cycle (register save)
+  // user wants to wait longer than 12 us
+  if (us > 12) // = 3 cycles
   {
-    // The requested microseconds are too small to multiplicate correct, so we do an approximation
-    us -= 6; // Subtract microseconds that were wasted in this function
-    us = (us >> 1) + (us >> 2) - (us >> 5); // Multiply with 0.71875
-  }
+    // since the loop is not accurately 1 microsecond we need
+    // to multiply us by 0.9216 ( = 3.6864 / 4)
+    us = (us * 60398L) >> 16;   // x0.9216 us = 29 cycles (60398 = 0.9216 x 0x10000L)
 
+    // account for the time taken in the preceeding commands.
+    // we just burned 47 (49) cycles above, remove 12, (12*4=48)
+    us -= 12; // = 2 cycles
+  }
   else
   {
-    // The following loop takes 1.085 microseconds (4 cycles)
-    // per iteration, so execute it us*0.9216 times
-    // for each microsecond requested
-    us = us - (us >> 4) - (us >> 6); // multiply with 0.9216
-    us -= 16;  // Subtract microseconds that were wasted in this function
+    // account for the time taken in the preceeding commands.
+    // we just burned 21 (23) cycles above, remove 6 microseconds
+
+             // 1 cycle when if jump here
+    us -= 6; // 2 cycles
+             // 2 cycles to jump back to delay cycle.
   }
+
+  // we don't need to multiply here because one request microsecond is almost one loop cycle
 
 #elif F_CPU >= 2000000L
-  // The overhead of the function call is 14 (16) cycles which is 8.68 us
-  // Plus the if-statement that takes 3 cycles (4 when true): ~11us
-  if (us <= 13)
-    return;
+  // the overhead of the function call is 14 (16) cycles which is ~7 us
+  // if someone request less than 11 us it will delay ~7 microseconds
+  if (us <= 10) return;
 
-  // Subtract microseconds that were wasted in this function
-  us -= 11; // 2 cycles
+  // Subtract microseconds (9) that were wasted in this function
+  // so we can substract 9 ( every 2nd delay accurate 11 us and above)
+  us -= 9;  // = 2 cycles
 
-  us = (us >> 1); // 3 cycles
+  us >>= 1; // division by 2 = 2 cycles
+
+  __asm__ __volatile__ ("nop"); // waiting 1 cycle to adjust time
 
 #elif F_CPU >= 1843200L
-  // The overhead of the function call is 14 (16) cycles which is 8 us
-  // Plus the if-statement that takes 3 cycles (4 when true): ~10us
-  if (us <= 13)
-    return;
+  // for less than 13 microsecond delay, simply return. the overhead
+  // of the function call takes 14 (16) cycles, which is almost 8 us
+  if (us <= 12) return; // = 3 cycles, (4 when true)
 
-  else if(us <= 49)
+                        // no register save here
+  // user wants to wait longer than 25 us
+  if (us > 25) // = 3 cycles
   {
-    // The requested microseconds are too small to multiplicate correct, so we do an approximation
-    // The following loop takes 2.17 microseconds (4 cycles)
-    // per iteration, so execute it actually us/2 times
-    // for each microsecond requested
-    us -= 12;
-    us = (us >> 1);
-  }
+    // since the loop takes ~2.17 microseconds we need
+    // to multiply us by 0.4608 ( = 1.8432 / 2 / 2 )
+    us = (us * 30199L) >> 16;   // x(0.9216/2) us = 29 cycles (30199 = 0.4608 x 0x10000L)
 
+    // account for the time taken in the preceeding commands.
+    // we just burned 47 (49) cycles above, remove 24, microseconds
+    us -= 24; // = 2 cycles
+  }
   else
   {
-    // The following loop takes 2.17 microseconds (4 cycles)
-    // per iteration, so execute it actually us/2.17 or in different words us*0.4608 times
-    // for each microsecond requested
-    us = (us >> 1) - (us >> 4) + (us >> 5) - (us >> 7);
+    // account for the time taken in the preceeding commands.
+    // we just burned 23 (25) cycles above, remove 12 microseconds
 
-    // Subtract microseconds that were wasted in this function
-    us -= 21;
+              // 1 cycle when if jump here
+    us -= 12; // 2 cycles
+
+    us >>= 1; // division by 2 = 2 cycles
+              // 2 cycles to jump back to delay cycle.
   }
 
 #else
@@ -478,8 +596,11 @@ void delayMicroseconds(unsigned int us)
 
   // busy wait
   __asm__ __volatile__ (
-    "1: sbiw %0,1" "\n\t" // 2 cycles
-    "brne 1b" : "=w" (us) : "0" (us) // 2 cycles
+    "1: sbiw %0,1" "\n\t"            // 2 cycles
+        _MORENOP_                    // 4 cycles if 32 MHz or 1 cycle if 25 MHz
+    "   brne 1b"                     // 2 cycles
+    : /* no outputs */
+    : "w" (us)
   );
   // return = 4 cycles
 }
@@ -496,152 +617,118 @@ void init()
   CLKPR = OSC_PRESCALER; // Set prescaler
 #endif
 
-  // on the ATmega168, timer 0 is also used for fast hardware pwm
+  // On the ATmega168, timer 0 is also used for fast hardware pwm
   // (using phase-correct PWM would mean that timer 0 overflowed half as often
   // resulting in different millis() behavior on the ATmega8 and ATmega168)
 #if defined(TCCR0A) && defined(WGM01)
-  sbi(TCCR0A, WGM01);
-  sbi(TCCR0A, WGM00);
+  TCCR0A |= _BV(WGM01) | _BV(WGM00);
 #endif
 
-  // set timer 0 prescale factor to 64
+  // Set timer 0 prescale factor to 64
 #if defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
   // CPU specific: different values for the ATmega64/128
-  sbi(TCCR0, WGM00);
-  sbi(TCCR0, WGM01);
-  sbi(TCCR0, CS02);
+  TCCR0 |= _BV(WGM01) | _BV(WGM00) | _BV(CS02);
 #elif defined(TCCR0) && defined(CS01) && defined(CS00)
-  // this combination is for the ATmega8535, ATmega8, ATmega16, ATmega32, ATmega8515, ATmega162
-  sbi(TCCR0, CS01);
-  sbi(TCCR0, CS00);
-    #if defined(WGM00) && defined(WGM01) // The ATmega8 doesn't have WGM00 and WGM01
-    sbi(TCCR0, WGM00);
-    sbi(TCCR0, WGM01);
+  // This combination is for the ATmega8535, ATmega8, ATmega16, ATmega32, ATmega8515, ATmega162
+  TCCR0 |= _BV(CS01) | _BV(CS00);
+  #if defined(WGM00) && defined(WGM01) // The ATmega8 doesn't have WGM00 and WGM01
+    TCCR0 |= _BV(WGM01) | _BV(WGM00);
   #endif
 #elif defined(TCCR0B) && defined(CS01) && defined(CS00)
-  // this combination is for the standard 168/328/640/1280/1281/2560/2561
-  sbi(TCCR0B, CS01);
-  sbi(TCCR0B, CS00);
+  // This combination is for the standard 168/328/640/1280/1281/2560/2561
+  TCCR0B |= _BV(CS01) | _BV(CS00);
 #elif defined(TCCR0A) && defined(CS01) && defined(CS00)
-  // this combination is for the __AVR_ATmega645__ series
-  sbi(TCCR0A, CS01);
-  sbi(TCCR0A, CS00);
+  // This combination is for the __AVR_ATmega645__ series
+  TCCR0A |= _BV(CS01) | _BV(CS00);
 #else
   #error Timer 0 prescale factor 64 not set correctly
 #endif
 
-  // enable timer 0 overflow interrupt
+// Enable timer 0 overflow interrupt
 #if defined(TIMSK) && defined(TOIE0)
-  sbi(TIMSK, TOIE0);
+  TIMSK |= _BV(TOIE0);
 #elif defined(TIMSK0) && defined(TOIE0)
-  sbi(TIMSK0, TOIE0);
+  TIMSK0 |= _BV(TOIE0);
 #else
   #error  Timer 0 overflow interrupt not set correctly
 #endif
 
-  // timers 1 and 2 are used for phase-correct hardware pwm
-  // this is better for motors as it ensures an even waveform
-  // note, however, that fast pwm mode can achieve a frequency of up
-  // 8 MHz (with a 16 MHz clock) at 50% duty cycle
+// Timers 1 and 2 are used for phase-correct hardware pwm
+// this is better for motors as it ensures an even waveform
+// note, however, that fast pwm mode can achieve a frequency of up
+// 8 MHz (with a 16 MHz clock) at 50% duty cycle
 
 #if defined(TCCR1B) && defined(CS11) && defined(CS10)
-  TCCR1B = 0;
-
-  // set timer 1 prescale factor to 64
-  sbi(TCCR1B, CS11);
+  TCCR1B = _BV(CS11); // Set timer 1 prescale factor to 64
 #if F_CPU >= 8000000L
-  sbi(TCCR1B, CS10);
+  TCCR1B |= _BV(CS10);
 #endif
 #elif defined(TCCR1) && defined(CS11) && defined(CS10)
-  sbi(TCCR1, CS11);
+  TCCR1 |= _BV(CS11);
 #if F_CPU >= 8000000L
-  sbi(TCCR1, CS10);
+  TCCR1 |= _BV(CS10);
 #endif
 #endif
-  // put timer 1 in 8-bit phase correct pwm mode
 #if defined(TCCR1A) && defined(WGM10)
-  sbi(TCCR1A, WGM10);
+  TCCR1A |= _BV(WGM10); // Put timer 1 in 8-bit phase correct pwm mode
 #endif
 
-  // set timer 2 prescale factor to 64
+// Set timer 2 prescale factor to 64
 #if defined(TCCR2) && defined(CS22)
-  sbi(TCCR2, CS22);
+  TCCR2 |= _BV(CS22);
 #elif defined(TCCR2B) && defined(CS22)
-  sbi(TCCR2B, CS22);
+  TCCR2B |= _BV(CS22);
 #elif defined(TCCR2A) && defined(CS22)
-  sbi(TCCR2A, CS22);
-//#else
-  // Timer 2 not finished (may not be present on this CPU)
+  TCCR2A |= _BV(CS22);
 #endif
 
-  // configure timer 2 for phase correct pwm (8-bit)
+// Configure timer 2 for phase correct pwm (8-bit)
 #if defined(TCCR2) && defined(WGM20)
-  sbi(TCCR2, WGM20);
+  TCCR2 |= _BV(WGM20);
 #elif defined(TCCR2A) && defined(WGM20)
-  sbi(TCCR2A, WGM20);
+  TCCR2A |= _BV(WGM20);
 //#else
   // Timer 2 not finished (may not be present on this CPU)
 #endif
 
 #if defined(TCCR3B) && defined(CS31) && defined(WGM30)
-  sbi(TCCR3B, CS31);    // set timer 3 prescale factor to 64
-  sbi(TCCR3B, CS30);
-  sbi(TCCR3A, WGM30);   // put timer 3 in 8-bit phase correct pwm mode
+  TCCR3B |= _BV(CS31) | _BV(CS30); // Set timer 3 prescale factor to 64
+  TCCR3A |= _BV(WGM30);            // Put timer 3 in 8-bit phase correct pwm mode
 #endif
 
-#if defined(TCCR4A) && defined(TCCR4B) && defined(TCCR4D) /* beginning of timer4 block for 32U4 and similar */
-  sbi(TCCR4B, CS42);    // set timer4 prescale factor to 64
-  sbi(TCCR4B, CS41);
-  sbi(TCCR4B, CS40);
-  sbi(TCCR4D, WGM40);   // put timer 4 in phase- and frequency-correct PWM mode 
-  sbi(TCCR4A, PWM4A);   // enable PWM mode for comparator OCR4A
-  sbi(TCCR4C, PWM4D);   // enable PWM mode for comparator OCR4D
-#else /* beginning of timer4 block for ATMEGA640, ATMEGA1280 and ATMEGA2560 */
-#if defined(TCCR4B) && defined(CS41) && defined(WGM40)
-  sbi(TCCR4B, CS41);    // set timer 4 prescale factor to 64
-  sbi(TCCR4B, CS40);
-  sbi(TCCR4A, WGM40);   // put timer 4 in 8-bit phase correct pwm mode
+#if defined(TCCR4A) && defined(TCCR4B) && defined(TCCR4D)
+  TCCR4B |= _BV(CS42) | _BV(CS41) | _BV(CS40); // Set timer 4 prescale factor to 64
+  TCCR4D |= _BV(WGM40);                        // Put timer 4 in phase- and frequency-correct PWM mode 
+  TCCR4A |= _BV(PWM4A);                        // Enable PWM mode for comparator OCR4A
+  TCCR4C |= _BV(PWM4D);                        // Enable PWM mode for comparator OCR4D 
+#elif defined(TCCR4B) && defined(CS41) && defined(WGM40)
+  TCCR4B |= _BV(CS41) | _BV(CS40); // Set timer 4 prescale factor to 64
+  TCCR4A |= _BV(WGM40);            // Put timer 4 in 8-bit phase correct pwm mode
 #endif
-#endif /* end timer4 block for ATMEGA640/1280/2560 and similar */ 
 
 #if defined(TCCR5B) && defined(CS51) && defined(WGM50)
-  sbi(TCCR5B, CS51);    // set timer 5 prescale factor to 64
-  sbi(TCCR5B, CS50);
-  sbi(TCCR5A, WGM50);   // put timer 5 in 8-bit phase correct pwm mode
+  TCCR5B |= _BV(CS51) | _BV(CS50); // Set timer 5 prescale factor to 64
+  TCCR5A |= _BV(WGM50);            // Put timer 5 in 8-bit phase correct pwm mode
 #endif
 
 #if defined(ADCSRA)
   // set a2d prescaler so we are inside the desired 50-200 KHz range.
   #if F_CPU >= 16000000 // 16 MHz / 128 = 125 KHz
-    sbi(ADCSRA, ADPS2);
-    sbi(ADCSRA, ADPS1);
-    sbi(ADCSRA, ADPS0);
+    ADCSRA = _BV(ADPS2) | _BV(ADPS1) | _BV(ADPS0) | _BV(ADEN);
   #elif F_CPU >= 8000000 // 8 MHz / 64 = 125 KHz
-    sbi(ADCSRA, ADPS2);
-    sbi(ADCSRA, ADPS1);
-    cbi(ADCSRA, ADPS0);
+    ADCSRA = _BV(ADPS2) | _BV(ADPS1) | _BV(ADEN);
   #elif F_CPU >= 4000000 // 4 MHz / 32 = 125 KHz
-    sbi(ADCSRA, ADPS2);
-    cbi(ADCSRA, ADPS1);
-    sbi(ADCSRA, ADPS0);
+    ADCSRA = _BV(ADPS2) | _BV(ADPS0) | _BV(ADEN);
   #elif F_CPU >= 2000000 // 2 MHz / 16 = 125 KHz
-    sbi(ADCSRA, ADPS2);
-    cbi(ADCSRA, ADPS1);
-    cbi(ADCSRA, ADPS0);
+    ADCSRA = _BV(ADPS2) | _BV(ADEN);
   #elif F_CPU >= 1000000 // 1 MHz / 8 = 125 KHz
-    cbi(ADCSRA, ADPS2);
-    sbi(ADCSRA, ADPS1);
-    sbi(ADCSRA, ADPS0);
+    ADCSRA = _BV(ADPS1) | _BV(ADPS0) | _BV(ADEN);
   #else // 128 kHz / 2 = 64 KHz -> This is the closest you can get, the prescaler is 2
-    cbi(ADCSRA, ADPS2);
-    cbi(ADCSRA, ADPS1);
-    sbi(ADCSRA, ADPS0);
+    ADCSRA = _BV(ADPS0) | _BV(ADEN);
   #endif
-  // enable a2d conversions
-  sbi(ADCSRA, ADEN);
 #endif
 
-  // the bootloader connects pins 0 and 1 to the USART; disconnect them
+  // The bootloader connects pins 0 and 1 to the USART; disconnect them
   // here so they can be used as normal digital i/o; they will be
   // reconnected in Serial.begin()
 #if defined(UCSRB)

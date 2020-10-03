@@ -90,11 +90,11 @@ void HardwareSerial::_tx_udr_empty_irq(void)
   // clear the TXC bit -- "can be cleared by writing a one to its bit
   // location". This makes sure flush() won't return until the bytes
   // actually got written
-  sbi(*_ucsra, TXC0);
+  *_ucsra |= _BV(TXC0);
 
   if (_tx_buffer_head == _tx_buffer_tail) {
     // Buffer empty, so disable interrupts
-    cbi(*_ucsrb, UDRIE0);
+    *_ucsrb &= ~_BV(UDRIE0);
   }
 }
 
@@ -131,10 +131,8 @@ void HardwareSerial::begin(unsigned long baud, byte config)
 #endif
   *_ucsrc = config;
   
-  sbi(*_ucsrb, RXEN0);
-  sbi(*_ucsrb, TXEN0);
-  sbi(*_ucsrb, RXCIE0);
-  cbi(*_ucsrb, UDRIE0);
+  *_ucsrb |= _BV(RXEN0) | _BV(TXEN0) | _BV(RXCIE0);
+  *_ucsrb &= ~_BV(UDRIE0);
 }
 
 void HardwareSerial::end()
@@ -142,10 +140,7 @@ void HardwareSerial::end()
   // wait for transmission of outgoing data
   flush();
 
-  cbi(*_ucsrb, RXEN0);
-  cbi(*_ucsrb, TXEN0);
-  cbi(*_ucsrb, RXCIE0);
-  cbi(*_ucsrb, UDRIE0);
+  *_ucsrb &= ~_BV(RXEN0) & ~_BV(TXEN0) & ~_BV(RXCIE0) & ~_BV(UDRIE0);
   
   // clear any received data
   _rx_buffer_head = _rx_buffer_tail;
@@ -221,7 +216,7 @@ size_t HardwareSerial::write(uint8_t c)
   // 500kbit/s) bitrates, where interrupt overhead becomes a slowdown.
   if (_tx_buffer_head == _tx_buffer_tail && bit_is_set(*_ucsra, UDRE0)) {
     *_udr = c;
-    sbi(*_ucsra, TXC0);
+    *_ucsra |= _BV(TXC0);
     return 1;
   }
   tx_buffer_index_t i = (_tx_buffer_head + 1) % SERIAL_TX_BUFFER_SIZE;
@@ -244,7 +239,7 @@ size_t HardwareSerial::write(uint8_t c)
   _tx_buffer[_tx_buffer_head] = c;
   _tx_buffer_head = i;
 
-  sbi(*_ucsrb, UDRIE0);
+  *_ucsrb |= _BV(UDRIE0);
   
   return 1;
 }
