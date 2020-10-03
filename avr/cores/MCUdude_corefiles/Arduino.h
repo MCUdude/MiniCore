@@ -32,6 +32,17 @@
 //#include <avr/sleep.h>
 #include "binary.h"
 
+// Use PROGMEM1 to place data in the memory between 64kB and 128kB
+// Use PROGMEM2 to place data in the memory between 128kB and 192kB
+// Use PROGMEM3 to place data in the memory between 192kB and 256kB
+#if FLASHEND >= 0x1FFFF
+  #define PROGMEM1 __attribute__((section(".FAR_MEM1")))
+#endif
+#if FLASHEND == 0x3FFFF
+  #define PROGMEM2 __attribute__((section(".FAR_MEM2")))
+  #define PROGMEM3 __attribute__((section(".FAR_MEM3")))
+#endif
+
 #ifdef __cplusplus
 extern "C"{
 #endif
@@ -151,25 +162,25 @@ void initVariant(void);
 
 int atexit(void (*func)()) __attribute__((weak));
 
-void pinMode(uint8_t, uint8_t);
-void digitalWrite(uint8_t, uint8_t);
-int digitalRead(uint8_t);
-int analogRead(uint8_t);
+void pinMode(uint8_t pin, uint8_t mode);
+void digitalWrite(uint8_t pin, uint8_t state);
+int digitalRead(uint8_t pin);
+int analogRead(uint8_t pin);
 void analogReference(uint8_t mode);
-void analogWrite(uint8_t, int);
+void analogWrite(uint8_t pin, int value);
 
 unsigned long millis(void);
 unsigned long micros(void);
-void delay(unsigned long);
-void delayMicroseconds(unsigned int us);
+void delay(unsigned long ms);
+void delayMicroseconds(unsigned int us) __attribute__ ((noinline));
 unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout);
 unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout);
 
 void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val);
 uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder);
 
-void attachInterrupt(uint8_t, void (*)(void), int mode);
-void detachInterrupt(uint8_t);
+void attachInterrupt(uint8_t interruptNumber, void (*)(void), int mode);
+void detachInterrupt(uint8_t interruptNumber);
 
 void setup(void);
 void loop(void);
@@ -298,14 +309,14 @@ uint16_t makeWord(byte h, byte l);
 unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
 unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
 
-void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);
-void noTone(uint8_t _pin);
+void tone(uint8_t pin, unsigned int frequency, unsigned long duration = 0);
+void noTone(uint8_t pin);
 
 // WMath prototypes
-long random(long);
-long random(long, long);
-void randomSeed(unsigned long);
-long map(long, long, long, long, long);
+long random(long max);
+long random(long min, long max);
+void randomSeed(unsigned long seed);
+long map(long value, long fromLow, long fromHigh, long toLow, long toHigh);
 
 #endif
 
