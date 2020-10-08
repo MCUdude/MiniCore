@@ -321,14 +321,15 @@ before_install:
   # Check for library issues that don't affect compilation
   - set_library_testing "true"
 
-  # Install all IDE version required by the job
-  - install_ide "$IDE_VERSIONS"
-
-  # Install Arduino AVR Boards 1.6.20x for modelPB variant support. This package is provided by Arduino for testing purposes: https://github.com/arduino/toolchain-avr/pull/47#issue-133713450
-  - install_package "arduino:avr" "https://downloads.arduino.cc/packages/package_avr_3.6.0_index.json"
-
+  # Install a version of Arduino IDE with an outdated bundled arduino:avr platform to force installation of latest arduino:avr
+  - install_ide "1.8.12"
+  # Install Arduino AVR Boards to get the AVR toolchain
+  - install_package "arduino:avr"
   # Install MiniCore from the repository
   - install_package
+
+  # Install all IDE version required by the job
+  - install_ide "$IDE_VERSIONS"
 
 
 script:
