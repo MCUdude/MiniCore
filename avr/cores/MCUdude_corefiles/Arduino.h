@@ -82,7 +82,7 @@ void yield(void);
   #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
   #define INTERNAL2V56 3
   #define INTERNAL 3
-  
+
 // ATmega48/P/PB, ATmega88/P/PB, ATmega168/P/PB, ATmega328/P/PB
 #elif defined(__AVR_ATmega48__) || defined(__AVR_ATmega48P__) || defined(__AVR_ATmega48PB__) \
 || defined(__AVR_ATmega88__)  || defined(__AVR_ATmega88P__)  || defined(__AVR_ATmega88PB__)  \
@@ -121,14 +121,18 @@ void yield(void);
 #undef abs
 #endif
 
-#define min(a,b) ((a)<(b)?(a):(b))
-#define max(a,b) ((a)>(b)?(a):(b))
-#define abs(x) ((x)>0?(x):-(x))
-#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
-#define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
-#define radians(deg) ((deg)*DEG_TO_RAD)
-#define degrees(rad) ((rad)*RAD_TO_DEG)
-#define sq(x) ((x)*(x))
+#define abs(x)       __builtin_abs(x)
+#define sq(x)        ({ typeof (x) _x = (x); _x * _x; })
+#define min(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a < _b ? _a : _b;    })
+#define max(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a > _b ? _a : _b;    })
+#define round(x)     ({ typeof (x) _x = (x);  _x >= 0 ? (long)_x + 0.5 : (long)_x - 0.5 })
+#define radians(deg) ((deg) * DEG_TO_RAD)
+#define degrees(rad) ((rad) * RAD_TO_DEG)
+#define constrain(x,low,high)   ({ \
+  typeof (x) _x = (x);             \
+  typeof (low) _l = (l);           \
+  typeof (high) _h = (h);          \
+  _x < _l ? _l : _x > _h ? _h :_x })
 
 #define interrupts() sei()
 #define noInterrupts() cli()
@@ -198,7 +202,7 @@ extern const uint8_t PROGMEM digital_pin_to_timer_PGM[];
 
 // Get the bit location within the hardware port of the given virtual pin.
 // This comes from the pins_*.c file for the active board configuration.
-// 
+//
 // These perform slightly better as macros compared to inline functions
 //
 #define digitalPinToPort(P) ( pgm_read_byte( digital_pin_to_port_PGM + (P) ) )
@@ -231,7 +235,7 @@ extern const uint8_t PROGMEM digital_pin_to_timer_PGM[];
 // Fix compiler warning for ATmega8/8535/16/32
 #if defined(__AVR_ATmega8__) || defined(__AVR_ATmega8535__) || defined(__AVR_ATmega16__) \
 || defined(__AVR_ATmega32__) || defined(__AVR_ATmega8515__)
-#else 
+#else
 #define PE 5
 #endif
 
