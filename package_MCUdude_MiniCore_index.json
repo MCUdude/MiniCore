@@ -372,6 +372,34 @@
             }
           ],
           "toolsDependencies": []
+        },
+        {
+          "name": "MiniCore",
+          "architecture": "avr",
+          "version": "2.0.8",
+          "category": "Contributed",
+          "url": "https://MCUdude.github.io/MiniCore/MiniCore-2.0.8.tar.bz2",
+          "archiveFileName": "MiniCore-2.0.8.tar.bz2",
+          "checksum": "SHA-256:e29731e66d0c32e964ec33f2464b67291397aa885b539e30580bb480aa33d2e2",
+          "size": "574707",
+          "boards": [
+            {
+              "name": "ATmega328/P/PA/A/PB"
+            },
+            {
+              "name": "ATmega168/P/PA/A/PB"
+            },
+            {
+              "name": "ATmega88/P/PA/A/PB"
+            },
+            {
+              "name": "ATmega48/P/PA/A/PB"
+            },
+            {
+              "name": "ATmega8"
+            }
+          ],
+          "toolsDependencies": []
         }
       ],
       "tools": []
