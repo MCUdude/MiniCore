@@ -113,6 +113,10 @@
 /* Adds function to copy flash pages. The function is     */
 /* intended to be called by the application.              */
 /*                                                        */
+/* CKDIV:                                                 */
+/* Sets CLKPR value during boot. Defaults to division     */
+/* factor 1 (value 0x00) except for 1MHz builds.          */
+/*                                                        */
 /**********************************************************/
 
 /**********************************************************/
@@ -324,6 +328,11 @@ optiboot_version = 256*(OPTIBOOT_MAJVER + OPTIBOOT_CUSTOMVER) + OPTIBOOT_MINVER;
 #endif
 #endif // baud rate fast check
 
+/* set the default prescaler */
+#if !defined(CKDIV) && F_CPU != 1000000L
+#define CKDIV 0x00
+#endif
+
 /* Watchdog settings */
 #define WATCHDOG_OFF    (0)
 #define WATCHDOG_16MS   (_BV(WDE))
@@ -515,9 +524,9 @@ int main(void) {
 #endif
 
 // This is necessary on targets that where the CLKPR has been set in user application
-#if defined(CLKPR) && F_CPU != 1000000L
+#if defined(CLKPR) && defined(CKDIV)
   CLKPR = 0x80; // Enable the clock prescaler
-  CLKPR = 0x00; // Set prescaler to 1
+  CLKPR = CKDIV; // Set the prescaler
 #endif
 
   // Skip all logic and run bootloader if MCUSR is cleared (application request)
