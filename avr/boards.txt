@@ -104,12 +104,20 @@ menu.bootloader=Bootloader
 
 # Brown out detection
 328.menu.BOD.2v7=BOD 2.7V
+328.menu.BOD.2v7.bootloader.internal_sut=00
+328.menu.BOD.2v7.bootloader.external_sut=01
 328.menu.BOD.2v7.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}101
 328.menu.BOD.4v3=BOD 4.3V
+328.menu.BOD.4v3.bootloader.internal_sut=00
+328.menu.BOD.4v3.bootloader.external_sut=01
 328.menu.BOD.4v3.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}100
 328.menu.BOD.1v8=BOD 1.8V
+328.menu.BOD.1v8.bootloader.internal_sut=00
+328.menu.BOD.1v8.bootloader.external_sut=01
 328.menu.BOD.1v8.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}110
-328.menu.BOD.disabled=BOD  disabled
+328.menu.BOD.disabled=BOD disabled
+328.menu.BOD.disabled.bootloader.internal_sut=10
+328.menu.BOD.disabled.bootloader.external_sut=11
 328.menu.BOD.disabled.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}111
 
 # Compiler link time optimization
@@ -128,119 +136,123 @@ menu.bootloader=Bootloader
 # Clock frequencies
 328.menu.clock.16MHz_external=External 16 MHz
 328.menu.clock.16MHz_external.upload.speed=115200
-328.menu.clock.16MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.16MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.16MHz_external.build.clkpr=
 328.menu.clock.16MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.16MHz_external.build.f_cpu=16000000L
 
 328.menu.clock.20MHz_external=External 20 MHz
 328.menu.clock.20MHz_external.upload.speed=115200
-328.menu.clock.20MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.20MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.20MHz_external.build.clkpr=
 328.menu.clock.20MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.20MHz_external.build.f_cpu=20000000L
 
 328.menu.clock.18_432MHz_external=External 18.432 MHz
 328.menu.clock.18_432MHz_external.upload.speed=115200
-328.menu.clock.18_432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.18_432MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.18_432MHz_external.build.clkpr=
 328.menu.clock.18_432MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.18_432MHz_external.build.f_cpu=18432000L
 
 328.menu.clock.14_7456MHz_external=External 14.7456 MHz
 328.menu.clock.14_7456MHz_external.upload.speed=115200
-328.menu.clock.14_7456MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.14_7456MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.14_7456MHz_external.build.clkpr=
 328.menu.clock.14_7456MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.14_7456MHz_external.build.f_cpu=14745600L
 
 328.menu.clock.12MHz_external=External 12 MHz
 328.menu.clock.12MHz_external.upload.speed=57600
-328.menu.clock.12MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.12MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.12MHz_external.build.clkpr=
 328.menu.clock.12MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 328.menu.clock.11_0592MHz_external=External 11.0592 MHz
 328.menu.clock.11_0592MHz_external.upload.speed=115200
-328.menu.clock.11_0592MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.11_0592MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.11_0592MHz_external.build.clkpr=
 328.menu.clock.11_0592MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.11_0592MHz_external.build.f_cpu=11059200L
 
 328.menu.clock.8MHz_external=External 8 MHz
 328.menu.clock.8MHz_external.upload.speed=57600
-328.menu.clock.8MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.8MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.8MHz_external.build.clkpr=
 328.menu.clock.8MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.8MHz_external.build.f_cpu=8000000L
 
 328.menu.clock.7_3728MHz_external=External 7.3728 MHz
 328.menu.clock.7_3728MHz_external.upload.speed=115200
-328.menu.clock.7_3728MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.7_3728MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.7_3728MHz_external.build.clkpr=
 328.menu.clock.7_3728MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
 
 328.menu.clock.4MHz_external=External 4 MHz
 328.menu.clock.4MHz_external.upload.speed=9600
-328.menu.clock.4MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.4MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.4MHz_external.build.clkpr=
 328.menu.clock.4MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.4MHz_external.build.f_cpu=4000000L
 
 328.menu.clock.3_6864MHz_external=External 3.6864 MHz
 328.menu.clock.3_6864MHz_external.upload.speed=115200
-328.menu.clock.3_6864MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.3_6864MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.3_6864MHz_external.build.clkpr=
 328.menu.clock.3_6864MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.3_6864MHz_external.build.f_cpu=3686400L
 
 328.menu.clock.2MHz_external=External 2 MHz
 328.menu.clock.2MHz_external.upload.speed=9600
-328.menu.clock.2MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.2MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.2MHz_external.build.clkpr=
 328.menu.clock.2MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.2MHz_external.build.f_cpu=2000000L
 
 328.menu.clock.1_8432MHz_external=External 1.8432 MHz
 328.menu.clock.1_8432MHz_external.upload.speed=115200
-328.menu.clock.1_8432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.1_8432MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.1_8432MHz_external.build.clkpr=
 328.menu.clock.1_8432MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.1_8432MHz_external.build.f_cpu=1843200L
 
 328.menu.clock.1MHz_external=External 1 MHz
 328.menu.clock.1MHz_external.upload.speed=9600
-328.menu.clock.1MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.1MHz_external.bootloader.low_fuses=0b11{bootloader.external_sut}{bootloader.cksel_bits}
 328.menu.clock.1MHz_external.build.clkpr=
 328.menu.clock.1MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.1MHz_external.build.f_cpu=1000000L
 
 328.menu.clock.8MHz_internal=Internal 8 MHz
 328.menu.clock.8MHz_internal.upload.speed=38400
-328.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
+#328.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
+328.menu.clock.8MHz_internal.bootloader.low_fuses=0b11{bootloader.internal_sut}0010
 328.menu.clock.8MHz_internal.build.clkpr=
 328.menu.clock.8MHz_internal.build.clock_speed={build.f_cpu}
 328.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
 328.menu.clock.4MHz_internal=Internal 4 MHz
 328.menu.clock.4MHz_internal.upload.speed=9600
-328.menu.clock.4MHz_internal.bootloader.low_fuses=0xe2
+#328.menu.clock.4MHz_internal.bootloader.low_fuses=0xe2
+328.menu.clock.4MHz_internal.bootloader.low_fuses=0b11{bootloader.internal_sut}0010
 328.menu.clock.4MHz_internal.build.clkpr=-DOSC_PRESCALER=0x01
 328.menu.clock.4MHz_internal.build.clock_speed=8000000L
 328.menu.clock.4MHz_internal.build.f_cpu=4000000L
 
 328.menu.clock.2MHz_internal=Internal 2 MHz
 328.menu.clock.2MHz_internal.upload.speed=9600
-328.menu.clock.2MHz_internal.bootloader.low_fuses=0xe2
+#328.menu.clock.2MHz_internal.bootloader.low_fuses=0xe2
+328.menu.clock.2MHz_internal.bootloader.low_fuses=0b11{bootloader.internal_sut}0010
 328.menu.clock.2MHz_internal.build.clkpr=-DOSC_PRESCALER=0x02
 328.menu.clock.2MHz_internal.build.clock_speed=8000000L
 328.menu.clock.2MHz_internal.build.f_cpu=2000000L
 
 328.menu.clock.1MHz_internal=Internal 1 MHz
 328.menu.clock.1MHz_internal.upload.speed=9600
-328.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
+#328.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
+328.menu.clock.1MHz_internal.bootloader.low_fuses=0b01{bootloader.internal_sut}0010
 328.menu.clock.1MHz_internal.build.clkpr=
 328.menu.clock.1MHz_internal.build.clock_speed={build.f_cpu}
 328.menu.clock.1MHz_internal.build.f_cpu=1000000L
