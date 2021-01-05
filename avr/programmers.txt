@@ -58,3 +58,17 @@ atmel_ice.protocol=atmelice_isp
 atmel_ice.program.protocol=atmelice_isp
 atmel_ice.program.tool=avrdude
 atmel_ice.program.extra_params=-Pusb
+
+pickit4_isp.name=PICkit4 (ISP mode) (MiniCore)
+pickit4_isp.communication=usb
+pickit4_isp.protocol=pickit4_isp
+pickit4_isp.program.protocol=pickit4_isp
+pickit4_isp.program.tool=avrdude
+pickit4_isp.program.extra_params=-Pusb
+
+snap_isp.name=MPLAB SNAP (ISP mode) (MiniCore)
+snap_isp.communication=usb
+snap_isp.protocol=snap_isp
+snap_isp.program.protocol=snap_isp
+snap_isp.program.tool=avrdude
+snap_isp.program.extra_params=-Pusb
