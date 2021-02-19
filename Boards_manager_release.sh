@@ -76,7 +76,23 @@ jq -r                                   \
     {"name": "ATmega48/P/PA/A/PB"},
     {"name": "ATmega8"}
   ],
-  "toolsDependencies": []
+  "toolsDependencies": [
+    {
+      "packager": "arduino",
+      "name": "avr-gcc",
+      "version": "7.3.0-atmel3.6.1-arduino7"
+    },
+    {
+      "packager": "arduino",
+      "name": "avrdude",
+      "version": "6.3.0-arduino18"
+    },
+    {
+      "packager": "arduino",
+      "name": "arduinoOTA",
+      "version": "1.3.0"
+    }
+  ]
 }' "package_${AUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${AUTHOR}_${REPOSITORY}_index.json"
 
 # Remove files that's no longer needed
