@@ -428,6 +428,50 @@
             }
           ],
           "toolsDependencies": []
+        },
+        {
+          "name": "MiniCore",
+          "architecture": "avr",
+          "version": "2.1.0",
+          "category": "Contributed",
+          "url": "https://MCUdude.github.io/MiniCore/MiniCore-2.1.0.tar.bz2",
+          "archiveFileName": "MiniCore-2.1.0.tar.bz2",
+          "checksum": "SHA-256:07e01d468545024f2d924fa4a0d1427afe886af561fb7120a77634dd38c664d9",
+          "size": "577870",
+          "boards": [
+            {
+              "name": "ATmega328/P/PA/A/PB"
+            },
+            {
+              "name": "ATmega168/P/PA/A/PB"
+            },
+            {
+              "name": "ATmega88/P/PA/A/PB"
+            },
+            {
+              "name": "ATmega48/P/PA/A/PB"
+            },
+            {
+              "name": "ATmega8"
+            }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "arduino",
+              "name": "avr-gcc",
+              "version": "7.3.0-atmel3.6.1-arduino7"
+            },
+            {
+              "packager": "arduino",
+              "name": "avrdude",
+              "version": "6.3.0-arduino18"
+            },
+            {
+              "packager": "arduino",
+              "name": "arduinoOTA",
+              "version": "1.3.0"
+            }
+          ]
         }
       ],
       "tools": []
