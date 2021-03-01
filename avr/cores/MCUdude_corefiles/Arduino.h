@@ -121,7 +121,7 @@ void yield(void);
 #undef abs
 #endif
 
-#define abs(x)       ({ typeof (x) _x = (x); _x > 0 ? _x : -x; })
+#define abs(x)       ({ typeof (x) _x = (x); _x > 0 ? _x : -_x; })
 #define sq(x)        ({ typeof (x) _x = (x); _x * _x; })
 #define min(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a < _b ? _a : _b; })
 #define max(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a > _b ? _a : _b; })
