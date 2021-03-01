@@ -6,7 +6,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
 
 name=MiniCore
-version=2.1.0
+version=2.1.1
 
 # AVR compile variables
 # ---------------------
