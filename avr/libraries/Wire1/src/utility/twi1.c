@@ -102,8 +102,8 @@ void twi_disable1(void)
   TWCR1 &= ~(_BV(TWEN) | _BV(TWIE) | _BV(TWEA));
 
   // deactivate internal pullups for twi.
-  digitalWrite(SDA, 0);
-  digitalWrite(SCL, 0);
+  digitalWrite(SDA1, 0);
+  digitalWrite(SCL1, 0);
 }
 
 /*
