@@ -138,13 +138,13 @@ env:
     # bootloader=no_bootloader, variant=modelP, BOD=2v7, LTO=Os, clock=16MHz_external
     - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=no_bootloader,variant=modelP,BOD=2v7,LTO=Os,clock=16MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # LTO=Os_flto, clock=20MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=no_bootloader,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="no_bootloader" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=no_bootloader,variant=modelP,BOD=2v7,LTO=Os_flto,clock=20MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_LTO"
     # variant=modelNonP, BOD=4v3, clock=18_432MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=no_bootloader,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="no_bootloader" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=no_bootloader,variant=modelNonP,BOD=4v3,LTO=Os,clock=18_432MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # variant=modelPB, BOD=1v8, clock=12MHz_external
     - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=no_bootloader,variant=modelPB,BOD=1v8,LTO=Os,clock=12MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # BOD=disabled, clock=8MHz_external
-    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=no_bootloader,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="no_bootloader" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
+    - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=no_bootloader,variant=modelP,BOD=disabled,LTO=Os,clock=8MHz_external" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
     # clock=1MHz_internal
     - SKETCH_PATH="${SKETCHBOOK_FOLDER}/hardware/MiniCore/avr/libraries/SPI/examples/DigitalPotControl" BOARD_ID="MiniCore:avr:48:bootloader=no_bootloader,variant=modelP,BOD=2v7,LTO=Os,clock=1MHz_internal" ALLOW_FAILURE="false" IDE_VERSIONS="$IDE_VERSION_LIST_FULL"
 
