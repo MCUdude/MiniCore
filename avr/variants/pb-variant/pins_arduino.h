@@ -33,7 +33,7 @@
 // PWM pins
 #if defined(__AVR_ATmega48PB__) || defined(__AVR_ATmega88PB__) || defined(__AVR_ATmega168PB__)
 #define digitalPinHasPWM(p)         ((p) == 3 || (p) == 5 || (p) == 6 || (p) == 9 || (p) == 10 || (p) == 11)
-#elif defined(__AVR_ATmega328PB__) 
+#elif defined(__AVR_ATmega328PB__)
 #define digitalPinHasPWM(p)         ((p) == 0 || (p) == 1 || (p) == 2 ||(p) == 3 || (p) == 5 || (p) == 6 || (p) == 9 || (p) == 10 || (p) == 11)
 #endif
 
@@ -244,7 +244,7 @@ const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = {
 };
 
 const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
-#if defined(__AVR_ATmega48PB__) || defined(__AVR_ATmega88PB__) || defined(__AVR_ATmega168PB__)	
+#if defined(__AVR_ATmega48PB__) || defined(__AVR_ATmega88PB__) || defined(__AVR_ATmega168PB__)
 	NOT_ON_TIMER, // PD0 - D0
 	NOT_ON_TIMER, // PD1 - D1
 	NOT_ON_TIMER, // PD2 - D2
@@ -306,5 +306,19 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
   #define USART_TX_vect USART0_TX_vect
   #define USART_TX_vect_num USART0_TX_vect_num
 #endif // 328PB defs
+
+// These serial port names are intended to allow libraries and architecture-neutral
+// sketches to automatically default to the correct port name for a particular type
+// of use.  For example, a GPS module would normally connect to SERIAL_PORT_HARDWARE_OPEN,
+// the first hardware serial port whose RX/TX pins are not dedicated to another use.
+
+#define SERIAL_PORT_MONITOR         Serial
+#define SERIAL_PORT_HARDWARE        Serial
+#define SERIAL_PORT_HARDWARE_OPEN   Serial
+
+#if defined(__AVR_ATmega328PB__)
+#define SERIAL_PORT_HARDWARE1       Serial1
+#define SERIAL_PORT_HARDWARE_OPEN1  Serial1
+#endif
 
 #endif // Pins_Arduino_h
