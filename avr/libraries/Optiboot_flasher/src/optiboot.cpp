@@ -19,7 +19,14 @@ void do_spm_cli(optiboot_addr_t address, uint8_t command, uint16_t data)
   asm volatile("cli"); // Disable interrupts
   #ifdef RAMPZ
     RAMPZ = (address >> 16) & 0xff;  // Address bits 23-16 goes to RAMPZ
+    #ifdef EIND
+      uint8_t eind = EIND;
+      EIND = FLASHEND / 0x20000;
+    #endif
     do_spm((address & 0xffff), command, data); // do_spm accepts only lower 16 bits of address
+    #ifdef EIND
+      EIND = eind;
+    #endif
   #else
     do_spm(address, command, data);  // 16-bit address - no problems to pass directly
   #endif
