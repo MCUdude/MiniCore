@@ -79,6 +79,12 @@ void setup()
   delay(2000);
   Serial.begin(9600);
 
+  if(!optiboot_check_writable())
+  {
+    Serial.println(F("Incompatible or no bootloader present! Please burn correct bootloader"));
+    while(1);
+  }
+
   static uint16_t addr = 0;
 
   Serial.print(F("Filling up flash page 0 with 16-bit values...\n"));

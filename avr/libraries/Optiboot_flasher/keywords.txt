@@ -27,6 +27,7 @@ put	KEYWORD2
 
 # Optiboot
 do_spm_cli	KEYWORD2
+optiboot_check_writable	KEYWORD2
 optiboot_page_erase	KEYWORD2
 optiboot_page_fill	KEYWORD2
 optiboot_page_write	KEYWORD2
