@@ -96,6 +96,7 @@ static const uint8_t SCK  = PIN_SPI_SCK;
 static const uint8_t SDA = PIN_WIRE_SDA;
 static const uint8_t SCL = PIN_WIRE_SCL;
 #if defined(__AVR_ATmega328PB__)
+  #define WIRE_INTERFACES_COUNT (2)
   #define PIN_WIRE_SDA0 PIN_WIRE_SDA
   #define PIN_WIRE_SCL0 PIN_WIRE_SCL
   #define PIN_WIRE_SDA1 (23)
