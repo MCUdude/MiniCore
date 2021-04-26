@@ -26,6 +26,8 @@
 
 #include <avr/pgmspace.h>
 
+#define MINICORE
+#define MCUDUDE_MINICORE
 
 // Digital pins
 #define NUM_DIGITAL_PINS            (27)

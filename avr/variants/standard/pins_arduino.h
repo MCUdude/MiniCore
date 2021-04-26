@@ -26,6 +26,8 @@
 
 #include <avr/pgmspace.h>
 
+#define MINICORE
+#define MCUDUDE_MINICORE
 
 // Definitions to make sure all variants will be supported
 #if defined(__AVR_ATmega48__)
