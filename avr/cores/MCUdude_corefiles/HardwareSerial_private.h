@@ -100,7 +100,7 @@ HardwareSerial::HardwareSerial(
 
 void HardwareSerial::_rx_complete_irq(void)
 {
-  if (bit_is_clear(*_ucsra, UPE0) && bit_clear(*_ucsra, FE0) && bit_clear(*_ucsra, DOR0)) {
+  if (bit_is_clear(*_ucsra, UPE0) && bit_is_clear(*_ucsra, FE0) && bit_is_clear(*_ucsra, DOR0)) {
     // No Parity error, read byte and store it in the buffer if there is
     // room
     unsigned char c = *_udr;
