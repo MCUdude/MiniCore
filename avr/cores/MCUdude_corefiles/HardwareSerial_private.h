@@ -123,7 +123,7 @@ void HardwareSerial::_rx_complete_irq(void)
     else if (bit_is_set(*_ucsra, FE0)) {
       _rx_error = -3;
     }
-    else
+    else {
       _rx_error = -4;
     }
 
