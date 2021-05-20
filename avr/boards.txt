@@ -56,7 +56,7 @@ menu.bootloader=Bootloader
 
 # Upload port select
 328.menu.bootloader.uart0=Yes (UART0)
-328.menu.bootloader.uart0.upload.maximum_size=32256
+328.menu.bootloader.uart0.upload.maximum_size=31744
 328.menu.bootloader.uart0.upload.protocol=arduino
 328.menu.bootloader.uart0.upload.port=UART0
 328.menu.bootloader.uart0.build.export_merged_output=true
@@ -64,7 +64,7 @@ menu.bootloader=Bootloader
 328.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
 
 328.menu.bootloader.uart1=Yes (UART1 328PB only)
-328.menu.bootloader.uart1.upload.maximum_size=32256
+328.menu.bootloader.uart1.upload.maximum_size=31744
 328.menu.bootloader.uart1.upload.protocol=arduino
 328.menu.bootloader.uart1.upload.port=UART1
 328.menu.bootloader.uart1.build.export_merged_output=true
