@@ -1182,7 +1182,24 @@ atmega8535: bootloaders/atmega8535/$(AVR_FREQ)/$(PROGRAM)_atmega8535_UART$(UART)
 endif
 endif
 
-
+#ATmega32m1
+atmega32m1: TARGET = atmega32m1
+atmega32m1: CFLAGS += $(COMMON_OPTIONS) $(UART_CMD)
+atmega32m1: maketargetdir
+# Move bootloader
+ifneq (,$(filter 1, $(COPY_FLASH_PAGES) $(SUPPORT_EEPROM) $(BIGBOOT)))
+atmega32m1: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
+atmega32m1: bootloaders/atmega32m1/$(AVR_FREQ)/$(PROGRAM)_atmega32m1_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.hex
+ifeq ($(ASM_OUTPUT), 1)
+atmega32m1: bootloaders/atmega32m1/$(AVR_FREQ)/$(PROGRAM)_atmega32m1_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED)_BIGBOOT.lst
+endif
+else
+atmega32m1: LDSECTIONS  = -Wl,--section-start=.text=0x7c00 -Wl,--section-start=.version=0x7ffe
+atmega32m1: bootloaders/atmega32m1/$(AVR_FREQ)/$(PROGRAM)_atmega32m1_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).hex
+ifeq ($(ASM_OUTPUT), 1)
+atmega32m1: bootloaders/atmega32m1/$(AVR_FREQ)/$(PROGRAM)_atmega32m1_UART$(UART)_$(BAUD_RATE)_$(AVR_FREQ)_$(LED).lst
+endif
+endif
 
 #---------------------------------------------------------------------------
 #

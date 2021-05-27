@@ -597,6 +597,13 @@ int main(void) {
   UCSRB = _BV(RXEN) | _BV(TXEN);  // enable Rx & Tx
   UCSRC = _BV(URSEL) | _BV(UCSZ1) | _BV(UCSZ0);  // config USART; 8N1
   UBRRL = (uint8_t)BAUD_SETTING;
+#elif defined(__AVR_ATmega16M1__) || defined(__AVR_ATmega32M1__) || defined(__AVR_ATmega64M1__)
+  // USART 8N1, enable RX and TX
+  LINCR = (0 << LCONF1) | (0 << LCONF0) | (0 << LENA) | (1 << LCMD2) | (1 << LCMD1) | (1 << LCMD0);
+  LINENIR = 0; // disable interrupts
+  LINBTR = (1 << LDISR) | 8; // 8 samples per bit
+  LINBRR = (uint16_t)( F_CPU/(8*BAUD_RATE)-1);
+  LINCR |= (1 << LENA);
 #else
 #ifndef SINGLESPEED
    UART_SRA = _BV(U2X0); // Double speed mode USART0
@@ -819,8 +826,13 @@ int main(void) {
 
 void putch(char ch) {
 #ifndef SOFT_UART
+#if defined(__AVR_ATmega16M1__) || defined(__AVR_ATmega32M1__) || defined(__AVR_ATmega64M1__)
+  while ( LINSIR & _BV(LBUSY));
+  LINDAT = ch;
+#else
   while (!(UART_SRA & _BV(UDRE0)));
   UART_UDR = ch;
+#endif
 #else
   __asm__ __volatile__ (
     "   com %[ch]\n" // ones complement, carry set
@@ -885,6 +897,23 @@ uint8_t getch(void) {
     :
       "r25"
 );
+#else
+#if defined(__AVR_ATmega16M1__) || defined(__AVR_ATmega32M1__) || defined(__AVR_ATmega64M1__)
+while(!(LINSIR & _BV(LRXOK)))
+  ;
+if (!(LINERR & _BV(LFERR))) {
+    /*
+     * A Framing Error indicates (probably) that something is talking
+     * to us at the wrong bit rate.  Assume that this is because it
+     * expects to be talking to the application, and DON'T reset the
+     * watchdog.  This should cause the bootloader to abort and run
+     * the application "soon", if it keeps happening.  (Note that we
+     * don't care that an invalid char is returned...)
+     */
+  watchdogReset();
+}
+
+ch = LINDAT;
 #else
   while(!(UART_SRA & _BV(RXC0)))
     ;
@@ -970,8 +999,10 @@ void flash_led(uint8_t count) {
       *  quick succession, some of which will be lost and cause us to
       *  get out of sync.  So if we see any data; stop blinking.
       */
+#if !defined(__AVR_ATmega16M1__) && !defined(__AVR_ATmega32M1__) && !defined(__AVR_ATmega64M1__)
      if (UART_SRA & _BV(RXC0))
        break;
+#endif
 #else
 // This doesn't seem to work?
 //    if ((UART_PIN & (1<<UART_RX_BIT)) == 0)
