@@ -26,5 +26,11 @@ void * operator new[](size_t size);
 void operator delete(void * ptr);
 void operator delete[](void * ptr);
 
+// C++14 introduces additional delete operators
+#if __cplusplus >= 201402L
+void operator delete(void * ptr, size_t);
+void operator delete[](void * ptr, size_t);
+#endif // end language is C++14 or greater
+
 #endif
 
