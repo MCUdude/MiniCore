@@ -1,5 +1,5 @@
 # MiniCore
-[![Build Status](https://travis-ci.org/MCUdude/MiniCore.svg?branch=master)](https://travis-ci.org/MCUdude/MiniCore) [![MiniCore forum thread](https://img.shields.io/badge/support-forum-blue.svg)](https://forum.arduino.cc/index.php?topic=412070.0)
+[![Build Status](https://travis-ci.com/MCUdude/MiniCore.svg?branch=master)](https://travis-ci.com/MCUdude/MiniCore) [![MiniCore forum thread](https://img.shields.io/badge/support-forum-blue.svg)](https://forum.arduino.cc/index.php?topic=412070.0)
 
 An Arduino core for the ATmega328, ATmega168, ATmega88, ATmega48 and ATmega8, all running a [custom version of Optiboot for increased functionality](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.8.5+ is recommended. <br/>
 **This core gives you two extra IO pins if you're using the internal oscillator!** PB6 and PB7 is mapped to [Arduino pin 20 and 21](#pinout).<br/>
