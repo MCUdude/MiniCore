@@ -1,11 +1,11 @@
 /*
-SoftwareSerial.cpp (formerly NewSoftSerial.cpp) - 
+SoftwareSerial.cpp (formerly NewSoftSerial.cpp) -
 Multi-instance software serial library for Arduino/Wiring
 -- Interrupt-driven receive and other improvements by ladyada
    (http://ladyada.net)
 -- Tuning, circular buffer, derivation from class Print/Stream,
    multi-instance support, porting to 8MHz processors,
-   various optimizations, PROGMEM delay tables, inverse logic and 
+   various optimizations, PROGMEM delay tables, inverse logic and
    direct port writing by Mikal Hart (http://www.arduiniana.org)
 -- Pin change interrupt macros by Paul Stoffregen (http://www.pjrc.com)
 -- 20MHz processor support by Garrett Mace (http://www.macetech.com)
@@ -37,9 +37,9 @@ http://arduiniana.org.
 #define _DEBUG 0
 #define _DEBUG_PIN1 11
 #define _DEBUG_PIN2 13
-// 
+//
 // Includes
-// 
+//
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <Arduino.h>
@@ -50,7 +50,7 @@ http://arduiniana.org.
 // Statics
 //
 SoftwareSerial *SoftwareSerial::active_object = 0;
-uint8_t SoftwareSerial::_receive_buffer[_SS_MAX_RX_BUFF]; 
+uint8_t SoftwareSerial::_receive_buffer[_SS_MAX_RX_BUFF];
 volatile uint8_t SoftwareSerial::_receive_buffer_tail = 0;
 volatile uint8_t SoftwareSerial::_receive_buffer_head = 0;
 
@@ -79,13 +79,13 @@ inline void DebugPulse(uint8_t, uint8_t) {}
 // Private methods
 //
 
-/* static */ 
-inline void SoftwareSerial::tunedDelay(uint16_t delay) { 
+/* static */
+inline void SoftwareSerial::tunedDelay(uint16_t delay) {
   _delay_loop_2(delay);
 }
 
 // This function sets the current object as the "listening"
-// one and returns true if it replaces another 
+// one and returns true if it replaces another
 bool SoftwareSerial::listen()
 {
   if (!_rx_delay_stopbit)
@@ -139,7 +139,7 @@ void SoftwareSerial::recv()
     "push r26 \n\t"
     "push r27 \n\t"
     ::);
-#endif  
+#endif
 
   uint8_t d = 0;
 
@@ -176,8 +176,8 @@ void SoftwareSerial::recv()
       // save new data in buffer: tail points to where byte goes
       _receive_buffer[_receive_buffer_tail] = d; // save new byte
       _receive_buffer_tail = next;
-    } 
-    else 
+    }
+    else
     {
       DebugPulse(_DEBUG_PIN1, 1);
       _buffer_overflow = true;
@@ -256,7 +256,7 @@ ISR(PCINT3_vect, ISR_ALIASOF(PCINT0_vect));
 //
 // Constructor
 //
-SoftwareSerial::SoftwareSerial(int8_t receivePin, int8_t transmitPin, bool inverse_logic /* = false */) : 
+SoftwareSerial::SoftwareSerial(int8_t receivePin, int8_t transmitPin, bool inverse_logic /* = false */) :
   _rx_delay_centering(0),
   _rx_delay_intrabit(0),
   _rx_delay_stopbit(0),
@@ -312,7 +312,7 @@ uint16_t SoftwareSerial::subtract_cap(uint16_t num, uint16_t sub) {
 //
 
 void SoftwareSerial::begin(long speed)
-{ 
+{
   _rx_delay_centering = _rx_delay_intrabit = _rx_delay_stopbit = _tx_delay = 0;
 
   // Precalculate the various delays, in number of 4-cycle delays
@@ -380,12 +380,12 @@ void SoftwareSerial::begin(long speed)
 
 #if defined(INT_AND_PCINT)
   else
-#endif  
+#endif
 #if defined(INT_ONLY) || defined(INT_AND_PCINT)
   {
      // Direct interrupts
      attachInterrupt(digitalPinToInterrupt(_receivePin), isr, CHANGE);
-     
+
     #if GCC_VERSION > 40800
     // Timings counted from gcc 4.8.2 output. This works up to 115200 on
     // 16Mhz and 57600 on 8Mhz.
@@ -469,7 +469,7 @@ int SoftwareSerial::available()
   if (!isListening())
     return 0;
 
-  return (_receive_buffer_tail + _SS_MAX_RX_BUFF - _receive_buffer_head) % _SS_MAX_RX_BUFF;
+  return ((uint16_t)(_receive_buffer_tail + _SS_MAX_RX_BUFF - _receive_buffer_head)) % _SS_MAX_RX_BUFF;
 }
 
 size_t SoftwareSerial::write(uint8_t b)
@@ -523,7 +523,7 @@ size_t SoftwareSerial::write(uint8_t b)
 
   SREG = oldSREG; // turn interrupts back on
   tunedDelay(_tx_delay);
-  
+
   return 1;
 }
 
