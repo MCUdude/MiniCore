@@ -75,7 +75,8 @@ recipe.objcopy.eep.pattern="{compiler.path}{compiler.objcopy.cmd}" {compiler.obj
 recipe.objcopy.hex.pattern="{compiler.path}{compiler.elf2hex.cmd}" {compiler.elf2hex.flags} {compiler.elf2hex.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.hex"
 
 ## Save disassembler listing
-recipe.hooks.objcopy.postobjcopy.1.pattern.windows=cmd /C "{compiler.path}{compiler.objdump.cmd}" {compiler.objdump.flags} "{build.path}/{build.project_name}.elf" > "{build.path}/{build.project_name}_{build.mcu}_{build.f_cpu}.lst"
+# Dummy initial `echo.` command prevents unwanted stripping of quotes by `cmd /C` which would cause the command to fail for paths with spaces
+recipe.hooks.objcopy.postobjcopy.1.pattern.windows=cmd /C echo. && "{compiler.path}{compiler.objdump.cmd}" {compiler.objdump.flags} "{build.path}/{build.project_name}.elf" > "{build.path}/{build.project_name}_{build.mcu}_{build.f_cpu}.lst"
 recipe.hooks.objcopy.postobjcopy.1.pattern.linux=chmod +x "{runtime.platform.path}/scripts/create_disassembler_listing.sh"
 recipe.hooks.objcopy.postobjcopy.1.pattern.macosx=chmod +x "{runtime.platform.path}/scripts/create_disassembler_listing.sh"
 recipe.hooks.objcopy.postobjcopy.2.pattern.linux="{runtime.platform.path}/scripts/create_disassembler_listing.sh" "{compiler.path}{compiler.objdump.cmd}" "{compiler.objdump.flags}" "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}_{build.mcu}_{build.f_cpu}.lst"
