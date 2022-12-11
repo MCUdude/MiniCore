@@ -121,18 +121,14 @@ void yield(void);
 #undef abs
 #endif
 
-#define abs(x)       ({ typeof (x) _x = (x); _x > 0 ? _x : -_x; })
-#define sq(x)        ({ typeof (x) _x = (x); _x * _x; })
-#define min(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a < _b ? _a : _b; })
-#define max(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a > _b ? _a : _b; })
-#define round(x)     ({ typeof (x) _x = (x); _x >= 0 ? (long)(_x + 0.5) : (long)(_x - 0.5); })
-#define radians(deg) ((deg) * DEG_TO_RAD)
-#define degrees(rad) ((rad) * RAD_TO_DEG)
-#define constrain(x,low,high)     ({ \
-  typeof (x) _x = (x);               \
-  typeof (low) _l = (low);           \
-  typeof (high) _h = (high);         \
-  _x < _l ? _l : _x > _h ? _h : _x; })
+#define min(a,b) ((a)<(b)?(a):(b))
+#define max(a,b) ((a)>(b)?(a):(b))
+#define abs(x) ((x)>0?(x):-(x))
+#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
+#define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
+#define radians(deg) ((deg)*DEG_TO_RAD)
+#define degrees(rad) ((rad)*RAD_TO_DEG)
+#define sq(x) ((x)*(x))
 
 #define interrupts() sei()
 #define noInterrupts() cli()
