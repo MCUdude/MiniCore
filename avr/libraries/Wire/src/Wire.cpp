@@ -428,8 +428,8 @@ TwoWire::TwoWire(int bufferLength,
 
 TwoWire::~TwoWire()
 {
-  delete rxBuffer;
-  delete txBuffer;
+  delete[] rxBuffer;
+  delete[] txBuffer;
 }
 
 // Public Methods //////////////////////////////////////////////////////////////
