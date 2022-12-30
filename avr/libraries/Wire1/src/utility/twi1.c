@@ -46,7 +46,7 @@ static volatile uint8_t twi_inRepStart; // in the middle of a repeated start
 static void (*twi_onSlaveTransmit)(void);
 static void (*twi_onSlaveReceive)(uint8_t*, int);
 
-static uint8_t twi_masterBuffer[TWI1_BUFFER_SIZE];
+static uint8_t *twi_masterBuffer;
 static volatile uint8_t twi_masterBufferIndex;
 static volatile uint8_t twi_masterBufferLength;
 
@@ -146,8 +146,6 @@ void twi_setFrequency1(uint32_t frequency)
  */
 uint8_t twi_readFrom1(uint8_t address, uint8_t* data, uint8_t length, uint8_t sendStop)
 {
-  uint8_t i;
-
   // ensure data will fit into buffer
   if(TWI1_BUFFER_SIZE < length){
     return 0;
@@ -163,6 +161,7 @@ uint8_t twi_readFrom1(uint8_t address, uint8_t* data, uint8_t length, uint8_t se
   twi_error = 0xFF;
 
   // initialize buffer iteration vars
+  twi_masterBuffer = data;
   twi_masterBufferIndex = 0;
   twi_masterBufferLength = length-1;  // This is not intuitive, read on...
   // On receive, the previously configured ACK/NACK setting is transmitted in
@@ -200,11 +199,6 @@ uint8_t twi_readFrom1(uint8_t address, uint8_t* data, uint8_t length, uint8_t se
   if (twi_masterBufferIndex < length)
     length = twi_masterBufferIndex;
 
-  // copy twi buffer to data
-  for(i = 0; i < length; ++i){
-    data[i] = twi_masterBuffer[i];
-  }
-
   return length;
 }
 
@@ -225,8 +219,6 @@ uint8_t twi_readFrom1(uint8_t address, uint8_t* data, uint8_t length, uint8_t se
  */
 uint8_t twi_writeTo1(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait, uint8_t sendStop)
 {
-  uint8_t i;
-
   // ensure data will fit into buffer
   if(TWI1_BUFFER_SIZE < length){
     return 1;
@@ -242,13 +234,9 @@ uint8_t twi_writeTo1(uint8_t address, uint8_t* data, uint8_t length, uint8_t wai
   twi_error = 0xFF;
 
   // initialize buffer iteration vars
+  twi_masterBuffer = data;
   twi_masterBufferIndex = 0;
   twi_masterBufferLength = length;
-  
-  // copy data to twi buffer
-  for(i = 0; i < length; ++i){
-    twi_masterBuffer[i] = data[i];
-  }
   
   // build sla+w, slave device address + w bit
   twi_slarw = TW_WRITE;
