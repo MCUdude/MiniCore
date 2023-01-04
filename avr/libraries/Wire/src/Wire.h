@@ -117,6 +117,11 @@ class TwoWire : public Stream
     void (*tw_reply)(uint8_t);
     void (*tw_stop)(void);
     void (*tw_releaseBus)(void);
+    #if defined(WIRE_TIMEOUT)
+      void (*tw_setTimeoutInMicros)(uint32_t, bool);
+      void (*tw_handleTimeout)(bool);
+      bool (*tw_manageTimeoutFlag)(bool);
+    #endif
   public:
     TwoWire(int bufferLength,
             void (*tw_init)(void),
@@ -128,7 +133,12 @@ class TwoWire : public Stream
             uint8_t (*tw_transmit)(const uint8_t*, uint8_t),
             void (*tw_reply)(uint8_t),
             void (*tw_stop)(void),
-            void (*twi_releaseBus)(void),
+            void (*tw_releaseBus)(void),
+            #if defined(WIRE_TIMEOUT)
+              void (*tw_setTimeoutInMicros)(uint32_t, bool),
+              void (*tw_handleTimeout)(bool),
+              bool (*tw_manageTimeoutFlag)(bool),
+            #endif
             void (*tw_attachSlaveRxEvent)( void (*onReceive)(uint8_t*, int) ),
             void (*onReceive)(uint8_t*, int),
             void (*tw_attachSlaveTxEvent)( void (*onTrasmit)(void) ),
@@ -139,6 +149,11 @@ class TwoWire : public Stream
     void begin(int);
     void end();
     void setClock(uint32_t);
+    #if defined(WIRE_TIMEOUT)
+      void setWireTimeout(uint32_t timeout = 25000, bool reset_with_timeout = false);
+      bool getWireTimeoutFlag(void);
+      void clearWireTimeoutFlag(void);
+    #endif
     void beginTransmission(uint8_t);
     void beginTransmission(int);
     uint8_t endTransmission(void);
