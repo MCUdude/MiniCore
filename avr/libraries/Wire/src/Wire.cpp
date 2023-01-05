@@ -504,7 +504,7 @@ void TwoWire::setClock(uint32_t clock)
 
  */
 void TwoWire::setWireTimeout(uint32_t timeout, bool reset_with_timeout){
-  twi_setTimeoutInMicros(timeout, reset_with_timeout);
+  tw_setTimeoutInMicros(timeout, reset_with_timeout);
 }
 
 /**
@@ -513,14 +513,14 @@ void TwoWire::setWireTimeout(uint32_t timeout, bool reset_with_timeout){
  * @return true if timeout has occured since the flag was last cleared.
  */
 bool TwoWire::getWireTimeoutFlag(void){
-  return(twi_manageTimeoutFlag(false));
+  return(tw_manageTimeoutFlag(false));
 }
 
 /**
  * Clears the TWI timeout flag.
  */
 void TwoWire::clearWireTimeoutFlag(void){
-  twi_manageTimeoutFlag(true);
+  tw_manageTimeoutFlag(true);
 }
 #endif // WIRE_TIMEOUT
 
