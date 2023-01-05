@@ -17,6 +17,7 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
   Modified 2012 by Todd Krein (todd@krein.org) to implement repeated starts
+  Modified 2020 by Greyson Christoforo (grey@christoforo.net) to implement timeouts
 */
 
 #include <math.h>
@@ -164,7 +165,7 @@ uint8_t twi_readFrom1(uint8_t address, uint8_t* data, uint8_t length, uint8_t se
   }
 
   // wait until twi is ready, become master receiver
-    #if defined(WIRE_TIMEOUT)
+  #if defined(WIRE_TIMEOUT)
     uint32_t startMicros = micros();
     while(TWI_READY != twi_state){
       if((twi_timeout_us > 0ul) && ((micros() - startMicros) > twi_timeout_us)) {
@@ -325,7 +326,7 @@ uint8_t twi_writeTo1(uint8_t address, uint8_t* data, uint8_t length, uint8_t wai
   }
   else
     // send start condition
-    TWCR1 = _BV(TWINT) | _BV(TWEA) | _BV(TWEN) | _BV(TWIE) | _BV(TWSTA);  // enable INTs
+    TWCR1 = _BV(TWINT) | _BV(TWEA) | _BV(TWEN) | _BV(TWIE) | _BV(TWSTA); // enable INTs
 
   // wait for write operation to complete
   #if defined(WIRE_TIMEOUT)
@@ -341,7 +342,7 @@ uint8_t twi_writeTo1(uint8_t address, uint8_t* data, uint8_t length, uint8_t wai
       continue;
     }
   #endif
-  
+
   if (twi_error == 0xFF)
     return 0; // success
   else if (twi_error == TW_MT_SLA_NACK)
