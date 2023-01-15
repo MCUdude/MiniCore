@@ -12,6 +12,10 @@ This repo contains the Arduino corefiles used with [MightyCore](https://github.c
 * ATmega8535, ATmega16, ATmega32, ATmega164A/P, ATmega324A/P/PA/PB, ATmega644/P, ATmega1284/P
 * ATmega8515, ATmega162
 * ATmega8, ATmega48/P/PA/PB, ATmega88/P/PA/PB, ATmega168/P/PA/PB, ATmega328/P/PA/PB
+* ATmega165/A/P/PA, ATmega325/A/P/PA, ATmega645/A/P
+* ATmega3250/A/P, ATmega6450/A/P
+* ATmega169/A/P/PA, ATmega329/A/P/PA, ATmega649/A/P
+* ATmega3290/A/P, ATmega6490/A/P
 
 
 ## Supported clock frequencies
