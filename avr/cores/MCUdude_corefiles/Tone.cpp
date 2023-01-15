@@ -126,7 +126,24 @@ volatile uint8_t timer2_pin_mask;
   #define USE_TIMER3
   const uint8_t PROGMEM tone_pin_to_timer_PGM[] = { 3 /*, 1 */ };
   static uint8_t tone_pins[AVAILABLE_TONE_PINS] = { 255 /*, 255 */ };
- 
+
+#elif defined(__AVR_ATmega165__) || defined(__AVR_ATmega165A__)  || defined(__AVR_ATmega165P__)   \
+|| defined(__AVR_ATmega165PA__)  || defined(__AVR_ATmega325__)   || defined(__AVR_ATmega325A__)   \
+|| defined(__AVR_ATmega325P__)   || defined(__AVR_ATmega325PA__) || defined(__AVR_ATmega3250__)   \
+|| defined(__AVR_ATmega3250A__)  || defined(__AVR_ATmega3250P__) || defined(__AVR_ATmega3250PA__) \
+|| defined(__AVR_ATmega645__)    || defined(__AVR_ATmega645A__)  || defined(__AVR_ATmega645P__)   \
+|| defined(__AVR_ATmega6450__)   || defined(__AVR_ATmega6450A__) || defined(__AVR_ATmega6450P__)  \
+|| defined(__AVR_ATmega169__)    || defined(__AVR_ATmega169A__)  || defined(__AVR_ATmega169P__)   \
+|| defined(__AVR_ATmega169PA__)  || defined(__AVR_ATmega329__)   || defined(__AVR_ATmega329A__)   \
+|| defined(__AVR_ATmega329P__)   || defined(__AVR_ATmega329PA__) || defined(__AVR_ATmega3290__)   \
+|| defined(__AVR_ATmega3290A__)  || defined(__AVR_ATmega3290P__) || defined(__AVR_ATmega3290PA__) \
+|| defined(__AVR_ATmega649__)    || defined(__AVR_ATmega649A__)  || defined(__AVR_ATmega649P__)   \
+|| defined(__AVR_ATmega6490__)   || defined(__AVR_ATmega6490A__) || defined(__AVR_ATmega6490P__)
+  #define AVAILABLE_TONE_PINS 1
+  #define USE_TIMER1
+  const uint8_t PROGMEM tone_pin_to_timer_PGM[] = { 1 };
+  static uint8_t tone_pins[AVAILABLE_TONE_PINS] = { 255 };
+
 #else // Generic
   #define AVAILABLE_TONE_PINS 1
   #define USE_TIMER2
@@ -136,12 +153,12 @@ volatile uint8_t timer2_pin_mask;
 #endif
 
 // Identifies the timer which has prescaler values 1/8/32/64/128/256/1024
-// Other timers are lacking 32 and 128 because clock select bits are used 
+// Other timers are lacking 32 and 128 because clock select bits are used
 // for external clock input
 #if defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
-  #define TIMER_WITH_FULL_PRESCALER 0         
+  #define TIMER_WITH_FULL_PRESCALER 0
 #else
-  #define TIMER_WITH_FULL_PRESCALER 2         
+  #define TIMER_WITH_FULL_PRESCALER 2
 #endif
 
 
@@ -149,13 +166,13 @@ static int8_t toneBegin(uint8_t _pin)
 {
   int8_t _timer = -1;
 
-  // if we're already using the pin, the timer should be configured.  
+  // if we're already using the pin, the timer should be configured.
   for (int i = 0; i < AVAILABLE_TONE_PINS; i++) {
     if (tone_pins[i] == _pin) {
       return pgm_read_byte(tone_pin_to_timer_PGM + i);
     }
   }
-  
+
   // search for an unused timer.
   for (int i = 0; i < AVAILABLE_TONE_PINS; i++) {
     if (tone_pins[i] == 255) {
@@ -164,7 +181,7 @@ static int8_t toneBegin(uint8_t _pin)
       break;
     }
   }
-  
+
   if (_timer != -1)
   {
     // Set timer specific stuff
@@ -273,7 +290,7 @@ void tone(uint8_t _pin, unsigned int frequency, unsigned long duration)
   {
     // Set the pinMode as OUTPUT
     pinMode(_pin, OUTPUT);
-    
+
     // if we are using an 8 bit timer, scan through prescalars to find the best fit
     if (_timer == 0 || _timer == 2)
     {
@@ -364,7 +381,7 @@ void tone(uint8_t _pin, unsigned int frequency, unsigned long duration)
 #endif
 
     }
-    
+
 
     // Calculate the toggle count
     if (duration > 0)
@@ -500,7 +517,7 @@ void disableTimer(uint8_t _timer)
 void noTone(uint8_t _pin)
 {
   int8_t _timer = -1;
-  
+
   for (int i = 0; i < AVAILABLE_TONE_PINS; i++) {
     if (tone_pins[i] == _pin) {
       _timer = pgm_read_byte(tone_pin_to_timer_PGM + i);
@@ -508,7 +525,7 @@ void noTone(uint8_t _pin)
       break;
     }
   }
-  
+
   disableTimer(_timer);
 
   digitalWrite(_pin, 0);

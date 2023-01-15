@@ -75,38 +75,27 @@ void yield(void);
 
 /* Analog reference definitions */
 
-// ATmega8535, ATmega8, ATmega16, ATmega32, ATmega64, ATmega128
-#if defined(__AVR_ATmega8535__) || defined(__AVR_ATmega8__) || defined(__AVR_ATmega16__) \
-|| defined(__AVR_ATmega32__) || defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
+// "Classic" series
+#if defined(__AVR_ATmega8535__) || defined(__AVR_ATmega8__)  || defined(__AVR_ATmega16__) \
+|| defined(__AVR_ATmega32__)    || defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
   #define EXTERNAL 0
   #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
   #define INTERNAL2V56 3
   #define INTERNAL 3
 
-// ATmega48/P/PB, ATmega88/P/PB, ATmega168/P/PB, ATmega328/P/PB
-#elif defined(__AVR_ATmega48__) || defined(__AVR_ATmega48P__) || defined(__AVR_ATmega48PB__) \
-|| defined(__AVR_ATmega88__)  || defined(__AVR_ATmega88P__)  || defined(__AVR_ATmega88PB__)  \
-|| defined(__AVR_ATmega168__) || defined(__AVR_ATmega168P__) || defined(__AVR_ATmega168PB__) \
-|| defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega328PB__)
-  #define EXTERNAL 0
-  #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
-  #define INTERNAL1V1 3
-  #define INTERNAL 3
-
-// ATmega640, ATmega1280, ATmega1281, ATmega2560, ATmega2561
+// 0/1 series
 #elif defined(__AVR_ATmega640__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega1281__) \
-|| defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__)
+|| defined(__AVR_ATmega2560__)   || defined(__AVR_ATmega2561__)
   #define EXTERNAL 0
   #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
   #define INTERNAL1V1 2
   #define INTERNAL2V56 3
   #define INTERNAL 3
 
-
-// ATmega164A/P, ATmega324A/P/PA/PB, ATmega644/P, ATmega1284/P
-#elif defined(__AVR_ATmega164A__) || defined(__AVR_ATmega164P__) || defined(__AVR_ATmega324A__) \
-|| defined(__AVR_ATmega324P__) || defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega324PB__)  \
-|| defined(__AVR_ATmega644A__) || defined(__AVR_ATmega644P__)  || defined(__AVR_ATmega1284__)   \
+// 4 series
+#elif defined(__AVR_ATmega164A__) || defined(__AVR_ATmega164P__)  || defined(__AVR_ATmega324A__)  \
+|| defined(__AVR_ATmega324P__)    || defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega324PB__) \
+|| defined(__AVR_ATmega644A__)    || defined(__AVR_ATmega644P__)  || defined(__AVR_ATmega1284__)  \
 || defined(__AVR_ATmega1284P__)
   #define EXTERNAL 0
   #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
@@ -114,25 +103,41 @@ void yield(void);
   #define INTERNAL2V56 3
   #define INTERNAL 3
 
-#endif
+// 5 series
+#elif defined(__AVR_ATmega165__) || defined(__AVR_ATmega165A__)  || defined(__AVR_ATmega165P__)   \
+|| defined(__AVR_ATmega165PA__)  || defined(__AVR_ATmega325__)   || defined(__AVR_ATmega325A__)   \
+|| defined(__AVR_ATmega325P__)   || defined(__AVR_ATmega325PA__) || defined(__AVR_ATmega3250__)   \
+|| defined(__AVR_ATmega3250A__)  || defined(__AVR_ATmega3250P__) || defined(__AVR_ATmega3250PA__) \
+|| defined(__AVR_ATmega645__)    || defined(__AVR_ATmega645A__)  || defined(__AVR_ATmega645P__)   \
+|| defined(__AVR_ATmega6450__)   || defined(__AVR_ATmega6450A__) || defined(__AVR_ATmega6450P__)
+  #define EXTERNAL 0
+  #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
+  #define INTERNAL1V1 3
+  #define INTERNAL 3
 
-// undefine stdlib's abs if encountered
-#ifdef abs
-#undef abs
-#endif
+// 8 series
+#elif defined(__AVR_ATmega48__) || defined(__AVR_ATmega48P__)  || defined(__AVR_ATmega48PB__)  \
+|| defined(__AVR_ATmega88__)    || defined(__AVR_ATmega88P__)  || defined(__AVR_ATmega88PB__)  \
+|| defined(__AVR_ATmega168__)   || defined(__AVR_ATmega168P__) || defined(__AVR_ATmega168PB__) \
+|| defined(__AVR_ATmega328__)   || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega328PB__)
+  #define EXTERNAL 0
+  #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
+  #define INTERNAL1V1 3
+  #define INTERNAL 3
 
-#define abs(x)       ({ typeof (x) _x = (x); _x > 0 ? _x : -_x; })
-#define sq(x)        ({ typeof (x) _x = (x); _x * _x; })
-#define min(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a < _b ? _a : _b; })
-#define max(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a > _b ? _a : _b; })
-#define round(x)     ({ typeof (x) _x = (x); _x >= 0 ? (long)(_x + 0.5) : (long)(_x - 0.5); })
-#define radians(deg) ((deg) * DEG_TO_RAD)
-#define degrees(rad) ((rad) * RAD_TO_DEG)
-#define constrain(x,low,high)     ({ \
-  typeof (x) _x = (x);               \
-  typeof (low) _l = (low);           \
-  typeof (high) _h = (high);         \
-  _x < _l ? _l : _x > _h ? _h : _x; })
+// 9 series
+#elif defined(__AVR_ATmega169__) || defined(__AVR_ATmega169A__)  || defined(__AVR_ATmega169P__)   \
+|| defined(__AVR_ATmega169PA__)  || defined(__AVR_ATmega329__)   || defined(__AVR_ATmega329A__)   \
+|| defined(__AVR_ATmega329P__)   || defined(__AVR_ATmega329PA__) || defined(__AVR_ATmega3290__)   \
+|| defined(__AVR_ATmega3290A__)  || defined(__AVR_ATmega3290P__) || defined(__AVR_ATmega3290PA__) \
+|| defined(__AVR_ATmega649__)    || defined(__AVR_ATmega649A__)  || defined(__AVR_ATmega649P__)   \
+|| defined(__AVR_ATmega6490__)   || defined(__AVR_ATmega6490A__) || defined(__AVR_ATmega6490P__)
+  #define EXTERNAL 0
+  #define DEFAULT 1 // Default -> AVCC with external capacitor at AREF pin
+  #define INTERNAL1V1 3
+  #define INTERNAL 3
+
+#endif
 
 #define interrupts() sei()
 #define noInterrupts() cli()
@@ -292,6 +297,66 @@ extern const uint8_t PROGMEM digital_pin_to_timer_PGM[];
 #ifdef __cplusplus
 } // extern "C"
 #endif
+
+// Undefine stdlib's abs if encountered
+#ifdef abs
+  #undef abs
+#endif
+
+#ifdef __cplusplus
+	template<class T>
+	auto abs(const T& x) -> decltype(x > 0 ? x : -x) {
+		return x > 0 ? x : -x;
+	}
+
+	template<class T, class L>
+	auto min(const T& a, const L& b) -> decltype((b < a) ? b : a) {
+		return (b < a) ? b : a;
+	}
+
+	template<class T, class L>
+	auto max(const T& a, const L& b) -> decltype((b < a) ? b : a) {
+		return (a < b) ? b : a;
+	}
+
+	template<class T>
+	long round(const T& x) {
+		return (long)(x >= 0 ? (x + 0.5) : (x - 0.5));
+	}
+
+	template<class T>
+	auto sq(const T& x) -> decltype(x * x) {
+		return x * x;
+	}
+
+  template<class T>
+  auto radians(const T& deg) -> decltype(deg * DEG_TO_RAD) {
+    return deg * DEG_TO_RAD;
+  }
+
+  template<class T>
+  auto degrees(const T& rad) -> decltype(rad * RAD_TO_DEG) {
+    return rad * RAD_TO_DEG;
+  }
+
+  template<class T, class L, class H>
+	auto constrain(const T& x, const L& l, const H& h) -> decltype((x < l) ? l : (x > h) ? h : x) {
+		return (x < l) ? l : (x > h) ? h : x;
+	}
+
+#else
+  #define abs(x)       ({ typeof (x) _x = (x); _x > 0 ? _x : -_x; })
+  #define min(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a < _b ? _a : _b; })
+  #define max(a,b)     ({ typeof (a) _a = (a); typeof (b) _b = (b); _a > _b ? _a : _b; })
+  #define sq(x)        ({ typeof (x) _x = (x); _x * _x; })
+  #define radians(deg) ((deg) * DEG_TO_RAD)
+  #define degrees(rad) ((rad) * RAD_TO_DEG)
+  #define constrain(x,low,high)     ({ \
+  typeof (x) _x = (x);               \
+  typeof (low) _l = (low);           \
+  typeof (high) _h = (high);         \
+  _x < _l ? _l : _x > _h ? _h : _x; })
+#endif // __cplusplus
 
 #ifdef __cplusplus
 #include "WCharacter.h"
