@@ -1,49 +1,27 @@
-stk500.name=STK500 as ISP (MiniCore)
-stk500.communication=serial
-stk500.protocol=stk500
-stk500.program.protocol=stk500
-stk500.program.tool=avrdude
-stk500.program.extra_params= -P {serial.port}
-
-avrisp.name=AVR ISP (MiniCore)
-avrisp.communication=serial
-avrisp.protocol=stk500v1
-avrisp.program.protocol=stk500v1
-avrisp.program.tool=avrdude
-avrisp.program.extra_params=-P{serial.port}
-
-avrispmkii.name=AVRISP mkII (MiniCore)
-avrispmkii.communication=usb
-avrispmkii.protocol=stk500v2
-avrispmkii.program.protocol=stk500v2
-avrispmkii.program.tool=avrdude
-avrispmkii.program.extra_params=-Pusb
-
-usbtinyisp.name=USBtinyISP (MiniCore)
-usbtinyisp.protocol=usbtiny
-usbtinyisp.program.tool=avrdude
-usbtinyisp.program.extra_params=
-
-usbtinyisp_slow.name=USBtinyISP slow (MiniCore)
-usbtinyisp_slow.protocol=usbtiny
-usbtinyisp_slow.program.tool=avrdude
-usbtinyisp_slow.program.extra_params=-B32
-
-usbasp.name=USBasp (MiniCore)
+usbasp.name=USBasp
 usbasp.communication=usb
 usbasp.protocol=usbasp
 usbasp.program.protocol=usbasp
 usbasp.program.tool=avrdude
-usbasp.program.extra_params=-Pusb
 
-usbasp_slow.name=USBasp slow (MiniCore)
+usbasp_slow.name=USBasp slow
 usbasp_slow.communication=usb
 usbasp_slow.protocol=usbasp
 usbasp_slow.program.protocol=usbasp
 usbasp_slow.program.tool=avrdude
-usbasp_slow.program.extra_params=-Pusb -B32
+usbasp_slow.program.extra_params= -B32
 
-arduinoasisp.name=Arduino as ISP (MiniCore)
+usbtinyisp.name=USBtinyISP
+usbtinyisp.protocol=usbtiny
+usbtinyisp.program.tool=avrdude
+usbtinyisp.program.extra_params=
+
+usbtinyisp_slow.name=USBtinyISP slow
+usbtinyisp_slow.protocol=usbtiny
+usbtinyisp_slow.program.tool=avrdude
+usbtinyisp_slow.program.extra_params=-B32
+
+arduinoasisp.name=Arduino as ISP
 arduinoasisp.communication=serial
 arduinoasisp.protocol=stk500v1
 arduinoasisp.speed=19200
@@ -52,23 +30,39 @@ arduinoasisp.program.speed=19200
 arduinoasisp.program.tool=avrdude
 arduinoasisp.program.extra_params=-P{serial.port} -b{program.speed}
 
-atmel_ice.name=Atmel-ICE (AVR) (MiniCore)
+xplainedmini.name=Xplained Mini
+xplainedmini.communication=usb
+xplainedmini.protocol=xplainedmini
+xplainedmini.program.protocol=xplainedmini
+xplainedmini.program.tool=avrdude
+
+atmel_ice.name=Atmel-ICE ISP
 atmel_ice.communication=usb
 atmel_ice.protocol=atmelice_isp
 atmel_ice.program.protocol=atmelice_isp
 atmel_ice.program.tool=avrdude
-atmel_ice.program.extra_params=-Pusb
 
-pickit4_isp.name=PICkit4 (ISP mode) (MiniCore)
+pickit4_isp.name=PICkit4 ISP
 pickit4_isp.communication=usb
 pickit4_isp.protocol=pickit4_isp
 pickit4_isp.program.protocol=pickit4_isp
 pickit4_isp.program.tool=avrdude
-pickit4_isp.program.extra_params=-Pusb
 
-snap_isp.name=MPLAB SNAP (ISP mode) (MiniCore)
+snap_isp.name=MPLAB SNAP ISP
 snap_isp.communication=usb
 snap_isp.protocol=snap_isp
 snap_isp.program.protocol=snap_isp
 snap_isp.program.tool=avrdude
-snap_isp.program.extra_params=-Pusb
+
+avrispmkii.name=AVRISP mkII
+avrispmkii.communication=usb
+avrispmkii.protocol=stk500v2
+avrispmkii.program.protocol=stk500v2
+avrispmkii.program.tool=avrdude
+
+stk500.name=STK500 as ISP (MiniCore)
+stk500.communication=serial
+stk500.protocol=stk500
+stk500.program.protocol=stk500
+stk500.program.tool=avrdude
+stk500.program.extra_params= -P {serial.port}
