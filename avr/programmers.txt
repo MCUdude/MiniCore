@@ -35,30 +35,35 @@ xplainedmini.communication=usb
 xplainedmini.protocol=xplainedmini
 xplainedmini.program.protocol=xplainedmini
 xplainedmini.program.tool=avrdude
+xplainedmini.program.extra_params=
 
 atmel_ice.name=Atmel-ICE ISP
 atmel_ice.communication=usb
 atmel_ice.protocol=atmelice_isp
 atmel_ice.program.protocol=atmelice_isp
 atmel_ice.program.tool=avrdude
+atmel_ice.program.extra_params=
 
 pickit4_isp.name=PICkit4 ISP
 pickit4_isp.communication=usb
 pickit4_isp.protocol=pickit4_isp
 pickit4_isp.program.protocol=pickit4_isp
 pickit4_isp.program.tool=avrdude
+pickit4_isp.program.extra_params=
 
 snap_isp.name=MPLAB SNAP ISP
 snap_isp.communication=usb
 snap_isp.protocol=snap_isp
 snap_isp.program.protocol=snap_isp
 snap_isp.program.tool=avrdude
+snap_isp.program.extra_params=
 
 avrispmkii.name=AVRISP mkII
 avrispmkii.communication=usb
 avrispmkii.protocol=stk500v2
 avrispmkii.program.protocol=stk500v2
 avrispmkii.program.tool=avrdude
+avrispmkii.program.extra_params=
 
 stk500.name=STK500 as ISP (MiniCore)
 stk500.communication=serial
