@@ -3,6 +3,7 @@ usbasp.communication=usb
 usbasp.protocol=usbasp
 usbasp.program.protocol=usbasp
 usbasp.program.tool=avrdude
+usbasp.program.extra_params=
 
 usbasp_slow.name=USBasp slow
 usbasp_slow.communication=usb
