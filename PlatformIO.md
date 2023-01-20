@@ -265,6 +265,7 @@ This parameter is used to set compiler flags. This is useful if you want to for 
 | -DSERIAL_TX_BUFFER_SIZE=128 | 64 bytes     | Sets the serial TX buffer to 128 bytes                    |
 | -DTWI_BUFFER_SIZE=64        | 32 bytes     | Sets the TWI (i2c) buffer to 64 bytes                     |
 | -DTWI1_BUFFER_SIZE=64       | 32 bytes     | Sets the TWI1 (i2c) buffer to 64 bytes (ATmega328PB only) |
+| -DWIRE_TIMEOUT              |              | Enable timeout for the Wire and Wire1 library             |
 
 **Example:**
 `build_flags = -DSERIAL_RX_BUFFER_SIZE=128 -DSERIAL_TX_BUFFER_SIZE=128`
