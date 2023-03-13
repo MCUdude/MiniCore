@@ -61,8 +61,8 @@ snap_isp.program.extra_params=
 
 avrispmkii.name=AVRISP mkII
 avrispmkii.communication=usb
-avrispmkii.protocol=stk500v2
-avrispmkii.program.protocol=stk500v2
+avrispmkii.protocol=avrispmkii
+avrispmkii.program.protocol=avrispmkii
 avrispmkii.program.tool=avrdude
 avrispmkii.program.extra_params=
 
