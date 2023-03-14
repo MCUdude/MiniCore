@@ -175,7 +175,7 @@ Open Arduino IDE, and a new category in the boards menu called "MiniCore" will s
 
 ## Getting started with MiniCore
 Ok, so you're downloaded and installed MiniCore, but how to get started? Here's a quick guide:
-* Hook up your microcontroller as shown in the [pinout diagram](#pinout), or simply just plut it into an Arduino UNO board.
+* Hook up your microcontroller as shown in the [pinout diagram](#pinout), or simply just plug it into an Arduino UNO board.
 	- (If you're not planning to use the bootloader (uploading code using a USB to serial adapter), the FTDI header and the 100 nF capacitor on the reset pin can be omitted.)
 * Open the **Tools > Board** menu item, and select a MiniCore compatible microcontroller.
 * If the *BOD option* is presented, you can select at what voltage the microcontroller will shut down at. Read more about BOD [here](#bod-option).
@@ -191,7 +191,7 @@ Your code should now be running on your microcontroller! If you experience any i
 
 
 ## Wiring reference
-To extend this core's functionality a bit futher, I've added a few missing Wiring functions. As many of you know Arduino is based on Wiring, but that doesn't mean the Wiring development isn't active. These functions are used as "regular" Arduino functions, and there's no need to include an external library.<br/>
+To extend this core's functionality a bit further, I've added a few missing Wiring functions. As many of you know Arduino is based on Wiring, but that doesn't mean the Wiring development isn't active. These functions are used as "regular" Arduino functions, and there's no need to include an external library.<br/>
 I hope you find this useful, because they really are!
 
 ### Function list
