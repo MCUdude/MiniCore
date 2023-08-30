@@ -99,7 +99,9 @@
 #endif
 
 // Builtin LED
-#define LED_BUILTIN (13)
+#if !defined(LED_BUILTIN)
+  #define LED_BUILTIN (13)
+#endif
 static const uint8_t LED = LED_BUILTIN;
 
 // Analog pins
