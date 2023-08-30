@@ -589,13 +589,13 @@ menu.bootloader=Bootloader
 48.bootloader.lock_bits=0xff
 48.bootloader.extended_fuses=0xff
 48.build.core=MCUdude_corefiles
-48.build.board=AVR_ATmega88
+48.build.board=AVR_ATmega48
 48.build.bootloader_led=led+b5
 48.build.extra_flags={build.clkpr}
 
 # Upload port select
 48.menu.bootloader.uart0=Yes (UART0)
-48.menu.bootloader.uart0.upload.maximum_size=3712
+48.menu.bootloader.uart0.upload.maximum_size=3776
 48.menu.bootloader.uart0.upload.protocol=urclock
 48.menu.bootloader.uart0.upload.uartpins=uart0_rxd0_txd1
 48.menu.bootloader.uart0.build.export_merged_output=true
