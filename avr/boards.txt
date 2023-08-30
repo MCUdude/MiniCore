@@ -1,39 +1,17 @@
-##################################################################################################
-## This file is created by MCUdude for use with MiniCore                                        ##
-## https://github.com/MCUdude/MiniCore                                                          ##
-##                                                                                              ##
-## This is the file where fuse settings, clock frequencies, upload ports, bootloaders and       ##
-## compiler flags are located.                                                                  ##
-##                                                                                              ##
-## Note that ATmega48/88/168/328/P/PB require the CLKPR register to be set in user application  ##
-## if you want to use the 2 or 1 MHz internal oscillator option.                                ##
-##                                                                                              ##
-## The table below shows the available precompiled bootloaders for the corresponding clock      ##
-## frequencies and baud rates. Modify the upload.speed field to change baud rate.               ##
-##                                                                                              ##
-## |             | 1000000 | 500000 | 250000 | 230400 | 115200 | 57600 | 38400 | 19200 | 9600 | ##
-## |-------------|---------|--------|--------|--------|--------|-------|-------|-------|------| ##
-## | 20 MHz      |         |  X     |  X     |        |  X     |       |       |  X    |      | ##
-## | 18.4320 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ##
-## | 16 MHz      |  X      |  X     |  X     |        |  X     |       |  X    |  X    |  X   | ##
-## | 14.7456 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 12 MHz      |         |  X     |  X     |        |  X     |  X    |       |  X    |  X   | ##
-## | 11.0592 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 8 MHz       |  X      |  X     |  X     |        |  X     |  X    |  X    |  X    |  X   | ##
-## | 7.3728 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 4 MHz       |         |  X     |  X     |        |        |       |       |  X    |  X   | ##
-## | 3.6864 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 2 MHz       |         |        |  X     |        |        |       |       |  X    |  X   | ##
-## | 1.8432 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
-## | 1 MHz       |         |        |        |        |        |       |       |       |  X   | ## 
-##                                                                                              ##
-##################################################################################################
+###########################################################################################################
+## This file is created by MCUdude for use with MiniCore                                                 ##
+## https://github.com/MCUdude/MiniCore                                                                   ##
+##                                                                                                       ##
+## This is the file where fuse settings, clock frequencies, upload ports, bootloaders and                ##
+## compiler flags are located.                                                                           ##
+##                                                                                                       ##
+###########################################################################################################
 
 # Menu options
 menu.clock=Clock
 menu.BOD=BOD
 menu.eeprom=EEPROM
-menu.LTO=Compiler LTO 
+menu.LTO=Compiler LTO
 menu.variant=Variant
 menu.bootloader=Bootloader
 
@@ -48,40 +26,37 @@ menu.bootloader=Bootloader
 328.upload.maximum_data_size=2048
 328.bootloader.tool=avrdude
 328.bootloader.unlock_bits=0xff
-328.bootloader.lock_bits=0xcf
+328.bootloader.lock_bits=0xff
 328.build.core=MCUdude_corefiles
 328.build.board=AVR_ATmega328
-328.build.bootloader_led=B5
+328.build.bootloader_led=led+b5
 328.build.extra_flags={build.clkpr}
 
 # Upload port select
 328.menu.bootloader.uart0=Yes (UART0)
-328.menu.bootloader.uart0.upload.maximum_size=32256
-328.menu.bootloader.uart0.upload.protocol=arduino
-328.menu.bootloader.uart0.upload.port=UART0
+328.menu.bootloader.uart0.upload.maximum_size=32384
+328.menu.bootloader.uart0.upload.protocol=urclock
+328.menu.bootloader.uart0.upload.uartpins=uart0_rxd0_txd1
 328.menu.bootloader.uart0.build.export_merged_output=true
-328.menu.bootloader.uart0.bootloader.high_fuses=0b1101{bootloader.eesave_bit}110
-328.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
+328.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
 
 328.menu.bootloader.uart1=Yes (UART1 328PB only)
-328.menu.bootloader.uart1.upload.maximum_size=32256
-328.menu.bootloader.uart1.upload.protocol=arduino
-328.menu.bootloader.uart1.upload.port=UART1
+328.menu.bootloader.uart1.upload.maximum_size=32384
+328.menu.bootloader.uart1.upload.protocol=urclock
+328.menu.bootloader.uart1.upload.uartpins=uart1_rxb4_txb3
 328.menu.bootloader.uart1.build.export_merged_output=true
-328.menu.bootloader.uart1.bootloader.high_fuses=0b1101{bootloader.eesave_bit}110
-328.menu.bootloader.uart1.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
+328.menu.bootloader.uart1.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
 
 328.menu.bootloader.no_bootloader=No bootloader
 328.menu.bootloader.no_bootloader.upload.maximum_size=32768
 328.menu.bootloader.no_bootloader.build.export_merged_output=false
-328.menu.bootloader.no_bootloader.bootloader.high_fuses=0b1101{bootloader.eesave_bit}111
 328.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
 # EEPROM
 328.menu.eeprom.keep=EEPROM retained
-328.menu.eeprom.keep.bootloader.eesave_bit=0
+328.menu.eeprom.keep.bootloader.high_fuses=0xd7
 328.menu.eeprom.erase=EEPROM not retained
-328.menu.eeprom.erase.bootloader.eesave_bit=1
+328.menu.eeprom.erase.bootloader.high_fuses=0xdf
 
 # Variants
 328.menu.variant.modelP=328P / 328PA
@@ -113,136 +88,119 @@ menu.bootloader=Bootloader
 328.menu.BOD.disabled.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}111
 
 # Compiler link time optimization
+328.menu.LTO.Os_flto=LTO enabled
+328.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
+328.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
+328.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
+328.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
+
 328.menu.LTO.Os=LTO disabled
 328.menu.LTO.Os.compiler.c.extra_flags=
 328.menu.LTO.Os.compiler.c.elf.extra_flags=
 328.menu.LTO.Os.compiler.cpp.extra_flags=
 328.menu.LTO.Os.ltoarcmd=avr-ar
 
-328.menu.LTO.Os_flto=LTO enabled
-328.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
-328.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g 
-328.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
-328.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
-
 # Clock frequencies
 328.menu.clock.16MHz_external=External 16 MHz
 328.menu.clock.16MHz_external.upload.speed=115200
 328.menu.clock.16MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.16MHz_external.build.clkpr=
-328.menu.clock.16MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.16MHz_external.build.f_cpu=16000000L
 
 328.menu.clock.20MHz_external=External 20 MHz
 328.menu.clock.20MHz_external.upload.speed=115200
 328.menu.clock.20MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.20MHz_external.build.clkpr=
-328.menu.clock.20MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.20MHz_external.build.f_cpu=20000000L
 
 328.menu.clock.18_432MHz_external=External 18.432 MHz
 328.menu.clock.18_432MHz_external.upload.speed=115200
 328.menu.clock.18_432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.18_432MHz_external.build.clkpr=
-328.menu.clock.18_432MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.18_432MHz_external.build.f_cpu=18432000L
 
 328.menu.clock.14_7456MHz_external=External 14.7456 MHz
 328.menu.clock.14_7456MHz_external.upload.speed=115200
 328.menu.clock.14_7456MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.14_7456MHz_external.build.clkpr=
-328.menu.clock.14_7456MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.14_7456MHz_external.build.f_cpu=14745600L
 
 328.menu.clock.12MHz_external=External 12 MHz
 328.menu.clock.12MHz_external.upload.speed=57600
 328.menu.clock.12MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.12MHz_external.build.clkpr=
-328.menu.clock.12MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 328.menu.clock.11_0592MHz_external=External 11.0592 MHz
 328.menu.clock.11_0592MHz_external.upload.speed=115200
 328.menu.clock.11_0592MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.11_0592MHz_external.build.clkpr=
-328.menu.clock.11_0592MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.11_0592MHz_external.build.f_cpu=11059200L
 
 328.menu.clock.8MHz_external=External 8 MHz
 328.menu.clock.8MHz_external.upload.speed=57600
 328.menu.clock.8MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.8MHz_external.build.clkpr=
-328.menu.clock.8MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.8MHz_external.build.f_cpu=8000000L
 
 328.menu.clock.7_3728MHz_external=External 7.3728 MHz
 328.menu.clock.7_3728MHz_external.upload.speed=115200
 328.menu.clock.7_3728MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.7_3728MHz_external.build.clkpr=
-328.menu.clock.7_3728MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
 
 328.menu.clock.4MHz_external=External 4 MHz
 328.menu.clock.4MHz_external.upload.speed=9600
 328.menu.clock.4MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.4MHz_external.build.clkpr=
-328.menu.clock.4MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.4MHz_external.build.f_cpu=4000000L
 
 328.menu.clock.3_6864MHz_external=External 3.6864 MHz
 328.menu.clock.3_6864MHz_external.upload.speed=115200
 328.menu.clock.3_6864MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.3_6864MHz_external.build.clkpr=
-328.menu.clock.3_6864MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.3_6864MHz_external.build.f_cpu=3686400L
 
 328.menu.clock.2MHz_external=External 2 MHz
 328.menu.clock.2MHz_external.upload.speed=9600
 328.menu.clock.2MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.2MHz_external.build.clkpr=
-328.menu.clock.2MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.2MHz_external.build.f_cpu=2000000L
 
 328.menu.clock.1_8432MHz_external=External 1.8432 MHz
 328.menu.clock.1_8432MHz_external.upload.speed=115200
 328.menu.clock.1_8432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.1_8432MHz_external.build.clkpr=
-328.menu.clock.1_8432MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.1_8432MHz_external.build.f_cpu=1843200L
 
 328.menu.clock.1MHz_external=External 1 MHz
 328.menu.clock.1MHz_external.upload.speed=9600
 328.menu.clock.1MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 328.menu.clock.1MHz_external.build.clkpr=
-328.menu.clock.1MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.1MHz_external.build.f_cpu=1000000L
 
 328.menu.clock.8MHz_internal=Internal 8 MHz
 328.menu.clock.8MHz_internal.upload.speed=38400
 328.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
 328.menu.clock.8MHz_internal.build.clkpr=
-328.menu.clock.8MHz_internal.build.clock_speed={build.f_cpu}
 328.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
 328.menu.clock.4MHz_internal=Internal 4 MHz
 328.menu.clock.4MHz_internal.upload.speed=9600
 328.menu.clock.4MHz_internal.bootloader.low_fuses=0xe2
 328.menu.clock.4MHz_internal.build.clkpr=-DOSC_PRESCALER=0x01
-328.menu.clock.4MHz_internal.build.clock_speed=8000000L
 328.menu.clock.4MHz_internal.build.f_cpu=4000000L
 
 328.menu.clock.2MHz_internal=Internal 2 MHz
 328.menu.clock.2MHz_internal.upload.speed=9600
 328.menu.clock.2MHz_internal.bootloader.low_fuses=0xe2
 328.menu.clock.2MHz_internal.build.clkpr=-DOSC_PRESCALER=0x02
-328.menu.clock.2MHz_internal.build.clock_speed=8000000L
 328.menu.clock.2MHz_internal.build.f_cpu=2000000L
 
 328.menu.clock.1MHz_internal=Internal 1 MHz
 328.menu.clock.1MHz_internal.upload.speed=9600
 328.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
 328.menu.clock.1MHz_internal.build.clkpr=
-328.menu.clock.1MHz_internal.build.clock_speed={build.f_cpu}
 328.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
 
@@ -257,10 +215,10 @@ menu.bootloader=Bootloader
 168.upload.maximum_data_size=1024
 168.bootloader.tool=avrdude
 168.bootloader.unlock_bits=0xff
-168.bootloader.lock_bits=0xcf
+168.bootloader.lock_bits=0xff
 168.build.core=MCUdude_corefiles
 168.build.board=AVR_ATmega168
-168.build.bootloader_led=B5
+168.build.bootloader_led=led+b5
 168.build.extra_flags={build.clkpr}
 
 # Upload port select
@@ -276,6 +234,19 @@ menu.bootloader=Bootloader
 168.menu.bootloader.no_bootloader.upload.maximum_size=16384
 168.menu.bootloader.no_bootloader.build.export_merged_output=false
 168.menu.bootloader.no_bootloader.bootloader.extended_fuses=0xfd
+168.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
+
+# Upload port select
+168.menu.bootloader.uart0=Yes (UART0)
+168.menu.bootloader.uart0.upload.maximum_size=16000
+168.menu.bootloader.uart0.upload.protocol=urclock
+168.menu.bootloader.uart0.upload.uartpins=uart0_rxd0_txd1
+168.menu.bootloader.uart0.build.export_merged_output=true
+168.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
+
+168.menu.bootloader.no_bootloader=No bootloader
+168.menu.bootloader.no_bootloader.upload.maximum_size=16384
+168.menu.bootloader.no_bootloader.build.export_merged_output=false
 168.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
 # EEPROM
@@ -311,136 +282,119 @@ menu.bootloader=Bootloader
 168.menu.BOD.disabled.bootloader.high_fuses=0b1101{bootloader.eesave_bit}111
 
 # Compiler link time optimization
-168.menu.LTO.Os=LTO Disabled
-168.menu.LTO.Os.compiler.c.extra_flags=
-168.menu.LTO.Os.compiler.c.elf.extra_flags=
-168.menu.LTO.Os.compiler.cpp.extra_flags=
-168.menu.LTO.Os.ltoarcmd=avr-ar
-
 168.menu.LTO.Os_flto=LTO Enabled
 168.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 168.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
 168.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
 168.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
 
+168.menu.LTO.Os=LTO Disabled
+168.menu.LTO.Os.compiler.c.extra_flags=
+168.menu.LTO.Os.compiler.c.elf.extra_flags=
+168.menu.LTO.Os.compiler.cpp.extra_flags=
+168.menu.LTO.Os.ltoarcmd=avr-ar
+
 # Clock frequencies
 168.menu.clock.16MHz_external=External 16 MHz
 168.menu.clock.16MHz_external.upload.speed=115200
 168.menu.clock.16MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.16MHz_external.build.clkpr=
-168.menu.clock.16MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.16MHz_external.build.f_cpu=16000000L
 
 168.menu.clock.20MHz_external=External 20 MHz
 168.menu.clock.20MHz_external.upload.speed=115200
 168.menu.clock.20MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.20MHz_external.build.clkpr=
-168.menu.clock.20MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.20MHz_external.build.f_cpu=20000000L
 
 168.menu.clock.18_432MHz_external=External 18.432 MHz
 168.menu.clock.18_432MHz_external.upload.speed=115200
 168.menu.clock.18_432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.18_432MHz_external.build.clkpr=
-168.menu.clock.18_432MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.18_432MHz_external.build.f_cpu=18432000L
 
 168.menu.clock.14_7456MHz_external=External 14.7456 MHz
 168.menu.clock.14_7456MHz_external.upload.speed=115200
 168.menu.clock.14_7456MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.14_7456MHz_external.build.clkpr=
-168.menu.clock.14_7456MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.14_7456MHz_external.build.f_cpu=14745600L
 
 168.menu.clock.12MHz_external=External 12 MHz
 168.menu.clock.12MHz_external.upload.speed=57600
 168.menu.clock.12MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.12MHz_external.build.clkpr=
-168.menu.clock.12MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 168.menu.clock.11_0592MHz_external=External 11.0592 MHz
 168.menu.clock.11_0592MHz_external.upload.speed=115200
 168.menu.clock.11_0592MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.11_0592MHz_external.build.clkpr=
-168.menu.clock.11_0592MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.11_0592MHz_external.build.f_cpu=11059200L
 
 168.menu.clock.8MHz_external=External 8 MHz
 168.menu.clock.8MHz_external.upload.speed=57600
 168.menu.clock.8MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.8MHz_external.build.clkpr=
-168.menu.clock.8MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.8MHz_external.build.f_cpu=8000000L
 
 168.menu.clock.7_3728MHz_external=External 7.3728 MHz
 168.menu.clock.7_3728MHz_external.upload.speed=115200
 168.menu.clock.7_3728MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.7_3728MHz_external.build.clkpr=
-168.menu.clock.7_3728MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
 
 168.menu.clock.4MHz_external=External 4 MHz
 168.menu.clock.4MHz_external.upload.speed=9600
 168.menu.clock.4MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.4MHz_external.build.clkpr=
-168.menu.clock.4MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.4MHz_external.build.f_cpu=4000000L
 
 168.menu.clock.3_6864MHz_external=External 3.6864 MHz
 168.menu.clock.3_6864MHz_external.upload.speed=115200
 168.menu.clock.3_6864MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.3_6864MHz_external.build.clkpr=
-168.menu.clock.3_6864MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.3_6864MHz_external.build.f_cpu=3686400L
 
 168.menu.clock.2MHz_external=External 2 MHz
 168.menu.clock.2MHz_external.upload.speed=9600
 168.menu.clock.2MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.2MHz_external.build.clkpr=
-168.menu.clock.2MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.2MHz_external.build.f_cpu=2000000L
 
 168.menu.clock.1_8432MHz_external=External 1.8432 MHz
 168.menu.clock.1_8432MHz_external.upload.speed=115200
 168.menu.clock.1_8432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.1_8432MHz_external.build.clkpr=
-168.menu.clock.1_8432MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.1_8432MHz_external.build.f_cpu=1843200L
 
 168.menu.clock.1MHz_external=External 1 MHz
 168.menu.clock.1MHz_external.upload.speed=9600
 168.menu.clock.1MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 168.menu.clock.1MHz_external.build.clkpr=
-168.menu.clock.1MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.1MHz_external.build.f_cpu=1000000L
 
 168.menu.clock.8MHz_internal=Internal 8 MHz
 168.menu.clock.8MHz_internal.upload.speed=38400
 168.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
 168.menu.clock.8MHz_internal.build.clkpr=
-168.menu.clock.8MHz_internal.build.clock_speed={build.f_cpu}
 168.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
 168.menu.clock.4MHz_internal=Internal 4 MHz
 168.menu.clock.4MHz_internal.upload.speed=9600
 168.menu.clock.4MHz_internal.bootloader.low_fuses=0xe2
 168.menu.clock.4MHz_internal.build.clkpr=-DOSC_PRESCALER=0x01
-168.menu.clock.4MHz_internal.build.clock_speed=8000000L
 168.menu.clock.4MHz_internal.build.f_cpu=4000000L
 
 168.menu.clock.2MHz_internal=Internal 2 MHz
 168.menu.clock.2MHz_internal.upload.speed=9600
 168.menu.clock.2MHz_internal.bootloader.low_fuses=0xe2
 168.menu.clock.2MHz_internal.build.clkpr=-DOSC_PRESCALER=0x02
-168.menu.clock.2MHz_internal.build.clock_speed=8000000L
 168.menu.clock.2MHz_internal.build.f_cpu=2000000L
 
 168.menu.clock.1MHz_internal=Internal 1 MHz
 168.menu.clock.1MHz_internal.upload.speed=9600
 168.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
 168.menu.clock.1MHz_internal.build.clkpr=
-168.menu.clock.1MHz_internal.build.clock_speed={build.f_cpu}
 168.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
 
@@ -454,25 +408,23 @@ menu.bootloader=Bootloader
 88.upload.maximum_data_size=1024
 88.bootloader.tool=avrdude
 88.bootloader.unlock_bits=0xff
-88.bootloader.lock_bits=0xcf
+88.bootloader.lock_bits=0xff
 88.build.core=MCUdude_corefiles
 88.build.board=AVR_ATmega88
-88.build.bootloader_led=B5
+88.build.bootloader_led=led+b5
 88.build.extra_flags={build.clkpr}
 
 # Upload port select
 88.menu.bootloader.uart0=Yes (UART0)
-88.menu.bootloader.uart0.upload.maximum_size=7680
-88.menu.bootloader.uart0.upload.protocol=arduino
-88.menu.bootloader.uart0.upload.port=UART0
+88.menu.bootloader.uart0.upload.maximum_size=7808
+88.menu.bootloader.uart0.upload.protocol=urclock
+88.menu.bootloader.uart0.upload.uartpins=uart0_rxd0_txd1
 88.menu.bootloader.uart0.build.export_merged_output=true
-88.menu.bootloader.uart0.bootloader.extended_fuses=0xfc
-88.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.clock_speed}_{build.bootloader_led}.hex
+88.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
 
 88.menu.bootloader.no_bootloader=No bootloader
 88.menu.bootloader.no_bootloader.upload.maximum_size=8192
 88.menu.bootloader.no_bootloader.build.export_merged_output=false
-88.menu.bootloader.no_bootloader.bootloader.extended_fuses=0xfd
 88.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
 # EEPROM
@@ -508,136 +460,119 @@ menu.bootloader=Bootloader
 88.menu.BOD.disabled.bootloader.high_fuses=0b1101{bootloader.eesave_bit}111
 
 # Compiler link time optimization
-88.menu.LTO.Os=LTO Disabled
-88.menu.LTO.Os.compiler.c.extra_flags=
-88.menu.LTO.Os.compiler.c.elf.extra_flags=
-88.menu.LTO.Os.compiler.cpp.extra_flags=
-88.menu.LTO.Os.ltoarcmd=avr-ar
-
 88.menu.LTO.Os_flto=LTO Enabled
 88.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 88.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
 88.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
 88.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
 
+88.menu.LTO.Os=LTO Disabled
+88.menu.LTO.Os.compiler.c.extra_flags=
+88.menu.LTO.Os.compiler.c.elf.extra_flags=
+88.menu.LTO.Os.compiler.cpp.extra_flags=
+88.menu.LTO.Os.ltoarcmd=avr-ar
+
 # Clock frequencies
 88.menu.clock.16MHz_external=External 16 MHz
 88.menu.clock.16MHz_external.upload.speed=115200
 88.menu.clock.16MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.16MHz_external.build.clkpr=
-88.menu.clock.16MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.16MHz_external.build.f_cpu=16000000L
 
 88.menu.clock.20MHz_external=External 20 MHz
 88.menu.clock.20MHz_external.upload.speed=115200
 88.menu.clock.20MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.20MHz_external.build.clkpr=
-88.menu.clock.20MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.20MHz_external.build.f_cpu=20000000L
 
 88.menu.clock.18_432MHz_external=External 18.432 MHz
 88.menu.clock.18_432MHz_external.upload.speed=115200
 88.menu.clock.18_432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.18_432MHz_external.build.clkpr=
-88.menu.clock.18_432MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.18_432MHz_external.build.f_cpu=18432000L
 
 88.menu.clock.14_7456MHz_external=External 14.7456 MHz
 88.menu.clock.14_7456MHz_external.upload.speed=115200
 88.menu.clock.14_7456MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.14_7456MHz_external.build.clkpr=
-88.menu.clock.14_7456MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.14_7456MHz_external.build.f_cpu=14745600L
 
 88.menu.clock.12MHz_external=External 12 MHz
 88.menu.clock.12MHz_external.upload.speed=57600
 88.menu.clock.12MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.12MHz_external.build.clkpr=
-88.menu.clock.12MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.12MHz_external.build.f_cpu=12000000L
 
 88.menu.clock.11_0592MHz_external=External 11.0592 MHz
 88.menu.clock.11_0592MHz_external.upload.speed=115200
 88.menu.clock.11_0592MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.11_0592MHz_external.build.clkpr=
-88.menu.clock.11_0592MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.11_0592MHz_external.build.f_cpu=11059200L
 
 88.menu.clock.8MHz_external=External 8 MHz
 88.menu.clock.8MHz_external.upload.speed=57600
 88.menu.clock.8MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.8MHz_external.build.clkpr=
-88.menu.clock.8MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.8MHz_external.build.f_cpu=8000000L
 
 88.menu.clock.7_3728MHz_external=External 7.3728 MHz
 88.menu.clock.7_3728MHz_external.upload.speed=115200
 88.menu.clock.7_3728MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.7_3728MHz_external.build.clkpr=
-88.menu.clock.7_3728MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
 
 88.menu.clock.4MHz_external=External 4 MHz
 88.menu.clock.4MHz_external.upload.speed=9600
 88.menu.clock.4MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.4MHz_external.build.clkpr=
-88.menu.clock.4MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.4MHz_external.build.f_cpu=4000000L
 
 88.menu.clock.3_6864MHz_external=External 3.6864 MHz
 88.menu.clock.3_6864MHz_external.upload.speed=115200
 88.menu.clock.3_6864MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.3_6864MHz_external.build.clkpr=
-88.menu.clock.3_6864MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.3_6864MHz_external.build.f_cpu=3686400L
 
 88.menu.clock.2MHz_external=External 2 MHz
 88.menu.clock.2MHz_external.upload.speed=9600
 88.menu.clock.2MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.2MHz_external.build.clkpr=
-88.menu.clock.2MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.2MHz_external.build.f_cpu=2000000L
 
 88.menu.clock.1_8432MHz_external=External 1.8432 MHz
 88.menu.clock.1_8432MHz_external.upload.speed=115200
 88.menu.clock.1_8432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.1_8432MHz_external.build.clkpr=
-88.menu.clock.1_8432MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.1_8432MHz_external.build.f_cpu=1843200L
 
 88.menu.clock.1MHz_external=External 1 MHz
 88.menu.clock.1MHz_external.upload.speed=9600
 88.menu.clock.1MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
 88.menu.clock.1MHz_external.build.clkpr=
-88.menu.clock.1MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.1MHz_external.build.f_cpu=1000000L
 
 88.menu.clock.8MHz_internal=Internal 8 MHz
 88.menu.clock.8MHz_internal.upload.speed=38400
 88.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
 88.menu.clock.8MHz_internal.build.clkpr=
-88.menu.clock.8MHz_internal.build.clock_speed={build.f_cpu}
 88.menu.clock.8MHz_internal.build.f_cpu=8000000L
 
 88.menu.clock.4MHz_internal=Internal 4 MHz
 88.menu.clock.4MHz_internal.upload.speed=9600
 88.menu.clock.4MHz_internal.bootloader.low_fuses=0xe2
 88.menu.clock.4MHz_internal.build.clkpr=-DOSC_PRESCALER=0x01
-88.menu.clock.4MHz_internal.build.clock_speed=8000000L
 88.menu.clock.4MHz_internal.build.f_cpu=4000000L
 
 88.menu.clock.2MHz_internal=Internal 2 MHz
 88.menu.clock.2MHz_internal.upload.speed=9600
 88.menu.clock.2MHz_internal.bootloader.low_fuses=0xe2
 88.menu.clock.2MHz_internal.build.clkpr=-DOSC_PRESCALER=0x02
-88.menu.clock.2MHz_internal.build.clock_speed=8000000L
 88.menu.clock.2MHz_internal.build.f_cpu=2000000L
 
 88.menu.clock.1MHz_internal=Internal 1 MHz
 88.menu.clock.1MHz_internal.upload.speed=9600
 88.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
 88.menu.clock.1MHz_internal.build.clkpr=
-88.menu.clock.1MHz_internal.build.clock_speed={build.f_cpu}
 88.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
 
@@ -648,19 +583,24 @@ menu.bootloader=Bootloader
 # General
 48.name=ATmega48
 48.upload.tool=avrdude
-48.upload.using=avrdude
-48.upload.maximum_size=4096
 48.upload.maximum_data_size=512
 48.bootloader.tool=avrdude
 48.bootloader.unlock_bits=0xff
-48.bootloader.lock_bits=0x3f
+48.bootloader.lock_bits=0xff
 48.bootloader.extended_fuses=0xff
 48.build.core=MCUdude_corefiles
-48.build.board=AVR_ATmega48
-48.build.bootloader_led=B5
+48.build.board=AVR_ATmega88
+48.build.bootloader_led=led+b5
 48.build.extra_flags={build.clkpr}
 
-# Bootloader select
+# Upload port select
+48.menu.bootloader.uart0=Yes (UART0)
+48.menu.bootloader.uart0.upload.maximum_size=3712
+48.menu.bootloader.uart0.upload.protocol=urclock
+48.menu.bootloader.uart0.upload.uartpins=uart0_rxd0_txd1
+48.menu.bootloader.uart0.build.export_merged_output=true
+48.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
+
 48.menu.bootloader.no_bootloader=No bootloader
 48.menu.bootloader.no_bootloader.upload.maximum_size=4096
 48.menu.bootloader.no_bootloader.build.export_merged_output=false
@@ -699,17 +639,17 @@ menu.bootloader=Bootloader
 48.menu.BOD.disabled.bootloader.high_fuses=0b1101{bootloader.eesave_bit}111
 
 # Compiler link time optimization
-48.menu.LTO.Os=LTO disabled
-48.menu.LTO.Os.compiler.c.extra_flags=
-48.menu.LTO.Os.compiler.c.elf.extra_flags=
-48.menu.LTO.Os.compiler.cpp.extra_flags=
-48.menu.LTO.Os.ltoarcmd=avr-ar
-
 48.menu.LTO.Os_flto=LTO enabled
 48.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 48.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
 48.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
 48.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
+
+48.menu.LTO.Os=LTO disabled
+48.menu.LTO.Os.compiler.c.extra_flags=
+48.menu.LTO.Os.compiler.c.elf.extra_flags=
+48.menu.LTO.Os.compiler.cpp.extra_flags=
+48.menu.LTO.Os.ltoarcmd=avr-ar
 
 # Clock frequencies
 48.menu.clock.16MHz_external=External 16 MHz
@@ -825,28 +765,26 @@ menu.bootloader=Bootloader
 8.upload.maximum_data_size=1024
 8.bootloader.tool=avrdude
 8.bootloader.unlock_bits=0xff
-8.bootloader.lock_bits=0xcf
+8.bootloader.lock_bits=0xff
 8.bootloader.low_fuses=0b{bootloader.bod_bits}{bootloader.sut_cksel_bits}
-8.bootloader.high_fuses=0b110{bootloader.ckopt_bit}{bootloader.eesave_bit}10{bootloader.bootrst_bit}
+8.bootloader.high_fuses=0b110{bootloader.ckopt_bit}{bootloader.eesave_bit}111
 8.build.core=MCUdude_corefiles
 8.build.variant=standard
 8.build.board=AVR_ATmega8
 8.build.mcu=atmega8
-8.build.bootloader_led=B5
+8.build.bootloader_led=led+b5
 
 # Upload port select
 8.menu.bootloader.uart0=Yes (UART0)
-8.menu.bootloader.uart0.upload.maximum_size=7680
-8.menu.bootloader.uart0.upload.protocol=arduino
-8.menu.bootloader.uart0.upload.port=UART0
+8.menu.bootloader.uart0.upload.maximum_size=7808
+8.menu.bootloader.uart0.upload.protocol=urclock
+8.menu.bootloader.uart0.upload.uartpins=uart0_rxd0_txd1
 8.menu.bootloader.uart0.build.export_merged_output=true
-8.menu.bootloader.uart0.bootloader.bootrst_bit=0
-8.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}.hex
+8.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
 
 8.menu.bootloader.no_bootloader=No bootloader
 8.menu.bootloader.no_bootloader.upload.maximum_size=8192
 8.menu.bootloader.no_bootloader.build.export_merged_output=false
-8.menu.bootloader.no_bootloader.bootloader.bootrst_bit=1
 8.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
 # EEPROM
@@ -864,17 +802,17 @@ menu.bootloader=Bootloader
 8.menu.BOD.disabled.bootloader.bod_bits=11
 
 # Compiler link time optimization
-8.menu.LTO.Os=LTO disabled
-8.menu.LTO.Os.compiler.c.extra_flags=
-8.menu.LTO.Os.compiler.c.elf.extra_flags=
-8.menu.LTO.Os.compiler.cpp.extra_flags=
-8.menu.LTO.Os.ltoarcmd=avr-ar
-
 8.menu.LTO.Os_flto=LTO enabled
 8.menu.LTO.Os_flto.compiler.c.extra_flags=-Wextra -flto -g
 8.menu.LTO.Os_flto.compiler.c.elf.extra_flags=-w -flto -g
 8.menu.LTO.Os_flto.compiler.cpp.extra_flags=-Wextra -flto -g
 8.menu.LTO.Os_flto.ltoarcmd=avr-gcc-ar
+
+8.menu.LTO.Os=LTO disabled
+8.menu.LTO.Os.compiler.c.extra_flags=
+8.menu.LTO.Os.compiler.c.elf.extra_flags=
+8.menu.LTO.Os.compiler.cpp.extra_flags=
+8.menu.LTO.Os.ltoarcmd=avr-ar
 
 # Clock frequencies - This is the second part of the low fuse bit concatenation
 8.menu.clock.16MHz_external=External 16 MHz
