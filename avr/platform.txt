@@ -5,7 +5,7 @@
 # https://arduino.github.io/arduino-cli/latest/platform-specification/
 
 name=MiniCore
-version=2.2.2
+version=3.0.0
 
 # AVR compile variables
 # ---------------------
