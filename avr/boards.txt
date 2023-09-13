@@ -20,7 +20,8 @@
 ## | 12 MHz      |         |  X     |  X     |        |  X     |  X    |       |  X    |  X   | ##
 ## | 11.0592 MHz |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
 ## | 8 MHz       |  X      |  X     |  X     |        |  X     |  X    |  X    |  X    |  X   | ##
-## | 7.3728 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
+## | 7.3728 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ##
+## | 6 MHz       |         |  X     |  X     |        |  X     |  X    |       |  X    |  X   | ## 
 ## | 4 MHz       |         |  X     |  X     |        |        |       |       |  X    |  X   | ##
 ## | 3.6864 MHz  |         |        |        |  X     |  X     |  X    |  X    |  X    |  X   | ## 
 ## | 2 MHz       |         |        |  X     |        |        |       |       |  X    |  X   | ##
@@ -47,8 +48,8 @@ menu.bootloader=Bootloader
 328.upload.tool=avrdude
 328.upload.maximum_data_size=2048
 328.bootloader.tool=avrdude
-328.bootloader.unlock_bits=0x3f
-328.bootloader.lock_bits=0x0f
+328.bootloader.unlock_bits=0xff
+328.bootloader.lock_bits=0xcf
 328.build.core=MCUdude_corefiles
 328.build.board=AVR_ATmega328
 328.build.bootloader_led=B5
@@ -182,6 +183,13 @@ menu.bootloader=Bootloader
 328.menu.clock.7_3728MHz_external.build.clock_speed={build.f_cpu}
 328.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
 
+328.menu.clock.6MHz_external=External 6 MHz
+328.menu.clock.6MHz_external.upload.speed=57600
+328.menu.clock.6MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+328.menu.clock.6MHz_external.build.clkpr=
+328.menu.clock.6MHz_external.build.clock_speed={build.f_cpu}
+328.menu.clock.6MHz_external.build.f_cpu=6000000L
+
 328.menu.clock.4MHz_external=External 4 MHz
 328.menu.clock.4MHz_external.upload.speed=9600
 328.menu.clock.4MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
@@ -256,8 +264,8 @@ menu.bootloader=Bootloader
 168.upload.maximum_size=15872
 168.upload.maximum_data_size=1024
 168.bootloader.tool=avrdude
-168.bootloader.unlock_bits=0x3f
-168.bootloader.lock_bits=0x0f
+168.bootloader.unlock_bits=0xff
+168.bootloader.lock_bits=0xcf
 168.build.core=MCUdude_corefiles
 168.build.board=AVR_ATmega168
 168.build.bootloader_led=B5
@@ -380,6 +388,13 @@ menu.bootloader=Bootloader
 168.menu.clock.7_3728MHz_external.build.clock_speed={build.f_cpu}
 168.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
 
+168.menu.clock.6MHz_external=External 6 MHz
+168.menu.clock.6MHz_external.upload.speed=57600
+168.menu.clock.6MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+168.menu.clock.6MHz_external.build.clkpr=
+168.menu.clock.6MHz_external.build.clock_speed={build.f_cpu}
+168.menu.clock.6MHz_external.build.f_cpu=6000000L
+
 168.menu.clock.4MHz_external=External 4 MHz
 168.menu.clock.4MHz_external.upload.speed=9600
 168.menu.clock.4MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
@@ -453,8 +468,8 @@ menu.bootloader=Bootloader
 88.upload.tool=avrdude
 88.upload.maximum_data_size=1024
 88.bootloader.tool=avrdude
-88.bootloader.unlock_bits=0x3f
-88.bootloader.lock_bits=0x0f
+88.bootloader.unlock_bits=0xff
+88.bootloader.lock_bits=0xcf
 88.build.core=MCUdude_corefiles
 88.build.board=AVR_ATmega88
 88.build.bootloader_led=B5
@@ -577,6 +592,13 @@ menu.bootloader=Bootloader
 88.menu.clock.7_3728MHz_external.build.clock_speed={build.f_cpu}
 88.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
 
+88.menu.clock.6MHz_external=External 6 MHz
+88.menu.clock.6MHz_external.upload.speed=57600
+88.menu.clock.6MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+88.menu.clock.6MHz_external.build.clkpr=
+88.menu.clock.6MHz_external.build.clock_speed={build.f_cpu}
+88.menu.clock.6MHz_external.build.f_cpu=6000000L
+
 88.menu.clock.4MHz_external=External 4 MHz
 88.menu.clock.4MHz_external.upload.speed=9600
 88.menu.clock.4MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
@@ -652,7 +674,7 @@ menu.bootloader=Bootloader
 48.upload.maximum_size=4096
 48.upload.maximum_data_size=512
 48.bootloader.tool=avrdude
-48.bootloader.unlock_bits=0x3f
+48.bootloader.unlock_bits=0xff
 48.bootloader.lock_bits=0x3f
 48.bootloader.extended_fuses=0xff
 48.build.core=MCUdude_corefiles
@@ -760,6 +782,12 @@ menu.bootloader=Bootloader
 48.menu.clock.7_3728MHz_external.build.clkpr=
 48.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
 
+48.menu.clock.6MHz_external=External 6 MHz
+48.menu.clock.6MHz_external.upload.speed=57600
+48.menu.clock.6MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+48.menu.clock.6MHz_external.build.clkpr=
+48.menu.clock.6MHz_external.build.f_cpu=6000000L
+
 48.menu.clock.4MHz_external=External 4 MHz
 48.menu.clock.4MHz_external.upload.speed=9600
 48.menu.clock.4MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
@@ -824,8 +852,8 @@ menu.bootloader=Bootloader
 8.upload.tool=avrdude
 8.upload.maximum_data_size=1024
 8.bootloader.tool=avrdude
-8.bootloader.unlock_bits=0x3f
-8.bootloader.lock_bits=0x0f
+8.bootloader.unlock_bits=0xff
+8.bootloader.lock_bits=0xcf
 8.bootloader.low_fuses=0b{bootloader.bod_bits}{bootloader.sut_cksel_bits}
 8.bootloader.high_fuses=0b110{bootloader.ckopt_bit}{bootloader.eesave_bit}10{bootloader.bootrst_bit}
 8.build.core=MCUdude_corefiles
@@ -924,6 +952,12 @@ menu.bootloader=Bootloader
 8.menu.clock.7_3728MHz_external.bootloader.sut_cksel_bits=111111
 8.menu.clock.7_3728MHz_external.bootloader.ckopt_bit=0
 8.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
+
+8.menu.clock.6MHz_external=External 6 MHz
+8.menu.clock.6MHz_external.upload.speed=57600
+8.menu.clock.6MHz_external.bootloader.sut_cksel_bits=111111
+8.menu.clock.6MHz_external.bootloader.ckopt_bit=0
+8.menu.clock.6MHz_external.build.f_cpu=6000000L
 
 8.menu.clock.4MHz_external=External 4 MHz
 8.menu.clock.4MHz_external.upload.speed=9600
