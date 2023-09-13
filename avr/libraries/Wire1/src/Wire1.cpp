@@ -15,6 +15,11 @@ TwoWire Wire1 = TwoWire(TWI1_BUFFER_SIZE,
                         twi_reply1,
                         twi_stop1,
                         twi_releaseBus1,
+                        #if defined(WIRE_TIMEOUT)
+                          twi_setTimeoutInMicros1,
+                          twi_handleTimeout1,
+                          twi_manageTimeoutFlag1,
+                        #endif
                         twi_attachSlaveRxEvent1,
                         [](uint8_t* v, int len){ Wire1.onReceiveService(v, len); },
                         twi_attachSlaveTxEvent1,

@@ -48,6 +48,9 @@
   void twi_reply1(uint8_t);
   void twi_stop1(void);
   void twi_releaseBus1(void);
+  void twi_setTimeoutInMicros1(uint32_t, bool);
+  void twi_handleTimeout1(bool);
+  bool twi_manageTimeoutFlag1(bool);
 
 #endif
 

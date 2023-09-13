@@ -25,10 +25,15 @@ portMode(portNumber, value)
 
 | PortNumber  | Physical port |
 |-------------|---------------|
-| 0           | PORTA         |
+| 0           | PORTA *       |
 | 1           | PORTB         |
 | 2           | PORTC         |
 | 3           | PORTD         |
+| 4           | PORTE **      |
+
+<b>*</b> Not a valid port number on any MiniCore compatible target
+<b>**</b> PB variants only
+
 
 #### Returns
 `none`

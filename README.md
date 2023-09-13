@@ -1,7 +1,7 @@
 # MiniCore
 [![Build Status](https://travis-ci.com/MCUdude/MiniCore.svg?branch=master)](https://travis-ci.com/MCUdude/MiniCore) [![MiniCore forum thread](https://img.shields.io/badge/support-forum-blue.svg)](https://forum.arduino.cc/index.php?topic=412070.0)
 
-An Arduino core for the ATmega328, ATmega168, ATmega88, ATmega48 and ATmega8, all running a [custom version of Optiboot for increased functionality](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.8.5+ is recommended. <br/>
+An Arduino core for the ATmega328, ATmega168, ATmega88, ATmega48 and ATmega8, all running a [custom version of Optiboot for increased functionality](#write-to-own-flash). This core requires at least Arduino IDE v1.6.2, where v1.8.13+ is recommended. <br/>
 **This core gives you two extra IO pins if you're using the internal oscillator!** PB6 and PB7 is mapped to [Arduino pin 20 and 21](#pinout).<br/>
 If you're into "generic" AVR programming, I'm happy to tell you that all relevant keywords are being highlighted by the IDE through a separate keywords file. Make sure to test the [example files](https://github.com/MCUdude/MiniCore/tree/master/avr/libraries/AVR_examples/examples) (File > Examples > AVR C code examples). Try writing a register name, <i>DDRB</i> for instance, and see for yourself!
 
@@ -63,7 +63,7 @@ You might experience upload issues when using the internal oscillator. It's fact
 | 20 MHz      | External crystal/oscillator |                                                               |
 | 18.4320 MHz | External crystal/oscillator | Great clock for UART communication with no error              |
 | 14.7456 MHz | External crystal/oscillator | Great clock for UART communication with no error              |
-| 12 MHz      | External crystal/oscillator | Useful when working with USB 1.1 (12 Mbit/s)                  |
+| 12 MHz      | External crystal/oscillator | Useful when working with USB 1.1                              |
 | 11.0592 MHz | External crystal/oscillator | Great clock for UART communication with no error              |
 | 8 MHz       | External crystal/oscillator | Common clock when working with 3.3V                           |
 | 7.3728 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
@@ -176,7 +176,7 @@ Open Arduino IDE, and a new category in the boards menu called "MiniCore" will s
 
 ## Getting started with MiniCore
 Ok, so you're downloaded and installed MiniCore, but how to get started? Here's a quick guide:
-* Hook up your microcontroller as shown in the [pinout diagram](#pinout), or simply just plut it into an Arduino UNO board.
+* Hook up your microcontroller as shown in the [pinout diagram](#pinout), or simply just plug it into an Arduino UNO board.
 	- (If you're not planning to use the bootloader (uploading code using a USB to serial adapter), the FTDI header and the 100 nF capacitor on the reset pin can be omitted.)
 * Open the **Tools > Board** menu item, and select a MiniCore compatible microcontroller.
 * If the *BOD option* is presented, you can select at what voltage the microcontroller will shut down at. Read more about BOD [here](#bod-option).
@@ -192,7 +192,7 @@ Your code should now be running on your microcontroller! If you experience any i
 
 
 ## Wiring reference
-To extend this core's functionality a bit futher, I've added a few missing Wiring functions. As many of you know Arduino is based on Wiring, but that doesn't mean the Wiring development isn't active. These functions are used as "regular" Arduino functions, and there's no need to include an external library.<br/>
+To extend this core's functionality a bit further, I've added a few missing Wiring functions. As many of you know Arduino is based on Wiring, but that doesn't mean the Wiring development isn't active. These functions are used as "regular" Arduino functions, and there's no need to include an external library.<br/>
 I hope you find this useful, because they really are!
 
 ### Function list
