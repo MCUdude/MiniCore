@@ -160,6 +160,7 @@ Below is a table with supported clocks for MiniCore. Defaults to 16 MHz if not s
 | 11.0592 MHz | External   | `11059200L`               |
 | 8 MHz       | External   | `8000000L`                |
 | 7.3728  MHz | External   | `7372800L`                |
+| 6 MHz       | External   | `6000000L`                |
 | 3.6864  MHz | External   | `3686400L`                |
 | 1.8432  MHz | External   | `1843200L`                |
 | 8 MHz       | Internal   | `8000000L`                |
@@ -242,6 +243,7 @@ Recommended baud rate for the particular clock speed is in **bold text**.
 | `11059200L` |         |        |  X     |        |  X     |  X     |  **X** |  X     |  X    |  X     |
 | `8000000L`  |  X      |  X     |        |  X     |        |  X     |  X     |  **X** |  X    |  X     |
 | `7372800L`  |         |        |  X     |        |  X     |  **X** |  X     |  X     |  X    |  X     |
+| `6000000L`  |         |  X     |        |  X     |        |        |  **X** |        |  X    |  X     |
 | `3686400L`  |         |        |  X     |        |  X     |  **X** |  X     |  X     |  X    |  X     |
 | `1843200L`  |         |        |        |        |  X     |  **X** |  X     |  X     |  X    |  X     |
 | `1000000L`  |         |        |        |        |        |        |        |        |       |  **X** |
