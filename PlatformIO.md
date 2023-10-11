@@ -243,7 +243,7 @@ Recommended baud rate for the particular clock speed is in **bold text**.
 | `11059200L` |         |        |  X     |        |  X     |  X     |  **X** |  X     |  X    |  X     |
 | `8000000L`  |  X      |  X     |        |  X     |        |  X     |  X     |  **X** |  X    |  X     |
 | `7372800L`  |         |        |  X     |        |  X     |  **X** |  X     |  X     |  X    |  X     |
-| `6000000L`  |         |  X     |        |  X     |        |        |  **X** |        |  X    |  X     |
+| `6000000L`  |         |        |        |  X     |        |        |  **X** |  X     |  X    |  X     |
 | `3686400L`  |         |        |  X     |        |  X     |  **X** |  X     |  X     |  X    |  X     |
 | `1843200L`  |         |        |        |        |  X     |  **X** |  X     |  X     |  X    |  X     |
 | `1000000L`  |         |        |        |        |        |        |        |        |       |  **X** |
