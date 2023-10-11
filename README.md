@@ -174,9 +174,9 @@ Open Arduino IDE, and a new category in the boards menu called "MiniCore" will s
 #### Arduino CLI Installation
 Run the following command in a terminal: 
 
-    ```
-    arduino-cli core install MiniCore:avr --additional-urls https://mcudude.github.io/MiniCore/package_MCUdude_MiniCore_index.json
-    ```
+```
+arduino-cli core install MiniCore:avr --additional-urls https://mcudude.github.io/MiniCore/package_MCUdude_MiniCore_index.json
+```
 
 #### PlatformIO
 [PlatformIO](http://platformio.org) is an open-source ecosystem for IoT and embedded systems, and supports MiniCore.
