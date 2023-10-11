@@ -172,7 +172,7 @@ Click on the "Download ZIP" button in the upper right corner. Extract the ZIP fi
 Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
 
 #### Arduino CLI Installation
-Run the following command in a terminal: 
+Run the following command in a terminal:
 
 ```
 arduino-cli core install MiniCore:avr --additional-urls https://mcudude.github.io/MiniCore/package_MCUdude_MiniCore_index.json
