@@ -12,6 +12,8 @@
 AUTHOR=MCUdude       # Github username
 REPOSITORY=MiniCore # Github repo name
 
+AVRDUDE_VERSION="7.2-arduino.1"
+
 # Get the download URL for the latest release from Github
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$AUTHOR/$REPOSITORY/releases/latest | grep "tarball_url" | awk -F\" '{print $4}')
 
@@ -52,13 +54,14 @@ URL="https://${AUTHOR}.github.io/${REPOSITORY}/$REPOSITORY-${DOWNLOADED_FILE#"v"
 cp "package_${AUTHOR}_${REPOSITORY}_index.json" "package_${AUTHOR}_${REPOSITORY}_index.json.tmp"
 
 # Add new boards release entry
-jq -r                                   \
---arg repository $REPOSITORY            \
---arg version    ${DOWNLOADED_FILE#"v"} \
---arg url        $URL                   \
---arg checksum   $SHA256                \
---arg file_size  $FILE_SIZE             \
---arg file_name  $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
+jq -r                                    \
+--arg repository  $REPOSITORY            \
+--arg version     ${DOWNLOADED_FILE#"v"} \
+--arg url         $URL                   \
+--arg checksum    $SHA256                \
+--arg file_size   $FILE_SIZE             \
+--arg avrdude_ver $AVRDUDE_VERSION       \
+--arg file_name   $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
 '.packages[].platforms[.packages[].platforms | length] |= . +
 {
   "name": $repository,
@@ -85,7 +88,7 @@ jq -r                                   \
     {
       "packager": "MiniCore",
       "name": "avrdude",
-      "version": "7.1-arduino.1"
+      "version": $avrdude_ver
     },
     {
       "packager": "arduino",
