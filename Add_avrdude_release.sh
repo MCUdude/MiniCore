@@ -1,7 +1,7 @@
 #!/bin/bash
 
-AUTHOR=MCUdude        # Github username
-REPOSITORY=MightyCore # Github repo name
+AUTHOR=MCUdude      # Github username
+REPOSITORY=MiniCore # Github repo name
 
 AVRDUDE_VERSION="7.2-arduino.1"
 
