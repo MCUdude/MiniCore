@@ -744,8 +744,8 @@
           "category": "Contributed",
           "url": "https://MCUdude.github.io/MiniCore/MiniCore-3.0.0.tar.bz2",
           "archiveFileName": "MiniCore-3.0.0.tar.bz2",
-          "checksum": "SHA-256:420e4f0619e431df479f6f35282480e43a541bbe995e6d385716ce27e6b5cd75",
-          "size": "641008",
+          "checksum": "SHA-256:a4f5bfce52113631b35001dfee5db01ec323fc1dda2ead1cd68c729b590df7ac",
+          "size": "662999",
           "boards": [
             {
               "name": "ATmega328/P/PA/A/PB"
