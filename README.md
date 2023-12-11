@@ -4,7 +4,7 @@
 An Arduino core for the ATmega328, ATmega168, ATmega88, ATmega48 and ATmega8, all running the [Urboot](#write-to-own-flash) bootloader.
 This core requires at least Arduino IDE v1.8, where v1.8.9 or newer is recommended. IDE 2.x should also work.
 
-*From MiniCore version 3 and onwards, the Optiboot bootloader has been replaced by the superior [Urboot bootloader](https://github.com/stefanrueger/urboot/). It's smaller, faster, and has automatic baud rate detection, and can read and write to EEPROM. Other cool features the bootloader provides but are not utilized by MightyCore are user program metadata stored in flash (that can easily be viewed by Avrdude -xshowall) and chip-erase functionality.
+*From MiniCore version 3 and onwards, the Optiboot bootloader has been replaced by the superior [Urboot bootloader](https://github.com/stefanrueger/urboot/). It's smaller, faster, and has automatic baud rate detection, and can read and write to EEPROM. Other cool features the bootloader provides but are not utilized by MiniCore are user program metadata stored in flash (that can easily be viewed by Avrdude -xshowall) and chip-erase functionality.
 If you already have Optiboot installed and don't want to replace it with Urboot, you can still upload programs without any compatibility issues. However, if you're burning a bootloader to a new chip, Urboot is the way to go.*
 
 **This core gives you two extra IO pins if you're using the internal oscillator!** PB6 and PB7 are mapped to [Arduino pin 20 and 21](#pinout).<br/>
@@ -14,6 +14,7 @@ If you already have Optiboot installed and don't want to replace it with Urboot,
 * [Supported microcontrollers](#supported-microcontrollers)
 * [Supported clock frequencies](#supported-clock-frequencies)
 * [Bootloader option](#bootloader-option)
+* [Baud rate option](#baud-rate-option)
 * [BOD option](#bod-option)
 * [EEPROM retain option](#eeprom-option)
 * [Link time optimization / LTO](#link-time-optimization--lto)
@@ -79,11 +80,17 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
 
 
 ## Bootloader option
-MegaCore lets you select which serial port you want to use for uploading. UART0 is the default port for all targets, but ATmega328PB can also use UART1.
+MiniCore lets you select which serial port you want to use for uploading. UART0 is the default port for all targets, but ATmega328PB can also use UART1.
 If your application doesn't need or require a bootloader for uploading you can also choose to disable it by selecting *No bootloader*.
 This frees 384 bytes of flash memory on ATmega8/88/168/328 and 320 bytes on the ATmega48.
 
 Note that you need to connect a programmer and hit **Burn bootloader** if you want to change any of the *Bootloader settings*.
+
+
+# Baud rate option
+Since Urboot has automatic baud rate detection, the upload baud rate can be changed without having to re-flash the bootloader. The default baud rate setting will pick a suited baud rate that also works with the legacy Optiboot bootloader used in earlier MiniCore versions.
+The other baud rate options may or may not work, depending on the clock frequency and accuracy of the clock source. A rule of thumb is that "non-round" baud rates like 230400 works best with "non-round" clock speeds like 18.4320 MHz,
+while "round" ones like 16 MHz work best with "round" baud rates like 250000.
 
 
 ## BOD option
