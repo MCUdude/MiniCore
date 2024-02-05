@@ -250,25 +250,11 @@ menu.baudrate=Baud rate
 168.bootloader.tool=avrdude
 168.bootloader.unlock_bits=0xff
 168.bootloader.lock_bits=0xff
+168.bootloader.extended_fuses=0xff
 168.build.core=MCUdude_corefiles
 168.build.board=AVR_ATmega168
 168.build.bootloader_led=led+b5
 168.build.extra_flags={build.clkpr}
-
-# Upload port select
-168.menu.bootloader.uart0=Yes (UART0)
-168.menu.bootloader.uart0.upload.maximum_size=15872
-168.menu.bootloader.uart0.upload.protocol=arduino
-168.menu.bootloader.uart0.upload.port=UART0
-168.menu.bootloader.uart0.build.export_merged_output=true
-168.menu.bootloader.uart0.bootloader.extended_fuses=0xfc
-168.menu.bootloader.uart0.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.clock_speed}/optiboot_flash_{build.mcu}_{upload.port}_{upload.default_speed}_{build.clock_speed}_{build.bootloader_led}.hex
-
-168.menu.bootloader.no_bootloader=No bootloader
-168.menu.bootloader.no_bootloader.upload.maximum_size=16384
-168.menu.bootloader.no_bootloader.build.export_merged_output=false
-168.menu.bootloader.no_bootloader.bootloader.extended_fuses=0xfd
-168.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
 # Upload port select
 168.menu.bootloader.uart0=Yes (UART0)
@@ -477,6 +463,7 @@ menu.baudrate=Baud rate
 88.bootloader.tool=avrdude
 88.bootloader.unlock_bits=0xff
 88.bootloader.lock_bits=0xff
+88.bootloader.extended_fuses=0xff
 88.build.core=MCUdude_corefiles
 88.build.board=AVR_ATmega88
 88.build.bootloader_led=led+b5
