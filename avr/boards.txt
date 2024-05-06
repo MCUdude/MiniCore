@@ -1020,6 +1020,12 @@ menu.baudrate=Baud rate
 8.menu.clock.6MHz_external.bootloader.ckopt_bit=0
 8.menu.clock.6MHz_external.build.f_cpu=6000000L
 
+8.menu.clock.4_9152MHz_external=External 4.9152 MHz
+8.menu.clock.4_9152MHz_external.upload.default_speed=38400
+8.menu.clock.4_9152MHz_external.bootloader.sut_cksel_bits=111111
+8.menu.clock.4_9152MHz_external.bootloader.ckopt_bit=0
+8.menu.clock.4_9152MHz_external.build.f_cpu=4915200L
+
 8.menu.clock.4MHz_external=External 4 MHz
 8.menu.clock.4MHz_external.upload.default_speed=9600
 8.menu.clock.4MHz_external.bootloader.sut_cksel_bits=111111

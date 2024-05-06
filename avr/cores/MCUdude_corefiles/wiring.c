@@ -126,6 +126,9 @@ volatile unsigned char timer0_fract = 0;
 #elif F_CPU == 6000000L         // for 6 MHz we get 91 + 1./3.
 #define CORRECT_LO
 #define CORRECT_ROLL 3
+#elif F_CPU == 4915200L         // for 4.9152 MHz we get 41.67, off by 2./3.
+#define CORRECT_HI
+#define CORRECT_ROLL 3
 #elif F_CPU == 3686400L         // for 3.6864 MHz we get 55 + 5./9.
 #define CORRECT_BRUTE 5
 #define CORRECT_ROLL 9
