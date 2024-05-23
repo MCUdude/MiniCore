@@ -159,6 +159,7 @@ Below is a table with supported clocks. Defaults to 16 MHz if not specified.
 | 14.7456 MHz | External   | `14745600L`               |
 | 12 MHz      | External   | `12000000L`               |
 | 11.0592 MHz | External   | `11059200L`               |
+| 9.216 MHz   | External   | `9216000L`                |
 | 8 MHz       | External   | `8000000L`                |
 | 7.3728  MHz | External   | `7372800L`                |
 | 6 MHz       | External   | `6000000L`                |
@@ -255,6 +256,7 @@ Suggested baud rates for a particular clock speed are in **bold text**.
 | `14745600L` |         |        |  X     |        |  X     |  **X** |  X     |  X     |  X    |  X     |
 | `12000000L` |         |  X     |        |  X     |        |        |  **X** |        |  X    |  X     |
 | `11059200L` |         |        |  X     |        |  X     |  X     |  **X** |  X     |  X    |  X     |
+| `9216000L`  |         |        |        |        |  X     |  **X** |  X     |  X     |  X    |  X     |
 | `8000000L`  |  X      |  X     |        |  X     |        |  X     |  X     |  **X** |  X    |  X     |
 | `7372800L`  |         |        |  X     |        |  X     |  **X** |  X     |  X     |  X    |  X     |
 | `6000000L`  |         |        |        |  X     |        |        |  **X** |  X     |  X    |  X     |

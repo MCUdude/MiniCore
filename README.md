@@ -65,6 +65,7 @@ Make sure you connect an ISP programmer, and select the correct one in the "Prog
 | 14.7456 MHz | External crystal/oscillator | Great clock for UART communication with no error              |
 | 12 MHz      | External crystal/oscillator |                                                               |
 | 11.0592 MHz | External crystal/oscillator | Great clock for UART communication with no error              |
+| 9.216 MHz   | External crystal/oscillator | Great clock for UART communication with no error              |
 | 8 MHz       | External crystal/oscillator | Common clock when working with 3.3V                           |
 | 7.3728 MHz  | External crystal/oscillator | Great clock for UART communication with no error              |
 | 6 MHz       | External crystal/oscillator |                                                               |
