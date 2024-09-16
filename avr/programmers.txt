@@ -45,6 +45,13 @@ atmel_ice.program.protocol=atmelice_isp
 atmel_ice.program.tool=avrdude
 atmel_ice.program.extra_params=
 
+pickit4_isp.name=PICkit2 ISP
+pickit4_isp.communication=usb
+pickit4_isp.protocol=pickit2
+pickit4_isp.program.protocol=pickit2
+pickit4_isp.program.tool=avrdude
+pickit4_isp.program.extra_params=
+
 pickit4_isp.name=PICkit4 ISP
 pickit4_isp.communication=usb
 pickit4_isp.protocol=pickit4_isp
