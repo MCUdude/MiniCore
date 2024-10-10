@@ -3,7 +3,7 @@
 AUTHOR=MCUdude      # Github username
 REPOSITORY=MiniCore # Github repo name
 
-AVRDUDE_VERSION="7.2-arduino.1"
+AVRDUDE_VERSION="8.0-arduino.1"
 
 OS_PLATFORM1="Linux_ARMv6"
 OS_PLATFORM2="Linux_ARM64"

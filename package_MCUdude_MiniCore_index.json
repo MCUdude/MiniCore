@@ -966,6 +966,54 @@
               "url": "http://downloads.arduino.cc/tools/avrdude_7.2-arduino.1_Windows_32bit.tar.gz"
             }
           ]
+        },
+        {
+          "name": "avrdude",
+          "version": "8.0-arduino.1",
+          "systems": [
+            {
+              "size": "1441658",
+              "checksum": "SHA-256:66ae53dac08b2db2f065d7b6b2f60ff62d2a85907613c7b2988fdd1922950b5d",
+              "host": "arm-linux-gnueabihf",
+              "archiveFileName": "avrdude_8.0-arduino.1_Linux_ARMv6.tar.gz",
+              "url": "http://downloads.arduino.cc/tools/avrdude_8.0-arduino.1_Linux_ARMv6.tar.gz"
+            },
+            {
+              "size": "1565761",
+              "checksum": "SHA-256:031f212bdcb77e2ea13895f07ab4a0c254963f8f1bbd3b8797d3363a6a2e95e3",
+              "host": "aarch64-linux-gnu",
+              "archiveFileName": "avrdude_8.0-arduino.1_Linux_ARM64.tar.gz",
+              "url": "http://downloads.arduino.cc/tools/avrdude_8.0-arduino.1_Linux_ARM64.tar.gz"
+            },
+            {
+              "size": "1173108",
+              "checksum": "SHA-256:8a36cf441a3ce21622eb30b40f0b71d27864b30ea851cb795ae654ee10e2c132",
+              "host": "x86_64-apple-darwin12",
+              "archiveFileName": "avrdude_8.0-arduino.1_macOS_64bit.tar.gz",
+              "url": "http://downloads.arduino.cc/tools/avrdude_8.0-arduino.1_macOS_64bit.tar.gz"
+            },
+            {
+              "size": "1476932",
+              "checksum": "SHA-256:1d2edadb07e070fcd016e8c802e961e30bfa606c2db63625c930526e7044aaa6",
+              "host": "x86_64-linux-gnu",
+              "archiveFileName": "avrdude_8.0-arduino.1_Linux_64bit.tar.gz",
+              "url": "http://downloads.arduino.cc/tools/avrdude_8.0-arduino.1_Linux_64bit.tar.gz"
+            },
+            {
+              "size": "1452068",
+              "checksum": "SHA-256:622358355a17cb400060cffbe1f8fc2fd9cea2ee883ab1b7766fd8219e0fc0f9",
+              "host": "i686-linux-gnu",
+              "archiveFileName": "avrdude_8.0-arduino.1_Linux_32bit.tar.gz",
+              "url": "http://downloads.arduino.cc/tools/avrdude_8.0-arduino.1_Linux_32bit.tar.gz"
+            },
+            {
+              "size": "1890359",
+              "checksum": "SHA-256:833aa1a66a8e70cd597fcfdbd7e559a91a00eca1d7aa3be2ce9bcadf7ccb987c",
+              "host": "i686-mingw32",
+              "archiveFileName": "avrdude_8.0-arduino.1_Windows_32bit.tar.gz",
+              "url": "http://downloads.arduino.cc/tools/avrdude_8.0-arduino.1_Windows_32bit.tar.gz"
+            }
+          ]
         }
       ]
     }
