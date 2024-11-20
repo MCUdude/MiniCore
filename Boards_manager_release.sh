@@ -12,7 +12,7 @@
 AUTHOR=MCUdude       # Github username
 REPOSITORY=MiniCore # Github repo name
 
-AVRDUDE_VERSION="7.2-arduino.1"
+AVRDUDE_VERSION="8.0-arduino.1"
 
 # Get the download URL for the latest release from Github
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$AUTHOR/$REPOSITORY/releases/latest | grep "tarball_url" | awk -F\" '{print $4}')
