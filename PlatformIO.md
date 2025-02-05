@@ -83,6 +83,9 @@ monitor_speed = 9600
 ; Run the following command to upload with this environment
 ; pio run -e Upload_UART -t upload
 [env:Upload_UART]
+; Use avrdude version 7.2 to have urclock protocol support
+platform_packages =
+  platformio/tool-avrdude@^1.70200.0
 ; Serial bootloader protocol
 upload_protocol = urclock
 ; Serial upload port
