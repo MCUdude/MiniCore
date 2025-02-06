@@ -230,7 +230,7 @@ This core uses the standard Arduino UNO pinout and will not break the compatibil
 
 | DIP-28 package  *ATmega8/48/88/168/328*               | TQFP-32 SMD package  *ATmega8/48/88/168/328*          | TQFP-32 SMD package  *ATmega48/88/168/328PB*          |
 |-------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
-|<img src="https://i.imgur.com/qXIEchT.jpg" width="280">|<img src="https://i.imgur.com/naweqE6.jpg" width="260">|<img src="https://i.imgur.com/ZQsjLwL.jpg" width="260">|
+|<img src="avr/images/pinout_DIP-28.jpg" width="280">|<img src="avr/images/pinout_TQFP-32.jpg" width="260">|<img src="avr/images/pinout_TQFP-32_PB.jpg" width="260">|
 
 
 ## Minimal setup
@@ -238,4 +238,4 @@ Here is a simple schematic showing a minimal setup using an external crystal. Sk
 
 | DIP-28 package  *ATmega8/48/88/168/328*               | TQFP-32 SMD package  *ATmega8/48/88/168/328*          | TQFP-32 SMD package  *ATmega48/88/168/328PB*          |
 |-------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
-|<img src="https://i.imgur.com/1k4q3xF.png" width="280">|<img src="https://i.imgur.com/bp7KI9f.png" width="280">|<img src="https://i.imgur.com/epbin2X.png" width="280">|
+|<img src="avr/images/minimal_setup_DIP-28.png" width="280">|<img src="avr/images/minimal_setup_TQFP-32.png" width="280">|<img src="avr/images/minimal_setup_TQFP-32_PB.png" width="280">|
