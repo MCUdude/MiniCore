@@ -694,7 +694,6 @@ menu.baudrate=Baud rate
 48.bootloader.tool=avrdude
 48.bootloader.unlock_bits=0xff
 48.bootloader.lock_bits=0xff
-48.bootloader.extended_fuses=0xff
 48.build.core=MCUdude_corefiles
 48.build.board=AVR_ATmega48
 48.build.bootloader_led=led+b5
