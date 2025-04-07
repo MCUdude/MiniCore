@@ -703,13 +703,17 @@ menu.baudrate=Baud rate
 # Upload port select
 48.menu.bootloader.uart0=Yes (UART0)
 48.menu.bootloader.uart0.upload.maximum_size=3776
+48.menu.bootloader.uart0.bootloader.extended_fuses=0xfe
 48.menu.bootloader.uart0.upload.protocol=urclock
 48.menu.bootloader.uart0.upload.uartpins=uart0_rxd0_txd1
 48.menu.bootloader.uart0.build.export_merged_output=true
-48.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
+48.bootloader.extended_fuses=0xff
+
+48.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee.hex
 
 48.menu.bootloader.no_bootloader=No bootloader
 48.menu.bootloader.no_bootloader.upload.maximum_size=4096
+48.menu.bootloader.no_bootloader.bootloader.extended_fuses=0xff
 48.menu.bootloader.no_bootloader.build.export_merged_output=false
 48.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
