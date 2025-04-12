@@ -4,7 +4,7 @@ AUTHOR=felias-fogg  # Github username
 REALAUTHOR=MCUDude   # Real author name
 REPOSITORY=MiniCore # Github repo name
 
-DWTOOLS_VERSION="2.1.3"
+DWTOOLS_VERSION="2.1.4"
 
 OS_PLATFORM1="Linux_ARMv6"
 OS_PLATFORM2="Linux_ARM64"

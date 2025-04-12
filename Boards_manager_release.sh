@@ -96,7 +96,7 @@ jq -r                                   \
     {
       "packager": "MiniCore",
       "name": "dw-tools",
-      "version": "2.1.3"
+      "version": "2.1.4"
     }   
   ]
 }' "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${REALAUTHOR}_${REPOSITORY}_index.json"
