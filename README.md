@@ -7,7 +7,7 @@ This core requires at least Arduino IDE v1.8, where v1.8.9 or newer is recommend
 *From MiniCore version 3 and onwards, the Optiboot bootloader has been replaced by the superior [Urboot bootloader](https://github.com/stefanrueger/urboot/). It's smaller, faster, and has automatic baud rate detection, and can read and write to EEPROM. Other cool features the bootloader provides but are not utilized by MiniCore are user program metadata stored in flash (that can easily be viewed by Avrdude -xshowall) and chip-erase functionality.
 If you already have Optiboot installed and don't want to replace it with Urboot, you can still upload programs without any compatibility issues. However, if you're burning a bootloader to a new chip, Urboot is the way to go.*
 
-*From version 3.1.0 onwards, debugging in the Arduino IDE 2 is supported. You can use any of Microchip's EDBG-based hardware debuggers and the DYI debugger dw-link. For documentation, consult https://felias-fogg.com/dw-gdbserver.* 
+*From version 3.1.0 onwards, debugging in the Arduino IDE 2 is supported. You can use any of Microchip's EDBG-based hardware debuggers and the DYI debugger dw-link. For documentation, consult https://github.com/felias-fogg/dw-gdbserver.* 
 
 **This core gives you two extra IO pins if you're using the internal oscillator!** PB6 and PB7 are mapped to [Arduino pin 20 and 21](#pinout).<br/>
 
