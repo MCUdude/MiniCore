@@ -9,10 +9,11 @@
 ##########################################################
 
 # Change these to match your repo
-AUTHOR=MCUdude       # Github username
-REPOSITORY=MiniCore # Github repo name
+AUTHOR=felias-fogg       # Github username
+REALAUTHOR=MCUdude       # real author!
+REPOSITORY=MiniCore      # Github repo
 
-AVRDUDE_VERSION="8.0-arduino.1"
+DWTOOLSVERSION=2.1.6
 
 # Get the download URL for the latest release from Github
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$AUTHOR/$REPOSITORY/releases/latest | grep "tarball_url" | awk -F\" '{print $4}')
@@ -51,17 +52,17 @@ SHA256="SHA-256:$(shasum -a 256 "$REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2" | a
 # Create Github download URL
 URL="https://${AUTHOR}.github.io/${REPOSITORY}/$REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2"
 
-cp "package_${AUTHOR}_${REPOSITORY}_index.json" "package_${AUTHOR}_${REPOSITORY}_index.json.tmp"
+cp "package_${REALAUTHOR}_${REPOSITORY}_index.json" "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp"
 
 # Add new boards release entry
-jq -r                                    \
---arg repository  $REPOSITORY            \
---arg version     ${DOWNLOADED_FILE#"v"} \
---arg url         $URL                   \
---arg checksum    $SHA256                \
---arg file_size   $FILE_SIZE             \
---arg avrdude_ver $AVRDUDE_VERSION       \
---arg file_name   $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
+jq -r \
+--arg dwtoolsversion $DWTOOLSVERSION        \
+--arg repository     $REPOSITORY            \
+--arg version        ${DOWNLOADED_FILE#"v"} \
+--arg url            $URL                   \
+--arg checksum       $SHA256                \
+--arg file_size      $FILE_SIZE             \
+--arg file_name      $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
 '.packages[].platforms[.packages[].platforms | length] |= . +
 {
   "name": $repository,
@@ -88,15 +89,21 @@ jq -r                                    \
     {
       "packager": "MiniCore",
       "name": "avrdude",
-      "version": $avrdude_ver
+      "version": "8.0-arduino.1"
     },
     {
       "packager": "arduino",
       "name": "arduinoOTA",
       "version": "1.3.0"
-    }
+    },
+    {
+      "packager": "MiniCore",
+      "name": "dw-tools",
+      "version": $dwtoolsversion
+    }   
   ]
-}' "package_${AUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${AUTHOR}_${REPOSITORY}_index.json"
+}' "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${REALAUTHOR}_${REPOSITORY}_index.json"
 
 # Remove files that's no longer needed
-rm -rf "$REPOSITORY-${DOWNLOADED_FILE#"v"}" "package_${AUTHOR}_${REPOSITORY}_index.json.tmp"
+rm -rf "$REPOSITORY-${DOWNLOADED_FILE#"v"}" "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp"
+
