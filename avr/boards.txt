@@ -923,6 +923,8 @@ menu.baudrate=Baud rate
 8.build.board=AVR_ATmega8
 8.build.mcu=atmega8
 8.build.bootloader_led=led+b5
+# ATMega 8 cannot be debugged
+8.debug.executable=
 
 # Upload port select
 8.menu.bootloader.uart0=Yes (UART0)

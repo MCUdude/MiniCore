@@ -31,6 +31,15 @@ arduinoasisp.program.speed=19200
 arduinoasisp.program.tool=avrdude
 arduinoasisp.program.extra_params=-P{serial.port} -b{program.speed}
 
+arduinoasispfast.name=Arduino as ISP fast
+arduinoasispfast.communication=serial
+arduinoasispfast.protocol=stk500v1
+arduinoasispfast.speed=19200
+arduinoasispfast.program.protocol=stk500v1
+arduinoasispfast.program.speed=115200
+arduinoasispfast.program.tool=avrdude
+arduinoasispfast.program.extra_params=-P{serial.port} -b{program.speed}
+
 xplainedmini.name=Xplained Mini
 xplainedmini.communication=usb
 xplainedmini.protocol=xplainedmini
@@ -44,6 +53,20 @@ atmel_ice.protocol=atmelice_isp
 atmel_ice.program.protocol=atmelice_isp
 atmel_ice.program.tool=avrdude
 atmel_ice.program.extra_params=
+
+atmel_powerdebugger.name=Power Debugger ISP
+atmel_powerdebugger.communication=usb
+atmel_powerdebugger.protocol=powerdebugger_isp
+atmel_powerdebugger.program.protocol=powerdebugger_isp
+atmel_powerdebugger.program.tool=avrdude
+atmel_powerdebugger.program.extra_params=
+
+atmel_jtagice3.name=JTAGICE3 ISP
+atmel_jtagice3.communication=usb
+atmel_jtagice3.protocol=jtag3isp
+atmel_jtagice3.program.protocol=jtag3isp
+atmel_jtagice3.program.tool=avrdude
+atmel_jtagice3.program.extra_params=
 
 pickit4_isp.name=PICkit4 ISP
 pickit4_isp.communication=usb
