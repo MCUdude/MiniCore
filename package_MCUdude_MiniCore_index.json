@@ -964,8 +964,8 @@
           "category": "Contributed",
           "url": "https://felias-fogg.github.io/MiniCore/MiniCore-3.1.0.tar.bz2",
           "archiveFileName": "MiniCore-3.1.0.tar.bz2",
-          "checksum": "SHA-256:49cb12e9a72914c044de8a8e96e9b9a9b9a49dae3b56a2cbb2b2f2f3b9fadaa0",
-          "size": "3499144",
+          "checksum": "SHA-256:c56d50b676085f984ddebdd9e6e2b9ba35af7fd4633e5400905e7f83ced31cfd",
+          "size": "3498793",
           "boards": [
             {
               "name": "ATmega328/P/PA/A/PB"
@@ -1002,7 +1002,7 @@
             {
               "packager": "MiniCore",
               "name": "dw-tools",
-              "version": "${DWTOOLS_VERSION}"
+              "version": "2.1.6"
             }
           ]
         }

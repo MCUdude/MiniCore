@@ -13,7 +13,7 @@ AUTHOR=felias-fogg       # Github username
 REALAUTHOR=MCUdude       # real author!
 REPOSITORY=MiniCore      # Github repo
 
-DWTOOLS_VERSION="2.1.6"
+DWTOOLSVERSION=2.1.6
 
 # Get the download URL for the latest release from Github
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$AUTHOR/$REPOSITORY/releases/latest | grep "tarball_url" | awk -F\" '{print $4}')
@@ -55,13 +55,14 @@ URL="https://${AUTHOR}.github.io/${REPOSITORY}/$REPOSITORY-${DOWNLOADED_FILE#"v"
 cp "package_${REALAUTHOR}_${REPOSITORY}_index.json" "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp"
 
 # Add new boards release entry
-jq -r                                   \
---arg repository $REPOSITORY            \
---arg version    ${DOWNLOADED_FILE#"v"} \
---arg url        $URL                   \
---arg checksum   $SHA256                \
---arg file_size  $FILE_SIZE             \
---arg file_name  $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
+jq -r \
+--arg dwtoolsversion $DWTOOLSVERSION        \
+--arg repository     $REPOSITORY            \
+--arg version        ${DOWNLOADED_FILE#"v"} \
+--arg url            $URL                   \
+--arg checksum       $SHA256                \
+--arg file_size      $FILE_SIZE             \
+--arg file_name      $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
 '.packages[].platforms[.packages[].platforms | length] |= . +
 {
   "name": $repository,
@@ -98,7 +99,7 @@ jq -r                                   \
     {
       "packager": "MiniCore",
       "name": "dw-tools",
-      "version": "${DWTOOLS_VERSION}"
+      "version": $dwtoolsversion
     }   
   ]
 }' "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${REALAUTHOR}_${REPOSITORY}_index.json"
