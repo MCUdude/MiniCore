@@ -1,7 +1,7 @@
 #!/bin/bash
 
 AUTHOR=felias-fogg  # Github username
-REALAUTHOR=MCUDude   # Real author name
+REALAUTHOR=MCUdude  # Real author name
 REPOSITORY=MiniCore # Github repo name
 
 DWTOOLS_VERSION="2.1.6"
