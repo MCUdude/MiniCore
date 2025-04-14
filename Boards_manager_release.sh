@@ -13,6 +13,8 @@ AUTHOR=felias-fogg       # Github username
 REALAUTHOR=MCUdude       # real author!
 REPOSITORY=MiniCore      # Github repo
 
+DWTOOLS_VERSION="2.1.6"
+
 # Get the download URL for the latest release from Github
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$AUTHOR/$REPOSITORY/releases/latest | grep "tarball_url" | awk -F\" '{print $4}')
 
@@ -96,7 +98,7 @@ jq -r                                   \
     {
       "packager": "MiniCore",
       "name": "dw-tools",
-      "version": "2.1.5"
+      "version": "${DWTOOLS_VERSION}"
     }   
   ]
 }' "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${REALAUTHOR}_${REPOSITORY}_index.json"
