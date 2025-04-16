@@ -9,11 +9,11 @@
 ##########################################################
 
 # Change these to match your repo
-AUTHOR=felias-fogg       # Github username
+AUTHOR=MCUdude       # Github username
 REALAUTHOR=MCUdude       # real author!
 REPOSITORY=MiniCore      # Github repo
 
-DWTOOLSVERSION=2.1.6
+DWTOOLSVERSION=2.1.8
 
 # Get the download URL for the latest release from Github
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$AUTHOR/$REPOSITORY/releases/latest | grep "tarball_url" | awk -F\" '{print $4}')
