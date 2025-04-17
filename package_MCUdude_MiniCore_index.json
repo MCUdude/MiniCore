@@ -960,12 +960,12 @@
         {
           "name": "MiniCore",
           "architecture": "avr",
-          "version": "3.1.0",
+          "version": "3.1.1",
           "category": "Contributed",
-          "url": "https://felias-fogg.github.io/MiniCore/MiniCore-3.1.0.tar.bz2",
-          "archiveFileName": "MiniCore-3.1.0.tar.bz2",
-          "checksum": "SHA-256:6909f7b5269756a1c2eea30c932bc07096e58b90483a167e83a35f797b431d61",
-          "size": "3499221",
+          "url": "https://felias-fogg.github.io/MiniCore/MiniCore-3.1.1.tar.bz2",
+          "archiveFileName": "MiniCore-3.1.1.tar.bz2",
+          "checksum": "SHA-256:d6b5b745b84ac3e72fa2bc882ec49267c039fe2be580b77cad00d490583d97d9",
+          "size": "3498711",
           "boards": [
             {
               "name": "ATmega328/P/PA/A/PB"
