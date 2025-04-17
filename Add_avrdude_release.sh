@@ -1,7 +1,6 @@
 #!/bin/bash
 
-AUTHOR=felias-fogg      # Github username
-REALAUTHOR=MCUdude
+AUTHOR=MCUdude      # Github username
 REPOSITORY=MiniCore # Github repo name
 
 AVRDUDE_VERSION="8.0-arduino.1"
@@ -63,7 +62,7 @@ printf "File4: ${FILE4}, Size: ${SIZE4}, SHA256: ${SHASUM4}, URL4: ${URL4}\n"
 printf "File5: ${FILE5}, Size: ${SIZE5}, SHA256: ${SHASUM5}, URL5: ${URL5}\n"
 printf "File6: ${FILE6}, Size: ${SIZE6}, SHA256: ${SHASUM6}, URL6: ${URL6}\n"
 
-cp "package_${REALAUTHOR}_${REPOSITORY}_index.json" "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp"
+cp "package_${AUTHOR}_${REPOSITORY}_index.json" "package_${AUTHOR}_${REPOSITORY}_index.json.tmp"
 
 jq -r                                  \
 --arg avrdude_version $AVRDUDE_VERSION \
@@ -151,7 +150,7 @@ jq -r                                  \
       "url": $url6
     }
   ]
-}' "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${REALAUTHOR}_${REPOSITORY}_index.json"
+}' "package_${AUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${AUTHOR}_${REPOSITORY}_index.json"
 
 rm $FILE1
 rm $FILE2
@@ -159,4 +158,4 @@ rm $FILE3
 rm $FILE4
 rm $FILE5
 rm $FILE6
-rm "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp"
+rm "package_${AUTHOR}_${REPOSITORY}_index.json.tmp"
