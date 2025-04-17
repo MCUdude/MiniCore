@@ -1,10 +1,10 @@
 #!/bin/bash
 
-AUTHOR=felias-fogg  # Github username
+AUTHOR=MCUdude  # Github username
 REALAUTHOR=MCUdude  # Real author name
 REPOSITORY=MiniCore # Github repo name
 
-DWTOOLS_VERSION="2.1.6"
+DWTOOLS_VERSION="2.1.8"
 
 OS_PLATFORM1="Linux_ARMv6"
 OS_PLATFORM2="Linux_ARM64"

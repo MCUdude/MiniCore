@@ -1105,42 +1105,42 @@
         },
         {
           "name": "dw-tools",
-          "version": "2.1.6",
+          "version": "2.1.8",
           "systems": [
             {
-              "size": "13406737",
-              "checksum": "SHA-256:7e0d1685dac0025486f92e126415f65f0594dc8f8e6b0d8e663fa0ed5286218d",
+              "size": "13401574",
+              "checksum": "SHA-256:3c03a18d0ad8b85ab57fa8e1e106a283d9eafc81e466f2e85ca3db19adb90283",
               "host": "aarch64-linux-gnu",
-              "archiveFileName": "dw-tools-2.1.6_aarch64-linux-gnu.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.6_aarch64-linux-gnu.tar.bz2"
+              "archiveFileName": "dw-tools-2.1.8_aarch64-linux-gnu.tar.bz2",
+              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.8_aarch64-linux-gnu.tar.bz2"
             },
             {
-              "size": "16934800",
-              "checksum": "SHA-256:42fba0d7f158da664fa3a0a2a7bba9e35b7a71a6fb5b8197b9a8582e489c656e",
+              "size": "17105442",
+              "checksum": "SHA-256:794752aff2de46cc18c976b780ebae01d16d0086e1034e2fd630df924640a4eb",
               "host": "x86_64-apple-darwin",
-              "archiveFileName": "dw-tools-2.1.6_x86_64-apple-darwin.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.6_x86_64-apple-darwin.tar.bz2"
+              "archiveFileName": "dw-tools-2.1.8_x86_64-apple-darwin.tar.bz2",
+              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.8_x86_64-apple-darwin.tar.bz2"
             },
             {
-              "size": "11752598",
-              "checksum": "SHA-256:448e40da7ffac15018a940cb0778fffac107c101e37738a5c27657f1f65a5251",
+              "size": "11753176",
+              "checksum": "SHA-256:33e58199c853aabbcda7e21b3a9f0a6a81072790962540c52c4e6023566686cd",
               "host": "x86_64-linux-gnu",
-              "archiveFileName": "dw-tools-2.1.6_x86_64-linux-gnu.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.6_x86_64-linux-gnu.tar.bz2"
+              "archiveFileName": "dw-tools-2.1.8_x86_64-linux-gnu.tar.bz2",
+              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.8_x86_64-linux-gnu.tar.bz2"
             },
             {
-              "size": "10178465",
-              "checksum": "SHA-256:8606af60fe27171de13f4524dc48b13ab29ac3bf98ff63e65211cd4d1211b65d",
+              "size": "10178675",
+              "checksum": "SHA-256:9874c6958667e0cb961d88ade6caaf24436784e5a4a9ccfa15f5b218b0e8542b",
               "host": "x86_64-mingw32",
-              "archiveFileName": "dw-tools-2.1.6_x86_64-mingw32.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.6_x86_64-mingw32.tar.bz2"
+              "archiveFileName": "dw-tools-2.1.8_x86_64-mingw32.tar.bz2",
+              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.8_x86_64-mingw32.tar.bz2"
             },
             {
-              "size": "16592878",
-              "checksum": "SHA-256:20230a6034e5c2f67f3c011660a055079bb506e3574e97819637ab8e7f094ad9",
+              "size": "16700766",
+              "checksum": "SHA-256:d05609c31c70adf7ddde368202163e9d1e4f0be2d1f75b23dec62377de161da1",
               "host": "arm64-apple-darwin",
-              "archiveFileName": "dw-tools-2.1.6_arm64-apple-darwin.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.6_arm64-apple-darwin.tar.bz2"
+              "archiveFileName": "dw-tools-2.1.8_arm64-apple-darwin.tar.bz2",
+              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.1.8_arm64-apple-darwin.tar.bz2"
             }
           ]
         }
