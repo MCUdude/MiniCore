@@ -9,7 +9,7 @@
 ##########################################################
 
 # Change these to match your repo
-AUTHOR=felias-fogg       # Github username
+AUTHOR=MCUdude       # Github username
 REALAUTHOR=MCUdude       # real author!
 REPOSITORY=MiniCore      # Github repo
 
