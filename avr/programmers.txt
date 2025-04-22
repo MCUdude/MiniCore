@@ -89,7 +89,7 @@ avrispmkii.program.protocol=avrispmkii
 avrispmkii.program.tool=avrdude
 avrispmkii.program.extra_params=
 
-stk500.name=STK500 as ISP (MiniCore)
+stk500.name=STK500 as ISP
 stk500.communication=serial
 stk500.protocol=stk500
 stk500.program.protocol=stk500
