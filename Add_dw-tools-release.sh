@@ -3,7 +3,7 @@
 AUTHOR=MCUdude  # Github username
 REPOSITORY=MiniCore # Github repo name
 
-DWTOOLS_VERSION="2.1.8"
+DWTOOLS_VERSION="2.2.0"
 
 OS_PLATFORM1="Linux_ARMv6"
 OS_PLATFORM2="Linux_ARM64"
