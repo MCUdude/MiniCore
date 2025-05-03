@@ -1002,7 +1002,7 @@
             {
               "packager": "MiniCore",
               "name": "dw-tools",
-              "version": "2.2.0"
+              "version": "2.2.1"
             }
           ]
         },
@@ -1198,47 +1198,6 @@
               "host": "i686-mingw32",
               "archiveFileName": "avrdude_8.0-arduino.1_Windows_32bit.tar.gz",
               "url": "http://downloads.arduino.cc/tools/avrdude_8.0-arduino.1_Windows_32bit.tar.gz"
-            }
-          ]
-        },
-        {
-          "name": "dw-tools",
-          "version": "2.2.0",
-          "systems": [
-            {
-              "size": "13428567",
-              "checksum": "SHA-256:80364285b4ba923871f18914e838c34a49a20504cce7198bd0b89ca56dc52d19",
-              "host": "aarch64-linux-gnu",
-              "archiveFileName": "dw-tools-2.2.0_aarch64-linux-gnu.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.2.0_aarch64-linux-gnu.tar.bz2"
-            },
-            {
-              "size": "17103147",
-              "checksum": "SHA-256:e1553840a0928d9f775338fe5c436b570ea87546fa2370413c303d134a8598d3",
-              "host": "x86_64-apple-darwin",
-              "archiveFileName": "dw-tools-2.2.0_x86_64-apple-darwin.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.2.0_x86_64-apple-darwin.tar.bz2"
-            },
-            {
-              "size": "11760787",
-              "checksum": "SHA-256:bed9f081f8f61adc93ca678ceef21cfb2923d76063705d70869339e5cb3115fd",
-              "host": "x86_64-linux-gnu",
-              "archiveFileName": "dw-tools-2.2.0_x86_64-linux-gnu.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.2.0_x86_64-linux-gnu.tar.bz2"
-            },
-            {
-              "size": "10197018",
-              "checksum": "SHA-256:45f1b2f5720be6a89d48521ed190d726ea064fb6d9426cc198de943ee7c8f13b",
-              "host": "x86_64-mingw32",
-              "archiveFileName": "dw-tools-2.2.0_x86_64-mingw32.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.2.0_x86_64-mingw32.tar.bz2"
-            },
-            {
-              "size": "16719797",
-              "checksum": "SHA-256:69402085d5ab886cb3eb3084ad04a141fb0038aa1c59ebba722af644f1632f02",
-              "host": "arm64-apple-darwin",
-              "archiveFileName": "dw-tools-2.2.0_arm64-apple-darwin.tar.bz2",
-              "url": "https://felias-fogg.github.io/dw-tools/dw-tools-2.2.0_arm64-apple-darwin.tar.bz2"
             }
           ]
         },
