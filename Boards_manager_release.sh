@@ -13,7 +13,7 @@ AUTHOR=MCUdude       # Github username
 REALAUTHOR=MCUdude       # real author!
 REPOSITORY=MiniCore      # Github repo
 
-DWTOOLSVERSION=2.2.1
+DWTOOLSVERSION=2.3.2
 
 # Get the download URL for the latest release from Github
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$AUTHOR/$REPOSITORY/releases/latest | grep "tarball_url" | awk -F\" '{print $4}')
