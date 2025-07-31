@@ -5,7 +5,7 @@
 # https://arduino.github.io/arduino-cli/latest/platform-specification/
 
 name=MiniCore
-version=3.1.1
+version=3.1.2
 
 # AVR compile variables
 # ---------------------
@@ -173,3 +173,4 @@ debug.cortex-debug.custom.serverArgs.3={build.mcu}
 debug.cortex-debug.custom.preLaunchCommands.0=monitor debugwire enable
 debug.cortex-debug.custom.postLaunchCommands.0=tbreak setup
 debug.cortex-debug.custom.preRestartCommands.0=tbreak setup
+debug.svd_file={runtime.platform.path}/svd/{build.mcu}.svd
