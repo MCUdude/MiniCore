@@ -487,7 +487,7 @@ menu.baudrate=Baud rate
 88.menu.bootloader.uart0.upload.protocol=urclock
 88.menu.bootloader.uart0.upload.uartpins=uart0_rxd0_txd1
 88.menu.bootloader.uart0.build.export_merged_output=true
-88.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
+88.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu_bl}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu_bl}_pr_ee_ce.hex
 
 88.menu.bootloader.no_bootloader=No bootloader
 88.menu.bootloader.no_bootloader.upload.maximum_size=8192
@@ -533,16 +533,19 @@ menu.baudrate=Baud rate
 88.menu.variant.modelP.bootloader.cksel_bits=0111
 88.menu.variant.modelP.build.variant=standard
 88.menu.variant.modelP.build.mcu=atmega88p
+88.menu.variant.modelP.build.mcu_bl={build.mcu}
 
 88.menu.variant.modelNonP=88 / 88A
 88.menu.variant.modelNonP.bootloader.cksel_bits=0111
 88.menu.variant.modelNonP.build.variant=standard
-88.menu.variant.modelNonP.build.mcu=atmega88
+88.menu.variant.modelNonP.build.mcu=atmega88a
+88.menu.variant.modelNonP.build.mcu_bl=atmega88
 
 88.menu.variant.modelPB=88PB
 88.menu.variant.modelPB.bootloader.cksel_bits=1111
 88.menu.variant.modelPB.build.variant=pb-variant
 88.menu.variant.modelPB.build.mcu=atmega88pb
+88.menu.variant.modelPB.build.mcu_bl={build.mcu}
 
 # Brown out detection
 88.menu.BOD.2v7=BOD 2.7V
@@ -708,7 +711,7 @@ menu.baudrate=Baud rate
 48.menu.bootloader.uart0.build.export_merged_output=true
 48.bootloader.extended_fuses=0xff
 
-48.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee.hex
+48.menu.bootloader.uart0.bootloader.file=urboot/{build.mcu_bl}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu_bl}_pr_ee.hex
 
 48.menu.bootloader.no_bootloader=No bootloader
 48.menu.bootloader.no_bootloader.upload.maximum_size=4096
@@ -755,16 +758,19 @@ menu.baudrate=Baud rate
 48.menu.variant.modelP.bootloader.cksel_bits=0111
 48.menu.variant.modelP.build.variant=standard
 48.menu.variant.modelP.build.mcu=atmega48p
+48.menu.variant.modelP.build.mcu_bl={build.mcu}
 
 48.menu.variant.modelNonP=48 / 48A
 48.menu.variant.modelNonP.bootloader.cksel_bits=0111
 48.menu.variant.modelNonP.build.variant=standard
 48.menu.variant.modelNonP.build.mcu=atmega48
+48.menu.variant.modelNonP.build.mcu_bl=atmega48a
 
 48.menu.variant.modelPB=48PB
 48.menu.variant.modelPB.bootloader.cksel_bits=1111
 48.menu.variant.modelPB.build.variant=pb-variant
 48.menu.variant.modelPB.build.mcu=atmega48pb
+48.menu.variant.modelPB.build.mcu_bl={build.mcu}
 
 # Brown out detection
 48.menu.BOD.2v7=BOD 2.7V
