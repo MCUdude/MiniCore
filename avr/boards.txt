@@ -243,6 +243,18 @@ menu.baudrate=Baud rate
 328.menu.clock.1MHz_internal.build.clkpr=
 328.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
+328.menu.clock.500k_internal=Internal 500 kHz
+328.menu.clock.500k_internal.upload.default_speed=9600
+328.menu.clock.500k_internal.bootloader.low_fuses=0xc2
+328.menu.clock.500k_internal.build.clkpr=-DOSC_PRESCALER=0x04
+328.menu.clock.500k_internal.build.f_cpu=500000L
+
+328.menu.clock.250k_internal=Internal 250 kHz
+328.menu.clock.250k_internal.upload.default_speed=9600
+328.menu.clock.250k_internal.bootloader.low_fuses=0xc2
+328.menu.clock.250k_internal.build.clkpr=-DOSC_PRESCALER=0x05
+328.menu.clock.250k_internal.build.f_cpu=250000L
+
 
 #############################
 #### ATmega168/A/P/PA/PB ####
@@ -462,6 +474,18 @@ menu.baudrate=Baud rate
 168.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
 168.menu.clock.1MHz_internal.build.clkpr=
 168.menu.clock.1MHz_internal.build.f_cpu=1000000L
+
+168.menu.clock.500k_internal=Internal 500 kHz
+168.menu.clock.500k_internal.upload.default_speed=9600
+168.menu.clock.500k_internal.bootloader.low_fuses=0xc2
+168.menu.clock.500k_internal.build.clkpr=-DOSC_PRESCALER=0x04
+168.menu.clock.500k_internal.build.f_cpu=500000L
+
+168.menu.clock.250k_internal=Internal 250 kHz
+168.menu.clock.250k_internal.upload.default_speed=9600
+168.menu.clock.250k_internal.bootloader.low_fuses=0xc2
+168.menu.clock.250k_internal.build.clkpr=-DOSC_PRESCALER=0x05
+168.menu.clock.250k_internal.build.f_cpu=250000L
 
 
 ############################
@@ -684,6 +708,18 @@ menu.baudrate=Baud rate
 88.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
 88.menu.clock.1MHz_internal.build.clkpr=
 88.menu.clock.1MHz_internal.build.f_cpu=1000000L
+
+88.menu.clock.500k_internal=Internal 500 kHz
+88.menu.clock.500k_internal.upload.default_speed=9600
+88.menu.clock.500k_internal.bootloader.low_fuses=0xc2
+88.menu.clock.500k_internal.build.clkpr=-DOSC_PRESCALER=0x04
+88.menu.clock.500k_internal.build.f_cpu=500000L
+
+88.menu.clock.250k_internal=Internal 250 kHz
+88.menu.clock.250k_internal.upload.default_speed=9600
+88.menu.clock.250k_internal.bootloader.low_fuses=0xc2
+88.menu.clock.250k_internal.build.clkpr=-DOSC_PRESCALER=0x05
+88.menu.clock.250k_internal.build.f_cpu=250000L
 
 
 ############################
@@ -909,6 +945,19 @@ menu.baudrate=Baud rate
 48.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
 48.menu.clock.1MHz_internal.build.clkpr=
 48.menu.clock.1MHz_internal.build.f_cpu=1000000L
+
+48.menu.clock.500k_internal=Internal 500 kHz
+48.menu.clock.500k_internal.upload.default_speed=9600
+48.menu.clock.500k_internal.bootloader.low_fuses=0xc2
+48.menu.clock.500k_internal.build.clkpr=-DOSC_PRESCALER=0x04
+48.menu.clock.500k_internal.build.f_cpu=500000L
+
+48.menu.clock.250k_internal=Internal 250 kHz
+48.menu.clock.250k_internal.upload.default_speed=9600
+48.menu.clock.250k_internal.bootloader.low_fuses=0xc2
+48.menu.clock.250k_internal.build.clkpr=-DOSC_PRESCALER=0x05
+48.menu.clock.250k_internal.build.f_cpu=250000L
+
 
 
 ###################
