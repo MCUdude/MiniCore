@@ -113,6 +113,8 @@ class HardwareSerial : public Stream
     unsigned char _rx_buffer[SERIAL_RX_BUFFER_SIZE];
     unsigned char _tx_buffer[SERIAL_TX_BUFFER_SIZE];
 
+    volatile int _rx_error;
+
   public:
     inline HardwareSerial(
       volatile uint8_t *ubrrh, volatile uint8_t *ubrrl,
@@ -131,6 +133,8 @@ class HardwareSerial : public Stream
     inline size_t write(long n) { return write((uint8_t)n); }
     inline size_t write(unsigned int n) { return write((uint8_t)n); }
     inline size_t write(int n) { return write((uint8_t)n); }
+    inline int rx_error(void) { return _rx_error; }
+    inline void clear_rx_error(void) { _rx_error = 0; }
     using Print::write; // pull in write(str) and write(buf, size) from Print
     operator bool() { return true; }
 
