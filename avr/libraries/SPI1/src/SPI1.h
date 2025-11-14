@@ -143,7 +143,7 @@ private:
     clockDiv ^= 0x1;
 
     // Pack into the SPI1Settings class
-    spcr1 = _BV(SPE) | _BV(MSTR) | ((bitOrder == LSBFIRST) ? _BV(DORD) : 0) |
+    spcr1 = _BV(SPE1) | _BV(MSTR) | ((bitOrder == LSBFIRST) ? _BV(DORD1) : 0) |
       (dataMode & SPI_MODE_MASK) | ((clockDiv >> 1) & SPI_CLOCK_MASK);
     spsr1 = clockDiv & SPI_2XCLOCK_MASK;
   }
@@ -214,29 +214,29 @@ public:
      * speeds it is unnoticed.
      */
     asm volatile("nop");
-    while (!(SPSR1 & _BV(SPIF))) ; // wait
+    while (!(SPSR1 & _BV(SPIF1))) ; // wait
     return SPDR1;
   }
   inline static uint16_t transfer16(uint16_t data) {
     union { uint16_t val; struct { uint8_t lsb; uint8_t msb; }; } in, out;
     in.val = data;
-    if (!(SPCR1 & _BV(DORD))) {
+    if (!(SPCR1 & _BV(DORD1))) {
       SPDR1 = in.msb;
       asm volatile("nop"); // See transfer(uint8_t) function
-      while (!(SPSR1 & _BV(SPIF))) ;
+      while (!(SPSR1 & _BV(SPIF1))) ;
       out.msb = SPDR1;
       SPDR1 = in.lsb;
       asm volatile("nop");
-      while (!(SPSR1 & _BV(SPIF))) ;
+      while (!(SPSR1 & _BV(SPIF1))) ;
       out.lsb = SPDR1;
     } else {
       SPDR1 = in.lsb;
       asm volatile("nop");
-      while (!(SPSR1 & _BV(SPIF))) ;
+      while (!(SPSR1 & _BV(SPIF1))) ;
       out.lsb = SPDR1;
       SPDR1 = in.msb;
       asm volatile("nop");
-      while (!(SPSR1 & _BV(SPIF))) ;
+      while (!(SPSR1 & _BV(SPIF1))) ;
       out.msb = SPDR1;
     }
     return out.val;
@@ -247,12 +247,12 @@ public:
     SPDR1 = *p;
     while (--count > 0) {
       uint8_t out = *(p + 1);
-      while (!(SPSR1 & _BV(SPIF))) ;
+      while (!(SPSR1 & _BV(SPIF1))) ;
       uint8_t in = SPDR1;
       SPDR1 = out;
       *p++ = in;
     }
-    while (!(SPSR1 & _BV(SPIF))) ;
+    while (!(SPSR1 & _BV(SPIF1))) ;
     *p = SPDR1;
   }
   // After performing a group of transfers and releasing the chip select
@@ -306,8 +306,8 @@ public:
   // These undocumented functions should not be used.  SPI.transfer()
   // polls the hardware flag which is automatically cleared as the
   // AVR responds to SPI's interrupt
-  inline static void attachInterrupt() { SPCR1 |= _BV(SPIE); }
-  inline static void detachInterrupt() { SPCR1 &= ~_BV(SPIE); }
+  inline static void attachInterrupt() { SPCR1 |= _BV(SPIE1); }
+  inline static void detachInterrupt() { SPCR1 &= ~_BV(SPIE1); }
 
 private:
   static uint8_t initialized;
