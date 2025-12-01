@@ -11,9 +11,9 @@ version=3.1.2
 # ---------------------
 
 # Optimization flags for debugging
-compiler.optimization_flags=-Os
-compiler.optimization_flags.release=-Os
-compiler.optimization_flags.debug=-Og -ggdb3
+compiler.optimization_flags=-Os -DNEDBUG
+compiler.optimization_flags.release=-Os -DNDEBUG
+compiler.optimization_flags.debug=-Og -ggdb3 -DDEBUG
 
 # Warnings
 compiler.warning_flags=
@@ -157,20 +157,23 @@ build.usb_flags=-DUSB_VID={build.vid} -DUSB_PID={build.pid} '-DUSB_MANUFACTURER=
 # ----------------------------------------
 debug.executable={build.path}/{build.project_name}.elf
 debug.toolchain=gcc
-debug.toolchain.path={runtime.tools.dw-tools.path}
+debug.toolchain.path={runtime.tools.avrocd-tools.path}
 
 debug.server=openocd
-debug.server.openocd.path={debug.toolchain.path}/dw-gdbserver
+debug.server.openocd.path={debug.toolchain.path}/pyavrocd
 #next doesn't matter, but should be specified so that cortex-debug is happy
-debug.server.openocd.script=doesnotmatter
+debug.server.openocd.script=nix
 debug.cortex-debug.custom.gdbPath={debug.toolchain.path}/avr-gdb
 debug.cortex-debug.custom.overrideGDBServerStartedRegex=Listening on port \d+ for gdb connection
 debug.cortex-debug.custom.objdumpPath={runtime.tools.avr-gcc.path}/bin/avr-objdump
 debug.cortex-debug.custom.serverArgs.0=-s
-debug.cortex-debug.custom.serverArgs.1=noop
+debug.cortex-debug.custom.serverArgs.1=nop
 debug.cortex-debug.custom.serverArgs.2=-d
 debug.cortex-debug.custom.serverArgs.3={build.mcu}
+debug.cortex-debug.custom.serverArgs.4=-F
+debug.cortex-debug.custom.serverArgs.5={build.f_cpu}
+debug.cortex-debug.custom.serverArgs.6=-m
+debug.cortex-debug.custom.serverArgs.7=all
 debug.cortex-debug.custom.preLaunchCommands.0=monitor debugwire enable
-debug.cortex-debug.custom.postLaunchCommands.0=tbreak setup
-debug.cortex-debug.custom.preRestartCommands.0=tbreak setup
-debug.svd_file={runtime.platform.path}/svd/{build.mcu}.svd
+debug.cortex-debug.custom.runToEntryPoint=main
+debug.svd_file={debug.toolchain.path}/pyavrocd-util/svd/{build.mcu}.svd
