@@ -9,20 +9,39 @@
 ##########################################################
 
 # Change these to match your repo
-AUTHOR=MCUdude       # Github username
-REALAUTHOR=MCUdude       # real author!
+PAOOWNER=felias-fogg     # Github owner of PyAvrOCD  
+AUTHOR=MCUdude           # Github user name
+REALAUTHOR=MCUdude       # real author
 REPOSITORY=MiniCore      # Github repo
 
-DWTOOLSVERSION=2.3.2
+AVRDUDE_VERSION="8.0-arduino.1"
+
+# Get the version number of most recent PyAvrOCD version
+PAOVERSION=$(curl -s https://api.github.com/repos/$PAOOWNER/PyAvrOCD/releases/latest | grep "tag_name" |  awk -F\" '{print $4}')
+AVROCDVERSION=${PAOVERSION#"v"}
 
 # Get the download URL for the latest release from Github
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$AUTHOR/$REPOSITORY/releases/latest | grep "tarball_url" | awk -F\" '{print $4}')
 
-# Download file
-wget --no-verbose $DOWNLOAD_URL
-
 # Get filename
 DOWNLOADED_FILE=$(echo $DOWNLOAD_URL | awk -F/ '{print $8}')
+
+# Check whether most recent board file is already in the index
+if grep -q ${REPOSITORY}-${DOWNLOADED_FILE#"v"} package_${REALAUTHOR}_${REPOSITORY}_index.json; then
+    echo "Most recent board version is already in the index file. Nothing to do."
+    exit 1
+fi
+
+# Check whether already part of the index
+if grep -q "avrocd-tools-"${AVROCDVERSION} package_${REALAUTHOR}_${REPOSITORY}_index.json; then
+    echo "Current PyAvrOCD version is in index. Continue ..."
+else
+    echo "Current PyAvrOCD version is not in index. Add it first."
+    exit 1
+fi
+
+# Download file
+wget --no-verbose $DOWNLOAD_URL
 
 # Add .tar.bz2 extension to downloaded file
 mv $DOWNLOADED_FILE ${DOWNLOADED_FILE}.tar.bz2
@@ -38,6 +57,7 @@ mv $REPOSITORY-${DOWNLOADED_FILE#"v"}/avr/* $REPOSITORY-${DOWNLOADED_FILE#"v"}
 # Delete downloaded file and empty avr folder
 rm -rf ${DOWNLOADED_FILE}.tar.bz2 $REPOSITORY-${DOWNLOADED_FILE#"v"}/avr
 
+# Make sure there are no macOS related files added to the arching that's soon to be geneated
 dot_clean .
 
 # Compress folder to tar.bz2
@@ -57,14 +77,15 @@ URL="https://${AUTHOR}.github.io/${REPOSITORY}/$REPOSITORY-${DOWNLOADED_FILE#"v"
 cp "package_${REALAUTHOR}_${REPOSITORY}_index.json" "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp"
 
 # Add new boards release entry
-jq -r \
---arg dwtoolsversion $DWTOOLSVERSION        \
---arg repository     $REPOSITORY            \
---arg version        ${DOWNLOADED_FILE#"v"} \
---arg url            $URL                   \
---arg checksum       $SHA256                \
---arg file_size      $FILE_SIZE             \
---arg file_name      $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
+jq -r                                    \
+--arg avrocdversion $AVROCDVERSION     \
+--arg repository  $REPOSITORY            \
+--arg version     ${DOWNLOADED_FILE#"v"} \
+--arg url         $URL                   \
+--arg checksum    $SHA256                \
+--arg file_size   $FILE_SIZE             \
+--arg avrdude_ver $AVRDUDE_VERSION       \
+--arg file_name   $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
 '.packages[].platforms[.packages[].platforms | length] |= . +
 {
   "name": $repository,
@@ -100,8 +121,8 @@ jq -r \
     },
     {
       "packager": "MiniCore",
-      "name": "dw-tools",
-      "version": $dwtoolsversion
+      "name": "avrocd-tools",
+      "version": $avrocdversion
     }   
   ]
 }' "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${REALAUTHOR}_${REPOSITORY}_index.json"
