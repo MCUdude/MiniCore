@@ -9,8 +9,9 @@
 ##########################################################
 
 # Change these to match your repo
-AUTHOR=MCUdude       # Github username
-REALAUTHOR=MCUdude       # real author!
+PAOOWNER=felias-fogg     # Github owner of PyAvrOCD  
+AUTHOR=MCUdude           # Github user name
+REALAUTHOR=MCUdude       # real author
 REPOSITORY=MiniCore      # Github repo
 
 DWTOOLSVERSION=2.3.2
@@ -57,14 +58,15 @@ URL="https://${AUTHOR}.github.io/${REPOSITORY}/$REPOSITORY-${DOWNLOADED_FILE#"v"
 cp "package_${REALAUTHOR}_${REPOSITORY}_index.json" "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp"
 
 # Add new boards release entry
-jq -r \
---arg dwtoolsversion $DWTOOLSVERSION        \
---arg repository     $REPOSITORY            \
---arg version        ${DOWNLOADED_FILE#"v"} \
---arg url            $URL                   \
---arg checksum       $SHA256                \
---arg file_size      $FILE_SIZE             \
---arg file_name      $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
+jq -r                                    \
+--arg avrocdversion $AVROCDVERSION     \
+--arg repository  $REPOSITORY            \
+--arg version     ${DOWNLOADED_FILE#"v"} \
+--arg url         $URL                   \
+--arg checksum    $SHA256                \
+--arg file_size   $FILE_SIZE             \
+--arg avrdude_ver $AVRDUDE_VERSION       \
+--arg file_name   $REPOSITORY-${DOWNLOADED_FILE#"v"}.tar.bz2  \
 '.packages[].platforms[.packages[].platforms | length] |= . +
 {
   "name": $repository,
@@ -100,8 +102,8 @@ jq -r \
     },
     {
       "packager": "MiniCore",
-      "name": "dw-tools",
-      "version": $dwtoolsversion
+      "name": "avrocd-tools",
+      "version": $avrocdversion
     }   
   ]
 }' "package_${REALAUTHOR}_${REPOSITORY}_index.json.tmp" > "package_${REALAUTHOR}_${REPOSITORY}_index.json"
