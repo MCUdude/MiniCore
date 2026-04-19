@@ -118,7 +118,6 @@ board_hardware.bod = 2.7v            ; Set brown-out detection
 board_hardware.eesave = yes          ; Preserve EEPROM when uploading using programmer
 upload_protocol = usbasp             ; Use the USBasp as programmer
 upload_flags =                       ; Select USB as upload port and divide the SPI clock by 8
-  -PUSB
   -B8
 
 ```
