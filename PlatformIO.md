@@ -100,7 +100,6 @@ upload_protocol = custom
 upload_flags =
   -C$PROJECT_PACKAGES_DIR/tool-avrdude/avrdude.conf
   -p$BOARD_MCU
-  -PUSB
   -cusbasp
 ; Avrdude upload command
 upload_command = avrdude $UPLOAD_FLAGS -U flash:w:$SOURCE:i
