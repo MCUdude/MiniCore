@@ -1,0 +1,16 @@
+#!/bin/sh
+# Stands in for the GDB server when the AvrDebugger package is missing. The IDE
+# shows what it prints in the gdb-server terminal, brings that to the front,
+# and when the stub exits says "GDB Server Quit Unexpectedly. See gdb-server
+# output for more details." The text has to stay identical to message.txt;
+# the workflow checks that.
+cat <<'EOF'
+
+                    *** The AvrDebugger package is not installed. ***
+Add the following URL to Additional Boards Manager URLs (File > Preferences):
+https://felias-fogg.github.io/AvrDebugger/package_felias-fogg_AvrDebugger_index.json
+and install AvrDebugger with the Boards Manager. Consult https://pyavrocd.io
+for information concerning debugging Arduino sketches on AVR hardware.
+
+EOF
+exit 1

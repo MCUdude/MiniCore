@@ -1,1 +1,4 @@
 *.bat text eol=crlf
+# The fallback stubs from AvrDebugger: shell scripts without an extension
+avr/debugger/fallback/bin/avr-gdb  text eol=lf
+avr/debugger/fallback/bin/pyavrocd text eol=lf
