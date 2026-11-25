@@ -1,0 +1,20 @@
+#!/bin/sh
+# Stands in for avr-gdb when the AvrDebugger package is missing. cortex-debug
+# starts GDB before the server and asks for its version first; when that fails
+# it gives up silently and never starts the server. So answer the version
+# check, and every command after it with success: cortex-debug then starts the
+# stub server, which prints the message and exits, and cortex-debug ends the
+# session in order with "GDB Server Quit Unexpectedly. See gdb-server output".
+# (Failing the later commands instead crashed cortex-debug's debug adapter;
+# measured in the Arduino IDE 2 on 2026-11-16.)
+printf '(gdb) \n'
+while IFS= read -r line; do
+    token=${line%%[!0-9]*}
+    case $line in
+        "$token"-gdb-version*)
+            printf '~"GNU gdb (AvrDebugger missing) 15.2\\n"\n%s^done\n(gdb) \n' "$token" ;;
+        *)
+            printf '%s^done\n(gdb) \n' "$token" ;;
+    esac
+done
+exit 0

@@ -4,7 +4,7 @@
 An Arduino core for the ATmega328, ATmega168, ATmega88, ATmega48 and ATmega8, all running the [Urboot](#write-to-own-flash) bootloader.  
 Arduino IDE v1.8 and v2.x supported!
 
-*From version 3.1.0 onwards, debugging in the Arduino IDE 2 is supported. You can use any of Microchip's EDBG-based hardware debuggers or the DIY debugger [dw-link](https://github.com/felias-fogg/dw-link). For documentation, see [https://pyavrocd.io](https://pyavrocd.io)*.
+*From version 3.1.0 onwards, debugging in the Arduino IDE 2 is supported. You can use any of Microchip's EDBG-based hardware debuggers or the DIY debugger [dw-link](https://github.com/felias-fogg/dw-link). For documentation, see [https://pyavrocd.io](https://pyavrocd.io). Since version 3.2.0, the debug tools come from the AvrDebugger package, which has to be installed in addition (see [below](#how-to-install))*.
 
 *From MiniCore version 3 and onwards, the Optiboot bootloader has been replaced by the superior [Urboot bootloader](https://github.com/stefanrueger/urboot/). It's smaller, faster, and has automatic baud rate detection, and can read and write to EEPROM. Other cool features the bootloader provides but are not utilized by MiniCore are user program metadata stored in flash (that can easily be viewed by Avrdude -xshowall) and chip-erase functionality.
 If you already have Optiboot installed and don't want to replace it with Urboot, you can still upload programs without any compatibility issues. However, if you're burning a bootloader to a new chip, Urboot is the way to go.*
@@ -175,16 +175,29 @@ This installation method requires Arduino IDE version 1.8.0 or greater.
 * Scroll down until you see the **MiniCore** entry and click on it.
 * Click **Install**.
 * After installation is complete close the **Boards Manager** window.
+* In order to debug, you also need the **AvrDebugger** package, which contains the debug tools shared by all debug-configured cores. Add its URL to **Additional Boards Manager URLs** as well (one URL per line),
+
+    ```
+    https://felias-fogg.github.io/AvrDebugger/package_felias-fogg_AvrDebugger_index.json
+    ```
+
+  and install **AvrDebugger** in the Boards Manager in the same way. If you click **Debug** without it, the IDE says so in its gdb-server terminal.
 
 #### Manual Installation
 Click on the "Download ZIP" button in the upper right corner. Extract the ZIP file, and move the extracted folder to the location "**~/Documents/Arduino/hardware**". Create the "hardware" folder if it doesn't exist.
-Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up.
+Open Arduino IDE, and a new category in the boards menu called "MiniCore" will show up. The debug tools come with the AvrDebugger package, which you can install with the Boards Manager as described above.
 
 #### Arduino CLI Installation
 Run the following command in a terminal:
 
 ```
 arduino-cli core install MiniCore:avr --additional-urls https://mcudude.github.io/MiniCore/package_MCUdude_MiniCore_index.json
+```
+
+and, for debugging,
+
+```
+arduino-cli core install AvrDebugger:avr --additional-urls https://felias-fogg.github.io/AvrDebugger/package_felias-fogg_AvrDebugger_index.json
 ```
 
 #### PlatformIO

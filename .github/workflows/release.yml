@@ -1,0 +1,158 @@
+# Releasing the core: the checks first, then the mechanical part.
+#
+# avr/extras/release.sh checks what can be checked beforehand, then tags and
+# pushes, and the push of the tag starts this:
+#
+#     ./avr/extras/release.sh 3.2.0-rc1    # a candidate to try out
+#     ./avr/extras/release.sh 3.2.0        # the real thing
+#
+# A tag carrying -rc is published as a pre-release and goes into an index of its
+# own, so it never reaches an ordinary board manager. Nothing is published unless
+# the checks, every compilation and the avrdude check have passed.
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write          # to create the release and to push to gh-pages
+
+jobs:
+  version:
+    name: The tag matches the core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare the tag with avr/platform.txt
+        run: |
+          # A candidate is checked against the version it is a candidate for:
+          # v3.2.0-rc2 belongs to 3.2.0, so trying one out does not mean
+          # touching the version number for every attempt.
+          TAG="${GITHUB_REF_NAME#v}"
+          WANT="${TAG%%-*}"
+          HAVE="$(sed -n 's/^version=//p' avr/platform.txt)"
+          echo "the tag says ${WANT}, avr/platform.txt says ${HAVE}"
+          test "$WANT" = "$HAVE"
+
+  core:
+    uses: ./.github/workflows/check-core.yml
+    with:
+      tag: ${{ github.ref_name }}
+
+  avrdude:
+    name: avrdude can upload with every programmer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check out the branch that carries the index
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: pages
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Find the avrdude this release will name in the index
+        working-directory: pages
+        run: |
+          # The publish job adds the newest avrdude to the index and makes the
+          # platform depend on it. Doing the same here, in a copy that is thrown
+          # away, gives exactly the avrdude a user will get.
+          bash Add_avrdude_release.sh
+          VERSION=$(jq -r '.packages[].tools[] | select(.name == "avrdude") | .version' \
+                    package_MCUdude_MiniCore_index.json | sort -V | tail -1)
+          echo "avrdude ${VERSION}"
+          test -n "$VERSION"
+          echo "AVRDUDE_VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Try it with every programmer
+        run: |
+          # No hardware involved: every programmer is called with -n and a port
+          # that matches nothing; see the script.
+          python avr/extras/check_avrdude.py --root avr \
+                 --index pages/package_MCUdude_MiniCore_index.json \
+                 --packager MiniCore --version "$AVRDUDE_VERSION" \
+                 --host x86_64-linux-gnu
+
+  publish:
+    name: Publish
+    needs: [version, core, avrdude]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Creating the release and adding it to the index are two steps, and
+          # only the second one can fail in ways worth retrying. So skip this
+          # when the release is already there, and a re-run of the job works.
+          if gh release view "${GITHUB_REF_NAME}" > /dev/null 2>&1; then
+            echo "the release already exists, leaving it alone"
+            exit 0
+          fi
+          PRE=""
+          case "${GITHUB_REF_NAME}" in *-rc*) PRE="--prerelease" ;; esac
+          gh release create "${GITHUB_REF_NAME}" --title "MiniCore ${GITHUB_REF_NAME}" \
+             --generate-notes $PRE
+
+      - name: Check out the branch that carries the index
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: pages
+          fetch-depth: 0
+
+      - name: Which index does this tag belong in?
+        run: |
+          case "${GITHUB_REF_NAME}" in
+            *-rc*) INDEX=package_MCUdude_MiniCore_rc_index.json ;;
+            *)     INDEX=package_MCUdude_MiniCore_index.json ;;
+          esac
+          echo "INDEX_FILE=$INDEX" >> "$GITHUB_ENV"
+          echo "This tag goes into ${INDEX}"
+
+      - name: Create the candidate index if there is none yet
+        working-directory: pages
+        run: |
+          # The first candidate would otherwise fail on a file that nobody has
+          # created. A copy of the released index is the right starting point:
+          # it carries the tools and lets a tester go back to a final version.
+          if [ ! -f "$INDEX_FILE" ]; then
+            cp package_MCUdude_MiniCore_index.json "$INDEX_FILE"
+            echo "created ${INDEX_FILE} from the released index"
+          fi
+
+      - name: Offer the current avrdude
+        working-directory: pages
+        run: |
+          # Adds the newest avrdude release to the index when it is not there
+          # yet, and says so and stops when it is. Has to run before the core
+          # entry, which depends on the newest avrdude the index knows.
+          bash Add_avrdude_release.sh
+
+      - name: Add this version to the board manager index
+        working-directory: pages
+        run: |
+          sleep 20          # give the release a moment to become visible to the API
+          bash Boards_manager_release.sh "${GITHUB_REF_NAME}"
+
+      - name: Commit and push the index
+        working-directory: pages
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "The index already knew about this version"
+            exit 0
+          fi
+          git commit -m "${GITHUB_REF_NAME}"
+          git push

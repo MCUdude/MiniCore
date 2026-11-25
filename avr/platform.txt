@@ -5,7 +5,7 @@
 # https://arduino.github.io/arduino-cli/latest/platform-specification/
 
 name=MiniCore
-version=3.1.3
+version=3.2.0
 
 # AVR compile variables
 # ---------------------
@@ -91,7 +91,7 @@ recipe.output.tmp_file={build.project_name}.hex
 recipe.output.save_file={build.project_name}_{build.mcu}_{build.f_cpu}.hex
 
 ## Save hex
-recipe.hooks.savehex.presavehex.1.pattern.windows="{runtime.platform.path}/scripts/delete_merged_output.bat" {build.export_merged_output} "{build.path}\{build.project_name}.with_bootloader.hex"
+recipe.hooks.savehex.presavehex.1.pattern.windows=cmd /C call "{runtime.platform.path}/scripts/delete_merged_output.bat" {build.export_merged_output} "{build.path}\{build.project_name}.with_bootloader.hex"
 recipe.hooks.savehex.presavehex.2.pattern.windows=cmd /C copy "{build.path}\{build.project_name}_{build.mcu}_{build.f_cpu}.lst" "{sketch_path}"
 recipe.hooks.savehex.presavehex.1.pattern.linux=chmod +x "{runtime.platform.path}/scripts/delete_merged_output.sh"
 recipe.hooks.savehex.presavehex.2.pattern.linux="{runtime.platform.path}/scripts/delete_merged_output.sh" {build.export_merged_output} "{build.path}/{build.project_name}.with_bootloader.hex"
@@ -155,9 +155,16 @@ build.usb_flags=-DUSB_VID={build.vid} -DUSB_PID={build.pid} '-DUSB_MANUFACTURER=
 
 # Debugger configuration (general options)
 # ----------------------------------------
+# The debug tools (PyAvrOCD, avr-gdb, simavr and the SVD files) come from the
+# AvrDebugger package, which every debug-configured core shares. When it is
+# installed, the IDE sets runtime.tools.avr-debugger.path itself and this line
+# is overridden. When it is not, the path leads to the fallback stubs from
+# AvrDebugger, which say in the gdb-server terminal what to install.
+runtime.tools.avr-debugger.path={runtime.platform.path}/debugger/fallback
+
 debug.executable={build.path}/{build.project_name}.elf
 debug.toolchain=gcc
-debug.toolchain.path={runtime.tools.avrocd-tools.path}
+debug.toolchain.path={runtime.tools.avr-debugger.path}/bin
 
 debug.server=openocd
 debug.server.openocd.path={debug.toolchain.path}/pyavrocd
@@ -166,17 +173,18 @@ debug.server.openocd.script=nix
 debug.cortex-debug.custom.gdbPath={debug.toolchain.path}/avr-gdb
 debug.cortex-debug.custom.overrideGDBServerStartedRegex=Listening on port \d+ for gdb connection
 debug.cortex-debug.custom.objdumpPath={runtime.tools.avr-gcc.path}/bin/avr-objdump
-debug.cortex-debug.custom.serverArgs.0=-s
-debug.cortex-debug.custom.serverArgs.1=nop
-debug.cortex-debug.custom.serverArgs.2=-d
-debug.cortex-debug.custom.serverArgs.3={build.mcu}
-debug.cortex-debug.custom.serverArgs.4=-F
-debug.cortex-debug.custom.serverArgs.5={build.f_cpu}
-debug.cortex-debug.custom.serverArgs.6=-m
-debug.cortex-debug.custom.serverArgs.7=all
-debug.cortex-debug.custom.serverArgs.8=--elf-file
-debug.cortex-debug.custom.serverArgs.9={debug.executable}
+debug.cortex-debug.custom.serverArgs.00=-s
+debug.cortex-debug.custom.serverArgs.01=nop
+debug.cortex-debug.custom.serverArgs.02=--device
+debug.cortex-debug.custom.serverArgs.03={build.mcu}
+debug.cortex-debug.custom.serverArgs.04=--manage
+debug.cortex-debug.custom.serverArgs.05=all
+debug.cortex-debug.custom.serverArgs.06=--F_CPU
+debug.cortex-debug.custom.serverArgs.07={build.f_cpu}
+debug.cortex-debug.custom.serverArgs.08=--elf-file
+debug.cortex-debug.custom.serverArgs.09={debug.executable}
+debug.cortex-debug.custom.serverArgs.10=--arduino-ide
 
 debug.cortex-debug.custom.preLaunchCommands.0=monitor debugwire enable
 debug.cortex-debug.custom.runToEntryPoint=main
-debug.svd_file={debug.toolchain.path}/pyavrocd-util/svd/{build.mcu}.svd
+debug.svd_file={runtime.tools.avr-debugger.path}/svd/{build.mcu}.svd

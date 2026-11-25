@@ -1,0 +1,143 @@
+# Checks the core itself: that boards.txt, platform.txt and the variants still
+# agree with each other, and that every board and every option that can change
+# the binary really compiles -- with the build hooks of each platform, and with a
+# blank in every path, because an unquoted path only shows when it has one.
+#
+# Two scripts in avr/extras/ do the work, and each of them runs by hand just as
+# well as it runs here:
+#
+#     python3 avr/extras/check_core.py
+#     python3 avr/extras/compile_all.py --fqbn-prefix MiniCore:avr
+#
+# The release workflow calls this one, so nothing is published that did not
+# pass here.
+
+name: Check the core
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/check-core.yml"
+      - "avr/extras/*.py"
+      - "avr/*.txt"
+      - "avr/cores/**"
+      - "avr/variants/**"
+      - "avr/libraries/**"
+      - "avr/scripts/**"
+  push:
+    paths:
+      - ".github/workflows/check-core.yml"
+      - "avr/extras/*.py"
+      - "avr/*.txt"
+      - "avr/cores/**"
+      - "avr/variants/**"
+      - "avr/libraries/**"
+      - "avr/scripts/**"
+  workflow_dispatch:
+  # workflow_call lets another workflow wait for these checks. The release
+  # workflow passes the tag it is about, which is checked as well then.
+  workflow_call:
+    inputs:
+      tag:
+        description: "the release this is run for, if it is run for one"
+        type: string
+        required: false
+
+jobs:
+  consistency:
+    name: Consistency
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Do boards.txt, platform.txt and the variants agree?
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          # With a tag it also says whether the core is ready to be released
+          # under that version.
+          if [ -n "$TAG" ]; then
+            python3 avr/extras/check_core.py --tag "$TAG"
+          else
+            python3 avr/extras/check_core.py
+          fi
+
+  compile:
+    name: Compile on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: consistency
+
+    strategy:
+      fail-fast: false          # one platform failing should not hide the others
+      # An ordinary push gets the Linux runner. The other two differ in their
+      # hook scripts and their paths rather than in their compiler, and that is
+      # worth the three runners when a release is at stake or someone asks.
+      matrix:
+        os: ${{ (github.event_name == 'push' || github.event_name == 'pull_request')
+                && fromJSON('["ubuntu-latest"]')
+                || fromJSON('["ubuntu-latest", "macos-latest", "windows-latest"]') }}
+
+    defaults:
+      run:
+        shell: bash             # also on Windows, where the hooks are .bat anyway
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: MiniCore
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: arduino/setup-arduino-cli@v2
+
+      - name: Keep Defender out of the build (Windows only)
+        if: runner.os == 'Windows'
+        continue-on-error: true      # a speed-up, not a requirement
+        shell: pwsh
+        run: |
+          # A build writes thousands of small object files and the real-time
+          # scanner opens every one of them. A parameter can only be given once,
+          # so the several paths go in as one array.
+          Add-MpPreference -ExclusionPath @("$HOME\Arduino with blank",
+                                            "$HOME\work with blank",
+                                            "$env:LOCALAPPDATA\Arduino15")
+          Add-MpPreference -ExclusionProcess @("avr-gcc.exe", "avr-g++.exe",
+                                               "avr-ar.exe", "avr-objcopy.exe",
+                                               "avr-objdump.exe")
+          Get-MpPreference | Select-Object -ExpandProperty ExclusionPath
+
+      - name: Put the core where arduino-cli finds it
+        run: |
+          set -x
+          arduino-cli version
+          # The blank is deliberate: {runtime.platform.path} ends up in every
+          # recipe and in the hook scripts, and an unquoted use of it only shows
+          # when the path has one. Naming the directory ourselves is safer than
+          # asking arduino-cli, whose 'config get' does not exist everywhere.
+          SKETCHBOOK="$HOME/Arduino with blank"
+          arduino-cli config init --overwrite
+          arduino-cli config set directories.user "$SKETCHBOOK"
+          mkdir -p "$SKETCHBOOK/hardware/MiniCore"
+          cp -r MiniCore/avr "$SKETCHBOOK/hardware/MiniCore/avr"
+          test -f "$SKETCHBOOK/hardware/MiniCore/avr/boards.txt" \
+            || { echo "the core did not end up where it belongs"; exit 1; }
+          arduino-cli core update-index              # nothing is installable without it
+          arduino-cli core install arduino:avr       # for the toolchain the core uses
+          arduino-cli core list
+          arduino-cli board listall | head -20
+
+      - name: Compile
+        run: |
+          # Every board, and of the menus those that can change the binary.
+          python MiniCore/avr/extras/compile_all.py \
+                 --fqbn-prefix MiniCore:avr \
+                 --work-dir "$HOME/work with blank" --timeout 300
